@@ -1,0 +1,25 @@
+# User unit for the parser service. Install without root:
+#   mkdir -p ~/.config/systemd/user
+#   cp deploy/auto-parts-parsers.service ~/.config/systemd/user/
+#   systemctl --user daemon-reload
+#   systemctl --user enable --now auto-parts-parsers
+#
+# CATALOG_API_KEY lives in apps/parsers/.env, which is not in the repository.
+[Unit]
+Description=Auto parts catalog parser service
+After=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/vrn/medusa-store/apps/parsers
+Environment=CATALOG_URL=http://127.0.0.1:9000
+Environment=PARSERS_WORKER=parsers@vrn-serv
+Environment=PARSERS_CACHE=/home/vrn/medusa-store/apps/parsers/.cache/responses.sqlite
+EnvironmentFile=/home/vrn/medusa-store/apps/parsers/.env
+ExecStart=/home/vrn/medusa-store/apps/parsers/.venv/bin/python -m parsers run
+Restart=on-failure
+RestartSec=30
+Nice=10
+
+[Install]
+WantedBy=default.target

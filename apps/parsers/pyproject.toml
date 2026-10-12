@@ -1,0 +1,23 @@
+[project]
+name = "auto-parts-parsers"
+version = "0.1.0"
+description = "On-demand lookup of part numbers in manufacturer catalogs for the auto-parts.pp.ua catalog"
+requires-python = ">=3.10"
+dependencies = [
+  "requests>=2.31,<3",
+  "beautifulsoup4>=4.12,<5",
+  "jsonschema>=4.20,<5",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<9"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["parsers*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

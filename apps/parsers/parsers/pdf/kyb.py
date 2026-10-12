@@ -108,13 +108,25 @@ def _is_icon(line: Line) -> bool:
 
 
 def clean_make(text: str) -> str:
-    """ "Renault (F)" -> "Renault": the bracket is the country of origin."""
-    return re.sub(r"\s*\([A-Z]{1,3}\)\s*$", "", text).strip()
+    """The make a heading files its vehicles under.
+
+    "Renault (F)" -> "Renault" (the bracket is a country or region),
+    "Citroen Commercial" -> "Citroen" (same make, commercial vehicles), and a
+    cross-reference heading "Hillman (GB) l Talbot (F)" -> "Talbot", the make
+    the catalogue lists those vehicles under.
+    """
+    text = re.split(r"\s+l\s+", text)[-1]
+    text = re.sub(r"\s*\([^)]*\)", "", text)
+    text = re.sub(r"\s+Commercial$", "", text)
+
+    return re.sub(r"\s+", " ", text).strip()
 
 
 def clean_model(text: str) -> str:
     """Drops the body-type icons that trail a model name ("Espace IV  I")."""
-    return re.sub(r"\s{2,}[A-Za-z0-9](?=\s*,|\s{2,}|\s*$)", "", text).strip(" ,")
+    text = re.sub(r"\s{2,}[A-Za-z0-9](?=\s|,|$)", "", text)
+
+    return re.sub(r"\s+", " ", text).strip(" ,")
 
 
 def split_model(text: str) -> tuple[str, str | None]:
@@ -123,7 +135,7 @@ def split_model(text: str) -> tuple[str, str | None]:
     "Laguna I  B  Exc. p" -> ("Laguna I", "Exc. p").
     """
     cleaned = clean_model(text)
-    parts = re.split(r"\s{2,}(?=(?:Exc|Incl)\.)", cleaned, maxsplit=1)
+    parts = re.split(r"\s+(?=(?:Exc|Incl)\.)", cleaned, maxsplit=1)
 
     return parts[0].strip(), (parts[1].strip() if len(parts) > 1 else None)
 

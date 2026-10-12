@@ -93,3 +93,15 @@ def test_record_points_at_the_page():
 
     assert application.record_ref.endswith("p. 296")
     assert application.raw_text.startswith("Renault Koleos")
+
+
+def test_make_headings_are_reduced_to_the_make():
+    assert kyb.clean_make("Ford (Europe)") == "Ford"
+    assert kyb.clean_make("Citroën Commercial") == "Citroën"
+    assert kyb.clean_make("Lada (VAZ)") == "Lada"
+    assert kyb.clean_make("Hillman (GB) l Talbot (F)") == "Talbot"
+    assert kyb.clean_make("Chrysler - Dodge - Plymouth") == "Chrysler - Dodge - Plymouth"
+
+
+def test_icons_before_a_bracket_are_dropped_from_the_model():
+    assert kyb.clean_model("Transit  S (06- )") == "Transit (06- )"

@@ -1,5 +1,5 @@
 import { defineRouteConfig } from "@medusajs/admin-sdk"
-import { ShieldCheck, Spinner } from "@medusajs/icons"
+import { Spinner } from "@medusajs/icons"
 import {
   Badge,
   Container,
@@ -14,7 +14,7 @@ import {
 } from "@medusajs/ui"
 import { keepPreviousData, useQuery } from "@tanstack/react-query"
 import { useState } from "react"
-import { sdk } from "../../lib/client"
+import { sdk } from "../../../lib/client"
 
 type SecurityEvent = {
   id: string
@@ -319,7 +319,6 @@ const AuditPage = () => {
 
 export const config = defineRouteConfig({
   label: "Аудит",
-  icon: ShieldCheck,
 })
 
 export default AuditPage

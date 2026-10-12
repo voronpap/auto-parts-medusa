@@ -1,0 +1,20 @@
+# systemd user unit: install to ~/.config/systemd/user/medusa-storefront.service
+[Unit]
+Description=Medusa storefront (Next.js)
+After=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/vrn/medusa-store/apps/storefront
+Environment=NODE_ENV=production
+Environment=NEXT_TELEMETRY_DISABLED=1
+Environment=PATH=/home/vrn/.nvm/versions/node/v22.22.3/bin:/usr/local/bin:/usr/bin:/bin
+ExecStart=/home/vrn/.nvm/versions/node/v22.22.3/bin/node node_modules/next/dist/bin/next start -p 8000 -H 127.0.0.1
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=30
+NoNewPrivileges=true
+UMask=0027
+
+[Install]
+WantedBy=default.target

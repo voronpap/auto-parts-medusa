@@ -1,0 +1,309 @@
+import { ArrowLongRight, Spinner, Trash } from "@medusajs/icons"
+import {
+  Badge,
+  Button,
+  Container,
+  Heading,
+  IconButton,
+  Table,
+  Text,
+  toast,
+  usePrompt,
+} from "@medusajs/ui"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
+import { Fragment, useState } from "react"
+import { Link, useNavigate, useParams } from "react-router-dom"
+import { CreateRelationshipModal } from "../../../components/parts-catalog/forms"
+import { sdk } from "../../../lib/client"
+import {
+  CATALOG_QUERY_KEY,
+  errorMessage,
+  INVERSE_RELATION_LABELS,
+  NUMBER_TYPE_LABELS,
+  PartNumber,
+  PartNumberDetail,
+  Relationship,
+  RELATION_TYPE_LABELS,
+  STATE_LABELS,
+  VERDICT_LABELS,
+} from "../../../lib/parts-catalog"
+
+const numberLabel = (item?: PartNumber | null) =>
+  item ? `${item.brand?.name ?? ""} ${item.display_number}`.trim() : "—"
+
+const RelationshipsTable = ({
+  relationships,
+  direction,
+  onDelete,
+}: {
+  relationships: Relationship[]
+  direction: "outgoing" | "incoming"
+  onDelete: (relationship: Relationship) => void
+}) => (
+  <Table>
+    <Table.Header>
+      <Table.Row>
+        <Table.HeaderCell>Зв'язок</Table.HeaderCell>
+        <Table.HeaderCell>Номер</Table.HeaderCell>
+        <Table.HeaderCell>Вердикт</Table.HeaderCell>
+        <Table.HeaderCell>Стан</Table.HeaderCell>
+        <Table.HeaderCell>Докази</Table.HeaderCell>
+        <Table.HeaderCell />
+      </Table.Row>
+    </Table.Header>
+    <Table.Body>
+      {relationships.map((relationship) => {
+        const other =
+          direction === "outgoing"
+            ? relationship.to_part_number
+            : relationship.from_part_number
+        const label =
+          direction === "outgoing"
+            ? RELATION_TYPE_LABELS[relationship.relation_type]
+            : (INVERSE_RELATION_LABELS[relationship.relation_type] ??
+              `${RELATION_TYPE_LABELS[relationship.relation_type]} (зворотний)`)
+        const verdict = VERDICT_LABELS[relationship.applicability_verdict]
+        const evidence = relationship.evidence ?? []
+
+        return (
+          <Table.Row key={relationship.id}>
+            <Table.Cell>{label ?? relationship.relation_type}</Table.Cell>
+            <Table.Cell>
+              {other ? (
+                <Link
+                  to={`/parts-catalog/${other.id}`}
+                  className="text-ui-fg-interactive"
+                >
+                  {numberLabel(other)}
+                </Link>
+              ) : (
+                "—"
+              )}
+            </Table.Cell>
+            <Table.Cell>
+              <div className="flex flex-col gap-y-1 py-2">
+                <div>
+                  <Badge size="2xsmall" color={verdict?.color ?? "grey"}>
+                    {verdict?.label ?? relationship.applicability_verdict}
+                  </Badge>
+                </div>
+                {relationship.reason && (
+                  <Text size="xsmall" className="text-ui-fg-subtle">
+                    {relationship.reason}
+                  </Text>
+                )}
+              </div>
+            </Table.Cell>
+            <Table.Cell>
+              {STATE_LABELS[relationship.relationship_state] ??
+                relationship.relationship_state}
+            </Table.Cell>
+            <Table.Cell>
+              <div className="flex flex-col gap-y-1 py-2">
+                <Text size="xsmall" weight="plus">
+                  Незалежних підтверджень:{" "}
+                  {relationship.independent_confirmations}
+                </Text>
+                {evidence.map((item) => (
+                  <Text
+                    key={item.id}
+                    size="xsmall"
+                    className="text-ui-fg-subtle"
+                  >
+                    {item.observation?.source?.name ?? "Джерело видалено"}
+                    {item.raw_relation_text
+                      ? ` — «${item.raw_relation_text}»`
+                      : ""}
+                  </Text>
+                ))}
+                {evidence.length === 0 && (
+                  <Text size="xsmall" className="text-ui-fg-subtle">
+                    Без доказів
+                  </Text>
+                )}
+              </div>
+            </Table.Cell>
+            <Table.Cell>
+              <IconButton
+                size="small"
+                variant="transparent"
+                onClick={() => onDelete(relationship)}
+              >
+                <Trash />
+              </IconButton>
+            </Table.Cell>
+          </Table.Row>
+        )
+      })}
+    </Table.Body>
+  </Table>
+)
+
+const PartNumberPage = () => {
+  const { id } = useParams()
+  const navigate = useNavigate()
+  const prompt = usePrompt()
+  const queryClient = useQueryClient()
+  const [createOpen, setCreateOpen] = useState(false)
+
+  const { data, isLoading } = useQuery({
+    queryFn: () =>
+      sdk.client.fetch<PartNumberDetail>(
+        `/admin/parts-catalog/part-numbers/${id}`
+      ),
+    queryKey: [CATALOG_QUERY_KEY, "part-number", id],
+  })
+
+  const deleteMutation = useMutation({
+    mutationFn: (path: string) => sdk.client.fetch(path, { method: "DELETE" }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [CATALOG_QUERY_KEY] })
+    },
+    onError: (error) => toast.error(errorMessage(error)),
+  })
+
+  const confirmDelete = async (description: string) =>
+    prompt({
+      title: "Видалити?",
+      description,
+      confirmText: "Видалити",
+      cancelText: "Скасувати",
+    })
+
+  const deleteRelationship = async (relationship: Relationship) => {
+    if (await confirmDelete("Зв'язок буде видалено разом із його доказами.")) {
+      deleteMutation.mutate(
+        `/admin/parts-catalog/relationships/${relationship.id}`,
+        { onSuccess: () => toast.success("Зв'язок видалено") }
+      )
+    }
+  }
+
+  const deleteNumber = async () => {
+    if (await confirmDelete("Номер буде видалено з каталогу.")) {
+      deleteMutation.mutate(`/admin/parts-catalog/part-numbers/${id}`, {
+        onSuccess: () => {
+          toast.success("Номер видалено")
+          navigate("/parts-catalog")
+        },
+      })
+    }
+  }
+
+  if (isLoading || !data) {
+    return (
+      <Container className="flex items-center justify-center p-8">
+        <Spinner className="text-ui-fg-subtle animate-spin" />
+      </Container>
+    )
+  }
+
+  const { part_number: partNumber, outgoing, incoming } = data
+  const chain = data.supersession_chain
+
+  return (
+    <div className="flex flex-col gap-y-3">
+      <Container className="divide-y p-0">
+        <div className="flex items-start justify-between gap-x-4 px-6 py-4">
+          <div className="flex flex-col gap-y-1">
+            <Link to="/parts-catalog" className="text-ui-fg-interactive">
+              <Text size="small" leading="compact">
+                ← Каталог номерів
+              </Text>
+            </Link>
+            <Heading level="h1">{numberLabel(partNumber)}</Heading>
+            <Text size="small" leading="compact" className="text-ui-fg-subtle">
+              {NUMBER_TYPE_LABELS[partNumber.number_type] ??
+                partNumber.number_type}
+              {" · у джерелі: "}
+              {partNumber.source_number}
+              {" · ключ пошуку: "}
+              {partNumber.normalized_number}
+            </Text>
+          </div>
+          <div className="flex items-center gap-x-2">
+            <Button size="small" onClick={() => setCreateOpen(true)}>
+              Додати зв'язок
+            </Button>
+            <Button
+              size="small"
+              variant="danger"
+              onClick={deleteNumber}
+              disabled={deleteMutation.isPending}
+            >
+              Видалити номер
+            </Button>
+          </div>
+        </div>
+        {chain.length > 1 && (
+          <div className="flex flex-col gap-y-2 px-6 py-4">
+            <Text size="small" leading="compact" weight="plus">
+              Ланцюжок замін до актуального номера
+            </Text>
+            <div className="flex flex-wrap items-center gap-2">
+              {chain.map((item, index) => (
+                <Fragment key={item.id}>
+                  {index > 0 && <ArrowLongRight className="text-ui-fg-muted" />}
+                  <Link to={`/parts-catalog/${item.id}`}>
+                    <Badge
+                      size="2xsmall"
+                      color={index === chain.length - 1 ? "green" : "grey"}
+                    >
+                      {numberLabel(item)}
+                    </Badge>
+                  </Link>
+                </Fragment>
+              ))}
+            </div>
+          </div>
+        )}
+      </Container>
+
+      <Container className="divide-y p-0">
+        <div className="px-6 py-4">
+          <Heading level="h2">Зв'язки від цього номера</Heading>
+        </div>
+        {outgoing.length ? (
+          <RelationshipsTable
+            relationships={outgoing}
+            direction="outgoing"
+            onDelete={deleteRelationship}
+          />
+        ) : (
+          <div className="px-6 py-4">
+            <Text size="small" leading="compact" className="text-ui-fg-subtle">
+              Зв'язків ще немає.
+            </Text>
+          </div>
+        )}
+      </Container>
+
+      <Container className="divide-y p-0">
+        <div className="px-6 py-4">
+          <Heading level="h2">Зв'язки до цього номера</Heading>
+        </div>
+        {incoming.length ? (
+          <RelationshipsTable
+            relationships={incoming}
+            direction="incoming"
+            onDelete={deleteRelationship}
+          />
+        ) : (
+          <div className="px-6 py-4">
+            <Text size="small" leading="compact" className="text-ui-fg-subtle">
+              На цей номер ще ніхто не посилається.
+            </Text>
+          </div>
+        )}
+      </Container>
+
+      <CreateRelationshipModal
+        open={createOpen}
+        onOpenChange={setCreateOpen}
+        from={partNumber}
+      />
+    </div>
+  )
+}
+
+export default PartNumberPage

@@ -31,7 +31,7 @@ type ModalProps = {
   onOpenChange: (open: boolean) => void
 }
 
-const Field = ({ label, children }: { label: string; children: ReactNode }) => (
+export const Field = ({ label, children }: { label: string; children: ReactNode }) => (
   <div className="flex flex-col gap-y-2">
     <Label size="small" weight="plus">
       {label}
@@ -40,7 +40,7 @@ const Field = ({ label, children }: { label: string; children: ReactNode }) => (
   </div>
 )
 
-const OptionSelect = ({
+export const OptionSelect = ({
   value,
   onChange,
   options,
@@ -65,7 +65,7 @@ const OptionSelect = ({
   </Select>
 )
 
-const FormModal = ({
+export const FormModal = ({
   open,
   onOpenChange,
   title,
@@ -113,7 +113,7 @@ const FormModal = ({
   </FocusModal>
 )
 
-const useCatalogMutation = (
+export const useCatalogMutation = (
   path: string,
   successMessage: string,
   onDone: () => void

@@ -2,6 +2,8 @@ import { model } from "@medusajs/framework/utils"
 import { APPLICABILITY_VERDICTS } from "../constants"
 import Observation from "./observation"
 import PartNumber from "./part-number"
+import VehicleMake from "./vehicle-make"
+import VehicleModel from "./vehicle-model"
 
 // A source's statement that a part fits a vehicle. The vehicle is kept as the
 // source described it; mapping to a normalized vehicle directory comes later
@@ -18,6 +20,14 @@ const PartApplication = model
     applicability_verdict: model
       .enum([...APPLICABILITY_VERDICTS])
       .default("CANDIDATE"),
+    // Directory entries the source's wording was matched to. The raw
+    // make and model below stay as the source wrote them.
+    vehicle_make: model
+      .belongsTo(() => VehicleMake, { mappedBy: "applications" })
+      .nullable(),
+    vehicle_model: model
+      .belongsTo(() => VehicleModel, { mappedBy: "applications" })
+      .nullable(),
     make: model.text(),
     model: model.text().nullable(),
     generation: model.text().nullable(),

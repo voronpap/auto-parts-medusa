@@ -171,10 +171,19 @@ const ApplicationsTable = ({ applications }: { applications: Application[] }) =>
             <Table.Cell>
               <div className="flex flex-col gap-y-1 py-2">
                 <Text size="small" leading="compact" weight="plus">
-                  {[item.make, item.model, item.generation]
+                  {[
+                    item.vehicle_make?.name ?? item.make,
+                    item.vehicle_model?.name ?? item.model,
+                    item.generation,
+                  ]
                     .filter(Boolean)
                     .join(" ")}
                 </Text>
+                {item.raw_text && (
+                  <Text size="xsmall" className="text-ui-fg-subtle">
+                    У джерелі: {item.raw_text}
+                  </Text>
+                )}
                 {conditions && (
                   <Text size="xsmall" className="text-ui-fg-subtle">
                     Умови: {conditions}

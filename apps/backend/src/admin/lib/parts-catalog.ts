@@ -56,8 +56,26 @@ export type ObservationRef = {
   source?: Source | null
 } | null
 
+export type VehicleMake = {
+  id: string
+  name: string
+  needs_review: boolean
+  aliases?: { id: string; alias: string }[]
+  model_count?: number
+}
+
+export type VehicleModel = {
+  id: string
+  name: string
+  needs_review: boolean
+  aliases?: { id: string; alias: string }[]
+  application_count?: number
+}
+
 export type Application = {
   id: string
+  vehicle_make?: VehicleMake | null
+  vehicle_model?: VehicleModel | null
   applicability_verdict: string
   make: string
   model: string | null

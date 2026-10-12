@@ -87,7 +87,12 @@ export async function GET(
     catalog.listPartApplications(
       { part_number_id: id },
       {
-        relations: ["observation", "observation.source"],
+        relations: [
+          "observation",
+          "observation.source",
+          "vehicle_make",
+          "vehicle_model",
+        ],
         order: { make: "ASC", model: "ASC", year_from: "ASC" },
         take: 500,
       }

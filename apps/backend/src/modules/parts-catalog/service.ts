@@ -10,6 +10,10 @@ import PartNumberSearchKey from "./models/part-number-search-key"
 import PartRelationship from "./models/part-relationship"
 import RelationshipEvidence from "./models/relationship-evidence"
 import Source from "./models/source"
+import VehicleMake from "./models/vehicle-make"
+import VehicleMakeAlias from "./models/vehicle-make-alias"
+import VehicleModel from "./models/vehicle-model"
+import VehicleModelAlias from "./models/vehicle-model-alias"
 
 class PartsCatalogModuleService extends MedusaService({
   Brand,
@@ -26,6 +30,10 @@ class PartsCatalogModuleService extends MedusaService({
   PartApplication,
   PartAttribute,
   LookupTask,
+  VehicleMake,
+  VehicleMakeAliasRecord: VehicleMakeAlias,
+  VehicleModel,
+  VehicleModelAliasRecord: VehicleModelAlias,
 }) {}
 
 export default PartsCatalogModuleService

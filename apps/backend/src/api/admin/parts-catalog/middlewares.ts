@@ -77,6 +77,18 @@ export const CreatePartRelationshipSchema = z.object({
   evidence: z.array(EvidenceSchema).max(20).optional(),
 })
 
+export const CreateVehicleMakeSchema = z.object({
+  name: z.string().trim().min(1).max(100),
+  aliases: z.array(z.string().trim().min(1).max(100)).max(50).optional(),
+})
+
+export const MergeVehiclesSchema = z.object({
+  source_id: z.string().min(1),
+  target_id: z.string().min(1),
+})
+
+export type CreateVehicleMakeBody = z.infer<typeof CreateVehicleMakeSchema>
+export type MergeVehiclesBody = z.infer<typeof MergeVehiclesSchema>
 export type ListCatalogQuery = z.infer<typeof ListCatalogSchema>
 export type CreateBrandBody = z.infer<typeof CreateBrandSchema>
 export type CreateSourceBody = z.infer<typeof CreateSourceSchema>
@@ -122,6 +134,21 @@ export const partsCatalogMiddlewares: MiddlewareRoute[] = [
     matcher: "/admin/parts-catalog/relationships",
     method: "POST",
     middlewares: [validateAndTransformBody(CreatePartRelationshipSchema)],
+  },
+  {
+    matcher: "/admin/parts-catalog/vehicle-makes",
+    method: "POST",
+    middlewares: [validateAndTransformBody(CreateVehicleMakeSchema)],
+  },
+  {
+    matcher: "/admin/parts-catalog/vehicle-makes/merge",
+    method: "POST",
+    middlewares: [validateAndTransformBody(MergeVehiclesSchema)],
+  },
+  {
+    matcher: "/admin/parts-catalog/vehicle-models/merge",
+    method: "POST",
+    middlewares: [validateAndTransformBody(MergeVehiclesSchema)],
   },
   {
     matcher: "/admin/parts-catalog/lookup-tasks",

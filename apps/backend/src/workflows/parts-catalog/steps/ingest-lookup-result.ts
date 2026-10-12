@@ -108,6 +108,8 @@ type Created = {
   evidence: string[]
   applications: string[]
   attributes: string[]
+  vehicle_makes: string[]
+  vehicle_models: string[]
   verdicts: { id: string; applicability_verdict: ApplicabilityVerdict }[]
 }
 
@@ -131,6 +133,12 @@ async function rollback(catalog: PartsCatalogModuleService, created: Created) {
   }
   if (created.observations.length) {
     await catalog.deleteObservations(created.observations)
+  }
+  if (created.vehicle_models.length) {
+    await catalog.deleteVehicleModels(created.vehicle_models)
+  }
+  if (created.vehicle_makes.length) {
+    await catalog.deleteVehicleMakes(created.vehicle_makes)
   }
   if (created.numbers.length) {
     await catalog.deletePartNumbers(created.numbers)
@@ -180,6 +188,8 @@ export const ingestLookupResultStep = createStep(
       evidence: [],
       applications: [],
       attributes: [],
+      vehicle_makes: [],
+      vehicle_models: [],
       verdicts: [],
     }
     const summary = {
@@ -436,6 +446,89 @@ export const ingestLookupResultStep = createStep(
         created.evidence.push(link.id)
       }
 
+      // Match the source's make and model wording to the vehicle directory.
+      // Unknown names are added and flagged for review, so nothing is lost
+      // and duplicates can be merged later.
+      const makeIds = new Map<string, string>()
+      const resolveMakeId = async (name: string) => {
+        const key = normalizeBrandName(name)
+
+        if (!key) {
+          return null
+        }
+
+        let makeId = makeIds.get(key)
+
+        if (!makeId) {
+          makeId =
+            (await catalog.listVehicleMakes({ normalized_name: key }))[0]?.id ??
+            (
+              await catalog.listVehicleMakeAliasRecords({
+                normalized_alias: key,
+              })
+            )[0]?.make_id
+
+          if (!makeId) {
+            const make = await catalog.createVehicleMakes({
+              name: name.trim(),
+              normalized_name: key,
+              needs_review: true,
+            })
+            created.vehicle_makes.push(make.id)
+            makeId = make.id
+          }
+
+          makeIds.set(key, makeId)
+        }
+
+        return makeId
+      }
+
+      const modelIds = new Map<string, string>()
+      const resolveModelId = async (makeId: string, name?: string | null) => {
+        const key = name ? normalizeBrandName(name) : ""
+
+        if (!key) {
+          return null
+        }
+
+        const cacheKey = `${makeId}|${key}`
+        let modelId = modelIds.get(cacheKey)
+
+        if (!modelId) {
+          modelId = (
+            await catalog.listVehicleModels({
+              make_id: makeId,
+              normalized_name: key,
+            })
+          )[0]?.id
+
+          if (!modelId) {
+            const aliases = await catalog.listVehicleModelAliasRecords(
+              { normalized_alias: key },
+              { relations: ["model"] }
+            )
+            modelId = aliases.find((alias) => alias.model?.make_id === makeId)
+              ?.model_id
+          }
+
+          if (!modelId) {
+            const model = await catalog.createVehicleModels({
+              make_id: makeId,
+              name: name!.trim(),
+              normalized_name: key,
+              needs_review: true,
+            })
+            created.vehicle_models.push(model.id)
+            modelId = model.id
+          }
+
+          modelIds.set(cacheKey, modelId)
+        }
+
+        return modelId
+      }
+
       const knownApplications = new Set(
         (
           await catalog.listPartApplications(
@@ -460,10 +553,16 @@ export const ingestLookupResultStep = createStep(
 
         knownApplications.add(key)
 
+        const vehicleMakeId = await resolveMakeId(make)
+        const vehicleModelId = vehicleMakeId
+          ? await resolveModelId(vehicleMakeId, item.model)
+          : null
         const observation = await observe(source, item)
         const application = await catalog.createPartApplications({
           part_number_id: subject.id,
           observation_id: observation.id,
+          vehicle_make_id: vehicleMakeId,
+          vehicle_model_id: vehicleModelId,
           applicability_verdict: autoApplicationVerdict(
             source.kind,
             hasKeys(item.constraints)

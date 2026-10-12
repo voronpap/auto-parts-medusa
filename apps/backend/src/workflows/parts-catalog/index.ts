@@ -17,6 +17,15 @@ import {
   IngestLookupResultInput,
 } from "./steps/ingest-lookup-result"
 import {
+  createVehicleMakeStep,
+  CreateVehicleMakeInput,
+  mergeVehicleMakesStep,
+  mergeVehicleModelsStep,
+  MergeVehiclesInput,
+  seedVehicleMakesStep,
+  SeedVehicleMakesInput,
+} from "./steps/vehicles"
+import {
   claimLookupTasksStep,
   ClaimLookupTasksInput,
   createLookupTaskStep,
@@ -101,5 +110,33 @@ export const ingestLookupResultWorkflow = createWorkflow(
   "ingest-lookup-result",
   function (input: IngestLookupResultInput) {
     return new WorkflowResponse(ingestLookupResultStep(input))
+  }
+)
+
+export const createVehicleMakeWorkflow = createWorkflow(
+  "create-vehicle-make",
+  function (input: CreateVehicleMakeInput) {
+    return new WorkflowResponse(createVehicleMakeStep(input))
+  }
+)
+
+export const seedVehicleMakesWorkflow = createWorkflow(
+  "seed-vehicle-makes",
+  function (input: SeedVehicleMakesInput) {
+    return new WorkflowResponse(seedVehicleMakesStep(input))
+  }
+)
+
+export const mergeVehicleModelsWorkflow = createWorkflow(
+  "merge-vehicle-models",
+  function (input: MergeVehiclesInput) {
+    return new WorkflowResponse(mergeVehicleModelsStep(input))
+  }
+)
+
+export const mergeVehicleMakesWorkflow = createWorkflow(
+  "merge-vehicle-makes",
+  function (input: MergeVehiclesInput) {
+    return new WorkflowResponse(mergeVehicleMakesStep(input))
   }
 )

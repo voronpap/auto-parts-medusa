@@ -18,12 +18,16 @@ class Line:
     x0: float
     x1: float
     text: str
+    # Font of the line's first character: headings differ from table text
+    # by typeface rather than by position.
+    font: str = ""
+    size: float = 0.0
 
 
 def page_lines(pdf_path: Path, page_numbers: list[int] | None = None) -> Iterator[tuple[int, list[Line]]]:
     """Yields (1-based page number, lines) for the requested pages."""
     from pdfminer.high_level import extract_pages
-    from pdfminer.layout import LAParams, LTFigure, LTTextContainer, LTTextLine
+    from pdfminer.layout import LAParams, LTChar, LTFigure, LTTextContainer, LTTextLine
 
     # all_texts: on some pages the table cells sit inside form objects, which
     # are skipped by layout analysis unless asked for.
@@ -40,7 +44,17 @@ def page_lines(pdf_path: Path, page_numbers: list[int] | None = None) -> Iterato
                         text = line.get_text().strip()
 
                         if text:
-                            lines.append(Line(round(line.y1, 1), round(line.x0, 1), round(line.x1, 1), text))
+                            first = next((char for char in line if isinstance(char, LTChar)), None)
+                            lines.append(
+                                Line(
+                                    round(line.y1, 1),
+                                    round(line.x0, 1),
+                                    round(line.x1, 1),
+                                    text,
+                                    first.fontname.split("+")[-1] if first else "",
+                                    round(first.size, 1) if first else 0.0,
+                                )
+                            )
 
     for index, page in enumerate(extract_pages(str(pdf_path), page_numbers=wanted, laparams=params)):
         lines: list[Line] = []

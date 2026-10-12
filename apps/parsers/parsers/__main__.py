@@ -3,7 +3,7 @@
     python -m parsers adapters
     python -m parsers lookup --brand Bosch --number "0 986 478 123"
     python -m parsers run
-    python -m parsers import-monroe
+    python -m parsers import-pdf monroe
 """
 
 from __future__ import annotations
@@ -50,8 +50,9 @@ def main(argv: list[str] | None = None) -> int:
 
     commands.add_parser("run", help="claim tasks from the catalog and post results")
 
-    load = commands.add_parser("import-monroe", help="load the parsed Monroe PDF catalogue into the catalog")
-    load.add_argument("--index", default=".cache/index/monroe.json")
+    load = commands.add_parser("import-pdf", help="load a parsed PDF catalogue into the catalog")
+    load.add_argument("catalogue", choices=["monroe", "kyb"])
+    load.add_argument("--index", help="parsed catalogue, default .cache/index/<catalogue>.json")
     load.add_argument("--limit", type=int)
 
     args = parser.parse_args(argv)
@@ -89,10 +90,11 @@ def main(argv: list[str] | None = None) -> int:
 
     client = CatalogClient(base_url, api_key)
 
-    if args.command == "import-monroe":
-        from .pdf.loader import load_monroe
+    if args.command == "import-pdf":
+        from .pdf.loader import load_catalogue
 
-        totals = load_monroe(client, Path(args.index), worker, limit=args.limit)
+        index = Path(args.index or f".cache/index/{args.catalogue}.json")
+        totals = load_catalogue(args.catalogue, client, index, worker, limit=args.limit)
         print(json.dumps(totals))
         return 0 if not totals["failed"] else 1
 

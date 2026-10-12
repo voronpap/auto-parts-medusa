@@ -46,6 +46,9 @@ module.exports = defineConfig({
       resolve: "./src/modules/security",
     },
     {
+      resolve: "./src/modules/parts-catalog",
+    },
+    {
       resolve: "@medusajs/medusa/translation",
     },
     ...(emailEnabled

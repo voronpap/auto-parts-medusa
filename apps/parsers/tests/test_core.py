@@ -199,7 +199,7 @@ def test_blocked_sources_are_reported_not_bypassed():
         FakeResponse(403, "Forbidden"),
         FakeResponse(429, "slow down"),
         FakeResponse(200, "<title>Just a moment...</title>"),
-        FakeResponse(200, "please solve the CAPTCHA"),
+        FakeResponse(200, "<html><body>please solve the CAPTCHA</body></html>"),
     ):
         session, http = polite([response])
 
@@ -207,6 +207,14 @@ def test_blocked_sources_are_reported_not_bypassed():
             session.fetch("https://x.example/")
 
         assert http.requests == 1
+
+
+def test_json_that_mentions_captcha_as_data_is_not_a_refusal():
+    session, _ = polite([FakeResponse(200, '{"isReCaptchaFeatureEnabled": true}')])
+
+    assert session.fetch_json("https://x.example/init") == {
+        "isReCaptchaFeatureEnabled": True
+    }
 
 
 def test_network_and_server_errors_become_source_errors():

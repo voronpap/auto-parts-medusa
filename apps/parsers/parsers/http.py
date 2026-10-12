@@ -169,9 +169,12 @@ class PoliteSession:
             raise SourceError(f"{type(error).__name__}: {error}") from error
 
         body = response.text
+        # Challenge pages are HTML. JSON may mention these words as data
+        # (a "reCaptcha enabled" flag, say) without being a refusal.
+        is_html = body.lstrip()[:1] == "<"
 
-        if response.status_code in BLOCKED_STATUSES or any(
-            marker in body[:4000].lower() for marker in BLOCK_MARKERS
+        if response.status_code in BLOCKED_STATUSES or (
+            is_html and any(marker in body[:4000].lower() for marker in BLOCK_MARKERS)
         ):
             raise SourceBlocked(
                 f"HTTP {response.status_code}: the source refuses automated access"

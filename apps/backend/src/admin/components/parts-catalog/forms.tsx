@@ -262,17 +262,10 @@ export const CreateSourceModal = ({ open, onOpenChange }: ModalProps) => {
 }
 
 export const CreatePartNumberModal = ({ open, onOpenChange }: ModalProps) => {
-  const [brandId, setBrandId] = useState("")
+  const [brand, setBrand] = useState<Brand | null>(null)
+  const brandId = brand?.id ?? ""
   const [numberType, setNumberType] = useState("aftermarket")
   const [number, setNumber] = useState("")
-  const { data } = useQuery({
-    queryFn: () =>
-      sdk.client.fetch<{ brands: Brand[] }>("/admin/parts-catalog/brands", {
-        query: { limit: 100 },
-      }),
-    queryKey: [CATALOG_QUERY_KEY, "brands", "options"],
-    enabled: open,
-  })
   const mutation = useCatalogMutation(
     "/admin/parts-catalog/part-numbers",
     "Номер створено",
@@ -281,10 +274,6 @@ export const CreatePartNumberModal = ({ open, onOpenChange }: ModalProps) => {
       onOpenChange(false)
     }
   )
-  const brandOptions = Object.fromEntries(
-    (data?.brands ?? []).map((brand) => [brand.id, brand.name])
-  )
-
   return (
     <FormModal
       open={open}
@@ -302,12 +291,7 @@ export const CreatePartNumberModal = ({ open, onOpenChange }: ModalProps) => {
       }
     >
       <Field label="Бренд">
-        <OptionSelect
-          value={brandId}
-          onChange={setBrandId}
-          options={brandOptions}
-          placeholder="Оберіть бренд"
-        />
+        <BrandPicker value={brand} onChange={setBrand} />
       </Field>
       <Field label="Тип номера">
         <OptionSelect
@@ -492,5 +476,70 @@ export const CreateRelationshipModal = ({
         <Input value={url} onChange={(e) => setUrl(e.target.value)} />
       </Field>
     </FormModal>
+  )
+}
+
+// There are hundreds of brands, so they are found by typing rather than
+// scrolled through.
+export const BrandPicker = ({
+  value,
+  onChange,
+}: {
+  value: Brand | null
+  onChange: (brand: Brand | null) => void
+}) => {
+  const [search, setSearch] = useState("")
+  const q = search.trim()
+  const { data } = useQuery({
+    queryFn: () =>
+      sdk.client.fetch<{ brands: Brand[] }>("/admin/parts-catalog/brands", {
+        query: { q, limit: 8 },
+      }),
+    queryKey: [CATALOG_QUERY_KEY, "brands", "search", q],
+    enabled: !value && q.length >= 2,
+  })
+
+  if (value) {
+    return (
+      <div className="flex items-center justify-between gap-x-3">
+        <Text size="small" weight="plus">
+          {value.name}
+        </Text>
+        <Button size="small" variant="secondary" onClick={() => onChange(null)}>
+          Змінити
+        </Button>
+      </div>
+    )
+  }
+
+  const brands = data?.brands ?? []
+
+  return (
+    <div className="flex flex-col gap-y-1">
+      <Input
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        placeholder="Почніть вводити назву бренду"
+      />
+      {brands.map((brand) => (
+        <Button
+          key={brand.id}
+          size="small"
+          variant="transparent"
+          className="justify-start"
+          onClick={() => {
+            onChange(brand)
+            setSearch("")
+          }}
+        >
+          {brand.name}
+        </Button>
+      ))}
+      {q.length >= 2 && data && !brands.length && (
+        <Text size="small" className="text-ui-fg-subtle">
+          Бренд не знайдено. Додайте його на сторінці «Каталог номерів».
+        </Text>
+      )}
+    </div>
   )
 }

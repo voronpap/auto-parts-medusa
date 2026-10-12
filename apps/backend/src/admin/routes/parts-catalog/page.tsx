@@ -150,12 +150,16 @@ const NumbersSection = () => {
 
 const BrandsSection = () => {
   const [createOpen, setCreateOpen] = useState(false)
+  const [search, setSearch] = useState("")
+  const q = search.trim()
   const { data, isLoading } = useQuery({
     queryFn: () =>
-      sdk.client.fetch<{ brands: Brand[] }>("/admin/parts-catalog/brands", {
-        query: { limit: 100 },
-      }),
-    queryKey: [CATALOG_QUERY_KEY, "brands"],
+      sdk.client.fetch<{ brands: Brand[]; count: number }>(
+        "/admin/parts-catalog/brands",
+        { query: { limit: 20, ...(q ? { q } : {}) } }
+      ),
+    queryKey: [CATALOG_QUERY_KEY, "brands", q],
+    placeholderData: keepPreviousData,
   })
   const brands = data?.brands ?? []
 
@@ -163,7 +167,7 @@ const BrandsSection = () => {
     <Container className="divide-y p-0">
       <SectionHeader
         title="Бренди"
-        description="Виробники авто, виробники запчастин і постачальники."
+        description={`Виробники авто, виробники запчастин і постачальники. Усього: ${data?.count ?? 0}; показано до 20, решта — через пошук.`}
         action={
           <Button
             size="small"
@@ -174,10 +178,18 @@ const BrandsSection = () => {
           </Button>
         }
       />
+      <div className="px-6 py-3">
+        <Input
+          type="search"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder="Пошук бренду"
+        />
+      </div>
       {isLoading ? (
         <Loading />
       ) : brands.length === 0 ? (
-        <Empty>Брендів ще немає.</Empty>
+        <Empty>Брендів не знайдено.</Empty>
       ) : (
         <Table>
           <Table.Header>
@@ -219,12 +231,16 @@ const BrandsSection = () => {
 
 const SourcesSection = () => {
   const [createOpen, setCreateOpen] = useState(false)
+  const [search, setSearch] = useState("")
+  const q = search.trim()
   const { data, isLoading } = useQuery({
     queryFn: () =>
-      sdk.client.fetch<{ sources: Source[] }>("/admin/parts-catalog/sources", {
-        query: { limit: 100 },
-      }),
-    queryKey: [CATALOG_QUERY_KEY, "sources"],
+      sdk.client.fetch<{ sources: Source[]; count: number }>(
+        "/admin/parts-catalog/sources",
+        { query: { limit: 20, ...(q ? { q } : {}) } }
+      ),
+    queryKey: [CATALOG_QUERY_KEY, "sources", q],
+    placeholderData: keepPreviousData,
   })
   const sources = data?.sources ?? []
 
@@ -232,7 +248,7 @@ const SourcesSection = () => {
     <Container className="divide-y p-0">
       <SectionHeader
         title="Джерела даних"
-        description="Звідки беруться кроси. Кожен доказ посилається на джерело з цього списку."
+        description={`Звідки беруться кроси. Кожен доказ посилається на джерело з цього списку. Усього: ${data?.count ?? 0}; показано до 20, решта — через пошук.`}
         action={
           <Button
             size="small"
@@ -243,10 +259,18 @@ const SourcesSection = () => {
           </Button>
         }
       />
+      <div className="px-6 py-3">
+        <Input
+          type="search"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder="Пошук джерела"
+        />
+      </div>
       {isLoading ? (
         <Loading />
       ) : sources.length === 0 ? (
-        <Empty>Джерел ще немає.</Empty>
+        <Empty>Джерел не знайдено.</Empty>
       ) : (
         <Table>
           <Table.Header>

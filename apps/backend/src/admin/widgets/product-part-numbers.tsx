@@ -4,7 +4,10 @@ import { Button, Container, Heading, Label, Text, toast } from "@medusajs/ui"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { useState } from "react"
 import { Link } from "react-router-dom"
-import { OptionSelect } from "../components/parts-catalog/forms"
+import {
+  BrandPicker,
+  OptionSelect,
+} from "../components/parts-catalog/forms"
 import { sdk } from "../lib/client"
 import {
   Brand,
@@ -31,7 +34,8 @@ const ProductPartNumbersWidget = ({
   data: product,
 }: DetailWidgetProps<HttpTypes.AdminProduct>) => {
   const queryClient = useQueryClient()
-  const [brandId, setBrandId] = useState("")
+  const [brand, setBrand] = useState<Brand | null>(null)
+  const brandId = brand?.id ?? ""
   const [numberType, setNumberType] = useState("aftermarket")
   const queryKey = [CATALOG_QUERY_KEY, "product", product.id]
 
@@ -41,13 +45,6 @@ const ProductPartNumbersWidget = ({
         `/admin/parts-catalog/products/${product.id}`
       ),
     queryKey,
-  })
-  const { data: brands } = useQuery({
-    queryFn: () =>
-      sdk.client.fetch<{ brands: Brand[] }>("/admin/parts-catalog/brands", {
-        query: { limit: 100 },
-      }),
-    queryKey: [CATALOG_QUERY_KEY, "brands", "options"],
   })
 
   const mutation = useMutation({
@@ -73,9 +70,6 @@ const ProductPartNumbersWidget = ({
   })
 
   const variants = data?.variants ?? []
-  const brandOptions = Object.fromEntries(
-    (brands?.brands ?? []).map((brand) => [brand.id, brand.name])
-  )
 
   return (
     <Container className="divide-y p-0">
@@ -136,12 +130,7 @@ const ProductPartNumbersWidget = ({
           <Label size="small" weight="plus">
             Бренд
           </Label>
-          <OptionSelect
-            value={brandId}
-            onChange={setBrandId}
-            options={brandOptions}
-            placeholder="Оберіть бренд"
-          />
+          <BrandPicker value={brand} onChange={setBrand} />
         </div>
         <div className="flex flex-col gap-y-2">
           <Label size="small" weight="plus">

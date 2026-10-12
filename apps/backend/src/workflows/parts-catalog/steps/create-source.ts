@@ -57,3 +57,63 @@ export const createPartsSourceStep = createStep(
     await catalog.deleteSources(sourceId)
   }
 )
+
+export type UpdateSourceInput = {
+  id: string
+  kind?: SourceKind
+  license_class?: LicenseClass
+  lineage?: string
+  url?: string | null
+  license_note?: string | null
+}
+
+type SourceSnapshot = {
+  id: string
+  kind: SourceKind
+  license_class: LicenseClass
+  lineage: string
+  url: string | null
+  license_note: string | null
+}
+
+export const updatePartsSourceStep = createStep(
+  "update-parts-source",
+  async (input: UpdateSourceInput, { container }) => {
+    const catalog = container.resolve<PartsCatalogModuleService>(
+      PARTS_CATALOG_MODULE
+    )
+    const current = await catalog.retrieveSource(input.id)
+    const previous: SourceSnapshot = {
+      id: current.id,
+      kind: current.kind,
+      license_class: current.license_class,
+      lineage: current.lineage,
+      url: current.url,
+      license_note: current.license_note,
+    }
+    const source = await catalog.updateSources({
+      id: current.id,
+      ...(input.kind ? { kind: input.kind } : {}),
+      ...(input.license_class ? { license_class: input.license_class } : {}),
+      ...(input.lineage?.trim()
+        ? { lineage: normalizeBrandName(input.lineage) }
+        : {}),
+      ...(input.url !== undefined ? { url: input.url?.trim() || null } : {}),
+      ...(input.license_note !== undefined
+        ? { license_note: input.license_note?.trim() || null }
+        : {}),
+    })
+
+    return new StepResponse(source, previous)
+  },
+  async (previous: SourceSnapshot | undefined, { container }) => {
+    if (!previous) {
+      return
+    }
+
+    const catalog = container.resolve<PartsCatalogModuleService>(
+      PARTS_CATALOG_MODULE
+    )
+    await catalog.updateSources(previous)
+  }
+)

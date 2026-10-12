@@ -11,7 +11,12 @@ import {
   createPartRelationshipStep,
   CreatePartRelationshipInput,
 } from "./steps/create-part-relationship"
-import { createPartsSourceStep, CreateSourceInput } from "./steps/create-source"
+import {
+  createPartsSourceStep,
+  CreateSourceInput,
+  updatePartsSourceStep,
+  UpdateSourceInput,
+} from "./steps/create-source"
 import {
   ingestLookupResultStep,
   IngestLookupResultInput,
@@ -138,5 +143,12 @@ export const mergeVehicleMakesWorkflow = createWorkflow(
   "merge-vehicle-makes",
   function (input: MergeVehiclesInput) {
     return new WorkflowResponse(mergeVehicleMakesStep(input))
+  }
+)
+
+export const updatePartsSourceWorkflow = createWorkflow(
+  "update-parts-source",
+  function (input: UpdateSourceInput) {
+    return new WorkflowResponse(updatePartsSourceStep(input))
   }
 )

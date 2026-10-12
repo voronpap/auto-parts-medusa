@@ -8,11 +8,15 @@
  */
 import type { ExecArgs } from "@medusajs/framework/types"
 import { ContainerRegistrationKeys, MedusaError } from "@medusajs/framework/utils"
+import { PARTS_CATALOG_MODULE } from "../modules/parts-catalog"
+import { LicenseClass } from "../modules/parts-catalog/constants"
+import PartsCatalogModuleService from "../modules/parts-catalog/service"
 import { readFile } from "fs/promises"
 import path from "path"
 import {
   createPartsBrandWorkflow,
   createPartsSourceWorkflow,
+  updatePartsSourceWorkflow,
 } from "../workflows/parts-catalog"
 
 type CatalogEntry = {
@@ -28,6 +32,8 @@ type CatalogEntry = {
   checked_at: string | null
   kind: "oem_catalog" | "manufacturer_catalog"
   lineage: string
+  platform: string | null
+  license_class: LicenseClass
 }
 
 const DATA_FILE = "src/modules/parts-catalog/data/manufacturer-catalogs.json"
@@ -46,7 +52,10 @@ export default async function importManufacturerCatalogs({
   const entries: CatalogEntry[] = JSON.parse(
     await readFile(path.resolve(process.cwd(), DATA_FILE), "utf-8")
   )
-  const counts = { sources: 0, brands: 0, skipped: 0 }
+  const catalog = container.resolve<PartsCatalogModuleService>(
+    PARTS_CATALOG_MODULE
+  )
+  const counts = { sources: 0, brands: 0, skipped: 0, updated: 0 }
 
   const run = async (kind: "sources" | "brands", create: () => Promise<unknown>) => {
     if (dryRun) {
@@ -67,31 +76,42 @@ export default async function importManufacturerCatalogs({
   }
 
   for (const entry of entries) {
-    await run("sources", () =>
-      createPartsSourceWorkflow(container).run({
-        input: {
-          name: `${entry.name} (каталог виробника)`,
-          kind: entry.kind,
-          // Public to read is not permission to collect automatically, so the
-          // class stays conservative until the terms of each site are checked.
-          license_class: "REFERENCE_ONLY",
-          lineage: entry.lineage,
-          url: entry.catalog_url || null,
-          license_note: [
-            `Група: ${entry.group}.`,
-            `Доступ: ${entry.access}.`,
-            entry.search ? `Пошук: ${entry.search}.` : "",
-            entry.note,
-            entry.official_url ? `Офіційне джерело: ${entry.official_url}.` : "",
-            entry.checked_at ? `Перевірено: ${entry.checked_at}.` : "",
-            "Умови використання для автоматичного збирання не перевірено.",
-          ]
-            .filter(Boolean)
-            .join(" ")
-            .slice(0, 2000),
-        },
-      })
-    )
+    const name = `${entry.name} (каталог виробника)`
+    const fields = {
+      kind: entry.kind,
+      license_class: entry.license_class,
+      // A manufacturer's own catalog is that manufacturer's data, whichever
+      // platform hosts it.
+      lineage: entry.lineage,
+      url: entry.catalog_url || null,
+      license_note: [
+        `Група: ${entry.group}.`,
+        `Доступ: ${entry.access}.`,
+        entry.platform ? `Платформа: ${entry.platform}.` : "",
+        entry.search ? `Пошук: ${entry.search}.` : "",
+        entry.note,
+        entry.official_url ? `Офіційне джерело: ${entry.official_url}.` : "",
+        entry.checked_at ? `Перевірено: ${entry.checked_at}.` : "",
+      ]
+        .filter(Boolean)
+        .join(" ")
+        .slice(0, 2000),
+    }
+    const [existing] = await catalog.listSources({ name })
+
+    if (existing) {
+      if (!dryRun) {
+        await updatePartsSourceWorkflow(container).run({
+          input: { id: existing.id, ...fields },
+        })
+      }
+
+      counts.updated += 1
+    } else {
+      await run("sources", () =>
+        createPartsSourceWorkflow(container).run({ input: { name, ...fields } })
+      )
+    }
 
     for (const brand of entry.brands) {
       await run("brands", () =>
@@ -109,6 +129,6 @@ export default async function importManufacturerCatalogs({
   }
 
   logger.info(
-    `${dryRun ? "[dry-run] " : ""}Manufacturer catalogs: ${counts.sources} sources, ${counts.brands} brands, ${counts.skipped} already present`
+    `${dryRun ? "[dry-run] " : ""}Manufacturer catalogs: ${counts.sources} sources created, ${counts.updated} updated, ${counts.brands} brands created, ${counts.skipped} brands already present`
   )
 }

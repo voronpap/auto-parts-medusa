@@ -15,7 +15,9 @@
   "official_url": "https://www.bilsteingroup.com/ua/profil/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "febi"
+  "lineage": "febi",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 2,
@@ -31,7 +33,9 @@
   "official_url": "https://www.meyle.com/en/parts-catalog",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "MEYLE"
+  "lineage": "MEYLE",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 3,
@@ -49,7 +53,9 @@
   "official_url": "https://japanparts.it/en/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Japanparts"
+  "lineage": "Japanparts",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 4,
@@ -65,7 +71,9 @@
   "official_url": "https://www.nipparts.com/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Nipparts"
+  "lineage": "Nipparts",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 5,
@@ -81,7 +89,9 @@
   "official_url": "https://www.aic-germany.de/en/product-catalogue",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "AIC Germany"
+  "lineage": "AIC Germany",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 6,
@@ -97,7 +107,9 @@
   "official_url": "https://www.metzger-autoteile.de/service",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "tecdoc"
+  "lineage": "METZGER",
+  "platform": "TecAlliance",
+  "license_class": "OPEN"
  },
  {
   "id": 7,
@@ -114,7 +126,9 @@
   "official_url": "https://www.parts-mall.com/product",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Parts-Mall"
+  "lineage": "Parts-Mall",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 8,
@@ -130,7 +144,9 @@
   "official_url": "https://ecatalogue.lynxauto.jp/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "LYNXauto"
+  "lineage": "LYNXauto",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 9,
@@ -146,7 +162,9 @@
   "official_url": "https://jpgroup.dk/en/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "JP Group"
+  "lineage": "JP Group",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 10,
@@ -162,7 +180,9 @@
   "official_url": "https://bsgautoparts.com/en/catalog",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "BSG"
+  "lineage": "BSG",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 11,
@@ -178,7 +198,9 @@
   "official_url": "https://www.fastoriginal.eu/en/auto-parts-categories",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "FAST Original"
+  "lineage": "FAST Original",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 12,
@@ -195,7 +217,9 @@
   "official_url": "https://www.skv.pl/en",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "SKV"
+  "lineage": "SKV",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 13,
@@ -211,7 +235,9 @@
   "official_url": "https://masuma.parts/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "MASUMA"
+  "lineage": "MASUMA",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 14,
@@ -227,7 +253,9 @@
   "official_url": "https://www.dormanproducts.com/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Dorman"
+  "lineage": "Dorman",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 15,
@@ -243,7 +271,9 @@
   "official_url": "https://www.cardone.com/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "CARDONE"
+  "lineage": "CARDONE",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 16,
@@ -259,7 +289,9 @@
   "official_url": "https://parts-catalog.acdelco.com/acesCat.php?isPigtail=1",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "ACDelco"
+  "lineage": "ACDelco",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 17,
@@ -275,7 +307,9 @@
   "official_url": "https://parts.ford.com/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Motorcraft"
+  "lineage": "Motorcraft",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 18,
@@ -291,7 +325,9 @@
   "official_url": "https://www.beckarnley.com/find-my-part.html",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Beck/Arnley"
+  "lineage": "Beck/Arnley",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 19,
@@ -308,7 +344,9 @@
   "official_url": "https://apaindustries.com/catalog",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "URO Parts"
+  "lineage": "URO Parts",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 20,
@@ -326,7 +364,9 @@
   "official_url": "https://crpautomotive.com/brands/rein-automotive/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Rein"
+  "lineage": "Rein",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 21,
@@ -342,7 +382,9 @@
   "official_url": "https://www.atpautomotive.com/catalogs",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "ATP Automotive"
+  "lineage": "ATP Automotive",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 22,
@@ -358,7 +400,9 @@
   "official_url": "https://www.pioneerautoinc.com/catalog",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Pioneer Automotive"
+  "lineage": "Pioneer Automotive",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 23,
@@ -378,7 +422,9 @@
   "official_url": "https://aftermarket.zf.com/en/aftermarket-portal/our-catalog/search-by-vehicle/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "ZF"
+  "lineage": "ZF",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 24,
@@ -399,7 +445,9 @@
   "official_url": "https://www.metelligroup.it/en",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Metelli"
+  "lineage": "Metelli",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 25,
@@ -423,7 +471,9 @@
   "official_url": "https://www.autoexperts.parts/pt/br/about",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Fremax"
+  "lineage": "Fremax",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 26,
@@ -439,7 +489,9 @@
   "official_url": "https://www.boschaftermarket.com/ua/uk/parts/product-search.html",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Bosch"
+  "lineage": "Bosch",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 27,
@@ -455,7 +507,9 @@
   "official_url": "https://www.denso-am.eu/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "DENSO"
+  "lineage": "DENSO",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 28,
@@ -471,7 +525,9 @@
   "official_url": "https://www.hella.com/partnerworld/ex/Support-materials/Catalogs-699/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "HELLA"
+  "lineage": "HELLA",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 29,
@@ -488,7 +544,9 @@
   "official_url": "https://www.valeoservice.co.uk/en-uk",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Valeo"
+  "lineage": "Valeo",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 30,
@@ -506,7 +564,9 @@
   "official_url": "https://www.vierol.de/en/automotive-division-en/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "VAICO"
+  "lineage": "VAICO",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 31,
@@ -522,7 +582,9 @@
   "official_url": "https://www.magnetimarelli-parts-and-services.it/content/mmamps/us/en/products/spare-parts.html",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "tecdoc"
+  "lineage": "Magneti Marelli Parts & Services",
+  "platform": "TecAlliance",
+  "license_class": "OPEN"
  },
  {
   "id": 32,
@@ -540,7 +602,9 @@
   "official_url": "https://herthundbuss.com/en/online-catalogue/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Herth+Buss"
+  "lineage": "Herth+Buss",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 33,
@@ -558,7 +622,9 @@
   "official_url": "https://www.standardbrand.com/ecatalog/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Standard"
+  "lineage": "Standard",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 34,
@@ -575,7 +641,9 @@
   "official_url": "https://wellsve.com/products/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Wells Vehicle Electronics"
+  "lineage": "Wells Vehicle Electronics",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 35,
@@ -591,7 +659,9 @@
   "official_url": "https://www.walkerproducts.com/catalog/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Walker Products"
+  "lineage": "Walker Products",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 36,
@@ -609,7 +679,9 @@
   "official_url": "https://www.ngkntk.com/part-finder/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "NGK"
+  "lineage": "NGK",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 37,
@@ -625,7 +697,9 @@
   "official_url": "https://www.championautoparts.com/en-eu/catalogue.html",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Champion"
+  "lineage": "Champion",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 38,
@@ -641,7 +715,9 @@
   "official_url": "https://www.fae.es/en",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "tecdoc"
+  "lineage": "FAE",
+  "platform": "TecAlliance",
+  "license_class": "OPEN"
  },
  {
   "id": 39,
@@ -657,7 +733,9 @@
   "official_url": "https://www.facet.eu/en/catalogs/facet-catalog/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "FACET"
+  "lineage": "FACET",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 40,
@@ -673,7 +751,9 @@
   "official_url": "https://www.facet.eu/en/catalogs/eps-catalog/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "EPS"
+  "lineage": "EPS",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 41,
@@ -689,7 +769,9 @@
   "official_url": "https://www.facet.eu/en/catalogs/kw-catalog/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "KW"
+  "lineage": "KW",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 42,
@@ -705,7 +787,9 @@
   "official_url": "https://www.eraspares.com/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "ERA"
+  "lineage": "ERA",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 43,
@@ -721,7 +805,9 @@
   "official_url": "https://www.mobiletron.co.uk/MobCAT",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Mobiletron"
+  "lineage": "Mobiletron",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 44,
@@ -737,7 +823,9 @@
   "official_url": "https://www.delphiautoparts.com/en-gb/catalogue",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Delphi"
+  "lineage": "Delphi",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 45,
@@ -754,7 +842,9 @@
   "official_url": "https://www.borgwarner.com/aftermarket/diesel-cold-start-technologies",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "BERU"
+  "lineage": "BERU",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 46,
@@ -770,7 +860,9 @@
   "official_url": "https://www.sidatgroup.it/en/categories",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "SIDAT"
+  "lineage": "SIDAT",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 47,
@@ -786,7 +878,9 @@
   "official_url": "https://www.fispa.it/en",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "FISPA"
+  "lineage": "FISPA",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 48,
@@ -802,7 +896,9 @@
   "official_url": "https://www.hoffer-products.com/de",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Hoffer"
+  "lineage": "Hoffer",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 49,
@@ -818,7 +914,9 @@
   "official_url": "https://www.meat-doria.com/en/car/ABARTH-500---595---695-yAll/33667",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Meat&Doria"
+  "lineage": "Meat&Doria",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 50,
@@ -835,7 +933,9 @@
   "official_url": "https://aftermarket.vdo.com/en-en/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "tecdoc"
+  "lineage": "VDO",
+  "platform": "TecAlliance",
+  "license_class": "OPEN"
  },
  {
   "id": 51,
@@ -854,7 +954,9 @@
   "official_url": "https://www.smpeurope.com/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Intermotor"
+  "lineage": "Intermotor",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 52,
@@ -872,7 +974,9 @@
   "official_url": "https://eltaeurope.com/elta-automotive-resources/news/elta-ecat-celebrates-first-year-supporting-independent-motor-factors/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "ELTA"
+  "lineage": "ELTA",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 53,
@@ -888,7 +992,9 @@
   "official_url": "https://www.brisk.eu/catalogues/spark-plugs",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "BRISK"
+  "lineage": "BRISK",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 54,
@@ -905,7 +1011,9 @@
   "official_url": "https://www.efi-service.com/en/ressource/ignition-wire-sets/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "EFI Automotive"
+  "lineage": "EFI Automotive",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 55,
@@ -921,7 +1029,9 @@
   "official_url": "https://www.delcoremy.com/find-a-part",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Delco Remy"
+  "lineage": "Delco Remy",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 56,
@@ -937,7 +1047,9 @@
   "official_url": "https://as-pl.com/en/content/as-pl_katalogus/10",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "AS-PL"
+  "lineage": "AS-PL",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 57,
@@ -953,7 +1065,9 @@
   "official_url": "https://hc-cargo.com/gb/en?showLanguagePicker=1",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "HC-Cargo"
+  "lineage": "HC-Cargo",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 58,
@@ -970,7 +1084,9 @@
   "official_url": "https://www.ika-germany.de/en/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "GEBE"
+  "lineage": "GEBE",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 59,
@@ -987,7 +1103,9 @@
   "official_url": "https://www.waiglobal.com/media/wysiwyg/catalogs_thumnails/Transpo_low-res_04152015.pdf",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "WAI"
+  "lineage": "WAI",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 60,
@@ -1003,7 +1121,9 @@
   "official_url": "https://catalog.jubana.com/en/alternator/143701169",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "JUBANA"
+  "lineage": "JUBANA",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 61,
@@ -1019,7 +1139,9 @@
   "official_url": "https://www.osram.com/am/services/interactive-tools/index.jsp",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "OSRAM"
+  "lineage": "OSRAM",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 62,
@@ -1035,7 +1157,9 @@
   "official_url": "https://www.tyceurope.com/ecatalog",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "TYC"
+  "lineage": "TYC",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 63,
@@ -1051,7 +1175,9 @@
   "official_url": "https://ulo.de/en/products/online-catalog",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "ULO"
+  "lineage": "ULO",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 64,
@@ -1067,7 +1193,9 @@
   "official_url": "https://www.vignal-group.com/fr/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Vignal Group"
+  "lineage": "Vignal Group",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 65,
@@ -1083,7 +1211,9 @@
   "official_url": "https://www.wesem.com/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "WESEM"
+  "lineage": "WESEM",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 66,
@@ -1099,7 +1229,9 @@
   "official_url": "https://fristom.com/en/offer/rear-lamps/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Fristom"
+  "lineage": "Fristom",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 67,
@@ -1115,7 +1247,9 @@
   "official_url": "https://www.aspoeck.com/en/products_services/spare-parts",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Aspöck"
+  "lineage": "Aspöck",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 68,
@@ -1131,7 +1265,9 @@
   "official_url": "https://www.was.eu/katalogi.php",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "WAŚ"
+  "lineage": "WAŚ",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 69,
@@ -1147,7 +1283,9 @@
   "official_url": "https://www.philips.com/c-dam/b2c/en_US/generic/support-home/support-page-product-flyers/automotive-lighting-tab-product-flyers/philips-automotive-lighting-master-catalog-2002-2022.pdf",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Philips Automotive"
+  "lineage": "Philips Automotive",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 70,
@@ -1163,7 +1301,9 @@
   "official_url": "https://www.narva-light.com/catalogues",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "NARVA Light"
+  "lineage": "NARVA Light",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 71,
@@ -1180,7 +1320,9 @@
   "official_url": "https://www.truck-lite.com/our-resources/assets",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Truck-Lite"
+  "lineage": "Truck-Lite",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 72,
@@ -1196,7 +1338,9 @@
   "official_url": "https://eu.motorad.com/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "MotoRad"
+  "lineage": "MotoRad",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 73,
@@ -1212,7 +1356,9 @@
   "official_url": "https://nissens.com/catalogue",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Nissens"
+  "lineage": "Nissens",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 74,
@@ -1228,7 +1374,9 @@
   "official_url": "https://nrf.eu/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "NRF"
+  "lineage": "NRF",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 75,
@@ -1244,7 +1392,9 @@
   "official_url": "https://ava.eu/en/catalogue.html",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "AVA Cooling"
+  "lineage": "AVA Cooling",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 76,
@@ -1260,7 +1410,9 @@
   "official_url": "https://www.idolz.com/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "tecdoc"
+  "lineage": "DOLZ",
+  "platform": "TecAlliance",
+  "license_class": "OPEN"
  },
  {
   "id": 77,
@@ -1276,7 +1428,9 @@
   "official_url": "https://www.kriosac.it/en/categories",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "KRIOS"
+  "lineage": "KRIOS",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 78,
@@ -1292,7 +1446,9 @@
   "official_url": "https://www.calorstatbyvernet.com/e-catalogue/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "CALORSTAT by Vernet"
+  "lineage": "CALORSTAT by Vernet",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 79,
@@ -1308,7 +1464,9 @@
   "official_url": "https://www.hepu.de/en/parts-catalogue/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "HEPU"
+  "lineage": "HEPU",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 80,
@@ -1324,7 +1482,9 @@
   "official_url": "https://www.geba-autoteile.de/en/products/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "tecdoc"
+  "lineage": "GEBA",
+  "platform": "TecAlliance",
+  "license_class": "OPEN"
  },
  {
   "id": 81,
@@ -1340,7 +1500,9 @@
   "official_url": "https://www.mann-filter.com/en/catalog.html",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "MANN-FILTER"
+  "lineage": "MANN-FILTER",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 82,
@@ -1356,7 +1518,9 @@
   "official_url": "https://www.wixfilters.com/uk-ua/catalog.html",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "WIX Filters"
+  "lineage": "WIX Filters",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 83,
@@ -1372,7 +1536,9 @@
   "official_url": "https://filtron.eu/en/catalog.html",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "FILTRON"
+  "lineage": "FILTRON",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 84,
@@ -1388,7 +1554,9 @@
   "official_url": "https://catalog.hengst.com/en/online-catalog/search/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Hengst"
+  "lineage": "Hengst",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 85,
@@ -1404,7 +1572,9 @@
   "official_url": "https://ufi-aftermarket.com/en/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "UFI Filters"
+  "lineage": "UFI Filters",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 86,
@@ -1420,7 +1590,9 @@
   "official_url": "https://sofima-aftermarket.com/EU/en/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "SOFIMA"
+  "lineage": "SOFIMA",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 87,
@@ -1436,7 +1608,9 @@
   "official_url": "https://www.purflux.com/en/catalogue/online-catalogue.html",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Purflux"
+  "lineage": "Purflux",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 88,
@@ -1452,7 +1626,9 @@
   "official_url": "https://www.sakurafilter.com/products",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Sakura"
+  "lineage": "Sakura",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 89,
@@ -1468,7 +1644,9 @@
   "official_url": "https://www.jsfilter.jp/catalogue",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "JS ASAKASHI"
+  "lineage": "JS ASAKASHI",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 90,
@@ -1484,7 +1662,9 @@
   "official_url": "https://sct-catalogue.de/?action=catalog_product",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "SCT-Germany"
+  "lineage": "SCT-Germany",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 91,
@@ -1500,7 +1680,9 @@
   "official_url": "https://www.donaldson.com/en/products/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Donaldson"
+  "lineage": "Donaldson",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 92,
@@ -1516,7 +1698,9 @@
   "official_url": "https://www.fram.com/parts-search",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "FRAM"
+  "lineage": "FRAM",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 93,
@@ -1532,7 +1716,9 @@
   "official_url": "https://catalogue.mecafilter.com/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "MECAFILTER"
+  "lineage": "MECAFILTER",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 94,
@@ -1548,7 +1734,9 @@
   "official_url": "https://www.alcofilters.co.uk/Catalogue/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "ALCO Filters"
+  "lineage": "ALCO Filters",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 95,
@@ -1564,7 +1752,9 @@
   "official_url": "https://www.filfilter.com.tr/en",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "FIL Filter"
+  "lineage": "FIL Filter",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 96,
@@ -1580,7 +1770,9 @@
   "official_url": "https://misfat.com.tn/catalogue/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "MISFAT"
+  "lineage": "MISFAT",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 97,
@@ -1596,7 +1788,9 @@
   "official_url": "https://hifi-filter.com/en/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "HIFI FILTER"
+  "lineage": "HIFI FILTER",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 98,
@@ -1612,7 +1806,9 @@
   "official_url": "https://www.knfilters.com/air-filters",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "K&N"
+  "lineage": "K&N",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 99,
@@ -1628,7 +1824,9 @@
   "official_url": "https://www.bmcairfilters.com/en",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "BMC Air Filters"
+  "lineage": "BMC Air Filters",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 100,
@@ -1645,7 +1843,9 @@
   "official_url": "https://www.mfilter.lt/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "MFilter"
+  "lineage": "MFilter",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 101,
@@ -1661,7 +1861,9 @@
   "official_url": "https://www.fleetguard.com/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Fleetguard"
+  "lineage": "Fleetguard",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 102,
@@ -1677,7 +1879,9 @@
   "official_url": "https://solutions.baldwinfilters.com/ifm",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Baldwin Filters"
+  "lineage": "Baldwin Filters",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 103,
@@ -1693,7 +1897,9 @@
   "official_url": "https://www.coopersfiaam.com/en/catalogue/online-catalogue.html",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "CoopersFiaam"
+  "lineage": "CoopersFiaam",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 104,
@@ -1709,7 +1915,9 @@
   "official_url": "https://www.fram-europe.com/en/catalogue/online-catalogue.html",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "FRAM"
+  "lineage": "FRAM",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 105,
@@ -1725,7 +1933,9 @@
   "official_url": "https://melling.com/catalogs/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Melling"
+  "lineage": "Melling",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 106,
@@ -1741,7 +1951,9 @@
   "official_url": "https://cloyes.com/home-2024/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Cloyes"
+  "lineage": "Cloyes",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 107,
@@ -1760,7 +1972,9 @@
   "official_url": "https://www.drivparts.com/digital-catalogs.html",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Sealed Power"
+  "lineage": "Sealed Power",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 108,
@@ -1780,7 +1994,9 @@
   "official_url": "https://www.drivparts.com/en-eu/support/pdf-catalogues.html",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "AE"
+  "lineage": "AE",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 109,
@@ -1797,7 +2013,9 @@
   "official_url": "https://www.mahle-aftermarket.com/eu/en/catalog/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "tecdoc"
+  "lineage": "MAHLE",
+  "platform": "TecAlliance",
+  "license_class": "OPEN"
  },
  {
   "id": 110,
@@ -1813,7 +2031,9 @@
   "official_url": "https://www.gatestechzone.com/gb/en.html",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Gates"
+  "lineage": "Gates",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 111,
@@ -1829,7 +2049,9 @@
   "official_url": "https://www.dayco.com/emea-en/catalog/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Dayco"
+  "lineage": "Dayco",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 112,
@@ -1845,7 +2067,9 @@
   "official_url": "https://web.optibelt.com/en/industry-solutions/automotive",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Optibelt"
+  "lineage": "Optibelt",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 113,
@@ -1864,7 +2088,9 @@
   "official_url": "https://www.ms-motorservice.com/int/en",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Kolbenschmidt"
+  "lineage": "Kolbenschmidt",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 114,
@@ -1880,7 +2106,9 @@
   "official_url": "https://www.kingbearings.com/catalog/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "tecdoc"
+  "lineage": "King Engine Bearings",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 115,
@@ -1896,7 +2124,9 @@
   "official_url": "https://www.faiauto.com/parts-catalogue/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "FAI Automotive"
+  "lineage": "FAI Automotive",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 116,
@@ -1912,7 +2142,9 @@
   "official_url": "https://www.engineteam.com/en/category/detail/283",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "ET ENGINETEAM"
+  "lineage": "ET ENGINETEAM",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 117,
@@ -1929,7 +2161,9 @@
   "official_url": "https://www.continental-engineparts.com/eu/en-gb/aftermarket/tools-apps/pic-product-information-center?lg=en",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Continental"
+  "lineage": "Continental",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 118,
@@ -1945,7 +2179,9 @@
   "official_url": "https://enginetech.com/catalog/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Enginetech"
+  "lineage": "Enginetech",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 119,
@@ -1961,7 +2197,9 @@
   "official_url": "https://hastingspistonrings.com/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Hastings Piston Rings"
+  "lineage": "Hastings Piston Rings",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 120,
@@ -1977,7 +2215,9 @@
   "official_url": "https://www.bandoindonesia.com/catalog.html",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Bando"
+  "lineage": "Bando",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 121,
@@ -1994,7 +2234,9 @@
   "official_url": "https://ecommerce.mblusa.com/catalogue-download/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Mitsuboshi"
+  "lineage": "Mitsuboshi",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 122,
@@ -2011,7 +2253,9 @@
   "official_url": "https://store.bgautomotive.co.uk/Product/ProductSearch",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "BGA"
+  "lineage": "BGA",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 123,
@@ -2027,7 +2271,9 @@
   "official_url": "https://www.felpro.com/find-my-part/engine-results.html",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Fel-Pro"
+  "lineage": "Fel-Pro",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 124,
@@ -2043,7 +2289,9 @@
   "official_url": "https://www.elring.com/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "tecdoc"
+  "lineage": "Elring",
+  "platform": "TecAlliance",
+  "license_class": "OPEN"
  },
  {
   "id": 125,
@@ -2059,7 +2307,9 @@
   "official_url": "https://www.victorreinz.com/EN/Catalog/Online-Catalog.aspx",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "tecdoc"
+  "lineage": "Victor Reinz",
+  "platform": "TecAlliance",
+  "license_class": "OPEN"
  },
  {
   "id": 126,
@@ -2075,7 +2325,9 @@
   "official_url": "https://ajusa.online/en/catalogue",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Ajusa"
+  "lineage": "Ajusa",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 127,
@@ -2091,7 +2343,9 @@
   "official_url": "https://www.corteco.com/products/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Corteco"
+  "lineage": "Corteco",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 128,
@@ -2107,7 +2361,9 @@
   "official_url": "https://glaser.es/en/service-downloads/catalog.aspx",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Glaser"
+  "lineage": "Glaser",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 129,
@@ -2123,7 +2379,9 @@
   "official_url": "https://www.elwis.com/automotive/catalogues/elwis-product-catalogue/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "tecdoc"
+  "lineage": "Elwis Royal",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 130,
@@ -2139,7 +2397,9 @@
   "official_url": "https://www.cometic.com/applications/categories",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Cometic"
+  "lineage": "Cometic",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 131,
@@ -2155,7 +2415,9 @@
   "official_url": "https://www.athena.eu/en-us/parts-cars-C1S1.htm?akc_id=50416%2C50975%2C51105%2C51754%2C52496%2C52710%2C53279%2C53401%2C53870%2C54353%2C54505%2C54516&alx_id=62196&dis_id=1",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Athena"
+  "lineage": "Athena",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 132,
@@ -2171,7 +2433,9 @@
   "official_url": "https://automotive.hutchinson.com/fr/documents",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Hutchinson"
+  "lineage": "Hutchinson",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 133,
@@ -2187,7 +2451,9 @@
   "official_url": "https://www.garrettmotion.com/turbo-replacement/aftermarket-reman-turbochargers-catalog/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Garrett"
+  "lineage": "Garrett",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 134,
@@ -2203,7 +2469,9 @@
   "official_url": "https://catalog.borgwarner.com/search",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "BorgWarner"
+  "lineage": "BorgWarner",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 135,
@@ -2219,7 +2487,9 @@
   "official_url": "https://www.walkerexhaust.com/find-my-part.html",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Walker Exhaust"
+  "lineage": "Walker Exhaust",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 136,
@@ -2235,7 +2505,9 @@
   "official_url": "https://www.bosal.com/en/what-are-you-looking",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "BOSAL"
+  "lineage": "BOSAL",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 137,
@@ -2251,7 +2523,9 @@
   "official_url": "https://www.hjs.com/onlinelieferprogramm/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "HJS"
+  "lineage": "HJS",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 138,
@@ -2267,7 +2541,9 @@
   "official_url": "https://bmcats.com/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "BM Catalysts"
+  "lineage": "BM Catalysts",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 139,
@@ -2283,7 +2559,9 @@
   "official_url": "https://www.klarius.eu/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Klarius"
+  "lineage": "Klarius",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 140,
@@ -2299,7 +2577,9 @@
   "official_url": "https://www.imasaf.it/cataloghi/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "IMASAF"
+  "lineage": "IMASAF",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 141,
@@ -2315,7 +2595,9 @@
   "official_url": "https://www.ernst-hagen.de/en/online-catalogue/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "ERNST"
+  "lineage": "ERNST",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 142,
@@ -2331,7 +2613,9 @@
   "official_url": "https://www.dinex.eu/dinex-partner-portal/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Dinex"
+  "lineage": "Dinex",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 143,
@@ -2347,7 +2631,9 @@
   "official_url": "https://www.bremboparts.com/europe/en?IsNewsletter=true",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Brembo"
+  "lineage": "Brembo",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 144,
@@ -2363,7 +2649,9 @@
   "official_url": "https://www.ate-brakes.com/catalogues/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "ATE"
+  "lineage": "ATE",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 145,
@@ -2381,7 +2669,9 @@
   "official_url": "https://textar.com/en/brakebook",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Textar"
+  "lineage": "Textar",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 146,
@@ -2397,7 +2687,9 @@
   "official_url": "https://www.ferodo.com/catalogue.html",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Ferodo"
+  "lineage": "Ferodo",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 147,
@@ -2413,7 +2705,9 @@
   "official_url": "https://www.jurid.com/catalogue.html",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Jurid"
+  "lineage": "Jurid",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 148,
@@ -2429,7 +2723,9 @@
   "official_url": "https://www.otto-zimmermann.de/en/aktuelles/online-catalog/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "tecdoc"
+  "lineage": "Otto Zimmermann",
+  "platform": "TecAlliance",
+  "license_class": "OPEN"
  },
  {
   "id": 149,
@@ -2445,7 +2741,9 @@
   "official_url": "https://www.remsa.com/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "tecdoc"
+  "lineage": "REMSA",
+  "platform": "TecAlliance",
+  "license_class": "OPEN"
  },
  {
   "id": 150,
@@ -2461,7 +2759,9 @@
   "official_url": "https://www.fte-automotive.eu/kataloge.php",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "FTE"
+  "lineage": "FTE",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 151,
@@ -2477,7 +2777,9 @@
   "official_url": "https://www.ebcbrakes.com/part-finder/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "EBC Brakes"
+  "lineage": "EBC Brakes",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 152,
@@ -2493,7 +2795,9 @@
   "official_url": "https://www.akebonobrakes.com/news/akebono-launches-new-web-catalog",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Akebono"
+  "lineage": "Akebono",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 153,
@@ -2510,7 +2814,9 @@
   "official_url": "https://www.nibk.jp/catalogue/cars",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "NiBK"
+  "lineage": "NiBK",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 154,
@@ -2527,7 +2833,9 @@
   "official_url": "https://www.sangsin.com/eng/main",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Sangsin"
+  "lineage": "Sangsin",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 155,
@@ -2543,7 +2851,9 @@
   "official_url": "https://www.bendix.com.au/catalogue",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Bendix Australia"
+  "lineage": "Bendix Australia",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 156,
@@ -2560,7 +2870,9 @@
   "official_url": "https://dba.com.au/part-finder/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "DBA"
+  "lineage": "DBA",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 157,
@@ -2576,7 +2888,9 @@
   "official_url": "https://www.frenkit.es/en/brake-catalogue",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Frenkit"
+  "lineage": "Frenkit",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 158,
@@ -2592,7 +2906,9 @@
   "official_url": "https://budweg-catalog.com/catalogue/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Budweg Caliper"
+  "lineage": "Budweg Caliper",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 159,
@@ -2609,7 +2925,9 @@
   "official_url": "https://absallbrakesystems.com/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "A.B.S."
+  "lineage": "A.B.S.",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 160,
@@ -2626,7 +2944,9 @@
   "official_url": "https://www.lpr.it/cataloghi.php?cat=1&lang=en",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "LPR"
+  "lineage": "LPR",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 161,
@@ -2642,7 +2962,9 @@
   "official_url": "https://catalog.febest.eu/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "FEBEST"
+  "lineage": "FEBEST",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 162,
@@ -2658,7 +2980,9 @@
   "official_url": "https://www.jikiu.com/catalogue/application?body%5B%5D=J60+-+HJ60LG&brand_id=88&eng_no%5B%5D=2H&engine%5B%5D=4000&model_id%5B%5D=4187&product_id=330423",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "JIKIU"
+  "lineage": "JIKIU",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 163,
@@ -2674,7 +2998,9 @@
   "official_url": "https://kyb-europe.com/ukr/katalog/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "tecdoc"
+  "lineage": "KYB",
+  "platform": "TecAlliance",
+  "license_class": "OPEN"
  },
  {
   "id": 164,
@@ -2690,7 +3016,9 @@
   "official_url": "https://www.monroe.com/en-eu/find-my-part.html",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "tecdoc"
+  "lineage": "Monroe",
+  "platform": "TecAlliance",
+  "license_class": "OPEN"
  },
  {
   "id": 165,
@@ -2706,7 +3034,9 @@
   "official_url": "https://www.moogparts.com/en-eu/catalogue.html",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "MOOG"
+  "lineage": "MOOG",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 166,
@@ -2722,7 +3052,9 @@
   "official_url": "https://bilstein.com/en/products/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "BILSTEIN"
+  "lineage": "BILSTEIN",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 167,
@@ -2738,7 +3070,9 @@
   "official_url": "https://shop.koni-na.com/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "KONI"
+  "lineage": "KONI",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 168,
@@ -2754,7 +3088,9 @@
   "official_url": "https://webcatalog.optimal-germany.com/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "OPTIMAL"
+  "lineage": "OPTIMAL",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 169,
@@ -2770,7 +3106,9 @@
   "official_url": "https://www.eibach.com/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Eibach"
+  "lineage": "Eibach",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 170,
@@ -2786,7 +3124,9 @@
   "official_url": "https://www.lesjofors.com/en/industries/automotive-aftermarket/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "tecdoc"
+  "lineage": "Lesjöfors",
+  "platform": "TecAlliance",
+  "license_class": "OPEN"
  },
  {
   "id": 171,
@@ -2802,7 +3142,9 @@
   "official_url": "https://www.sidem.be/news/new-online-catalogue-app/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "SIDEM"
+  "lineage": "SIDEM",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 172,
@@ -2818,7 +3160,9 @@
   "official_url": "https://www.rts-sa.com/en/purchase-catalogue",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "RTS"
+  "lineage": "RTS",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 173,
@@ -2834,7 +3178,9 @@
   "official_url": "https://aftermarket.ctr.co.kr/ru/catalogue-search",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "CTR"
+  "lineage": "CTR",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 174,
@@ -2850,7 +3196,9 @@
   "official_url": "https://www.teknorot.com/en/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Teknorot"
+  "lineage": "Teknorot",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 175,
@@ -2866,7 +3214,9 @@
   "official_url": "https://www.frap.it/en/products-catalogue.php",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "FRAP"
+  "lineage": "FRAP",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 176,
@@ -2882,7 +3232,9 @@
   "official_url": "https://birth.it/en/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "tecdoc"
+  "lineage": "Original Birth",
+  "platform": "TecAlliance",
+  "license_class": "OPEN"
  },
  {
   "id": 177,
@@ -2899,7 +3251,9 @@
   "official_url": "https://malospa.it/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Malò"
+  "lineage": "Malò",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 178,
@@ -2915,7 +3269,9 @@
   "official_url": "https://www.tedgum.pl/ro/catalog-online/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "TEDGUM"
+  "lineage": "TEDGUM",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 179,
@@ -2932,7 +3288,9 @@
   "official_url": "https://www.impergom.it/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Impergom"
+  "lineage": "Impergom",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 180,
@@ -2948,7 +3306,9 @@
   "official_url": "https://www.dys-sl.com/es/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "DYS"
+  "lineage": "DYS",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 181,
@@ -2964,7 +3324,9 @@
   "official_url": "https://catalog.master-sport.de/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Master-Sport"
+  "lineage": "Master-Sport",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 182,
@@ -2980,7 +3342,9 @@
   "official_url": "https://automotive.skf.com/eur/en",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "SKF"
+  "lineage": "SKF",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 183,
@@ -2997,7 +3361,9 @@
   "official_url": "https://eshop.ntn-snr.com/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "NTN"
+  "lineage": "NTN",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 184,
@@ -3013,7 +3379,9 @@
   "official_url": "https://www.nsk.com/eu-en/products/automotive/automotive-aftermarket/catalogue-parts/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "NSK"
+  "lineage": "NSK",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 185,
@@ -3029,7 +3397,9 @@
   "official_url": "https://www.timken.com/tr/resources/timkeninfo-com-sell-sheet_10451/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Timken"
+  "lineage": "Timken",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 186,
@@ -3046,7 +3416,9 @@
   "official_url": "https://koyo.jtekt.co.jp/en/support/faq/article/002265.php",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "JTEKT"
+  "lineage": "JTEKT",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 187,
@@ -3063,7 +3435,9 @@
   "official_url": "https://www.aisinaftermarket.eu/our-links/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "tecdoc"
+  "lineage": "AISIN",
+  "platform": "TecAlliance",
+  "license_class": "OPEN"
  },
  {
   "id": 188,
@@ -3079,7 +3453,9 @@
   "official_url": "https://www3.exedy-aftermarket.com/english/parts/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "EXEDY"
+  "lineage": "EXEDY",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 189,
@@ -3097,7 +3473,9 @@
   "official_url": "https://www.gknautomotive.com/en/Aftermarket/online-catalogue/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "tecdoc"
+  "lineage": "GKN Automotive",
+  "platform": "TecAlliance",
+  "license_class": "OPEN"
  },
  {
   "id": 190,
@@ -3113,7 +3491,9 @@
   "official_url": "https://gmb.net/catalog/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "GMB"
+  "lineage": "GMB",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 191,
@@ -3129,7 +3509,9 @@
   "official_url": "https://gspnorthamerica.com/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "GSP"
+  "lineage": "GSP",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 192,
@@ -3145,7 +3527,9 @@
   "official_url": "https://www.sonnax.com/parts/transmission",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Sonnax"
+  "lineage": "Sonnax",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 193,
@@ -3161,7 +3545,9 @@
   "official_url": "https://transgo.com/code-finder/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "TransGo"
+  "lineage": "TransGo",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 194,
@@ -3177,7 +3563,9 @@
   "official_url": "https://transtec.com/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "TransTec"
+  "lineage": "TransTec",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 195,
@@ -3193,7 +3581,9 @@
   "official_url": "https://transmissionkits.com/catalogs-category/catalogs/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Precision International"
+  "lineage": "Precision International",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 196,
@@ -3209,7 +3599,9 @@
   "official_url": "https://www.alkar.es/en/home",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "ALKAR"
+  "lineage": "ALKAR",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 197,
@@ -3225,7 +3617,9 @@
   "official_url": "https://www.dieseltechnic.com/en/solutions/faq/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "DT Spare Parts"
+  "lineage": "DT Spare Parts",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 198,
@@ -3241,7 +3635,9 @@
   "official_url": "https://www.sampa.com/en/productdetail?code=030.089",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Sampa"
+  "lineage": "Sampa",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 199,
@@ -3257,7 +3653,9 @@
   "official_url": "https://www.iamauger.com/en/products/product-catalogues",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Auger"
+  "lineage": "Auger",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 200,
@@ -3273,7 +3671,9 @@
   "official_url": "https://www.wabco-customercentre.com/catalog/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "WABCO"
+  "lineage": "WABCO",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 201,
@@ -3289,7 +3689,9 @@
   "official_url": "https://truckservices.knorr-bremse.com/en/tr/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Knorr-Bremse TruckServices"
+  "lineage": "Knorr-Bremse TruckServices",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 202,
@@ -3305,7 +3707,9 @@
   "official_url": "https://www.haldex.com/en/europe/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Haldex"
+  "lineage": "Haldex",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 203,
@@ -3321,7 +3725,9 @@
   "official_url": "https://www.meritorpartsxpress.com/webapp/wcs/stores/servlet/en/meritor-na/home",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Meritor Parts Xpress"
+  "lineage": "Meritor Parts Xpress",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 204,
@@ -3338,7 +3744,9 @@
   "official_url": "https://www.jost-world.com/en/products/search.html",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "JOST"
+  "lineage": "JOST",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 205,
@@ -3354,7 +3762,9 @@
   "official_url": "https://www.safholland-benelux.com/parts-on-demand-offline-version",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "SAF-HOLLAND"
+  "lineage": "SAF-HOLLAND",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 206,
@@ -3370,7 +3780,9 @@
   "official_url": "https://www.bpw.de/en/service/after-sales-/-spare-parts-old/spare-parts-lists",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "BPW"
+  "lineage": "BPW",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 207,
@@ -3386,7 +3798,9 @@
   "official_url": "https://www.hendrickson-intl.com/parts-and-service",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Hendrickson"
+  "lineage": "Hendrickson",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 208,
@@ -3403,7 +3817,9 @@
   "official_url": "https://www.pe.de/en/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "PE Automotive"
+  "lineage": "PE Automotive",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 209,
@@ -3419,7 +3835,9 @@
   "official_url": "https://www.trucktec.de/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "TRUCKTEC"
+  "lineage": "TRUCKTEC",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 210,
@@ -3437,7 +3855,9 @@
   "official_url": "https://www.alko-tech.com/en/private-customer-service/downloads-catalogues",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "AL-KO Vehicle Technology"
+  "lineage": "AL-KO Vehicle Technology",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 211,
@@ -3453,7 +3873,9 @@
   "official_url": "https://www.knott.de/en/pages/anhaengertechnik-uebersicht",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "KNOTT"
+  "lineage": "KNOTT",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 212,
@@ -3469,7 +3891,9 @@
   "official_url": "https://autoparts.toyota.com/",
   "checked_at": "2026-10-12",
   "kind": "oem_catalog",
-  "lineage": "Toyota"
+  "lineage": "Toyota",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 213,
@@ -3485,7 +3909,9 @@
   "official_url": "https://parts.nissanusa.com/",
   "checked_at": "2026-10-12",
   "kind": "oem_catalog",
-  "lineage": "Nissan"
+  "lineage": "Nissan",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 214,
@@ -3501,7 +3927,9 @@
   "official_url": "https://parts.infinitiusa.com/",
   "checked_at": "2026-10-12",
   "kind": "oem_catalog",
-  "lineage": "Infiniti"
+  "lineage": "Infiniti",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 215,
@@ -3517,7 +3945,9 @@
   "official_url": "https://dreamshop.honda.com/s/honda",
   "checked_at": "2026-10-12",
   "kind": "oem_catalog",
-  "lineage": "Honda"
+  "lineage": "Honda",
+  "platform": null,
+  "license_class": "OPEN"
  },
  {
   "id": 216,
@@ -3533,7 +3963,9 @@
   "official_url": "https://nty.parts/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "NTY"
+  "lineage": "NTY",
+  "platform": null,
+  "license_class": "REFERENCE_ONLY"
  },
  {
   "id": 217,
@@ -3549,7 +3981,9 @@
   "official_url": "https://www.ossca.com/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "OSSCA"
+  "lineage": "OSSCA",
+  "platform": null,
+  "license_class": "REFERENCE_ONLY"
  },
  {
   "id": 218,
@@ -3566,7 +4000,9 @@
   "official_url": "https://www.topran.de/en/welcome/products",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "TOPRAN"
+  "lineage": "TOPRAN",
+  "platform": null,
+  "license_class": "REFERENCE_ONLY"
  },
  {
   "id": 219,
@@ -3582,7 +4018,9 @@
   "official_url": "https://www.borsehung.de/en/digitalization/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Borsehung"
+  "lineage": "Borsehung",
+  "platform": null,
+  "license_class": "REFERENCE_ONLY"
  },
  {
   "id": 220,
@@ -3598,7 +4036,9 @@
   "official_url": "https://maxgear.pl/pl/oferta/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "MaXgear"
+  "lineage": "MaXgear",
+  "platform": null,
+  "license_class": "REFERENCE_ONLY"
  },
  {
   "id": 221,
@@ -3615,7 +4055,9 @@
   "official_url": "https://nk-autoparts.com/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "NK"
+  "lineage": "NK",
+  "platform": null,
+  "license_class": "REFERENCE_ONLY"
  },
  {
   "id": 222,
@@ -3633,7 +4075,9 @@
   "official_url": "https://www.aftermarket.astemo.com/emea/en/automotive/electronics/universalelectricalparts.html",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "tecdoc"
+  "lineage": "Astemo",
+  "platform": "TecAlliance",
+  "license_class": "REFERENCE_ONLY"
  },
  {
   "id": 223,
@@ -3649,7 +4093,9 @@
   "official_url": "https://www.bremi.de/en/ignition-coils/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "BREMI"
+  "lineage": "BREMI",
+  "platform": null,
+  "license_class": "REFERENCE_ONLY"
  },
  {
   "id": 224,
@@ -3665,7 +4111,9 @@
   "official_url": "https://www.depoautolamp.com/index_en.php",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "DEPO"
+  "lineage": "DEPO",
+  "platform": null,
+  "license_class": "REFERENCE_ONLY"
  },
  {
   "id": 225,
@@ -3683,7 +4131,9 @@
   "official_url": "https://www.saleriaftermarket.com/en/portal/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Saleri"
+  "lineage": "Saleri",
+  "platform": null,
+  "license_class": "REFERENCE_ONLY"
  },
  {
   "id": 226,
@@ -3699,7 +4149,9 @@
   "official_url": "https://airtexproducts.es/page/60/?et_blog=&lang=en",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Airtex"
+  "lineage": "Airtex",
+  "platform": null,
+  "license_class": "REFERENCE_ONLY"
  },
  {
   "id": 227,
@@ -3715,7 +4167,9 @@
   "official_url": "https://www.freccia.com/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Freccia"
+  "lineage": "Freccia",
+  "platform": null,
+  "license_class": "REFERENCE_ONLY"
  },
  {
   "id": 228,
@@ -3731,7 +4185,9 @@
   "official_url": "https://www.iwis.com/en-en/aftermarket",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "tecdoc"
+  "lineage": "iwis",
+  "platform": null,
+  "license_class": "REFERENCE_ONLY"
  },
  {
   "id": 229,
@@ -3747,7 +4203,9 @@
   "official_url": "https://www.eberspaecher.com/fileadmin/data/corporatesite/pdf/en/et_gp_pkw_en.pdf",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Eberspächer"
+  "lineage": "Eberspächer",
+  "platform": null,
+  "license_class": "REFERENCE_ONLY"
  },
  {
   "id": 230,
@@ -3763,7 +4221,9 @@
   "official_url": "https://autofrenseinsa.com/en/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "AUTOFREN SEINSA"
+  "lineage": "AUTOFREN SEINSA",
+  "platform": null,
+  "license_class": "REFERENCE_ONLY"
  },
  {
   "id": 231,
@@ -3779,7 +4239,9 @@
   "official_url": "https://ertseinsa.com/en/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "ERT SEINSA"
+  "lineage": "ERT SEINSA",
+  "platform": null,
+  "license_class": "REFERENCE_ONLY"
  },
  {
   "id": 232,
@@ -3795,7 +4257,9 @@
   "official_url": "https://www.triscan.dk/en/new-catalogue-goodbye-triweb-hello-tricat",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "TRISCAN"
+  "lineage": "TRISCAN",
+  "platform": null,
+  "license_class": "REFERENCE_ONLY"
  },
  {
   "id": 233,
@@ -3812,7 +4276,9 @@
   "official_url": "https://sasic.fr/",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "SASIC"
+  "lineage": "SASIC",
+  "platform": null,
+  "license_class": "REFERENCE_ONLY"
  },
  {
   "id": 234,
@@ -3831,7 +4297,9 @@
   "official_url": "https://www.repxpert.com/en",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Schaeffler"
+  "lineage": "Schaeffler",
+  "platform": null,
+  "license_class": "REFERENCE_ONLY"
  },
  {
   "id": 235,
@@ -3847,7 +4315,9 @@
   "official_url": "https://www.klokkerholm.com/GB/Products.aspx",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Klokkerholm"
+  "lineage": "Klokkerholm",
+  "platform": null,
+  "license_class": "REFERENCE_ONLY"
  },
  {
   "id": 236,
@@ -3863,6 +4333,8 @@
   "official_url": "https://www.vanwezel.de/kataloge/webkatalog",
   "checked_at": "2026-10-12",
   "kind": "manufacturer_catalog",
-  "lineage": "Van Wezel"
+  "lineage": "Van Wezel",
+  "platform": null,
+  "license_class": "REFERENCE_ONLY"
  }
 ]

@@ -1,0 +1,3868 @@
+[
+ {
+  "id": 1,
+  "group": "Багатопрофільні каталоги",
+  "name": "bilstein group: febi / SWAG / Blue Print",
+  "brands": [
+   "febi",
+   "SWAG",
+   "Blue Print"
+  ],
+  "catalog_url": "https://partsfinder.bilsteingroup.com/uk",
+  "access": "Вебкаталог",
+  "search": "Автомобіль; артикул; опис; розміри",
+  "note": "Продукція: Багатопрофільні. Публічний вебкаталог. Українська версія. Розширені функції потребують безкоштовної реєстрації.",
+  "official_url": "https://www.bilsteingroup.com/ua/profil/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "febi"
+ },
+ {
+  "id": 2,
+  "group": "Багатопрофільні каталоги",
+  "name": "MEYLE",
+  "brands": [
+   "MEYLE"
+  ],
+  "catalog_url": "https://www.meyle.com/en/parts-catalog",
+  "access": "Вебкаталог",
+  "search": "Каталог деталей за автомобілем",
+  "note": "Продукція: Багатопрофільні. Вебкаталог (JavaScript). Офіційний каталог легкових авто й фургонів; є українська версія сайту.",
+  "official_url": "https://www.meyle.com/en/parts-catalog",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "MEYLE"
+ },
+ {
+  "id": 3,
+  "group": "Багатопрофільні каталоги",
+  "name": "Japanparts / Ashika / Japko",
+  "brands": [
+   "Japanparts",
+   "Ashika",
+   "Japko"
+  ],
+  "catalog_url": "https://japanparts.it/en/",
+  "access": "Вебкаталог",
+  "search": "Артикул; OE; конкурент; автомобіль; двигун",
+  "note": "Продукція: Багатопрофільні. Публічний вебкаталог. Сімейство брендів Japanparts; окремі брендовані входи Ashika/Japko. Додатково PDF.",
+  "official_url": "https://japanparts.it/en/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Japanparts"
+ },
+ {
+  "id": 4,
+  "group": "Багатопрофільні каталоги",
+  "name": "Nipparts",
+  "brands": [
+   "Nipparts"
+  ],
+  "catalog_url": "https://www.nipparts.com/",
+  "access": "Вебкаталог",
+  "search": "Онлайн-каталог та PDF",
+  "note": "Продукція: Багатопрофільні. Вебкаталог (JavaScript). Офіційна сторінка з входом в онлайн-каталог; спеціалізація на азійських авто.",
+  "official_url": "https://www.nipparts.com/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Nipparts"
+ },
+ {
+  "id": 5,
+  "group": "Багатопрофільні каталоги",
+  "name": "AIC Germany",
+  "brands": [
+   "AIC Germany"
+  ],
+  "catalog_url": "https://www.aic-germany.de/en/product-catalogue",
+  "access": "Вебкаталог",
+  "search": "Артикул; OE; назва; KBA; автомобіль",
+  "note": "Продукція: Багатопрофільні. Публічний вебкаталог. Публічні картки товарів із OE-посиланнями.",
+  "official_url": "https://www.aic-germany.de/en/product-catalogue",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "AIC Germany"
+ },
+ {
+  "id": 6,
+  "group": "Багатопрофільні каталоги",
+  "name": "METZGER",
+  "brands": [
+   "METZGER"
+  ],
+  "catalog_url": "https://web.tecalliance.net/werner-metzger/de/home",
+  "access": "Вебкаталог",
+  "search": "Автомобіль; OE; артикул",
+  "note": "Продукція: Багатопрофільні. Вебкаталог (JavaScript). Офіційний перехід на брендований TecAlliance. Дилерський логін окремий.",
+  "official_url": "https://www.metzger-autoteile.de/service",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "tecdoc"
+ },
+ {
+  "id": 7,
+  "group": "Багатопрофільні каталоги",
+  "name": "Parts-Mall / PMC",
+  "brands": [
+   "Parts-Mall",
+   "PMC"
+  ],
+  "catalog_url": "https://catalog.parts-mall.com/",
+  "access": "Вебкаталог",
+  "search": "Номер; тип авто; модель; категорія",
+  "note": "Продукція: Багатопрофільні. Публічний вебкаталог. Корейські авто, також комерційні; портал від Parts-Mall.",
+  "official_url": "https://www.parts-mall.com/product",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Parts-Mall"
+ },
+ {
+  "id": 8,
+  "group": "Багатопрофільні каталоги",
+  "name": "LYNXauto",
+  "brands": [
+   "LYNXauto"
+  ],
+  "catalog_url": "https://ecatalogue.lynxauto.jp/",
+  "access": "Вебкаталог",
+  "search": "Артикул; OEM; аналоги; модель авто",
+  "note": "Продукція: Багатопрофільні. Публічний вебкаталог. Є точний та універсальний пошук.",
+  "official_url": "https://ecatalogue.lynxauto.jp/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "LYNXauto"
+ },
+ {
+  "id": 9,
+  "group": "Багатопрофільні каталоги",
+  "name": "JP Group",
+  "brands": [
+   "JP Group"
+  ],
+  "catalog_url": "https://jpgroup.dk/en/",
+  "access": "Вебкаталог",
+  "search": "OE; назва; категорія; артикул",
+  "note": "Продукція: Багатопрофільні. Публічна форма пошуку; B2B-вхід окремо. Сучасні та класичні авто; офіційні розділи каталогів. Пошук у браузері не тестувався.",
+  "official_url": "https://jpgroup.dk/en/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "JP Group"
+ },
+ {
+  "id": 10,
+  "group": "Багатопрофільні каталоги",
+  "name": "BSG",
+  "brands": [
+   "BSG"
+  ],
+  "catalog_url": "https://bsgautoparts.com/en/downloads/catalogues",
+  "access": "PDF / цифрові видання",
+  "search": "PDF за групами/марками",
+  "note": "Продукція: Багатопрофільні. PDF. Вебкаталог на момент перевірки позначений Coming soon; посилання веде до завантажень.",
+  "official_url": "https://bsgautoparts.com/en/catalog",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "BSG"
+ },
+ {
+  "id": 11,
+  "group": "Багатопрофільні каталоги",
+  "name": "FAST Original",
+  "brands": [
+   "FAST Original"
+  ],
+  "catalog_url": "https://www.fastoriginal.eu/en/auto-parts-categories",
+  "access": "Вебкаталог",
+  "search": "Автомобіль; артикул; VIN заявлений на сторінці",
+  "note": "Продукція: Багатопрофільні. Публічний вебкаталог. Фургони й легкі комерційні авто. Регіональне охоплення VIN не перевірено.",
+  "official_url": "https://www.fastoriginal.eu/en/auto-parts-categories",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "FAST Original"
+ },
+ {
+  "id": 12,
+  "group": "Багатопрофільні каталоги",
+  "name": "SKV / ESEN SKV",
+  "brands": [
+   "SKV",
+   "ESEN SKV"
+  ],
+  "catalog_url": "https://www.skv.pl/en",
+  "access": "Вебкаталог",
+  "search": "Каталог деталей; PDF за групами",
+  "note": "Продукція: Багатопрофільні. Вебкаталог (JavaScript). Офіційна сторінка пропонує Parts Catalogue і PDF Catalogue; повний сценарій не тестувався.",
+  "official_url": "https://www.skv.pl/en",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "SKV"
+ },
+ {
+  "id": 13,
+  "group": "Багатопрофільні каталоги",
+  "name": "MASUMA",
+  "brands": [
+   "MASUMA"
+  ],
+  "catalog_url": "https://masuma.parts/catalog",
+  "access": "Вебкаталог",
+  "search": "Автомобіль; каталог бренду",
+  "note": "Продукція: Багатопрофільні. Вебкаталог (JavaScript). Офіційний глобальний сайт бренду. Другий портал: https://masuma.com/model_search.",
+  "official_url": "https://masuma.parts/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "MASUMA"
+ },
+ {
+  "id": 14,
+  "group": "Багатопрофільні каталоги",
+  "name": "Dorman",
+  "brands": [
+   "Dorman"
+  ],
+  "catalog_url": "https://www.dormanproducts.com/",
+  "access": "Вебкаталог · регіональний",
+  "search": "Пошук товарів; візуальний пошук",
+  "note": "Продукція: Америка: багатопрофільні. Публічний вебкаталог. Ремонтні деталі, електрика, кузов, кріплення, підвіска; додатково PDF.",
+  "official_url": "https://www.dormanproducts.com/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Dorman"
+ },
+ {
+  "id": 15,
+  "group": "Багатопрофільні каталоги",
+  "name": "CARDONE",
+  "brands": [
+   "CARDONE"
+  ],
+  "catalog_url": "https://www.cardone.com/",
+  "access": "Вебкаталог · регіональний",
+  "search": "Групи деталей; пошук товарів",
+  "note": "Продукція: Америка: багатопрофільні. Публічний каталог; акаунт для B2B. Відновлені та нові вузли: кермо, гальма, електрика, приводи.",
+  "official_url": "https://www.cardone.com/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "CARDONE"
+ },
+ {
+  "id": 16,
+  "group": "Багатопрофільні каталоги",
+  "name": "ACDelco",
+  "brands": [
+   "ACDelco"
+  ],
+  "catalog_url": "https://parts-catalog.acdelco.com/",
+  "access": "Вебкаталог · регіональний",
+  "search": "Автомобіль; Interchange; Buyers Guide; роз'єми",
+  "note": "Продукція: Америка: багатопрофільні. Вебкаталог (JavaScript). Каталог Північної Америки. Повний режим доступу після відкриття JS не перевірено.",
+  "official_url": "https://parts-catalog.acdelco.com/acesCat.php?isPigtail=1",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "ACDelco"
+ },
+ {
+  "id": 17,
+  "group": "Багатопрофільні каталоги",
+  "name": "Motorcraft / Ford Parts",
+  "brands": [
+   "Motorcraft"
+  ],
+  "catalog_url": "https://www.ford.com/parts",
+  "access": "Вебкаталог · регіональний",
+  "search": "Каталог Ford/Motorcraft за автомобілем/деталлю",
+  "note": "Продукція: Америка: багатопрофільні. Регіональний вебкаталог. parts.ford.com перенаправляє на ford.com/parts; орієнтований на США.",
+  "official_url": "https://parts.ford.com/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Motorcraft"
+ },
+ {
+  "id": 18,
+  "group": "Багатопрофільні каталоги",
+  "name": "Beck/Arnley",
+  "brands": [
+   "Beck/Arnley"
+  ],
+  "catalog_url": "https://www.beckarnley.com/find-my-part.html",
+  "access": "Вебкаталог · регіональний",
+  "search": "Автомобіль; артикул; interchange",
+  "note": "Продукція: Америка: багатопрофільні. Публічний вебкаталог. Імпортні авто на північноамериканському ринку.",
+  "official_url": "https://www.beckarnley.com/find-my-part.html",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Beck/Arnley"
+ },
+ {
+  "id": 19,
+  "group": "Багатопрофільні каталоги",
+  "name": "URO Parts / Autotecnica (APA)",
+  "brands": [
+   "URO Parts",
+   "Autotecnica"
+  ],
+  "catalog_url": "https://apaindustries.com/catalog",
+  "access": "Вебкаталог · регіональний",
+  "search": "OEM; артикул; фільтри автомобіля",
+  "note": "Продукція: Америка: багатопрофільні. Публічний вебкаталог. Один каталог APA Industries для двох брендів.",
+  "official_url": "https://apaindustries.com/catalog",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "URO Parts"
+ },
+ {
+  "id": 20,
+  "group": "Багатопрофільні каталоги",
+  "name": "CRP: Rein / AAE / Pentosin",
+  "brands": [
+   "Rein",
+   "AAE",
+   "Pentosin"
+  ],
+  "catalog_url": "https://crpautomotive.com/part-lookup/",
+  "access": "Вебкаталог · регіональний",
+  "search": "Застосування; деталі й рідини",
+  "note": "Продукція: Америка: багатопрофільні. Публічний вебкаталог. Виробник прямо називає каталог публічним; платформа ShowMeTheParts.",
+  "official_url": "https://crpautomotive.com/brands/rein-automotive/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Rein"
+ },
+ {
+  "id": 21,
+  "group": "Багатопрофільні каталоги",
+  "name": "ATP Automotive",
+  "brands": [
+   "ATP Automotive"
+  ],
+  "catalog_url": "https://www.atpautomotive.com/catalogs",
+  "access": "Вебкаталог · регіональний",
+  "search": "Автомобіль; номер; категорія",
+  "note": "Продукція: Америка: трансмісія. Публічний вебкаталог та PDF. Каталог ShowMeTheParts із переходом з офіційної сторінки.",
+  "official_url": "https://www.atpautomotive.com/catalogs",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "ATP Automotive"
+ },
+ {
+  "id": 22,
+  "group": "Багатопрофільні каталоги",
+  "name": "Pioneer Automotive",
+  "brands": [
+   "Pioneer Automotive"
+  ],
+  "catalog_url": "https://www.pioneerautoinc.com/catalog",
+  "access": "Вебкаталог · регіональний",
+  "search": "Каталог; Part Finder; PDF",
+  "note": "Продукція: Америка: двигун і трансмісія. Публічний вебкаталог та PDF. Троси, маховики, опори, деталі двигуна та трансмісії.",
+  "official_url": "https://www.pioneerautoinc.com/catalog",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Pioneer Automotive"
+ },
+ {
+  "id": 23,
+  "group": "Багатопрофільні каталоги",
+  "name": "ZF / LEMFÖRDER / SACHS / TRW / BOGE",
+  "brands": [
+   "ZF",
+   "LEMFÖRDER",
+   "SACHS",
+   "TRW",
+   "BOGE"
+  ],
+  "catalog_url": "https://aftermarket.zf.com/en/catalog/",
+  "access": "Вебкаталог",
+  "search": "За автомобілем; номером деталі",
+  "note": "Продукція: Гальма; підвіска; кермування; амортизатори; зчеплення; трансмісія. Відкритий вебкаталог. Один груповий каталог. Сучасна адреса замість старого webcat.zf.com.",
+  "official_url": "https://aftermarket.zf.com/en/aftermarket-portal/our-catalog/search-by-vehicle/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "ZF"
+ },
+ {
+  "id": 24,
+  "group": "Багатопрофільні каталоги",
+  "name": "Metelli Group: Metelli / Cifam / Trusting / Fri.tech. / Graf / KWP",
+  "brands": [
+   "Metelli",
+   "Cifam",
+   "Trusting",
+   "Fri.tech.",
+   "Graf",
+   "KWP"
+  ],
+  "catalog_url": "https://www.metelligroup.it/en",
+  "access": "Вебкаталог",
+  "search": "Артикул; OE; порівняльний номер; номерний знак/KBA",
+  "note": "Продукція: Гальма; гідравліка; зчеплення; ШРУСи; підшипники; охолодження. Відкритий пошук на сайті + PDF. Єдиний груповий каталог. PDF: https://www.metelligroup.it/en/Support/Catalogues .",
+  "official_url": "https://www.metelligroup.it/en",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Metelli"
+ },
+ {
+  "id": 25,
+  "group": "Багатопрофільні каталоги",
+  "name": "Frasle Mobility / Auto Experts: Fremax / Fras-le / Lonaflex / Controil / Nakata / Master / Jost / Suspensys / Castertech",
+  "brands": [
+   "Fremax",
+   "Fras-le",
+   "Lonaflex",
+   "Controil",
+   "Nakata",
+   "Master",
+   "Jost",
+   "Suspensys",
+   "Castertech"
+  ],
+  "catalog_url": "https://www.autoexperts.parts/pt/br",
+  "access": "Вебкаталог",
+  "search": "Автомобіль, рік/версія, артикул, перехресний номер, категорія; номерний знак/шасі для підтримуваних ринків",
+  "note": "Продукція: Гальма, підвіска, кермування, маточини, зчеплення; легкові та комерційні авто. Відкритий пошук; безкоштовний вхід для розширених функцій. Офіційна спільна платформа перелічує всі зазначені бренди. Регіони: Бразилія, Аргентина, Колумбія, Мексика, США, LATAM. Старий catalogo.fremax.com.br переадресовує сюди.",
+  "official_url": "https://www.autoexperts.parts/pt/br/about",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Fremax"
+ },
+ {
+  "id": 26,
+  "group": "Багатопрофільні каталоги",
+  "name": "Bosch",
+  "brands": [
+   "Bosch"
+  ],
+  "catalog_url": "https://www.boschaftermarket.com/ua/uk/parts/product-search.html",
+  "access": "Вебкаталог",
+  "search": "Пошук автомобіля; пошук продукту",
+  "note": "Продукція: Електрика, запалювання, паливо, датчики та інші запчастини. Публічна сторінка каталогу; динамічний підбір. Українська версія. Сторінка відкрилася без входу; виконання JavaScript-пошуку не перевірено.",
+  "official_url": "https://www.boschaftermarket.com/ua/uk/parts/product-search.html",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Bosch"
+ },
+ {
+  "id": 27,
+  "group": "Багатопрофільні каталоги",
+  "name": "DENSO",
+  "brands": [
+   "DENSO"
+  ],
+  "catalog_url": "https://www.denso-am.eu/catalog/pv",
+  "access": "Вебкаталог",
+  "search": "Автомобіль; номер DENSO/OE; VIN/Frame (заявлено у формі)",
+  "note": "Продукція: Запалювання, датчики, дизельні компоненти, генератори/стартери, клімат. Публічний вебкаталог. Європейський каталог; у меню також каталоги вантажівок і мотоциклів та українська мова. Роботу VIN на українських авто не перевірено.",
+  "official_url": "https://www.denso-am.eu/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "DENSO"
+ },
+ {
+  "id": 28,
+  "group": "Багатопрофільні каталоги",
+  "name": "HELLA",
+  "brands": [
+   "HELLA"
+  ],
+  "catalog_url": "https://cat.hella.com/opencat/opencat/en_DE/all/all/na/index.xhtml",
+  "access": "Вебкаталог",
+  "search": "Авто; OE/номер конкурента (заявлено на офіційному порталі)",
+  "note": "Продукція: Світлотехніка, електрика, датчики, реле, охолодження. Офіційний вебкаталог; JS/перевірка робота. Офіційний сайт веде на cat.hella.com. Під час перевірки портал вимагав JavaScript для перевірки робота; не підтверджено повний пошук.",
+  "official_url": "https://www.hella.com/partnerworld/ex/Support-materials/Catalogs-699/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "HELLA"
+ },
+ {
+  "id": 29,
+  "group": "Багатопрофільні каталоги",
+  "name": "Valeo / SWF",
+  "brands": [
+   "Valeo",
+   "SWF"
+  ],
+  "catalog_url": "https://www.valeoservice.co.uk/en-uk",
+  "access": "Вебкаталог · регіональний",
+  "search": "VIN; артикул/назва; марка й модель",
+  "note": "Продукція: Електрика, світло, кондиціонування, охолодження, зчеплення, склоочисники. Публічна форма вебпідбору на регіональному сайті; JavaScript. Уточнення: британський сайт має вбудований технічний пошук із полями VIN, Part Number / Name, Car brand and model. Форма відкрита без входу; виконання підбору і підтримка VIN України не тестувалися. Вебпідбір підтверджений для Valeo; SWF і друковані каталоги лишаються на https://www.valeoservice.com/en-com/catalogs .",
+  "official_url": "https://www.valeoservice.co.uk/en-uk",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Valeo"
+ },
+ {
+  "id": 30,
+  "group": "Багатопрофільні каталоги",
+  "name": "VAICO / VEMO / ACKOJA (VIEROL)",
+  "brands": [
+   "VAICO",
+   "VEMO",
+   "ACKOJA"
+  ],
+  "catalog_url": "https://www.vierol-shop.de/en",
+  "access": "Вебкаталог",
+  "search": "Пошук; марка/модель/модифікація; KBA; VIN після входу",
+  "note": "Продукція: Широкий асортимент VAICO/ACKOJA; електрика, датчики, клімат та охолодження VEMO. Публічний каталог; VIN потребує входу. Спільний VIEROL-shop для VEMO, VAICO та ACKOJA. На сторінці явно написано VIN Suche Login required.",
+  "official_url": "https://www.vierol.de/en/automotive-division-en/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "VAICO"
+ },
+ {
+  "id": 31,
+  "group": "Багатопрофільні каталоги",
+  "name": "Magneti Marelli Parts & Services",
+  "brands": [
+   "Magneti Marelli Parts & Services"
+  ],
+  "catalog_url": "https://web.tecalliance.net/magnetimarelli/en/home?sessionArticleCountry=gb&sessionTargetCountry=gb",
+  "access": "Вебкаталог",
+  "search": "Не підтверджено у текстовій перевірці",
+  "note": "Продукція: Електрика, датчики, паливо, світло, охолодження та інші запчастини. Офіційний фірмовий вебкаталог TecAlliance; JavaScript. Прямий GO TO WEB CAT з офіційної сторінки Spare Parts. Посилання відкриває регіон GB; країну слід перевіряти.",
+  "official_url": "https://www.magnetimarelli-parts-and-services.it/content/mmamps/us/en/products/spare-parts.html",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "tecdoc"
+ },
+ {
+  "id": 32,
+  "group": "Багатопрофільні каталоги",
+  "name": "Herth+Buss / Elparts / Jakoparts",
+  "brands": [
+   "Herth+Buss",
+   "Elparts",
+   "Jakoparts"
+  ],
+  "catalog_url": "https://herthundbuss.com/en/online-catalogue/",
+  "access": "Вебкаталог",
+  "search": "Вибір країни; методи повного підбору не встановлено",
+  "note": "Продукція: Автоелектрика, роз’єми, клеми, ремонт проводки; запчастини азійських авто. Офіційний публічний вхід до каталогу; повний інтерфейс не завантажився. Офіційно Elparts та Jakoparts; інструмент не прочитав сторінку понад 4 МБ. Є окремі PDF-каталоги.",
+  "official_url": "https://herthundbuss.com/en/online-catalogue/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Herth+Buss"
+ },
+ {
+  "id": 33,
+  "group": "Електрика, датчики та паливо",
+  "name": "Standard / Intermotor / Blue Streak",
+  "brands": [
+   "Standard",
+   "Intermotor",
+   "Blue Streak"
+  ],
+  "catalog_url": "https://www.standardbrand.com/ecatalog/",
+  "access": "Вебкаталог · регіональний",
+  "search": "eCatalog; PDF",
+  "note": "Продукція: Америка: електрика. Вебкаталог (JavaScript). Датчики, запалювання, керування двигуном, TPMS; портал Standard Motor Products.",
+  "official_url": "https://www.standardbrand.com/ecatalog/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Standard"
+ },
+ {
+  "id": 34,
+  "group": "Електрика, датчики та паливо",
+  "name": "Wells Vehicle Electronics / WVE",
+  "brands": [
+   "Wells Vehicle Electronics",
+   "WVE"
+  ],
+  "catalog_url": "https://wellsve.com/products/",
+  "access": "Вебкаталог · регіональний",
+  "search": "Пошук деталей; повний електронний каталог",
+  "note": "Продукція: Америка: електрика. Публічний вебкаталог. Датчики, електроніка й керування двигуном.",
+  "official_url": "https://wellsve.com/products/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Wells Vehicle Electronics"
+ },
+ {
+  "id": 35,
+  "group": "Електрика, датчики та паливо",
+  "name": "Walker Products",
+  "brands": [
+   "Walker Products"
+  ],
+  "catalog_url": "https://www.walkerproducts.com/e-catalog/",
+  "access": "Вебкаталог",
+  "search": "Каталог за застосуванням; окремий каталог карбюраторних деталей",
+  "note": "Продукція: Електрика та керування двигуном. Вебкаталог (JavaScript). Датчики, паливні та запалювальні компоненти. Окремий бренд від Walker Exhaust.",
+  "official_url": "https://www.walkerproducts.com/catalog/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Walker Products"
+ },
+ {
+  "id": 36,
+  "group": "Електрика, датчики та паливо",
+  "name": "NGK / NTK / Niterra",
+  "brands": [
+   "NGK",
+   "NTK",
+   "Niterra"
+  ],
+  "catalog_url": "https://www.ngkntk.com/part-finder/",
+  "access": "Вебкаталог",
+  "search": "Транспортний засіб/застосування; назва/номер артикула; крос-список",
+  "note": "Продукція: Свічки, котушки, дроти, лямбда-зонди, MAF/MAP, EGR та інші датчики. Відкритий вебкаталог. Офіційно вказано: Part Finder для європейського регіону. Кроси мають рекомендаційний характер.",
+  "official_url": "https://www.ngkntk.com/part-finder/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "NGK"
+ },
+ {
+  "id": 37,
+  "group": "Електрика, датчики та паливо",
+  "name": "Champion",
+  "brands": [
+   "Champion"
+  ],
+  "catalog_url": "https://www.championautoparts.com/en-eu/catalogue.html",
+  "access": "Вебкаталог",
+  "search": "Авто; артикул; двигун; вкладки VIN/держномер (доступність залежить від ринку)",
+  "note": "Продукція: Запалювання, свічки, котушки, фільтри та гальмівні деталі. Публічна форма вебкаталогу; JavaScript. Є форми та розділи Interchanges, Fitment. Присутність VIN-вкладки не гарантує підтримку українського VIN/держномера.",
+  "official_url": "https://www.championautoparts.com/en-eu/catalogue.html",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Champion"
+ },
+ {
+  "id": 38,
+  "group": "Електрика, датчики та паливо",
+  "name": "FAE",
+  "brands": [
+   "FAE"
+  ],
+  "catalog_url": "https://web.tecalliance.net/fae/en/home",
+  "access": "Вебкаталог",
+  "search": "Не підтверджено у текстовій перевірці",
+  "note": "Продукція: Датчики, вимикачі, котушки, термостати, електроніка. Офіційний фірмовий вебкаталог TecAlliance; JavaScript. Пряме посилання Catalog web / TecDoc Catalog з офіційного сайту. Додатково є PDF-каталоги.",
+  "official_url": "https://www.fae.es/en",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "tecdoc"
+ },
+ {
+  "id": 39,
+  "group": "Електрика, датчики та паливо",
+  "name": "FACET",
+  "brands": [
+   "FACET"
+  ],
+  "catalog_url": "https://catalogo.facet.eu/EN",
+  "access": "Вебкаталог",
+  "search": "Артикул/OE/OES/крос; автомобіль; код двигуна; група/лінійка продукції",
+  "note": "Продукція: Датчики, запалювання, термостати, вимикачі, EGR. Публічний вебкаталог. Офіційна сторінка прямо посилається на новий каталог.",
+  "official_url": "https://www.facet.eu/en/catalogs/facet-catalog/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "FACET"
+ },
+ {
+  "id": 40,
+  "group": "Електрика, датчики та паливо",
+  "name": "EPS",
+  "brands": [
+   "EPS"
+  ],
+  "catalog_url": "https://catalogo.eps-autoparts.com/EN",
+  "access": "Вебкаталог",
+  "search": "Не підтверджено у текстовій перевірці",
+  "note": "Продукція: Датчики, запалювання, термостати, вимикачі. Офіційний вебкаталог; пряме завантаження не підтверджено. Бренд групи Facet. Офіційне посилання підтверджене, інструмент отримав помилку при відкритті цільової сторінки.",
+  "official_url": "https://www.facet.eu/en/catalogs/eps-catalog/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "EPS"
+ },
+ {
+  "id": 41,
+  "group": "Електрика, датчики та паливо",
+  "name": "KW (Facet)",
+  "brands": [
+   "KW"
+  ],
+  "catalog_url": "https://catalogo.kw-automotive.com/EN",
+  "access": "Вебкаталог",
+  "search": "Артикул/OE/OES/крос; автомобіль; код двигуна; група/лінійка продукції",
+  "note": "Продукція: Датчики, запалювання, термостати, вимикачі. Публічний вебкаталог. Це електричний бренд групи Facet, а не KW Suspensions.",
+  "official_url": "https://www.facet.eu/en/catalogs/kw-catalog/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "KW"
+ },
+ {
+  "id": 42,
+  "group": "Електрика, датчики та паливо",
+  "name": "ERA",
+  "brands": [
+   "ERA"
+  ],
+  "catalog_url": "https://ecom.eraspares.com/ec/Tabellone.asp",
+  "access": "Вебкаталог",
+  "search": "Артикул/посилальний номер; авто; двигун; TecDoc type; категорія",
+  "note": "Продукція: Електрика, датчики, паливо, клімат, стартери/генератори, склопідіймачі. Відкритий каталог без входу. На каталозі прямо пояснено: підбір без логіна, замовлення перенесені в окремий e-commerce.",
+  "official_url": "https://www.eraspares.com/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "ERA"
+ },
+ {
+  "id": 43,
+  "group": "Електрика, датчики та паливо",
+  "name": "Mobiletron",
+  "brands": [
+   "Mobiletron"
+  ],
+  "catalog_url": "https://ecat.mobiletron.co.uk/MobCat",
+  "access": "Вебкаталог",
+  "search": "Номер/частина номера; OE/номер конкурента; авто; британський держномер",
+  "note": "Продукція: Котушки, модулі, регулятори, діодні мости, датчики, TPMS. Публічна форма каталогу; для окремих функцій є вхід/CAPTCHA. MobCAT має європейський/UK індекс; у формі пошуку держномера CAPTCHA; форма Login також присутня.",
+  "official_url": "https://www.mobiletron.co.uk/MobCAT",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Mobiletron"
+ },
+ {
+  "id": 44,
+  "group": "Електрика, датчики та паливо",
+  "name": "Delphi",
+  "brands": [
+   "Delphi"
+  ],
+  "catalog_url": "https://www.delphiautoparts.com/en-gb/catalogue",
+  "access": "Вебкаталог",
+  "search": "Авто; Delphi/OE/XREF; держномер VRM",
+  "note": "Продукція: Електроніка, датчики, паливо, запалювання, а також гальма/підвіска. Публічна сторінка вебкаталогу; JavaScript. Офіційний Find my part переадресовує сюди. Пошук за держномером залежить від країни.",
+  "official_url": "https://www.delphiautoparts.com/en-gb/catalogue",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Delphi"
+ },
+ {
+  "id": 45,
+  "group": "Електрика, датчики та паливо",
+  "name": "BERU / BorgWarner",
+  "brands": [
+   "BERU",
+   "BorgWarner"
+  ],
+  "catalog_url": "https://www.borgwarner.com/aftermarket/diesel-cold-start-technologies",
+  "access": "PDF / цифрові видання",
+  "search": "Інтерактивний PDF: застосування, артикули, кроси",
+  "note": "Продукція: Свічки розжарювання, блоки розжарювання, котушки запалювання. Публічний PDF за посиланням Catalog. На сторінці Catalog – Glow Plugs, Glow Plug Controllers and Ignition Coils. Доступний каталог 2021; beruparts.eu вже переадресовує на Champion.",
+  "official_url": "https://www.borgwarner.com/aftermarket/diesel-cold-start-technologies",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "BERU"
+ },
+ {
+  "id": 46,
+  "group": "Електрика, датчики та паливо",
+  "name": "SIDAT",
+  "brands": [
+   "SIDAT"
+  ],
+  "catalog_url": "https://www.sidatgroup.it/en/categories",
+  "access": "Вебкаталог",
+  "search": "Артикул; авто; група продукції",
+  "note": "Продукція: Електрика, датчики, паливо, запалювання, ремонтні роз’єми/проводка, клімат. Публічний вебкаталог; партнерський вхід окремо. Перевірено відкритий список товарів з артикулами, наприклад 405699 у Connectors for Wiring.",
+  "official_url": "https://www.sidatgroup.it/en/categories",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "SIDAT"
+ },
+ {
+  "id": 47,
+  "group": "Електрика, датчики та паливо",
+  "name": "FISPA",
+  "brands": [
+   "FISPA"
+  ],
+  "catalog_url": "https://www.fispa.it/en/categories",
+  "access": "Вебкаталог",
+  "search": "Артикул; авто; група продукції",
+  "note": "Продукція: Електрика, датчики, паливо, запалювання, ремонт проводки, клімат. Публічний вебкаталог; партнерський вхід окремо. Бренд SIDAT Group. Форма Search By Reference / Search By Vehicle відкрита; Login призначений партнерам.",
+  "official_url": "https://www.fispa.it/en",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "FISPA"
+ },
+ {
+  "id": 48,
+  "group": "Електрика, датчики та паливо",
+  "name": "Hoffer",
+  "brands": [
+   "Hoffer"
+  ],
+  "catalog_url": "https://www.hoffer-products.com/de",
+  "access": "Вебкаталог",
+  "search": "Hoffer/OEM; код двигуна; авто/фургон/вантажівка; рік; категорія",
+  "note": "Продукція: Електрика, датчики, паливо, запалювання, охолодження та клімат. Публічна форма вебкаталогу; партнерський вхід окремо. Каталог вбудований у головну сторінку. Німецька версія відкрилася й показала всі поля; англійська https://www.hoffer-products.com/en/node під час повторного відкриття дала 403.",
+  "official_url": "https://www.hoffer-products.com/de",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Hoffer"
+ },
+ {
+  "id": 49,
+  "group": "Електрика, датчики та паливо",
+  "name": "Meat&Doria",
+  "brands": [
+   "Meat&Doria"
+  ],
+  "catalog_url": "https://www.meat-doria.com/en",
+  "access": "Вебкаталог",
+  "search": "Автомобіль; категорія; артикули/OE у картках",
+  "note": "Продукція: Електрика, датчики, паливо, запалювання, охолодження та клімат. Публічні каталожні сторінки індексуються; пряме відкриття головної 403. Підтверджено офіційні сторінки підбору за авто та номерами деталей; під час перевірки головна блокувала автоматизоване читання. Споріднений каталог Hoffer відкрився.",
+  "official_url": "https://www.meat-doria.com/en/car/ABARTH-500---595---695-yAll/33667",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Meat&Doria"
+ },
+ {
+  "id": 50,
+  "group": "Електрика, датчики та паливо",
+  "name": "VDO / AUMOVIO (колишній Continental Automotive)",
+  "brands": [
+   "VDO",
+   "AUMOVIO"
+  ],
+  "catalog_url": "https://web.tecalliance.net/vdo/en/home",
+  "access": "Вебкаталог",
+  "search": "Фірмовий TecDoc; методи пошуку у JavaScript не перевірено",
+  "note": "Продукція: Датчики, TPMS, паливо, Common Rail, актуатори, турбіни, електроніка. Офіційний публічний вхід у вебкаталог TecAlliance; JavaScript. Прямий Go to online catalog з поточного офіційного сайту. Портфель електроніки/мехатроніки Continental повертається під VDO після виділення AUMOVIO; не плутати з ременями Continental/ContiTech.",
+  "official_url": "https://aftermarket.vdo.com/en-en/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "tecdoc"
+ },
+ {
+  "id": 51,
+  "group": "Електрика, датчики та паливо",
+  "name": "SMPE / Intermotor Group: Intermotor, Lucas, Lemark, FuelParts",
+  "brands": [
+   "Intermotor",
+   "Lucas",
+   "Lemark",
+   "FuelParts"
+  ],
+  "catalog_url": "https://intermotorgroup.elcome.co.uk/",
+  "access": "Вебкаталог",
+  "search": "Автомобіль; артикул; крос-номер",
+  "note": "Продукція: Запалювання, датчики, реле, паливо, EGR/викиди, термостати й охолодження. Публічний вебкаталог. Старий офіційний smpeurope.com переадресовує на intermotor.com, звідки пряме посилання на цей каталог. Відкриті форми By Vehicle / Part Number / Cross Reference.",
+  "official_url": "https://www.smpeurope.com/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Intermotor"
+ },
+ {
+  "id": 52,
+  "group": "Електрика, датчики та паливо",
+  "name": "ELTA / VXPRO / Lucas",
+  "brands": [
+   "ELTA",
+   "VXPRO",
+   "Lucas"
+  ],
+  "catalog_url": "https://catalogue.eltaeurope.com/",
+  "access": "Вебкаталог",
+  "search": "Автомобіль; артикул; крос-номер; VRM лише для зареєстрованих клієнтів",
+  "note": "Продукція: Електрика, датчики, світлотехніка, склоочисники та інші запчастини. Відкритий безкоштовний каталог; VRM/ціни/залишки після входу. Офіційний матеріал 27.05.2026 прямо підтверджує public catalogue immediately і free to use; ціни/залишки/VRM — розширені функції клієнтського акаунта. Додавання Serck у цьому повідомленні ще анонсоване.",
+  "official_url": "https://eltaeurope.com/elta-automotive-resources/news/elta-ecat-celebrates-first-year-supporting-independent-motor-factors/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "ELTA"
+ },
+ {
+  "id": 53,
+  "group": "Електрика, датчики та паливо",
+  "name": "BRISK",
+  "brands": [
+   "BRISK"
+  ],
+  "catalog_url": "https://www.brisk.eu/catalogues/spark-plugs",
+  "access": "Вебкаталог",
+  "search": "Тип свічки; категорія/серія; технічні таблиці з артикулами",
+  "note": "Продукція: Свічки запалювання й розжарювання. Публічний технічний вебкаталог. Каталог містить реальні коди й технічні параметри свічок (різьба, зазор, довжина тощо); підтвердженого підбору за VIN немає. Додаткові видання PDF: https://www.brisk.eu/for-download .",
+  "official_url": "https://www.brisk.eu/catalogues/spark-plugs",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "BRISK"
+ },
+ {
+  "id": 54,
+  "group": "Електрика, датчики та паливо",
+  "name": "EFI Automotive / BOUGICORD — проводи для класичних авто",
+  "brands": [
+   "EFI Automotive",
+   "BOUGICORD"
+  ],
+  "catalog_url": "https://www.efi-service.com/wp-content/uploads/2023/02/WIRE-SETS-FOR-VINTAGE-CARS.pdf",
+  "access": "PDF / цифрові видання",
+  "search": "Таблиця марка/модель/роки/номер комплекту",
+  "note": "Продукція: Комплекти високовольтних проводів запалювання для класичних автомобілів. Публічний PDF підбору; вузьке охоплення. Реальна таблиця застосувань Bougicord, а не рекламна брошура. Повний відкритий онлайнкаталог EFI не підтверджено. Додатково індексується офіційна добірка котушок 2026: https://www.efi-service.com/wp-content/uploads/2022/04/INDISPENSABLES-2026-BOBINES-DALLUMAGE.pdf .",
+  "official_url": "https://www.efi-service.com/en/ressource/ignition-wire-sets/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "EFI Automotive"
+ },
+ {
+  "id": 55,
+  "group": "Стартери, генератори та ремонтні компоненти",
+  "name": "Delco Remy",
+  "brands": [
+   "Delco Remy"
+  ],
+  "catalog_url": "https://www.delcoremy.com/find-a-part",
+  "access": "Вебкаталог",
+  "search": "Номер; аналог; авто; сімейство; внутрішні деталі",
+  "note": "Продукція: Електрика та керування двигуном. Публічний вебкаталог. Стартери й генератори, зокрема вантажні; є пошук Service Parts.",
+  "official_url": "https://www.delcoremy.com/find-a-part",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Delco Remy"
+ },
+ {
+  "id": 56,
+  "group": "Стартери, генератори та ремонтні компоненти",
+  "name": "AS-PL",
+  "brands": [
+   "AS-PL"
+  ],
+  "catalog_url": "https://www.as-catalog.com/",
+  "access": "Вебкаталог",
+  "search": "AS/OE/OEM/крос-номер; автомобіль; категорія; технічні параметри",
+  "note": "Продукція: Генератори, стартери, регулятори, діоди, щітки та ремонтні компоненти. Відкритий каталог без входу. Виробник прямо підтверджує no login required. Деталі, застосування та порівняння компонентів; B2B-ціни окремо.",
+  "official_url": "https://as-pl.com/en/content/as-pl_katalogus/10",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "AS-PL"
+ },
+ {
+  "id": 57,
+  "group": "Стартери, генератори та ремонтні компоненти",
+  "name": "HC-Cargo",
+  "brands": [
+   "HC-Cargo"
+  ],
+  "catalog_url": "https://hc-cargo.com/gb/en",
+  "access": "Вебкаталог",
+  "search": "HC/OE/крос-номер; авто; держномер; KBA; VIN; категорія",
+  "note": "Продукція: Стартери, генератори, ремонтні компоненти автоелектрики. Відкритий каталог без входу. Новий каталог прямо повідомляє: вхід більше не потрібен, BOM (склад вузла) видимі всім. Держномер/VIN залежать від підтримки ринку.",
+  "official_url": "https://hc-cargo.com/gb/en?showLanguagePicker=1",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "HC-Cargo"
+ },
+ {
+  "id": 58,
+  "group": "Стартери, генератори та ремонтні компоненти",
+  "name": "GEBE / IKA Germany",
+  "brands": [
+   "GEBE",
+   "IKA Germany"
+  ],
+  "catalog_url": "https://www.gebe-shop.de/",
+  "access": "Вебкаталог",
+  "search": "Пошук продукту; категорії",
+  "note": "Продукція: Ремонт генераторів/стартерів, щітки, регулятори, реле, NOx та інші датчики. Публічний каталог у webshop; ціни окремо. Категорії, артикули та деталі відкриті без входу. На відкритій сторінці вказано Price not available; офіційний сайт IKA прямо веде до GEBE-shop.",
+  "official_url": "https://www.ika-germany.de/en/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "GEBE"
+ },
+ {
+  "id": 59,
+  "group": "Стартери, генератори та ремонтні компоненти",
+  "name": "WAI / Transpo",
+  "brands": [
+   "WAI",
+   "Transpo"
+  ],
+  "catalog_url": "https://www.waiglobal.com/media/wysiwyg/catalogs_thumnails/Transpo_low-res_04152015.pdf",
+  "access": "PDF / цифрові видання",
+  "search": "Артикул; OE; кроси; застосування до генератора",
+  "note": "Продукція: Регулятори генераторів, діодні мости, електроніка та ремонтні компоненти. Публічний технічний PDF. Повний Transpo Buyers Guide на офіційному WAI; датований 2015 у назві файлу. Вебкаталог/поточність асортименту не підтверджені.",
+  "official_url": "https://www.waiglobal.com/media/wysiwyg/catalogs_thumnails/Transpo_low-res_04152015.pdf",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "WAI"
+ },
+ {
+  "id": 60,
+  "group": "Стартери, генератори та ремонтні компоненти",
+  "name": "JUBANA",
+  "brands": [
+   "JUBANA"
+  ],
+  "catalog_url": "https://catalog.jubana.com/en/",
+  "access": "Вебкаталог",
+  "search": "Категорії; артикули; OE/кроси й застосування у картках",
+  "note": "Продукція: Стартери й генератори, зокрема для спецтехніки. Публічний вебкаталог. Відкрито головну й докладну картку генератора з напругою, струмом, напрямом обертання, таблицями кросів і застосування. Категорії іноді повертали timeout.",
+  "official_url": "https://catalog.jubana.com/en/alternator/143701169",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "JUBANA"
+ },
+ {
+  "id": 61,
+  "group": "Світло, лампи та проводка",
+  "name": "OSRAM",
+  "brands": [
+   "OSRAM"
+  ],
+  "catalog_url": "https://www.osram.com/apps/gvlrg/en_COM",
+  "access": "Вебкаталог",
+  "search": "Авто/тип транспортного засобу; місце встановлення лампи",
+  "note": "Продукція: Автолампи, світлотехніка. Публічний Lamp Finder; JavaScript. Офіційно інструмент для європейських автомобілів; легкові, вантажівки й мотоцикли. Повний JS-підбір не виконувався.",
+  "official_url": "https://www.osram.com/am/services/interactive-tools/index.jsp",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "OSRAM"
+ },
+ {
+  "id": 62,
+  "group": "Світло, лампи та проводка",
+  "name": "TYC",
+  "brands": [
+   "TYC"
+  ],
+  "catalog_url": "https://www.tyceurope.com/ecatalog",
+  "access": "Вебкаталог",
+  "search": "Тип продукту; виробник/модель; TYC/OEM; рік",
+  "note": "Продукція: Ліхтарі, фари, дзеркала, радіатори, вентилятори. Публічна форма каталогу в індексі; прямий доступ під час перевірки 403. Офіційний європейський eCatalog. Також глобальний https://www.tyc.com.tw/index.php/ecatalog ; автоматизоване відкриття європейської сторінки блокувалося.",
+  "official_url": "https://www.tyceurope.com/ecatalog",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "TYC"
+ },
+ {
+  "id": 63,
+  "group": "Світло, лампи та проводка",
+  "name": "ULO",
+  "brands": [
+   "ULO"
+  ],
+  "catalog_url": "https://ulo.de/en/products/online-catalog",
+  "access": "Вебкаталог",
+  "search": "ULO/OE/крос; авто; категорії легкових/LCV/CV/універсальних деталей",
+  "note": "Продукція: Фари, ліхтарі, дзеркала, тримачі ламп. Публічний вебкаталог. Відкрита форма Number Search та вибір авто; є окремий завантажуваний загальний PDF.",
+  "official_url": "https://ulo.de/en/products/online-catalog",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "ULO"
+ },
+ {
+  "id": 64,
+  "group": "Світло, лампи та проводка",
+  "name": "Vignal Group",
+  "brands": [
+   "Vignal Group"
+  ],
+  "catalog_url": "https://www.vignal-group.com/fr/eclairage-1",
+  "access": "Вебкаталог",
+  "search": "Номер деталі; група; номер омологації; фільтри",
+  "note": "Продукція: Світлотехніка, сигналізація, роз’єми, проводка вантажівок/причепів. Публічний технічний вебкаталог. Підбір за технічними категоріями. Також https://www.vignal-group.com/fr/telechargements/catalogues-63/ з PDF-каталогами.",
+  "official_url": "https://www.vignal-group.com/fr/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Vignal Group"
+ },
+ {
+  "id": 65,
+  "group": "Світло, лампи та проводка",
+  "name": "WESEM",
+  "brands": [
+   "WESEM"
+  ],
+  "catalog_url": "https://www.wesem.com/",
+  "access": "Вебкаталог",
+  "search": "Назва/код продукту; тип фари/ліхтаря",
+  "note": "Продукція: Фари й ліхтарі легкових авто, вантажівок, агро- та спецтехніки. Публічний каталог у розділі Products. Головна містить справжнє поле Search for the product name or code та категорії. Додатково Download the catalogue.",
+  "official_url": "https://www.wesem.com/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "WESEM"
+ },
+ {
+  "id": 66,
+  "group": "Світло, лампи та проводка",
+  "name": "Fristom",
+  "brands": [
+   "Fristom"
+  ],
+  "catalog_url": "https://fristom.com/en/offer/",
+  "access": "Вебкаталог",
+  "search": "Тип ліхтаря; модель/код FT; пошук сайту",
+  "note": "Продукція: Світлотехніка й кабельні джгути для причепів, вантажівок, спецтехніки. Публічний технічний вебкаталог. Категорії розкривають конкретні артикули й технічні сторінки (FT-323, FT-334 тощо); є каталог для завантаження.",
+  "official_url": "https://fristom.com/en/offer/rear-lamps/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Fristom"
+ },
+ {
+  "id": 67,
+  "group": "Світло, лампи та проводка",
+  "name": "Aspöck",
+  "brands": [
+   "Aspöck"
+  ],
+  "catalog_url": "https://www.aspoeck.com/en/products_services/spare-parts",
+  "access": "PDF / цифрові видання",
+  "search": "Каталог Spare Parts & Accessories",
+  "note": "Продукція: Світлотехніка, компоненти ліхтарів, роз’єми й проводка причепів/вантажівок. Публічний каталог PDF/перегортання. Офіційна сторінка пропонує Spare Parts & Accessories Version 2025, окремо Service Book з монтажу роз’ємів.",
+  "official_url": "https://www.aspoeck.com/en/products_services/spare-parts",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Aspöck"
+ },
+ {
+  "id": 68,
+  "group": "Світло, лампи та проводка",
+  "name": "WAŚ",
+  "brands": [
+   "WAŚ"
+  ],
+  "catalog_url": "https://www.was.eu/katalogi.php",
+  "access": "PDF / цифрові видання",
+  "search": "Каталоги за виданням; пошук тексту у PDF",
+  "note": "Продукція: Світлотехніка, відбивачі й проводка для авто/причепів/спецтехніки. Публічна бібліотека PDF/перегортання. Офіційні Download PDF різних років і мов. Є також пошук ліхтарів на сайті, але цільова форма під час перевірки не завантажилася.",
+  "official_url": "https://www.was.eu/katalogi.php",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "WAŚ"
+ },
+ {
+  "id": 69,
+  "group": "Світло, лампи та проводка",
+  "name": "Philips Automotive",
+  "brands": [
+   "Philips Automotive"
+  ],
+  "catalog_url": "https://www.philips.com/c-dam/b2c/en_US/generic/support-home/support-page-product-flyers/automotive-lighting-tab-product-flyers/philips-automotive-lighting-master-catalog-2002-2022.pdf",
+  "access": "PDF / цифрові видання",
+  "search": "Артикул; таблиці застосувань",
+  "note": "Продукція: Автомобільні лампи. Публічний PDF; американський регіон. Американський PDF із позначенням 2002–2022 у назві файла; це не твердження про повноту охоплення цих років. Поточний асортимент і європейські застосування за цим файлом не перевірялися.",
+  "official_url": "https://www.philips.com/c-dam/b2c/en_US/generic/support-home/support-page-product-flyers/automotive-lighting-tab-product-flyers/philips-automotive-lighting-master-catalog-2002-2022.pdf",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Philips Automotive"
+ },
+ {
+  "id": 70,
+  "group": "Світло, лампи та проводка",
+  "name": "NARVA Light",
+  "brands": [
+   "NARVA Light"
+  ],
+  "catalog_url": "https://www.narva-light.com/catalogues",
+  "access": "PDF / цифрові видання",
+  "search": "Каталог за країною/мовою; артикул у виданні",
+  "note": "Продукція: Автомобільні лампи: галоген, ксенон, LED. Публічна бібліотека каталогів для завантаження. На офіційній сторінці є європейські видання й окремий український каталог. Прямий український PDF: https://www.narva-light.com/_files/ugd/ae96f6_7919abf104684b89b1efeadddfa2bfbe.pdf (17 МБ).",
+  "official_url": "https://www.narva-light.com/catalogues",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "NARVA Light"
+ },
+ {
+  "id": 71,
+  "group": "Світло, лампи та проводка",
+  "name": "Truck-Lite / Signal-Stat",
+  "brands": [
+   "Truck-Lite",
+   "Signal-Stat"
+  ],
+  "catalog_url": "https://www.truck-lite.com/our-resources/assets",
+  "access": "PDF / цифрові видання",
+  "search": "Каталог за групами; артикули; специфікації",
+  "note": "Продукція: Світлотехніка, роз’єми, джгути, перемикачі та сигналізація вантажівок/причепів. Публічні PDF у Resources; прямий доступ обмежений robots. Офіційна сторінка дає Download the 2023 Catalog. Числові технічні картки товарів також індексуються на сайті, але вебнавігацію не перевірено.",
+  "official_url": "https://www.truck-lite.com/our-resources/assets",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Truck-Lite"
+ },
+ {
+  "id": 72,
+  "group": "Охолодження та кондиціонування",
+  "name": "MotoRad",
+  "brands": [
+   "MotoRad"
+  ],
+  "catalog_url": "https://eu.motorad.com/",
+  "access": "Вебкаталог",
+  "search": "Find a Product; регіональний підбір",
+  "note": "Продукція: Охолодження. Вебкаталог (JavaScript). Термостати, корпуси та кришки. Обрано Europe/EMEA.",
+  "official_url": "https://eu.motorad.com/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "MotoRad"
+ },
+ {
+  "id": 73,
+  "group": "Охолодження та кондиціонування",
+  "name": "Nissens",
+  "brands": [
+   "Nissens"
+  ],
+  "catalog_url": "https://catalogue.nissens.com/Product",
+  "access": "Вебкаталог",
+  "search": "Nissens/OE/номер конкурента; авто; код двигуна; потужність",
+  "note": "Продукція: Радіатори, клімат, вентилятори, турбіни, EGR, датчики. Публічна форма каталогу; клієнтський вхід окремо. Не плутати публічний catalogue.nissens.com з customerportal.nissens.com, де показується клієнтський логін.",
+  "official_url": "https://nissens.com/catalogue",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Nissens"
+ },
+ {
+  "id": 74,
+  "group": "Охолодження та кондиціонування",
+  "name": "NRF",
+  "brands": [
+   "NRF"
+  ],
+  "catalog_url": "https://webshop.nrf.eu/",
+  "access": "Вебкаталог",
+  "search": "NRF/OE/номер виробника; категорії; розширений пошук",
+  "note": "Продукція: Охолодження, кондиціонування, датчики, EGR та електрика. Публічний каталог у webshop. Офіційний сайт веде до webshop; категорії й рядок пошуку видно без входу. Умови B2B-замовлення не перевірялися.",
+  "official_url": "https://nrf.eu/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "NRF"
+ },
+ {
+  "id": 75,
+  "group": "Охолодження та кондиціонування",
+  "name": "AVA Cooling",
+  "brands": [
+   "AVA Cooling"
+  ],
+  "catalog_url": "https://ava.eu/en/catalogue.html",
+  "access": "Вебкаталог",
+  "search": "Авто; номер деталі; OE; крос-номер; EAN; KTYPE; держномер окремих країн",
+  "note": "Продукція: Радіатори, кондиціонери, компресори, вентилятори. Публічний вебкаталог. Є технічні розміри та порівняння. Форма держномерів показує DE/KBA, DK, FR, NL.",
+  "official_url": "https://ava.eu/en/catalogue.html",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "AVA Cooling"
+ },
+ {
+  "id": 76,
+  "group": "Охолодження та кондиціонування",
+  "name": "DOLZ",
+  "brands": [
+   "DOLZ"
+  ],
+  "catalog_url": "https://web.tecalliance.net/dolz/es/home",
+  "access": "Вебкаталог",
+  "search": "Не підтверджено у текстовій перевірці",
+  "note": "Продукція: Водяні помпи, комплекти ГРМ, термостати. Офіційний фірмовий вебкаталог TecAlliance; JavaScript. Прямий eCATÁLOGO з офіційного сайту; виконання JavaScript-підбору не перевірено.",
+  "official_url": "https://www.idolz.com/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "tecdoc"
+ },
+ {
+  "id": 77,
+  "group": "Охолодження та кондиціонування",
+  "name": "KRIOS",
+  "brands": [
+   "KRIOS"
+  ],
+  "catalog_url": "https://www.kriosac.it/en/categories",
+  "access": "Вебкаталог",
+  "search": "Артикул; авто; категорія",
+  "note": "Продукція: Кондиціонування, компресори, вентилятори, резистори, ремонтні роз’єми. Публічний вебкаталог; партнерський вхід окремо. Кліматичний бренд SIDAT Group. Перевірено відкриті Cable Repair Set з артикулами 2.6201–2.6211.",
+  "official_url": "https://www.kriosac.it/en/categories",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "KRIOS"
+ },
+ {
+  "id": 78,
+  "group": "Охолодження та кондиціонування",
+  "name": "CALORSTAT by Vernet",
+  "brands": [
+   "CALORSTAT by Vernet"
+  ],
+  "catalog_url": "https://www.ecalorstat.com/",
+  "access": "Вебкаталог",
+  "search": "Автомобіль; номер продукту; код двигуна; регіон",
+  "note": "Продукція: Термостати, термовимикачі, датчики, кришки системи охолодження. Публічний вебкаталог. Офіційний Global Worldwide E-Catalog. Видимі поля марки, моделі, двигуна, року та продукту; регіон потрібно вибрати.",
+  "official_url": "https://www.calorstatbyvernet.com/e-catalogue/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "CALORSTAT by Vernet"
+ },
+ {
+  "id": 79,
+  "group": "Охолодження та кондиціонування",
+  "name": "HEPU",
+  "brands": [
+   "HEPU"
+  ],
+  "catalog_url": "https://www.hepu.de/en/parts-catalogue/",
+  "access": "Вебкаталог",
+  "search": "Автомобіль; марка/модель/двигун; OE — за описом виробника",
+  "note": "Продукція: Водяні помпи, охолодження, комплекти ГРМ, деталі двигуна. Офіційний вебкаталог; вбудований JavaScript. Сторінка містить вбудований каталог carparts-cat; пошукові можливості підтверджені описом виробника, виконання підбору не перевірене.",
+  "official_url": "https://www.hepu.de/en/parts-catalogue/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "HEPU"
+ },
+ {
+  "id": 80,
+  "group": "Охолодження та кондиціонування",
+  "name": "GEBA",
+  "brands": [
+   "GEBA"
+  ],
+  "catalog_url": "https://web.tecalliance.net/geba-autoteile/en/home",
+  "access": "Вебкаталог",
+  "search": "Фірмовий TecDoc; легкові/вантажні застосування; категорії",
+  "note": "Продукція: Водяні помпи легкових авто, вантажівок, сільгосптехніки; комплекти. Офіційний вебкаталог; JavaScript. Виробник безпосередньо посилається на брендований каталог GEBA. Динамічна форма не відображається у текстовому перегляді.",
+  "official_url": "https://www.geba-autoteile.de/en/products/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "tecdoc"
+ },
+ {
+  "id": 81,
+  "group": "Фільтри",
+  "name": "MANN-FILTER",
+  "brands": [
+   "MANN-FILTER"
+  ],
+  "catalog_url": "https://www.mann-filter.com/ua-uk/catalog.html",
+  "access": "Вебкаталог",
+  "search": "авто; артикул; крос-номер; розміри",
+  "note": "Продукція: Фільтри. Відкритий; вибір регіону/мови. Є українська версія.",
+  "official_url": "https://www.mann-filter.com/en/catalog.html",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "MANN-FILTER"
+ },
+ {
+  "id": 82,
+  "group": "Фільтри",
+  "name": "WIX Filters",
+  "brands": [
+   "WIX Filters"
+  ],
+  "catalog_url": "https://www.wixfilters.com/uk-ua/catalog.html",
+  "access": "Вебкаталог · регіональний",
+  "search": "тип авто; OE-номер; технічні параметри",
+  "note": "Продукція: Фільтри. Відкритий; регіональний. Європейський/український каталог; для США окремий Filter Finder https://www.wixfilters.com/en-us/filter-finder.html .",
+  "official_url": "https://www.wixfilters.com/uk-ua/catalog.html",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "WIX Filters"
+ },
+ {
+  "id": 83,
+  "group": "Фільтри",
+  "name": "FILTRON",
+  "brands": [
+   "FILTRON"
+  ],
+  "catalog_url": "https://filtron.eu/en/catalog.html",
+  "access": "Вебкаталог",
+  "search": "пошук продукту",
+  "note": "Продукція: Фільтри. Відкритий. Окремий каталог бренду MANN+HUMMEL.",
+  "official_url": "https://filtron.eu/en/catalog.html",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "FILTRON"
+ },
+ {
+  "id": 84,
+  "group": "Фільтри",
+  "name": "Hengst",
+  "brands": [
+   "Hengst"
+  ],
+  "catalog_url": "https://catalog.hengst.com/en/online-catalog/search/",
+  "access": "Вебкаталог",
+  "search": "авто; артикул Hengst; крос-номер; KBA; рік",
+  "note": "Продукція: Фільтри. Відкритий; вибір регіону. Окремі режими vehicle/product/cross-reference search.",
+  "official_url": "https://catalog.hengst.com/en/online-catalog/search/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Hengst"
+ },
+ {
+  "id": 85,
+  "group": "Фільтри",
+  "name": "UFI Filters",
+  "brands": [
+   "UFI Filters"
+  ],
+  "catalog_url": "https://shop.ufi-aftermarket.com/s/catalogue?language=en_US",
+  "access": "Вебкаталог · регіональний",
+  "search": "пошук продукту; застосування",
+  "note": "Продукція: Фільтри. Відкритий; регіональний. Офіційний новий каталог; обрати регіон.",
+  "official_url": "https://ufi-aftermarket.com/en/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "UFI Filters"
+ },
+ {
+  "id": 86,
+  "group": "Фільтри",
+  "name": "SOFIMA",
+  "brands": [
+   "SOFIMA"
+  ],
+  "catalog_url": "https://sofima-aftermarket.com/EU/en/filters/",
+  "access": "Вебкаталог",
+  "search": "",
+  "note": "Продукція: Фільтри. Відкритий каталог; JavaScript. EMEA; існують окремі версії India/APAC.",
+  "official_url": "https://sofima-aftermarket.com/EU/en/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "SOFIMA"
+ },
+ {
+  "id": 87,
+  "group": "Фільтри",
+  "name": "Purflux",
+  "brands": [
+   "Purflux"
+  ],
+  "catalog_url": "https://www.purflux.com/en/catalogue/online-catalogue.html",
+  "access": "Вебкаталог",
+  "search": "виробник авто; тип фільтра; артикул",
+  "note": "Продукція: Фільтри. Відкритий каталог; зовнішній рушій. Сторінка виробника веде на sogefifilterdivision.com; рушій повернув 403 дослідницькому інструменту.",
+  "official_url": "https://www.purflux.com/en/catalogue/online-catalogue.html",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Purflux"
+ },
+ {
+  "id": 88,
+  "group": "Фільтри",
+  "name": "Sakura",
+  "brands": [
+   "Sakura"
+  ],
+  "catalog_url": "https://www.sakurafilter.com/products",
+  "access": "Вебкаталог",
+  "search": "авто; артикул; крос-номер",
+  "note": "Продукція: Фільтри. Відкритий. Картки мають OEM Cross Reference.",
+  "official_url": "https://www.sakurafilter.com/products",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Sakura"
+ },
+ {
+  "id": 89,
+  "group": "Фільтри",
+  "name": "JS ASAKASHI",
+  "brands": [
+   "JS ASAKASHI"
+  ],
+  "catalog_url": "https://www.jsfilter.jp/catalogue",
+  "access": "Вебкаталог",
+  "search": "OEM; JS-артикул; VIN/номер шасі",
+  "note": "Продукція: Фільтри. Відкритий каталог. Офіційні поля OEM No / JS No та VIN Or Chassis No. Покриття конкретного VIN не перевірялося.",
+  "official_url": "https://www.jsfilter.jp/catalogue",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "JS ASAKASHI"
+ },
+ {
+  "id": 90,
+  "group": "Фільтри",
+  "name": "SCT-Germany",
+  "brands": [
+   "SCT-Germany"
+  ],
+  "catalog_url": "https://sct-catalogue.de/",
+  "access": "Вебкаталог",
+  "search": "авто; розміри/форма фільтра",
+  "note": "Продукція: Фільтри; широкий асортимент. Відкритий каталог. Є пошук фільтрів за розмірами/формою та каталог автомобілів; пряме відкриття іноді повертає 502.",
+  "official_url": "https://sct-catalogue.de/?action=catalog_product",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "SCT-Germany"
+ },
+ {
+  "id": 91,
+  "group": "Фільтри",
+  "name": "Donaldson",
+  "brands": [
+   "Donaldson"
+  ],
+  "catalog_url": "https://shop.donaldson.com/",
+  "access": "Вебкаталог · регіональний",
+  "search": "крос-номер",
+  "note": "Продукція: Фільтри для транспорту й спецтехніки. Відкритий каталог; регіональний; JavaScript. Офіційний каталог/крос-пошук; дослідницькому інструменту повернув 403. Є окремі електронні PDF-каталоги.",
+  "official_url": "https://www.donaldson.com/en/products/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Donaldson"
+ },
+ {
+  "id": 92,
+  "group": "Фільтри",
+  "name": "FRAM (Північна Америка)",
+  "brands": [
+   "FRAM"
+  ],
+  "catalog_url": "https://www.fram.com/parts-search",
+  "access": "Вебкаталог · регіональний",
+  "search": "марка; модель; рік; крос-номер",
+  "note": "Продукція: Фільтри. Відкритий; регіональний. Окрема від європейського FRAM версія каталогу.",
+  "official_url": "https://www.fram.com/parts-search",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "FRAM"
+ },
+ {
+  "id": 93,
+  "group": "Фільтри",
+  "name": "MECAFILTER",
+  "brands": [
+   "MECAFILTER"
+  ],
+  "catalog_url": "https://catalogue.mecafilter.com/",
+  "access": "Вебкаталог",
+  "search": "авто; артикул; крос-номер; розміри; safety cartridge",
+  "note": "Продукція: Фільтри. Відкритий. Фільтри SOLAUFIL; є PDF.",
+  "official_url": "https://catalogue.mecafilter.com/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "MECAFILTER"
+ },
+ {
+  "id": 94,
+  "group": "Фільтри",
+  "name": "ALCO Filters",
+  "brands": [
+   "ALCO Filters"
+  ],
+  "catalog_url": "https://www.alcofilters.co.uk/Catalogue/",
+  "access": "Вебкаталог",
+  "search": "пошук продукту; категорія",
+  "note": "Продукція: Фільтри. Публічний перегляд; частина функцій із входом. Офіційна британська версія; Login/Register не заважає перегляду списку фільтрів.",
+  "official_url": "https://www.alcofilters.co.uk/Catalogue/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "ALCO Filters"
+ },
+ {
+  "id": 95,
+  "group": "Фільтри",
+  "name": "FIL Filter",
+  "brands": [
+   "FIL Filter"
+  ],
+  "catalog_url": "https://catalog.filfilter.com.tr/en",
+  "access": "Вебкаталог",
+  "search": "авто; артикул; OEM; крос-номер; категорія",
+  "note": "Продукція: Фільтри. Відкритий. Окремий офіційний каталог для легкових і комерційних авто.",
+  "official_url": "https://www.filfilter.com.tr/en",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "FIL Filter"
+ },
+ {
+  "id": 96,
+  "group": "Фільтри",
+  "name": "MISFAT",
+  "brands": [
+   "MISFAT"
+  ],
+  "catalog_url": "https://catalogue.misfat.com/",
+  "access": "Вебкаталог · регіональний",
+  "search": "авто; артикул; крос-номер; розміри; safety cartridge",
+  "note": "Продукція: Фільтри. Відкритий; регіональний. Міжнародний каталог; туніський також доступний на misfat.com.tn/catalogue/.",
+  "official_url": "https://misfat.com.tn/catalogue/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "MISFAT"
+ },
+ {
+  "id": 97,
+  "group": "Фільтри",
+  "name": "HIFI FILTER",
+  "brands": [
+   "HIFI FILTER"
+  ],
+  "catalog_url": "https://catalog.hifi-filter.com/en-GB",
+  "access": "Вебкаталог",
+  "search": "артикул; марка; модель",
+  "note": "Продукція: Фільтри для авто, спецтехніки, промисловості. Відкритий. Бренд/постачальник фільтрів і супутніх деталей.",
+  "official_url": "https://hifi-filter.com/en/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "HIFI FILTER"
+ },
+ {
+  "id": 98,
+  "group": "Фільтри",
+  "name": "K&N",
+  "brands": [
+   "K&N"
+  ],
+  "catalog_url": "https://www.knfilters.com/vehicle-search",
+  "access": "Вебкаталог · регіональний",
+  "search": "авто; розміри; крос-номер",
+  "note": "Продукція: Фільтри; впуск. Відкритий; регіональний. Офіційний каталог поєднаний із магазином; є ЄС knfilters.eu.",
+  "official_url": "https://www.knfilters.com/air-filters",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "K&N"
+ },
+ {
+  "id": 99,
+  "group": "Фільтри",
+  "name": "BMC Air Filters",
+  "brands": [
+   "BMC Air Filters"
+  ],
+  "catalog_url": "https://www.bmcairfilters.com/en/search_by_code",
+  "access": "Вебкаталог",
+  "search": "OEM; BMC-артикул; авто; параметри конічних фільтрів",
+  "note": "Продукція: Фільтри; впуск. Відкритий. Також https://www.bmcairfilters.com/en/products/replacement/car .",
+  "official_url": "https://www.bmcairfilters.com/en",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "BMC Air Filters"
+ },
+ {
+  "id": 100,
+  "group": "Фільтри",
+  "name": "MFilter / Baltic Filter",
+  "brands": [
+   "MFilter",
+   "Baltic Filter"
+  ],
+  "catalog_url": "https://catalog.mfilter.lt/catalog/",
+  "access": "Вебкаталог",
+  "search": "",
+  "note": "Продукція: Фільтри. Відкритий; JavaScript. Окремий офіційний MFilter online Catalog; посилання з сайту виробника.",
+  "official_url": "https://www.mfilter.lt/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "MFilter"
+ },
+ {
+  "id": 101,
+  "group": "Фільтри",
+  "name": "Fleetguard",
+  "brands": [
+   "Fleetguard"
+  ],
+  "catalog_url": "https://www.fleetguard.com/results",
+  "access": "Вебкаталог",
+  "search": "ключове слово; артикул; VIN",
+  "note": "Продукція: Фільтри для транспорту й спецтехніки. Публічний пошук; JavaScript; кошик/списки після входу. VIN прямо зазначено в пошуковому полі; покриття конкретного VIN не перевірялося. Офіційні картки деталей доступні через /product/.",
+  "official_url": "https://www.fleetguard.com/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Fleetguard"
+ },
+ {
+  "id": 102,
+  "group": "Фільтри",
+  "name": "Baldwin Filters",
+  "brands": [
+   "Baldwin Filters"
+  ],
+  "catalog_url": "https://www.baldwinfilters.com/us/en.html",
+  "access": "Вебкаталог · регіональний",
+  "search": "OE/крос-номер",
+  "note": "Продукція: Фільтри для транспорту й спецтехніки. Офіційний вебкаталог; JavaScript; регіональний. Офіційний Cross Reference підтверджений. Індексована сторінка результатів: https://www.baldwinfilters.com/us/en/cross-reference-result-page.html?partNo1=WK1040 .",
+  "official_url": "https://solutions.baldwinfilters.com/ifm",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Baldwin Filters"
+ },
+ {
+  "id": 103,
+  "group": "Фільтри",
+  "name": "CoopersFiaam",
+  "brands": [
+   "CoopersFiaam"
+  ],
+  "catalog_url": "https://www.coopersfiaam.com/en/catalogue/online-catalogue.html",
+  "access": "Вебкаталог",
+  "search": "виробник авто; тип фільтра; артикул",
+  "note": "Продукція: Фільтри. Офіційний вебкаталог; зовнішній рушій. Purflux Group; окремий брендовий каталог на спільній платформі sogefifilterdivision.com, як у Purflux/FRAM Europe.",
+  "official_url": "https://www.coopersfiaam.com/en/catalogue/online-catalogue.html",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "CoopersFiaam"
+ },
+ {
+  "id": 104,
+  "group": "Фільтри",
+  "name": "FRAM Europe",
+  "brands": [
+   "FRAM"
+  ],
+  "catalog_url": "https://www.fram-europe.com/en/catalogue/online-catalogue.html",
+  "access": "Вебкаталог",
+  "search": "виробник авто; тип фільтра; артикул",
+  "note": "Продукція: Фільтри. Офіційний вебкаталог; зовнішній рушій. Purflux Group; європейський каталог окремий від FRAM.com; спільна платформа з Purflux/CoopersFiaam.",
+  "official_url": "https://www.fram-europe.com/en/catalogue/online-catalogue.html",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "FRAM"
+ },
+ {
+  "id": 105,
+  "group": "Двигун і приводи ГРМ",
+  "name": "Melling",
+  "brands": [
+   "Melling"
+  ],
+  "catalog_url": "https://specsearch.melling.com/",
+  "access": "Вебкаталог · регіональний",
+  "search": "Тип деталі; параметри; специфікації PDF",
+  "note": "Продукція: Америка: двигун. Публічний вебкаталог та PDF. Оливні насоси, розподільні вали, ГРМ, клапанний механізм.",
+  "official_url": "https://melling.com/catalogs/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Melling"
+ },
+ {
+  "id": 106,
+  "group": "Двигун і приводи ГРМ",
+  "name": "Cloyes",
+  "brands": [
+   "Cloyes"
+  ],
+  "catalog_url": "https://cloyes.mycarparts.com/",
+  "access": "Вебкаталог · регіональний",
+  "search": "Артикул; OE; інший номер; авто; VIN",
+  "note": "Продукція: Америка: двигун. Публічний вебкаталог. Приводи ГРМ. VIN-пошук присутній, глобальне охоплення не підтверджене.",
+  "official_url": "https://cloyes.com/home-2024/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Cloyes"
+ },
+ {
+  "id": 107,
+  "group": "Двигун і приводи ГРМ",
+  "name": "DRiV: Sealed Power / Speed-Pro / National / FP Diesel",
+  "brands": [
+   "Sealed Power",
+   "Speed-Pro",
+   "National",
+   "FP Diesel"
+  ],
+  "catalog_url": "https://www.drivparts.com/digital-catalogs.html",
+  "access": "PDF / цифрові видання",
+  "search": "Цифрові каталоги та PDF за брендами/застосуванням",
+  "note": "Продукція: Америка: двигун. PDF / цифрові каталоги. Окремі розділи Passenger, Commercial, Performance, Marine, Small Engine. Додатково Fel-Pro/Champion.",
+  "official_url": "https://www.drivparts.com/digital-catalogs.html",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Sealed Power"
+ },
+ {
+  "id": 108,
+  "group": "Двигун і приводи ГРМ",
+  "name": "DRiV: AE / Glyco / Goetze / Nüral / Payen",
+  "brands": [
+   "AE",
+   "Glyco",
+   "Goetze",
+   "Nüral",
+   "Payen"
+  ],
+  "catalog_url": "https://www.drivparts.com/en-eu/support/pdf-catalogues.html",
+  "access": "PDF / цифрові видання",
+  "search": "Деталі двигуна; застосування; каталоги PDF",
+  "note": "Продукція: Двигун і ущільнення. PDF / цифрові каталоги. Вкладиші, кільця, поршні, гільзи, клапанні компоненти, прокладки; різні роки видання.",
+  "official_url": "https://www.drivparts.com/en-eu/support/pdf-catalogues.html",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "AE"
+ },
+ {
+  "id": 109,
+  "group": "Двигун і приводи ГРМ",
+  "name": "MAHLE / Knecht",
+  "brands": [
+   "MAHLE",
+   "Knecht"
+  ],
+  "catalog_url": "https://web.tecalliance.net/mahle-catalog/en/home?sessionArticleCountry=UA&sessionTargetCountry=UA",
+  "access": "Вебкаталог",
+  "search": "",
+  "note": "Продукція: Двигун; фільтри; ущільнення; охолодження. Відкритий; вибір регіону; JavaScript. Офіційна сторінка має окреме посилання Ukraine; новий eCat на TecAlliance.",
+  "official_url": "https://www.mahle-aftermarket.com/eu/en/catalog/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "tecdoc"
+ },
+ {
+  "id": 110,
+  "group": "Двигун і приводи ГРМ",
+  "name": "Gates",
+  "brands": [
+   "Gates"
+  ],
+  "catalog_url": "https://navigates.gates.com/emea/",
+  "access": "Вебкаталог · регіональний",
+  "search": "авто; артикул; OE-номер",
+  "note": "Продукція: Ремені; ролики; комплекти ГРМ; шланги. Відкритий; регіональний. Актуальний офіційний вхід Product Catalog веде на NAVIGATES EMEA.",
+  "official_url": "https://www.gatestechzone.com/gb/en.html",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Gates"
+ },
+ {
+  "id": 111,
+  "group": "Двигун і приводи ГРМ",
+  "name": "Dayco",
+  "brands": [
+   "Dayco"
+  ],
+  "catalog_url": "https://www.dayco.com/emea-en/catalog/",
+  "access": "Вебкаталог · регіональний",
+  "search": "марка; модель; рік; двигун; Dayco/OE/конкурент; Engine/TecDoc-код",
+  "note": "Продукція: Ремені; ролики; комплекти ГРМ. Відкритий; регіональний. Є окремі NAM, EMEA, APAC, LATAM.",
+  "official_url": "https://www.dayco.com/emea-en/catalog/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Dayco"
+ },
+ {
+  "id": 112,
+  "group": "Двигун і приводи ГРМ",
+  "name": "Optibelt",
+  "brands": [
+   "Optibelt"
+  ],
+  "catalog_url": "https://web.optibelt.com/en/industry-solutions/automotive",
+  "access": "Вебкаталог",
+  "search": "тип; профіль; довжина; кількість ребер",
+  "note": "Продукція: Ремені; ролики; комплекти приводу. Відкритий каталог продукції; PDF. Підбір за параметрами виробів; підбір по авто тут не підтверджений.",
+  "official_url": "https://web.optibelt.com/en/industry-solutions/automotive",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Optibelt"
+ },
+ {
+  "id": 113,
+  "group": "Двигун і приводи ГРМ",
+  "name": "Motorservice: Kolbenschmidt / Pierburg / BF / TRW Engine Components",
+  "brands": [
+   "Kolbenschmidt",
+   "Pierburg",
+   "BF",
+   "TRW Engine Components"
+  ],
+  "catalog_url": "https://catalog.ms-motorservice.com/",
+  "access": "Вебкаталог",
+  "search": "",
+  "note": "Продукція: Двигун; поршнева; клапани; керування двигуном. Відкритий без входу. На офіційному сайті прямо написано «Go to online catalogue without login».",
+  "official_url": "https://www.ms-motorservice.com/int/en",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Kolbenschmidt"
+ },
+ {
+  "id": 114,
+  "group": "Двигун і приводи ГРМ",
+  "name": "King Engine Bearings",
+  "brands": [
+   "King Engine Bearings"
+  ],
+  "catalog_url": "https://www.king-catalog.com/",
+  "access": "Вебкаталог",
+  "search": "авто; двигун; King-артикул; OE; крос-номер",
+  "note": "Продукція: Вкладиші двигуна. Відкритий; збереження вибраного з обліковим записом. Новий офіційний каталог; ACES/TecDoc, пошук за автомобілем та двигуном, розміри.",
+  "official_url": "https://www.kingbearings.com/catalog/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "tecdoc"
+ },
+ {
+  "id": 115,
+  "group": "Двигун і приводи ГРМ",
+  "name": "FAI Automotive",
+  "brands": [
+   "FAI Automotive"
+  ],
+  "catalog_url": "https://www.faiauto.com/parts-catalogue/",
+  "access": "Вебкаталог",
+  "search": "держномер; авто; двигун; артикул; OE; номер конкурента",
+  "note": "Продукція: Двигун; ГРМ; ходова. Відкритий каталог; JavaScript. Держномер залежить від підтримуваного ринку.",
+  "official_url": "https://www.faiauto.com/parts-catalogue/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "FAI Automotive"
+ },
+ {
+  "id": 116,
+  "group": "Двигун і приводи ГРМ",
+  "name": "ET ENGINETEAM",
+  "brands": [
+   "ET ENGINETEAM"
+  ],
+  "catalog_url": "https://www.engineteam.com/en/",
+  "access": "Вебкаталог",
+  "search": "категорія; авто; двигун",
+  "note": "Продукція: Двигун; ГРМ; поршнева; ГБЦ. Відкритий каталог. Картки деталей і OE-посилання; бренд запасних частин.",
+  "official_url": "https://www.engineteam.com/en/category/detail/283",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "ET ENGINETEAM"
+ },
+ {
+  "id": 117,
+  "group": "Двигун і приводи ГРМ",
+  "name": "Continental / ContiTech",
+  "brands": [
+   "Continental",
+   "ContiTech"
+  ],
+  "catalog_url": "https://www.continental-engineparts.com/eu/en-gb/aftermarket/tools-apps/pic-product-information-center?lg=en",
+  "access": "Вебкаталог",
+  "search": "артикул; крос-номер; марка/модель авто",
+  "note": "Продукція: Ремені; ролики; комплекти ГРМ; привід. Відкритий. Product Information Center (PIC); офіційний вбудований каталог. Поля Z.1/Z.2 для реєстраційних даних окремих ринків.",
+  "official_url": "https://www.continental-engineparts.com/eu/en-gb/aftermarket/tools-apps/pic-product-information-center?lg=en",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Continental"
+ },
+ {
+  "id": 118,
+  "group": "Двигун і приводи ГРМ",
+  "name": "Enginetech",
+  "brands": [
+   "Enginetech"
+  ],
+  "catalog_url": "https://www.enginetechcatalog.com/",
+  "access": "Вебкаталог",
+  "search": "двигун; рік; трансмісія; артикул/крос",
+  "note": "Продукція: Деталі двигуна; поршнева; ГБЦ; трансмісія. Публічний пошук; замовлення після входу. Офіційний каталог бренду/постачальника для моторного ремонту. Вхід прямо потрібен для додавання в кошик.",
+  "official_url": "https://enginetech.com/catalog/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Enginetech"
+ },
+ {
+  "id": 119,
+  "group": "Двигун і приводи ГРМ",
+  "name": "Hastings Piston Rings",
+  "brands": [
+   "Hastings Piston Rings"
+  ],
+  "catalog_url": "https://hastings.apacatalog.com/",
+  "access": "Вебкаталог",
+  "search": "двигун; застосування; розміри; артикул; окреме кільце",
+  "note": "Продукція: Поршневі кільця. Відкритий. Додатково регіональні PDF та таблиці кросів: https://hastingspistonrings.com/catalogs-cross-reference/ .",
+  "official_url": "https://hastingspistonrings.com/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Hastings Piston Rings"
+ },
+ {
+  "id": 120,
+  "group": "Двигун і приводи ГРМ",
+  "name": "Bando",
+  "brands": [
+   "Bando"
+  ],
+  "catalog_url": "https://www.bandoindonesia.com/catalog.html",
+  "access": "PDF / цифрові видання",
+  "search": "",
+  "note": "Продукція: Ремені; привід; CVT. PDF-каталоги; регіональні. Офіційна індонезійська сторінка з вбудованими PDF: V-Belt, Rib Ace EPDM, Automotive Fanbelt, CVT. Інтерактивний підбір за авто не підтверджено.",
+  "official_url": "https://www.bandoindonesia.com/catalog.html",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Bando"
+ },
+ {
+  "id": 121,
+  "group": "Двигун і приводи ГРМ",
+  "name": "Mitsuboshi / MBL",
+  "brands": [
+   "Mitsuboshi",
+   "MBL"
+  ],
+  "catalog_url": "https://ecommerce.mblusa.com/catalogue-download/",
+  "access": "PDF / цифрові видання",
+  "search": "",
+  "note": "Продукція: Ремені; привід. PDF-каталоги; Північна Америка. Офіційний MBL USA / Mitsuboshi Belting Ltd Group: Automotive, Heavy Duty Automotive, StarFit. Інтерактивний підбір за авто не підтверджено.",
+  "official_url": "https://ecommerce.mblusa.com/catalogue-download/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Mitsuboshi"
+ },
+ {
+  "id": 122,
+  "group": "Двигун і приводи ГРМ",
+  "name": "BGA / BG Automotive",
+  "brands": [
+   "BGA",
+   "BG Automotive"
+  ],
+  "catalog_url": "https://store.bgautomotive.co.uk/Product/ProductSearch",
+  "access": "Вебкаталог",
+  "search": "Автомобіль; артикул BGA; OE; номер конкурента; код двигуна",
+  "note": "Продукція: Деталі двигуна, ГРМ, прокладки, помпи, підвіска та кермування. Публічний вебкаталог; обліковий запис для бізнес-функцій. Відкрита окрема форма Catalogue Search. Реєстрація покупця й замовлення не потрібні для перегляду початкової форми.",
+  "official_url": "https://store.bgautomotive.co.uk/Product/ProductSearch",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "BGA"
+ },
+ {
+  "id": 123,
+  "group": "Прокладки та ущільнення",
+  "name": "Fel-Pro",
+  "brands": [
+   "Fel-Pro"
+  ],
+  "catalog_url": "https://www.felpro.com/find-my-part/engine-results.html",
+  "access": "Вебкаталог · регіональний",
+  "search": "Автомобіль; артикул",
+  "note": "Продукція: Америка: двигун. Публічний вебкаталог. Прокладки й ущільнення двигуна; додаткові PDF у DRiV.",
+  "official_url": "https://www.felpro.com/find-my-part/engine-results.html",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Fel-Pro"
+ },
+ {
+  "id": 124,
+  "group": "Прокладки та ущільнення",
+  "name": "Elring",
+  "brands": [
+   "Elring"
+  ],
+  "catalog_url": "https://web.tecalliance.net/elring/en/home",
+  "access": "Вебкаталог",
+  "search": "",
+  "note": "Продукція: Прокладки; сальники; болти ГБЦ; деталі двигуна. Відкритий; JavaScript. Офіційний сайт веде на фірмовий TecAlliance-каталог.",
+  "official_url": "https://www.elring.com/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "tecdoc"
+ },
+ {
+  "id": 125,
+  "group": "Прокладки та ущільнення",
+  "name": "Victor Reinz",
+  "brands": [
+   "Victor Reinz"
+  ],
+  "catalog_url": "https://web.tecalliance.net/reinz/en",
+  "access": "Вебкаталог · регіональний",
+  "search": "авто; двигун",
+  "note": "Продукція: Прокладки; сальники; болти ГБЦ. Відкритий; регіональний. Офіційний TecDoc; на сторінці виробника є інструкції пошуку за авто та двигуном і додаткові безкоштовні інтерактивні PDF.",
+  "official_url": "https://www.victorreinz.com/EN/Catalog/Online-Catalog.aspx",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "tecdoc"
+ },
+ {
+  "id": 126,
+  "group": "Прокладки та ущільнення",
+  "name": "Ajusa",
+  "brands": [
+   "Ajusa"
+  ],
+  "catalog_url": "https://ajusa.online/en/catalogue",
+  "access": "Вебкаталог",
+  "search": "авто; двигун; VIN; артикул; OEM; техпараметри",
+  "note": "Продукція: Прокладки; ГБЦ; гідрокомпенсатори; розподільні вали. Відкритий каталог; JavaScript. VIN заявлений на офіційній сторінці; покриття конкретного VIN потрібно перевіряти.",
+  "official_url": "https://ajusa.online/en/catalogue",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Ajusa"
+ },
+ {
+  "id": 127,
+  "group": "Прокладки та ущільнення",
+  "name": "Corteco",
+  "brands": [
+   "Corteco"
+  ],
+  "catalog_url": "https://www.ecatcorteco.com/",
+  "access": "Вебкаталог",
+  "search": "авто; тип двигуна; артикул",
+  "note": "Продукція: Ущільнення; гумометал; підвіска; фільтри. Відкритий інформаційний каталог. Окремий пошук сальників https://www.findyourseal.com/ .",
+  "official_url": "https://www.corteco.com/products/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Corteco"
+ },
+ {
+  "id": 128,
+  "group": "Прокладки та ущільнення",
+  "name": "Glaser",
+  "brands": [
+   "Glaser"
+  ],
+  "catalog_url": "https://glaser.es/en/service-downloads/catalog.aspx",
+  "access": "Вебкаталог",
+  "search": "",
+  "note": "Продукція: Прокладки; ущільнення; болти ГБЦ. Відкритий каталог. Офіційний електронний каталог Dana/Glaser.",
+  "official_url": "https://glaser.es/en/service-downloads/catalog.aspx",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Glaser"
+ },
+ {
+  "id": 129,
+  "group": "Прокладки та ущільнення",
+  "name": "Elwis Royal",
+  "brands": [
+   "Elwis Royal"
+  ],
+  "catalog_url": "https://www.elwis.com/automotive/catalogues/elwis-product-catalogue/",
+  "access": "Вебкаталог",
+  "search": "пошук у таблиці",
+  "note": "Продукція: Прокладки; сальники; ущільнення. Відкритий. Таблиця з артикулами, маркою, OEM-номерами, двигунами; є експорт результатів у Excel, TecDoc та PDF.",
+  "official_url": "https://www.elwis.com/automotive/catalogues/elwis-product-catalogue/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "tecdoc"
+ },
+ {
+  "id": 130,
+  "group": "Прокладки та ущільнення",
+  "name": "Cometic",
+  "brands": [
+   "Cometic"
+  ],
+  "catalog_url": "https://www.cometic.com/applications/categories",
+  "access": "Вебкаталог",
+  "search": "авто; двигун; категорія; артикул/UPC",
+  "note": "Продукція: Прокладки; ущільнення; моторний кріпіж. Відкритий каталог-магазин. Є автомобільний розділ Domestic / Import / Diesel та підбір за сімейством/розміром двигуна.",
+  "official_url": "https://www.cometic.com/applications/categories",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Cometic"
+ },
+ {
+  "id": 131,
+  "group": "Прокладки та ущільнення",
+  "name": "Athena",
+  "brands": [
+   "Athena"
+  ],
+  "catalog_url": "https://www.athena.eu/en-us/parts-cars-C1S1.htm",
+  "access": "Вебкаталог",
+  "search": "категорія; авто; параметри",
+  "note": "Продукція: Двигун; прокладки; поршнева; спортивні деталі. Публічний каталог-магазин; пряме відкриття обмежене. Власний бренд та партнерські бренди. Фільтри/картки індексуються пошуком; автоматичне відкриття сторінки повернуло 405.",
+  "official_url": "https://www.athena.eu/en-us/parts-cars-C1S1.htm?akc_id=50416%2C50975%2C51105%2C51754%2C52496%2C52710%2C53279%2C53401%2C53870%2C54353%2C54505%2C54516&alx_id=62196&dis_id=1",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Athena"
+ },
+ {
+  "id": 132,
+  "group": "Прокладки та ущільнення",
+  "name": "Hutchinson",
+  "brands": [
+   "Hutchinson"
+  ],
+  "catalog_url": "https://automotive.hutchinson.com/fr/documents",
+  "access": "PDF / цифрові видання",
+  "search": "Тип документа, застосування, мова, країна; пошук усередині PDF",
+  "note": "Продукція: Ущільнення та гумометалеві елементи; автомобілі й вантажівки. Тільки PDF/технічні документи; повний підбір авто не підтверджений. На новому сайті є Spare Parts Catalogue для ущільнень автомобілів і вантажівок, датований 26.11.2025. Не видавати загальну сторінку Automotive Aftermarket за повноцінний каталог підбору всього асортименту.",
+  "official_url": "https://automotive.hutchinson.com/fr/documents",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Hutchinson"
+ },
+ {
+  "id": 133,
+  "group": "Турбіни та вихлоп",
+  "name": "Garrett",
+  "brands": [
+   "Garrett"
+  ],
+  "catalog_url": "https://www.garrettmotion.com/turbo-replacement/aftermarket-reman-turbochargers-catalog/",
+  "access": "Вебкаталог",
+  "search": "",
+  "note": "Продукція: Турбокомпресори. Відкритий каталог; JavaScript. Aftermarket & Reman; окремо Performance Catalog.",
+  "official_url": "https://www.garrettmotion.com/turbo-replacement/aftermarket-reman-turbochargers-catalog/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Garrett"
+ },
+ {
+  "id": 134,
+  "group": "Турбіни та вихлоп",
+  "name": "BorgWarner",
+  "brands": [
+   "BorgWarner"
+  ],
+  "catalog_url": "https://catalog.borgwarner.com/search",
+  "access": "Вебкаталог · регіональний",
+  "search": "артикул; двигун; легкові; комерційні; Off-Highway; VIN",
+  "note": "Продукція: Турбокомпресори; суміжні моторні компоненти. Відкритий; регіональний. VIN-поле присутнє; доступність даних для конкретного VIN не перевірялася.",
+  "official_url": "https://catalog.borgwarner.com/search",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "BorgWarner"
+ },
+ {
+  "id": 135,
+  "group": "Турбіни та вихлоп",
+  "name": "Walker Exhaust",
+  "brands": [
+   "Walker Exhaust"
+  ],
+  "catalog_url": "https://www.walkerexhaust.com/find-my-part.html",
+  "access": "Вебкаталог · регіональний",
+  "search": "авто; артикул; крос-номер",
+  "note": "Продукція: Вихлоп; глушники; каталізатори. Відкритий; регіональний. Ця версія переважно для Північної Америки.",
+  "official_url": "https://www.walkerexhaust.com/find-my-part.html",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Walker Exhaust"
+ },
+ {
+  "id": 136,
+  "group": "Турбіни та вихлоп",
+  "name": "BOSAL",
+  "brands": [
+   "BOSAL"
+  ],
+  "catalog_url": "https://catalogue.bosal.com/catalog",
+  "access": "Вебкаталог",
+  "search": "",
+  "note": "Продукція: Вихлоп; монтажні деталі. Відкритий каталог; JavaScript. Посилання підтверджено офіційним корпоративним сайтом.",
+  "official_url": "https://www.bosal.com/en/what-are-you-looking",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "BOSAL"
+ },
+ {
+  "id": 137,
+  "group": "Турбіни та вихлоп",
+  "name": "HJS",
+  "brands": [
+   "HJS"
+  ],
+  "catalog_url": "https://www.hjs.com/onlinelieferprogramm/",
+  "access": "Вебкаталог",
+  "search": "",
+  "note": "Продукція: Вихлоп; DPF; каталізатори; монтажні деталі. Відкритий; згода на зовнішній вміст. Є офіційні PDF-каталоги ремонтних/універсальних деталей.",
+  "official_url": "https://www.hjs.com/onlinelieferprogramm/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "HJS"
+ },
+ {
+  "id": 138,
+  "group": "Турбіни та вихлоп",
+  "name": "BM Catalysts",
+  "brands": [
+   "BM Catalysts"
+  ],
+  "catalog_url": "https://bmcats.com/catalogue/",
+  "access": "Вебкаталог",
+  "search": "",
+  "note": "Продукція: Каталізатори; DPF; вихлоп. Відкритий каталог. Офіційний сайт виробника BM Catalysts.",
+  "official_url": "https://bmcats.com/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "BM Catalysts"
+ },
+ {
+  "id": 139,
+  "group": "Турбіни та вихлоп",
+  "name": "Klarius",
+  "brands": [
+   "Klarius"
+  ],
+  "catalog_url": "https://webcat.klarius.eu/",
+  "access": "Вебкаталог",
+  "search": "",
+  "note": "Продукція: Вихлоп; каталізатори; DPF; монтажні деталі. Офіційний вебкаталог; доступність потребує перевірки. Посилання з головної сторінки підтверджено; під час прямого відкриття рушій повернув 502.",
+  "official_url": "https://www.klarius.eu/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Klarius"
+ },
+ {
+  "id": 140,
+  "group": "Турбіни та вихлоп",
+  "name": "IMASAF",
+  "brands": [
+   "IMASAF"
+  ],
+  "catalog_url": "https://www.imasaf.it/cataloghi/",
+  "access": "Вебкаталог",
+  "search": "модель авто",
+  "note": "Продукція: Вихлоп; монтажні деталі. Відкритий; веб і PDF. Окремі каталоги Aftermarket, Classic, аксесуари; під час повторної автоматичної перевірки був timeout.",
+  "official_url": "https://www.imasaf.it/cataloghi/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "IMASAF"
+ },
+ {
+  "id": 141,
+  "group": "Турбіни та вихлоп",
+  "name": "ERNST",
+  "brands": [
+   "ERNST"
+  ],
+  "catalog_url": "https://www.ernst-hagen.de/en/online-catalogue/",
+  "access": "Вебкаталог",
+  "search": "авто; артикул/референс",
+  "note": "Продукція: Вихлоп; глушники; каталізатори; DPF. Відкритий; вбудований каталог. Офіційний каталог повного асортименту ERNST.",
+  "official_url": "https://www.ernst-hagen.de/en/online-catalogue/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "ERNST"
+ },
+ {
+  "id": 142,
+  "group": "Турбіни та вихлоп",
+  "name": "Dinex",
+  "brands": [
+   "Dinex"
+  ],
+  "catalog_url": "https://shop.dinex.eu/",
+  "access": "Вебкаталог",
+  "search": "Dinex-артикул; OE-номер; категорія; система/модель авто",
+  "note": "Продукція: Вихлоп; DPF/SCR; датчики; вантажівки й автобуси. Публічний перегляд; розширені функції після входу. Видимі каталоги EU/USA, окремі деталі та системи; Partner Portal login для решти функцій.",
+  "official_url": "https://www.dinex.eu/dinex-partner-portal/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Dinex"
+ },
+ {
+  "id": 143,
+  "group": "Гальма та ремкомплекти",
+  "name": "Brembo",
+  "brands": [
+   "Brembo"
+  ],
+  "catalog_url": "https://www.bremboparts.com/europe/en",
+  "access": "Вебкаталог",
+  "search": "Автомобіль; номер; номерний знак у підтримуваних країнах",
+  "note": "Продукція: Диски; колодки; супорти; гідравліка гальм. Відкритий вебкаталог. Є регіони Europe/America/Asia/Africa; також мотоциклетна продукція.",
+  "official_url": "https://www.bremboparts.com/europe/en?IsNewsletter=true",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Brembo"
+ },
+ {
+  "id": 144,
+  "group": "Гальма та ремкомплекти",
+  "name": "ATE",
+  "brands": [
+   "ATE"
+  ],
+  "catalog_url": "https://www.ate-brakes.com/catalogues/online-catalogues/",
+  "access": "Вебкаталог",
+  "search": "Модель автомобіля; артикул",
+  "note": "Продукція: Гальмівні диски/колодки; супорти; гідравліка; зчеплення. Відкритий вебкаталог + PDF. Окремі каталоги запчастин та інструмента.",
+  "official_url": "https://www.ate-brakes.com/catalogues/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "ATE"
+ },
+ {
+  "id": 145,
+  "group": "Гальма та ремкомплекти",
+  "name": "TMD Friction: Textar / Pagid / Mintex",
+  "brands": [
+   "Textar",
+   "Pagid",
+   "Mintex"
+  ],
+  "catalog_url": "https://textar.com/en/brakebook",
+  "access": "Вебкаталог",
+  "search": "Автомобіль; експертний пошук за параметрами; артикул; штрихкод у застосунку",
+  "note": "Продукція: Гальмівні колодки; диски; накладки; аксесуари. Відкриті брендовані каталоги Brakebook. Інші офіційні входи: https://pagid.com/brakebook/ і https://mintex.com/brakebook/ . Можна створювати PDF добірки.",
+  "official_url": "https://textar.com/en/brakebook",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Textar"
+ },
+ {
+  "id": 146,
+  "group": "Гальма та ремкомплекти",
+  "name": "Ferodo",
+  "brands": [
+   "Ferodo"
+  ],
+  "catalog_url": "https://www.ferodo.com/uk-ua/catalogue.html",
+  "access": "Вебкаталог",
+  "search": "Автомобіль; номер; двигун; вісь",
+  "note": "Продукція: Гальмівні колодки; диски; накладки; аксесуари. Відкритий вебкаталог. Українська версія; брендований Part Finder.",
+  "official_url": "https://www.ferodo.com/catalogue.html",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Ferodo"
+ },
+ {
+  "id": 147,
+  "group": "Гальма та ремкомплекти",
+  "name": "Jurid",
+  "brands": [
+   "Jurid"
+  ],
+  "catalog_url": "https://www.jurid.com/catalogue.html",
+  "access": "Вебкаталог",
+  "search": "Автомобіль; артикул; двигун; вісь",
+  "note": "Продукція: Гальмівні колодки; диски; накладки; аксесуари. Відкритий вебкаталог. Окремо доступні PDF для комерційних автомобілів.",
+  "official_url": "https://www.jurid.com/catalogue.html",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Jurid"
+ },
+ {
+  "id": 148,
+  "group": "Гальма та ремкомплекти",
+  "name": "Otto Zimmermann",
+  "brands": [
+   "Otto Zimmermann"
+  ],
+  "catalog_url": "https://web.tecalliance.net/otto-zimmermann/en/",
+  "access": "Вебкаталог",
+  "search": "Виробник автомобіля; код типу автомобіля",
+  "note": "Продукція: Гальмівні диски; колодки; барабани; комплекти. Відкритий вебкаталог. Офіційний /en/catalog/ перенаправляє до брендованого TecDoc.",
+  "official_url": "https://www.otto-zimmermann.de/en/aktuelles/online-catalog/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "tecdoc"
+ },
+ {
+  "id": 149,
+  "group": "Гальма та ремкомплекти",
+  "name": "REMSA",
+  "brands": [
+   "REMSA"
+  ],
+  "catalog_url": "https://web.tecalliance.net/remsa/en/home",
+  "access": "Вебкаталог",
+  "search": "",
+  "note": "Продукція: Гальмівні колодки; диски; комплекти. Відкритий вебкаталог. Прямий каталог підтверджений кнопкою Remsa Catalogue з офіційного сайту.",
+  "official_url": "https://www.remsa.com/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "tecdoc"
+ },
+ {
+  "id": 150,
+  "group": "Гальма та ремкомплекти",
+  "name": "FTE — North America",
+  "brands": [
+   "FTE"
+  ],
+  "catalog_url": "https://fte.mycarparts.net/",
+  "access": "Вебкаталог · регіональний",
+  "search": "Автомобіль; артикул FTE; OE; номер аналога; VIN (регіональний)",
+  "note": "Продукція: Гідравліка гальм і зчеплення; супорти. Публічний регіональний вебкаталог. Північна Америка. Європейський FTE веде до ValeoService, уже наведеного окремо. Відкриті поля VIN та підбору авто/OE; глобальне охоплення VIN не перевірене.",
+  "official_url": "https://www.fte-automotive.eu/kataloge.php",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "FTE"
+ },
+ {
+  "id": 151,
+  "group": "Гальма та ремкомплекти",
+  "name": "EBC Brakes",
+  "brands": [
+   "EBC Brakes"
+  ],
+  "catalog_url": "https://www.ebcbrakes.com/part-finder/",
+  "access": "Вебкаталог",
+  "search": "Марка й модель; тип транспортного засобу",
+  "note": "Продукція: Гальмівні колодки; диски; комплекти; шланги. Відкритий вебкаталог + PDF. Part Finder охоплює автомобілі, мотоцикли та інші категорії; окремо є PDF/електронні каталоги. Виробник застерігає, що в базі можуть бути номери, які ще не запущені у виробництво.",
+  "official_url": "https://www.ebcbrakes.com/part-finder/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "EBC Brakes"
+ },
+ {
+  "id": 152,
+  "group": "Гальма та ремкомплекти",
+  "name": "Akebono",
+  "brands": [
+   "Akebono"
+  ],
+  "catalog_url": "https://akebonobrakes.mypartfinder.com/",
+  "access": "Вебкаталог · регіональний",
+  "search": "Автомобіль; номер деталі",
+  "note": "Продукція: Гальмівні колодки. Відкритий регіональний вебкаталог. North America; URL узято з актуальної кнопки Part Lookup офіційного сайту.",
+  "official_url": "https://www.akebonobrakes.com/news/akebono-launches-new-web-catalog",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Akebono"
+ },
+ {
+  "id": 153,
+  "group": "Гальма та ремкомплекти",
+  "name": "NiBK / JNBK",
+  "brands": [
+   "NiBK",
+   "JNBK"
+  ],
+  "catalog_url": "https://www.nibk.jp/catalogue/cars",
+  "access": "Вебкаталог",
+  "search": "Автомобіль; OEM; NiBK; WVA; FMSI; інший номер",
+  "note": "Продукція: Гальмівні колодки; диски; барабанні колодки. Відкритий вебкаталог. Також каталог мотоциклів. Сторінка вказує JNBK Corporation.",
+  "official_url": "https://www.nibk.jp/catalogue/cars",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "NiBK"
+ },
+ {
+  "id": 154,
+  "group": "Гальма та ремкомплекти",
+  "name": "Sangsin / Hi-Q",
+  "brands": [
+   "Sangsin",
+   "Hi-Q"
+  ],
+  "catalog_url": "https://www.e-sangsin.com/eng/search",
+  "access": "Вебкаталог",
+  "search": "За каталогом продукції",
+  "note": "Продукція: Гальмівні колодки; диски; накладки. Відкритий вебкаталог + PDF. Офіційний корпоративний сайт має перехід E-Catalogue; є Hi-Q, Hardron, Hagen.",
+  "official_url": "https://www.sangsin.com/eng/main",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Sangsin"
+ },
+ {
+  "id": 155,
+  "group": "Гальма та ремкомплекти",
+  "name": "Bendix Australia",
+  "brands": [
+   "Bendix Australia"
+  ],
+  "catalog_url": "https://www.bendix.com.au/catalogue",
+  "access": "Вебкаталог · регіональний",
+  "search": "Марка/модель; номер деталі; австралійський номерний знак",
+  "note": "Продукція: Гальмівні колодки; диски; барабани; аксесуари. Відкритий регіональний вебкаталог. Регіон Australia/New Zealand. Не ототожнювати автоматично з американським Bendix Commercial Vehicle Systems.",
+  "official_url": "https://www.bendix.com.au/catalogue",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Bendix Australia"
+ },
+ {
+  "id": 156,
+  "group": "Гальма та ремкомплекти",
+  "name": "DBA / Disc Brakes Australia",
+  "brands": [
+   "DBA",
+   "Disc Brakes Australia"
+  ],
+  "catalog_url": "https://dba.com.au/part-finder/",
+  "access": "Вебкаталог · регіональний",
+  "search": "Автомобіль/модель/рік/двигун, артикул, VIN, номерний знак для підтримуваної країни/штату",
+  "note": "Продукція: Гальмівні диски, барабани, колодки, гідравліка, супорти, шланги, комплекти. Відкритий регіональний вебкаталог. Виробничий сайт Австралії; вибір країни/штату для пошуку за номерним знаком. Є також каталог європейського представництва dbabrakes.eu.",
+  "official_url": "https://dba.com.au/part-finder/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "DBA"
+ },
+ {
+  "id": 157,
+  "group": "Гальма та ремкомплекти",
+  "name": "Frenkit",
+  "brands": [
+   "Frenkit"
+  ],
+  "catalog_url": "https://www.frenkit.es/en/brake-catalogue/online-catalogue/eu",
+  "access": "Вебкаталог · регіональний",
+  "search": "Номер Frenkit, ремкомплект, OEM супорта; категорії; регіон",
+  "note": "Продукція: Гальмівні ремкомплекти, поршні, направляючі, деталі супортів і циліндрів. Відкритий регіональний вебкаталог + PDF. Окремі регіони Europe, USA/Canada, Mex/Latam; також окремі каталоги Performance та Moto. Пошукова форма підтверджена індексованим офіційним каталогом.",
+  "official_url": "https://www.frenkit.es/en/brake-catalogue",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Frenkit"
+ },
+ {
+  "id": 158,
+  "group": "Гальма та ремкомплекти",
+  "name": "Budweg Caliper",
+  "brands": [
+   "Budweg Caliper"
+  ],
+  "catalog_url": "https://budweg-catalog.com/catalogue/",
+  "access": "Вебкаталог",
+  "search": "Номер Budweg, OE, TecDoc; фільтри застосування",
+  "note": "Продукція: Нові й відновлені супорти, поршні, ущільнення, направляючі, механізми стоянкового гальма, ремкомплекти. Відкритий вебкаталог. Реальна відкрита форма і таблиці застосувань/деталей. Офіційні матеріали Budweg також називають budweg.com/catalogue; основний budweg.com під час перевірки повертав 403. Старий sparepartsxyz2015.budweg.com потребує входу.",
+  "official_url": "https://budweg-catalog.com/catalogue/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Budweg Caliper"
+ },
+ {
+  "id": 159,
+  "group": "Гальма та ремкомплекти",
+  "name": "A.B.S. / All Brake Systems",
+  "brands": [
+   "A.B.S.",
+   "All Brake Systems"
+  ],
+  "catalog_url": "https://www.abs-bv.shop/en/shop",
+  "access": "Вебкаталог",
+  "search": "Артикул ABS або конкурента, категорія/група, автомобіль",
+  "note": "Продукція: Гальма, гідравліка гальм/зчеплення, підвіска й кермування, підшипники коліс. Відкритий пошук і застосування; B2B-функції після входу. Офіційний сайт безпосередньо посилається на abs-bv.shop. Реальна форма /en/shop доступна без входу; окремі сторінки деталей містять таблиці автомобілів. Виробник/бренд нейтрально: компанія сама описує також sourcing та дистрибуцію.",
+  "official_url": "https://absallbrakesystems.com/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "A.B.S."
+ },
+ {
+  "id": 160,
+  "group": "Гальма та ремкомплекти",
+  "name": "LPR / Samko",
+  "brands": [
+   "LPR",
+   "Samko"
+  ],
+  "catalog_url": "https://www.lpr.it/cataloghi.php?cat=1&lang=en",
+  "access": "Вебкаталог",
+  "search": "Марка/модель/двигун; номер LPR, OEM, OES в загальному каталозі",
+  "note": "Продукція: Гідравліка гальм і зчеплення, диски/барабани, колодки, шланги. Публічний вебкаталог підтверджений індексом; сервер нестабільний. Основне посилання — Hydraulic catalogue; на сайті окремі каталоги фрикційних деталей (cat=8) і шлангів (cat=9). Samko: https://samko.it/cataloghi.php?cat=1. Під час прямого відкриття були timeout/502; не гарантувати доступність зараз.",
+  "official_url": "https://www.lpr.it/cataloghi.php?cat=1&lang=en",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "LPR"
+ },
+ {
+  "id": 161,
+  "group": "Підвіска, кермування та гумометал",
+  "name": "FEBEST",
+  "brands": [
+   "FEBEST"
+  ],
+  "catalog_url": "https://catalog.febest.eu/",
+  "access": "Вебкаталог",
+  "search": "Артикул; OE; автомобіль; технічні параметри",
+  "note": "Продукція: Багатопрофільні. Публічний вебкаталог. Розміри й характеристики у картках; підвіска, гумові деталі, приводи.",
+  "official_url": "https://catalog.febest.eu/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "FEBEST"
+ },
+ {
+  "id": 162,
+  "group": "Підвіска, кермування та гумометал",
+  "name": "JIKIU",
+  "brands": [
+   "JIKIU"
+  ],
+  "catalog_url": "https://www.jikiu.com/catalogue",
+  "access": "Вебкаталог",
+  "search": "Артикул; OEM; інший номер; авто/кузов/двигун",
+  "note": "Продукція: Підвіска та гумові деталі. Публічний вебкаталог. Каталог застосування з кодами кузова й двигуна.",
+  "official_url": "https://www.jikiu.com/catalogue/application?body%5B%5D=J60+-+HJ60LG&brand_id=88&eng_no%5B%5D=2H&engine%5B%5D=4000&model_id%5B%5D=4187&product_id=330423",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "JIKIU"
+ },
+ {
+  "id": 163,
+  "group": "Підвіска, кермування та гумометал",
+  "name": "KYB",
+  "brands": [
+   "KYB"
+  ],
+  "catalog_url": "https://kyb-europe.com/ukr/katalog/",
+  "access": "Вебкаталог",
+  "search": "",
+  "note": "Продукція: Амортизатори; пружини; опори; захисні комплекти; кермові деталі. Відкритий вебкаталог + PDF. Є український вхід. Прямий каталог: https://web.tecalliance.net/kyb/uk/ .",
+  "official_url": "https://kyb-europe.com/ukr/katalog/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "tecdoc"
+ },
+ {
+  "id": 164,
+  "group": "Підвіска, кермування та гумометал",
+  "name": "Monroe",
+  "brands": [
+   "Monroe"
+  ],
+  "catalog_url": "https://www.monroe.com/en-eu/find-my-part.html",
+  "access": "Вебкаталог",
+  "search": "",
+  "note": "Продукція: Амортизатори; пружини; опори; захисні комплекти; підвіска та кермування. Відкритий вебкаталог + PDF. Офіційний GO TO ECATALOGUE веде на https://web.tecalliance.net/tae/en/home . Є український варіант сайту.",
+  "official_url": "https://www.monroe.com/en-eu/find-my-part.html",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "tecdoc"
+ },
+ {
+  "id": 165,
+  "group": "Підвіска, кермування та гумометал",
+  "name": "MOOG",
+  "brands": [
+   "MOOG"
+  ],
+  "catalog_url": "https://www.moogparts.com/en-eu/catalogue.html",
+  "access": "Вебкаталог",
+  "search": "Автомобіль; номер; VIN/номерний знак залежно від країни; двигун; вісь",
+  "note": "Продукція: Підвіска; кермування; маточини/підшипники. Відкритий вебкаталог. Є схеми розташування деталей та кроси. Наявність поля VIN не гарантує підтримку кожної країни.",
+  "official_url": "https://www.moogparts.com/en-eu/catalogue.html",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "MOOG"
+ },
+ {
+  "id": 166,
+  "group": "Підвіска, кермування та гумометал",
+  "name": "BILSTEIN",
+  "brands": [
+   "BILSTEIN"
+  ],
+  "catalog_url": "https://bilstein.com/en/products/",
+  "access": "Вебкаталог",
+  "search": "Автомобіль; лінійка продуктів",
+  "note": "Продукція: Амортизатори; стійки; комплекти підвіски. Відкритий вебкаталог. Кнопка Browse Product Catalog веде на web1.carparts-cat.com. Це BILSTEIN амортизатори, окремо від febi bilstein.",
+  "official_url": "https://bilstein.com/en/products/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "BILSTEIN"
+ },
+ {
+  "id": 167,
+  "group": "Підвіска, кермування та гумометал",
+  "name": "KONI",
+  "brands": [
+   "KONI"
+  ],
+  "catalog_url": "https://shop.koni-na.com/",
+  "access": "Вебкаталог · регіональний",
+  "search": "Автомобіль/застосування; продукт",
+  "note": "Продукція: Амортизатори; спортивна підвіска. Відкритий регіональний каталог. Підтверджено North America. Глобальний koni.com не розкрив каталог під час перевірки.",
+  "official_url": "https://shop.koni-na.com/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "KONI"
+ },
+ {
+  "id": 168,
+  "group": "Підвіска, кермування та гумометал",
+  "name": "OPTIMAL",
+  "brands": [
+   "OPTIMAL"
+  ],
+  "catalog_url": "https://webcatalog.optimal-germany.com/",
+  "access": "Вебкаталог",
+  "search": "Артикул або назва/номер",
+  "note": "Продукція: Підшипники; підвіска; кермування; гальма; приводи. Відкритий вебкаталог. Окремо є офіційні PDF за групами.",
+  "official_url": "https://webcatalog.optimal-germany.com/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "OPTIMAL"
+ },
+ {
+  "id": 169,
+  "group": "Підвіска, кермування та гумометал",
+  "name": "Eibach",
+  "brands": [
+   "Eibach"
+  ],
+  "catalog_url": "https://www.eibach.com/",
+  "access": "Вебкаталог · регіональний",
+  "search": "Автомобіль/застосування; категорія",
+  "note": "Продукція: Пружини; стабілізатори; амортизатори; спортивна підвіска. Відкритий регіональний каталог. На сайті є Application Search; PDF каталоги на https://eibach.com/catalogs .",
+  "official_url": "https://www.eibach.com/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Eibach"
+ },
+ {
+  "id": 170,
+  "group": "Підвіска, кермування та гумометал",
+  "name": "Lesjöfors",
+  "brands": [
+   "Lesjöfors"
+  ],
+  "catalog_url": "https://web.tecalliance.net/lesjofors/en/home",
+  "access": "Вебкаталог",
+  "search": "",
+  "note": "Продукція: Пружини підвіски; ресори; газові пружини; стрем'янки. Відкритий вебкаталог. Офіційний каталог Automotive Aftermarket на TecAlliance; пружини підвіски, листові ресори, газові пружини. Не плутати з промисловим магазином стандартних пружин.",
+  "official_url": "https://www.lesjofors.com/en/industries/automotive-aftermarket/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "tecdoc"
+ },
+ {
+  "id": 171,
+  "group": "Підвіска, кермування та гумометал",
+  "name": "SIDEM",
+  "brands": [
+   "SIDEM"
+  ],
+  "catalog_url": "https://catalogue.sidem.eu/en/",
+  "access": "Вебкаталог",
+  "search": "Марка; модель; OE; артикул",
+  "note": "Продукція: Підвіска; кермування; сайлентблоки. Відкритий вебкаталог. Схеми деталей у розташуванні на автомобілі, технічні дані та зображення.",
+  "official_url": "https://www.sidem.be/news/new-online-catalogue-app/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "SIDEM"
+ },
+ {
+  "id": 172,
+  "group": "Підвіска, кермування та гумометал",
+  "name": "RTS",
+  "brands": [
+   "RTS"
+  ],
+  "catalog_url": "https://www.rts-sa.com/en/purchase-catalogue",
+  "access": "Вебкаталог",
+  "search": "OE; номер RTS; номер аналога; автомобіль",
+  "note": "Продукція: Кермування; підвіска; маточини/підшипники. Відкритий вебкаталог. Є українська версія інтерфейсу.",
+  "official_url": "https://www.rts-sa.com/en/purchase-catalogue",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "RTS"
+ },
+ {
+  "id": 173,
+  "group": "Підвіска, кермування та гумометал",
+  "name": "CTR",
+  "brands": [
+   "CTR"
+  ],
+  "catalog_url": "https://aftermarket.ctr.co.kr/ru/catalogue-search",
+  "access": "Вебкаталог · регіональний",
+  "search": "Продукт/номер; автомобіль",
+  "note": "Продукція: Кермування; підвіска. Відкритий регіональний вебкаталог. Регіон впливає на набір полів; пошукова форма доступна без входу, окремо є Login.",
+  "official_url": "https://aftermarket.ctr.co.kr/ru/catalogue-search",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "CTR"
+ },
+ {
+  "id": 174,
+  "group": "Підвіска, кермування та гумометал",
+  "name": "Teknorot",
+  "brands": [
+   "Teknorot"
+  ],
+  "catalog_url": "https://www.teknorot.com/en/",
+  "access": "Вебкаталог",
+  "search": "OE; номер Teknorot; група; марка; модель; рік; кузов",
+  "note": "Продукція: Кермування; підвіска; сайлентблоки. Відкритий вебкаталог. Є порівняння, список деталей та експорт у PDF/Excel.",
+  "official_url": "https://www.teknorot.com/en/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Teknorot"
+ },
+ {
+  "id": 175,
+  "group": "Підвіска, кермування та гумометал",
+  "name": "FRAP",
+  "brands": [
+   "FRAP"
+  ],
+  "catalog_url": "https://www.frap.it/en/products-catalogue.php",
+  "access": "Вебкаталог",
+  "search": "Автомобіль; модель; оригінальний номер; FRAP-код",
+  "note": "Продукція: Кермування; підвіска; шарніри; важелі. Відкритий вебкаталог. Окремий технічний каталог OEM-компонентів: https://www.frap-oem.com/technical-catalogue/?lang=en .",
+  "official_url": "https://www.frap.it/en/products-catalogue.php",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "FRAP"
+ },
+ {
+  "id": 176,
+  "group": "Підвіска, кермування та гумометал",
+  "name": "Original Birth",
+  "brands": [
+   "Original Birth"
+  ],
+  "catalog_url": "https://web.tecalliance.net/birth/it/home",
+  "access": "Вебкаталог",
+  "search": "Через брендований каталог TecAlliance",
+  "note": "Продукція: Гума-метал; підвіска; кермування; опори; маточини; охолодження. Відкритий вебкаталог + PDF. На офіційному сайті окремі посилання TecAlliance і Digital Catalog; перше веде в підбір, друге — у цифрові видання. За прямим посиланням початкова мова італійська.",
+  "official_url": "https://birth.it/en/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "tecdoc"
+ },
+ {
+  "id": 177,
+  "group": "Підвіска, кермування та гумометал",
+  "name": "Malò / Akron",
+  "brands": [
+   "Malò",
+   "Akron"
+  ],
+  "catalog_url": "https://malospa.it/",
+  "access": "Гостьовий доступ",
+  "search": "Номер деталі",
+  "note": "Продукція: Гума-метал; підвіска; шланги; троси; інші групи. Гостьовий вебкаталог; продаж після входу. Кнопка CATALOGO офіційно запускає гостьовий доступ до b2b.malospa.it; окремо є комерційний Login.",
+  "official_url": "https://malospa.it/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Malò"
+ },
+ {
+  "id": 178,
+  "group": "Підвіска, кермування та гумометал",
+  "name": "TEDGUM",
+  "brands": [
+   "TEDGUM"
+  ],
+  "catalog_url": "https://katalog.tedgum.pl/offer/",
+  "access": "Вебкаталог",
+  "search": "Автомобіль; номер; опис; схема; розміри",
+  "note": "Продукція: Гума-метал; сайлентблоки; поліуретан; підвіска; інструмент. Відкритий каталог; наявність після входу. Каталог офіційно призначений для ідентифікації деталей; B2B-наявність потребує входу.",
+  "official_url": "https://www.tedgum.pl/ro/catalog-online/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "TEDGUM"
+ },
+ {
+  "id": 179,
+  "group": "Підвіска, кермування та гумометал",
+  "name": "Impergom / Original Imperium",
+  "brands": [
+   "Impergom",
+   "Original Imperium"
+  ],
+  "catalog_url": "https://www.impergom.it/catalogue/",
+  "access": "Вебкаталог",
+  "search": "Код/група; автомобіль",
+  "note": "Продукція: Гума-метал; опори; пильовики; патрубки; підвіска. Відкритий покажчик вебкаталогу; B2B окремо. Сайт розділяє Online Web catalogue та Area clienti B2B; JS-форма не читається текстовим переглядом.",
+  "official_url": "https://www.impergom.it/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Impergom"
+ },
+ {
+  "id": 180,
+  "group": "Підвіска, кермування та гумометал",
+  "name": "DYS",
+  "brands": [
+   "DYS"
+  ],
+  "catalog_url": "https://www.dys-sl.com/es/",
+  "access": "Вебкаталог",
+  "search": "Марка; модель; двигун; DYS; OE; номерний знак",
+  "note": "Продукція: Кермування; підвіска; гума-метал; ШРУСи; приводи; маточини. Відкрита пошукова форма; клієнтський вхід окремо. Каталоги PDF також https://www.dys-sl.com/es/catalogos.php .",
+  "official_url": "https://www.dys-sl.com/es/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "DYS"
+ },
+ {
+  "id": 181,
+  "group": "Підвіска, кермування та гумометал",
+  "name": "Master-Sport",
+  "brands": [
+   "Master-Sport"
+  ],
+  "catalog_url": "https://catalog.master-sport.de/",
+  "access": "Вебкаталог",
+  "search": "Автомобіль; код; назва",
+  "note": "Продукція: Підвіска; кермування; маточини; приводи; гальма; інші групи. Відкритий вебкаталог. Каталог/магазин бренду з технічними картками деталей.",
+  "official_url": "https://catalog.master-sport.de/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Master-Sport"
+ },
+ {
+  "id": 182,
+  "group": "Підшипники, приводи та зчеплення",
+  "name": "SKF",
+  "brands": [
+   "SKF"
+  ],
+  "catalog_url": "https://automotive.skf.com/eur/en/product-catalogue",
+  "access": "Вебкаталог",
+  "search": "За регіональним каталогом",
+  "note": "Продукція: Підшипники; маточини; приводи; трансмісія; ремінні комплекти. Відкритий вебкаталог; JavaScript. Потрібно вибрати регіон. Нова автомобільна адреса SKF; текстовий перегляд не розкриває форму пошуку.",
+  "official_url": "https://automotive.skf.com/eur/en",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "SKF"
+ },
+ {
+  "id": 183,
+  "group": "Підшипники, приводи та зчеплення",
+  "name": "NTN / SNR",
+  "brands": [
+   "NTN",
+   "SNR"
+  ],
+  "catalog_url": "https://eshop.ntn-snr.com/",
+  "access": "Вебкаталог",
+  "search": "Номер; застосування; крос-номери; технічні картки",
+  "note": "Продукція: Підшипники; маточини; ШРУСи; підвіска; ГРМ; трансмісія. Відкритий каталог; бізнес-функції після входу. Логін потрібний для персональних цін і наявності; автомобільні категорії та картки доступні публічно.",
+  "official_url": "https://eshop.ntn-snr.com/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "NTN"
+ },
+ {
+  "id": 184,
+  "group": "Підшипники, приводи та зчеплення",
+  "name": "NSK",
+  "brands": [
+   "NSK"
+  ],
+  "catalog_url": "https://www.nsk.com/eu-en/products/automotive/automotive-aftermarket/catalogue-parts/",
+  "access": "Вебкаталог",
+  "search": "Автомобіль; номер деталі; OE у технічних PDF",
+  "note": "Продукція: Колісні підшипники; маточини; комплекти ProKIT; підшипники зчеплення. Відкритий вебкаталог + PDF. Офіційна сторінка веде на nsk.incony.de. Каталог підшипників зчеплення також у PDF.",
+  "official_url": "https://www.nsk.com/eu-en/products/automotive/automotive-aftermarket/catalogue-parts/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "NSK"
+ },
+ {
+  "id": 185,
+  "group": "Підшипники, приводи та зчеплення",
+  "name": "Timken",
+  "brands": [
+   "Timken"
+  ],
+  "catalog_url": "https://www.timkeninfo.com/",
+  "access": "Вебкаталог",
+  "search": "Автомобіль; крос OE/іншого бренду → Timken",
+  "note": "Продукція: Підшипники; маточини; сальники. Вебкаталог підтверджений виробником; відкриття не підтвердилось. Сайт Timkeninfo не завантажився пошуковим інструментом. Публічні технічні картки маточин також на cad.timken.com.",
+  "official_url": "https://www.timken.com/tr/resources/timkeninfo-com-sell-sheet_10451/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Timken"
+ },
+ {
+  "id": 186,
+  "group": "Підшипники, приводи та зчеплення",
+  "name": "JTEKT / Koyo",
+  "brands": [
+   "JTEKT",
+   "Koyo"
+  ],
+  "catalog_url": "https://partsnavi.jtekt.co.jp/EN/login.php",
+  "access": "Гостьовий доступ",
+  "search": "Автомобільні деталі через Parts Navi III",
+  "note": "Продукція: Підшипники; кермування; трансмісія; приводи; сальники. Безкоштовний гостьовий вхід. Офіційний FAQ надає публічний гостьовий ID KOYO і пароль JTEKT_FREE. Це опублікований виробником гостьовий доступ; посилання на FAQ — у колонці офіційного джерела.",
+  "official_url": "https://koyo.jtekt.co.jp/en/support/faq/article/002265.php",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "JTEKT"
+ },
+ {
+  "id": 187,
+  "group": "Підшипники, приводи та зчеплення",
+  "name": "AISIN / ADVICS",
+  "brands": [
+   "AISIN",
+   "ADVICS"
+  ],
+  "catalog_url": "https://www.aisinaftermarket.eu/our-links/",
+  "access": "Вебкаталог",
+  "search": "",
+  "note": "Продукція: Зчеплення; трансмісія; гальма; охолодження; підвіска; кермування. Відкритий вебкаталог + PDF. Офіційний AISIN Catalogue веде на https://web.tecalliance.net/aisin-europe/fr/home ; у меню можна змінити мову. ADVICS у спільному портфелі гальм.",
+  "official_url": "https://www.aisinaftermarket.eu/our-links/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "tecdoc"
+ },
+ {
+  "id": 188,
+  "group": "Підшипники, приводи та зчеплення",
+  "name": "EXEDY",
+  "brands": [
+   "EXEDY"
+  ],
+  "catalog_url": "https://www3.exedy-aftermarket.com/english/parts/",
+  "access": "Вебкаталог",
+  "search": "Автомобіль; двигун",
+  "note": "Продукція: Зчеплення; фрикційні диски; комплекти трансмісії. Відкритий вебкаталог. Також є регіональний каталог exedy.co.uk і окремий Racing.",
+  "official_url": "https://www3.exedy-aftermarket.com/english/parts/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "EXEDY"
+ },
+ {
+  "id": 189,
+  "group": "Підшипники, приводи та зчеплення",
+  "name": "GKN Automotive / SPIDAN / LÖBRO",
+  "brands": [
+   "GKN Automotive",
+   "SPIDAN",
+   "LÖBRO"
+  ],
+  "catalog_url": "https://www.gknautomotive.com/en/Aftermarket/online-catalogue/",
+  "access": "Вебкаталог · регіональний",
+  "search": "",
+  "note": "Продукція: Півосі; ШРУСи; пильовики; кардани; пружини; кермування. Відкритий регіональний вебкаталог. Сторінка пропонує офіційні регіональні переходи TecAlliance. English: https://web.tecalliance.net/gkn/en/home?sessionArticleCountry=GB&sessionTargetCountry=GB .",
+  "official_url": "https://www.gknautomotive.com/en/Aftermarket/online-catalogue/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "tecdoc"
+ },
+ {
+  "id": 190,
+  "group": "Підшипники, приводи та зчеплення",
+  "name": "GMB",
+  "brands": [
+   "GMB"
+  ],
+  "catalog_url": "https://gmb.net/catalog/",
+  "access": "Вебкаталог · регіональний",
+  "search": "Автомобіль; категорія",
+  "note": "Продукція: Маточини; підшипники; хрестовини; натягувачі; водяні насоси. Відкритий регіональний вебкаталог. Основний URL North America; інша офіційна база GMB Korea: https://am.gmb.co.kr/content/sub02_2 .",
+  "official_url": "https://gmb.net/catalog/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "GMB"
+ },
+ {
+  "id": 191,
+  "group": "Підшипники, приводи та зчеплення",
+  "name": "GSP",
+  "brands": [
+   "GSP"
+  ],
+  "catalog_url": "https://gspnorthamerica.com/pages/find-my-part",
+  "access": "Вебкаталог · регіональний",
+  "search": "Автомобіль; номер деталі; крос-номер. VIN підтверджений у каталозі Latin America.",
+  "note": "Продукція: ШРУСи; півосі; підшипники; маточини; опори двигуна. Відкритий регіональний вебкаталог + PDF. Перевірені офіційні каталоги North America і https://www.gsplatinamerica.com/; глобальні PDF 2026 доступні на https://www.gspglobal.com/info/list/309. Китайський autoparts.gsp.cn під час перевірки не відкрився.",
+  "official_url": "https://gspnorthamerica.com/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "GSP"
+ },
+ {
+  "id": 192,
+  "group": "Ремонт АКПП",
+  "name": "Sonnax",
+  "brands": [
+   "Sonnax"
+  ],
+  "catalog_url": "https://www.sonnax.com/parts",
+  "access": "Вебкаталог",
+  "search": "Модель КПП; зона; тип деталі; номер",
+  "note": "Продукція: Трансмісія та ремонтні комплекти. Публічний вебкаталог. АКПП, гідротрансформатори, карданні компоненти; є інструкції.",
+  "official_url": "https://www.sonnax.com/parts/transmission",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Sonnax"
+ },
+ {
+  "id": 193,
+  "group": "Ремонт АКПП",
+  "name": "TransGo",
+  "brands": [
+   "TransGo"
+  ],
+  "catalog_url": "https://transgo.com/code-finder/",
+  "access": "Вебкаталог",
+  "search": "Виробник; модель КПП; код несправності",
+  "note": "Продукція: Трансмісія та ремонтні комплекти. Публічний вебкаталог. Ремкомплекти й рішення для АКПП; також дерево продукції за коробкою.",
+  "official_url": "https://transgo.com/code-finder/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "TransGo"
+ },
+ {
+  "id": 194,
+  "group": "Ремонт АКПП",
+  "name": "TransTec",
+  "brands": [
+   "TransTec"
+  ],
+  "catalog_url": "https://transtec.com/",
+  "access": "Вебкаталог",
+  "search": "Каталоги трансмісії та кермового управління",
+  "note": "Продукція: Трансмісія та ремонтні комплекти. Вебкаталог та PDF. Ущільнення й ремонтні комплекти. Тип входу залежить від розділу.",
+  "official_url": "https://transtec.com/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "TransTec"
+ },
+ {
+  "id": 195,
+  "group": "Ремонт АКПП",
+  "name": "Precision International",
+  "brands": [
+   "Precision International"
+  ],
+  "catalog_url": "https://transmissionkits.com/catalogs-category/catalogs/",
+  "access": "PDF / цифрові видання",
+  "search": "Модель трансмісії; каталоги комплектів",
+  "note": "Продукція: Трансмісія та ремонтні комплекти. PDF / цифрові каталоги. Опубліковані каталоги 2026: трансмісія, роздавальні коробки, Foreign Kit Guide.",
+  "official_url": "https://transmissionkits.com/catalogs-category/catalogs/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Precision International"
+ },
+ {
+  "id": 196,
+  "group": "Кузов та дзеркала",
+  "name": "ALKAR",
+  "brands": [
+   "ALKAR"
+  ],
+  "catalog_url": "https://www.alkar.es/en/home",
+  "access": "Вебкаталог",
+  "search": "Марка; модель; двигун; група деталей",
+  "note": "Продукція: Кузов, дзеркала та скло. Публічний вебкаталог. Дзеркала, скло/корпуси дзеркал і світлотехніка.",
+  "official_url": "https://www.alkar.es/en/home",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "ALKAR"
+ },
+ {
+  "id": 197,
+  "group": "Вантажівки та причепи",
+  "name": "DT Spare Parts (Diesel Technic)",
+  "brands": [
+   "DT Spare Parts"
+  ],
+  "catalog_url": "https://dcat.dieseltechnic.com/",
+  "access": "PDF / цифрові видання",
+  "search": "Цифрові каталоги; пошук і фільтри",
+  "note": "Продукція: Вантажні та причепи. Публічні цифрові каталоги. Безкоштовний dcat прямо зазначений у FAQ; Partner Portal — окремий розширений ресурс.",
+  "official_url": "https://www.dieseltechnic.com/en/solutions/faq/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "DT Spare Parts"
+ },
+ {
+  "id": 198,
+  "group": "Вантажівки та причепи",
+  "name": "Sampa",
+  "brands": [
+   "Sampa"
+  ],
+  "catalog_url": "https://www.sampa.com/en/webshop",
+  "access": "Вебкаталог",
+  "search": "Номер Sampa; OEM; конкурент; назва",
+  "note": "Продукція: Вантажні та причепи. Публічна форма пошуку; замовлення окремо. Комерційні авто; пряме відкриття під час перевірки дало помилку, дані підтверджені індексом офіційного сайту.",
+  "official_url": "https://www.sampa.com/en/productdetail?code=030.089",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Sampa"
+ },
+ {
+  "id": 199,
+  "group": "Вантажівки та причепи",
+  "name": "Auger",
+  "brands": [
+   "Auger"
+  ],
+  "catalog_url": "https://www.iamauger.com/en/products/product-catalogues",
+  "access": "Вебкаталог",
+  "search": "Номер Auger; OEM; каталоги",
+  "note": "Продукція: Вантажні та причепи. Публічний вебкаталог та PDF. Комерційні авто; окремий продуктовий пошук /en/search.",
+  "official_url": "https://www.iamauger.com/en/products/product-catalogues",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Auger"
+ },
+ {
+  "id": 200,
+  "group": "Вантажівки та причепи",
+  "name": "WABCO",
+  "brands": [
+   "WABCO"
+  ],
+  "catalog_url": "https://www.wabco-customercentre.com/catalog/",
+  "access": "Вебкаталог · регіональний",
+  "search": "Каталог виробів; конфігуратори систем",
+  "note": "Продукція: Вантажні та причепи. Регіональний вебкаталог. Гальма, пневматика, керування. Окремий портал від легкового каталогу ZF.",
+  "official_url": "https://www.wabco-customercentre.com/catalog/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "WABCO"
+ },
+ {
+  "id": 201,
+  "group": "Вантажівки та причепи",
+  "name": "Knorr-Bremse TruckServices",
+  "brands": [
+   "Knorr-Bremse TruckServices"
+  ],
+  "catalog_url": "https://mytruckservices.knorr-bremse.com/",
+  "access": "Вебкаталог",
+  "search": "Номер; тип; назва; документація",
+  "note": "Продукція: Вантажні та причепи. Публічна інформація; акаунт для замовлень. Технічні параметри, документація й сервісні рішення.",
+  "official_url": "https://truckservices.knorr-bremse.com/en/tr/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Knorr-Bremse TruckServices"
+ },
+ {
+  "id": 202,
+  "group": "Вантажівки та причепи",
+  "name": "Haldex",
+  "brands": [
+   "Haldex"
+  ],
+  "catalog_url": "https://www.haldex.com/en/europe/",
+  "access": "Вебкаталог · регіональний",
+  "search": "Продуктовий каталог; характеристики",
+  "note": "Продукція: Вантажні та причепи. Регіональний вебкаталог. Вхід до європейського каталогу з офіційного сайту; NA має окремий розділ.",
+  "official_url": "https://www.haldex.com/en/europe/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Haldex"
+ },
+ {
+  "id": 203,
+  "group": "Вантажівки та причепи",
+  "name": "Meritor Parts Xpress",
+  "brands": [
+   "Meritor Parts Xpress"
+  ],
+  "catalog_url": "https://www.meritorpartsxpress.com/webapp/wcs/stores/servlet/en/meritor-na/home",
+  "access": "Вебкаталог · регіональний",
+  "search": "Каталог; візуальні вибухові схеми; пошук",
+  "note": "Продукція: Вантажні та причепи. Регіональний вебкаталог. Наведено північноамериканський портал. Для інших ринків обрати відповідний регіон.",
+  "official_url": "https://www.meritorpartsxpress.com/webapp/wcs/stores/servlet/en/meritor-na/home",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Meritor Parts Xpress"
+ },
+ {
+  "id": 204,
+  "group": "Вантажівки та причепи",
+  "name": "JOST / ROCKINGER",
+  "brands": [
+   "JOST",
+   "ROCKINGER"
+  ],
+  "catalog_url": "https://www.jost-world.com/en/products/search.html",
+  "access": "Вебкаталог",
+  "search": "Вироби; документація; JOST Part Finder",
+  "note": "Продукція: Вантажні та причепи. Публічний вебкаталог та PDF. Зчіпні пристрої, опорні стійки, осі, деталі причепів.",
+  "official_url": "https://www.jost-world.com/en/products/search.html",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "JOST"
+ },
+ {
+  "id": 205,
+  "group": "Вантажівки та причепи",
+  "name": "SAF-HOLLAND",
+  "brands": [
+   "SAF-HOLLAND"
+  ],
+  "catalog_url": "https://www.safholland-benelux.com/parts-on-demand-offline-version",
+  "access": "Вебкаталог",
+  "search": "Parts on Demand; креслення; специфікації",
+  "note": "Продукція: Вантажні та причепи. Публічний вхід до цифрового каталогу. Посилання виробника на онлайн POD; офлайн-версія запитується формою.",
+  "official_url": "https://www.safholland-benelux.com/parts-on-demand-offline-version",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "SAF-HOLLAND"
+ },
+ {
+  "id": 206,
+  "group": "Вантажівки та причепи",
+  "name": "BPW",
+  "brands": [
+   "BPW"
+  ],
+  "catalog_url": "https://www.bpw.de/en/service/after-sales-/-spare-parts-old/spare-parts-lists",
+  "access": "Вебкаталог",
+  "search": "Пошук списків запасних частин",
+  "note": "Продукція: Вантажні та причепи. Публічний технічний каталог. Офіційний пошук специфікацій вузлів; старий шлях зберігається на сайті.",
+  "official_url": "https://www.bpw.de/en/service/after-sales-/-spare-parts-old/spare-parts-lists",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "BPW"
+ },
+ {
+  "id": 207,
+  "group": "Вантажівки та причепи",
+  "name": "Hendrickson",
+  "brands": [
+   "Hendrickson"
+  ],
+  "catalog_url": "https://www.hendrickson-intl.com/parts-and-service",
+  "access": "PDF / цифрові видання",
+  "search": "Цифрові каталоги Truck/Trailer/Auxiliary",
+  "note": "Продукція: Вантажні та причепи. Цифрові каталоги; Parts PLUS+ потребує входу. Публічна документація підвіски. Розширений Parts PLUS+ — реєстрація.",
+  "official_url": "https://www.hendrickson-intl.com/parts-and-service",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Hendrickson"
+ },
+ {
+  "id": 208,
+  "group": "Вантажівки та причепи",
+  "name": "PE Automotive / Monark",
+  "brands": [
+   "PE Automotive",
+   "Monark"
+  ],
+  "catalog_url": "https://shop.pe.de/kategorien/",
+  "access": "Вебкаталог",
+  "search": "Категорії; деталі; розширена ідентифікація після входу",
+  "note": "Продукція: Вантажні та причепи. Публічний каталог; розширення після входу. На сторінці прямо просять увійти для розширених функцій ідентифікації.",
+  "official_url": "https://www.pe.de/en/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "PE Automotive"
+ },
+ {
+  "id": 209,
+  "group": "Вантажівки та причепи",
+  "name": "TRUCKTEC",
+  "brands": [
+   "TRUCKTEC"
+  ],
+  "catalog_url": "https://www.trucktec.de/trucks",
+  "access": "Вебкаталог",
+  "search": "Каталог за групами; картки запчастин",
+  "note": "Продукція: Вантажні та причепи. Публічний каталог; магазин має вхід. Є легкова й вантажна програми. Наведено вантажний розділ.",
+  "official_url": "https://www.trucktec.de/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "TRUCKTEC"
+ },
+ {
+  "id": 210,
+  "group": "Вантажівки та причепи",
+  "name": "AL-KO Vehicle Technology / Winterhoff / Bradley",
+  "brands": [
+   "AL-KO Vehicle Technology",
+   "Winterhoff",
+   "Bradley"
+  ],
+  "catalog_url": "https://www.alko-tech.com/en/private-customer-service/downloads-catalogues",
+  "access": "PDF / цифрові видання",
+  "search": "Категорія документа, ключове слово, пошук у PDF за номером/типом вузла",
+  "note": "Продукція: Компоненти причепів: осі, гальма накату, зчіпні пристрої, опорні колеса, підвіска; каравани. Відкриті PDF-каталоги; окрема система ідентифікації. Справжні Comprehensive Catalogue — Trailer Components, Winterhoff catalogue, Bradley overrun devices. Не плутати з AL-KO Garden. Додаткова система запчастин https://parts.al-ko.com/shop/parts/login.php починається з вибору країни/мови; подальші вимоги входу не перевірялися.",
+  "official_url": "https://www.alko-tech.com/en/private-customer-service/downloads-catalogues",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "AL-KO Vehicle Technology"
+ },
+ {
+  "id": 211,
+  "group": "Вантажівки та причепи",
+  "name": "KNOTT",
+  "brands": [
+   "KNOTT"
+  ],
+  "catalog_url": "https://www.knott-anhaenger-shop.de/",
+  "access": "Вебкаталог",
+  "search": "Ключове слово або номер деталі, категорії; окремий PDF-каталог запчастин",
+  "note": "Продукція: Гальма, осі, зчіпні пристрої та запчастини причепів. Відкритий офіційний магазин-каталог + PDF. Виробник прямо посилається на магазин; відкриті картки товарів, номери й категорії. На сторінці виробника також Component Catalogue та Spare Parts Catalogue Trailer Technology.",
+  "official_url": "https://www.knott.de/en/pages/anhaengertechnik-uebersicht",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "KNOTT"
+ },
+ {
+  "id": 212,
+  "group": "Офіційні OEM-каталоги США",
+  "name": "Toyota Parts Center Online",
+  "brands": [
+   "Toyota"
+  ],
+  "catalog_url": "https://autoparts.toyota.com/",
+  "access": "Вебкаталог · регіональний",
+  "search": "Артикул; назва; повний VIN; автомобіль",
+  "note": "Продукція: Додатково: офіційні OEM. Регіональний публічний каталог. Офіційний портал Toyota США. OE-номери перевіряти на відповідність ринку авто.",
+  "official_url": "https://autoparts.toyota.com/",
+  "checked_at": "2026-10-12",
+  "kind": "oem_catalog",
+  "lineage": "Toyota"
+ },
+ {
+  "id": 213,
+  "group": "Офіційні OEM-каталоги США",
+  "name": "Nissan Parts USA",
+  "brands": [
+   "Nissan"
+  ],
+  "catalog_url": "https://parts.nissanusa.com/",
+  "access": "Вебкаталог · регіональний",
+  "search": "Артикул; назва; VIN; модель",
+  "note": "Продукція: Додатково: офіційні OEM. Регіональний публічний каталог. Офіційний портал Nissan США; регіональне застосування.",
+  "official_url": "https://parts.nissanusa.com/",
+  "checked_at": "2026-10-12",
+  "kind": "oem_catalog",
+  "lineage": "Nissan"
+ },
+ {
+  "id": 214,
+  "group": "Офіційні OEM-каталоги США",
+  "name": "Infiniti Parts USA",
+  "brands": [
+   "Infiniti"
+  ],
+  "catalog_url": "https://parts.infinitiusa.com/",
+  "access": "Вебкаталог · регіональний",
+  "search": "Артикул; назва; VIN; модель",
+  "note": "Продукція: Додатково: офіційні OEM. Регіональний публічний каталог. Офіційний портал Infiniti США; регіональне застосування.",
+  "official_url": "https://parts.infinitiusa.com/",
+  "checked_at": "2026-10-12",
+  "kind": "oem_catalog",
+  "lineage": "Infiniti"
+ },
+ {
+  "id": 215,
+  "group": "Офіційні OEM-каталоги США",
+  "name": "Honda DreamShop",
+  "brands": [
+   "Honda"
+  ],
+  "catalog_url": "https://dreamshop.honda.com/s/honda",
+  "access": "Вебкаталог · регіональний",
+  "search": "Автомобіль; категорія запчастин",
+  "note": "Продукція: Додатково: офіційні OEM. Регіональний вебкаталог (JavaScript). Офіційний портал Honda США, розділ Parts поряд з аксесуарами.",
+  "official_url": "https://dreamshop.honda.com/s/honda",
+  "checked_at": "2026-10-12",
+  "kind": "oem_catalog",
+  "lineage": "Honda"
+ },
+ {
+  "id": 216,
+  "group": "Багатопрофільні каталоги",
+  "name": "NTY",
+  "brands": [
+   "NTY"
+  ],
+  "catalog_url": "https://nty.parts/products/",
+  "access": "Підбір без входу не підтверджено",
+  "search": "Категорія; картки товарів; інтерактивний каталог",
+  "note": "Продукція: Багатопрофільні. Публічна продукція та вхід у каталог. Основний сайт заявляє інтерактивний каталог. Повний пошуковий сценарій не перевірено. Номери/асортимент і повний підбір за автомобілем — різні рівні доступної інформації; другий не підтверджений.",
+  "official_url": "https://nty.parts/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "NTY"
+ },
+ {
+  "id": 217,
+  "group": "Багатопрофільні каталоги",
+  "name": "OSSCA",
+  "brands": [
+   "OSSCA"
+  ],
+  "catalog_url": "https://www.ossca.com/products.asp",
+  "access": "Підбір без входу не підтверджено",
+  "search": "Продуктові групи; каталог бренду",
+  "note": "Продукція: Багатопрофільні. Публічний каталог продукції. Не підтверджено пошук застосування/VIN. Номери/асортимент і повний підбір за автомобілем — різні рівні доступної інформації; другий не підтверджений.",
+  "official_url": "https://www.ossca.com/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "OSSCA"
+ },
+ {
+  "id": 218,
+  "group": "Багатопрофільні каталоги",
+  "name": "TOPRAN / Hans Pries",
+  "brands": [
+   "TOPRAN",
+   "Hans Pries"
+  ],
+  "catalog_url": "https://shop.pries.de/",
+  "access": "Реєстрація / вхід",
+  "search": "Каталог B2B",
+  "note": "Продукція: Обмежений доступ. Потрібні логін і пароль. Публічного повного підбору не підтверджено; офіційний магазин відкриває форму входу.",
+  "official_url": "https://www.topran.de/en/welcome/products",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "TOPRAN"
+ },
+ {
+  "id": 219,
+  "group": "Багатопрофільні каталоги",
+  "name": "Borsehung",
+  "brands": [
+   "Borsehung"
+  ],
+  "catalog_url": "https://www.borsehung.de/en/digitalization/",
+  "access": "Підбір без входу не підтверджено",
+  "search": "Заявлені онлайн-каталоги; TecDoc",
+  "note": "Продукція: Обмежений доступ. Публічний підбір не підтверджений. Виявлено офіційний опис цифрових каталогів і Login. Не прирівняно до відкритого пошуку.",
+  "official_url": "https://www.borsehung.de/en/digitalization/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Borsehung"
+ },
+ {
+  "id": 220,
+  "group": "Багатопрофільні каталоги",
+  "name": "MaXgear",
+  "brands": [
+   "MaXgear"
+  ],
+  "catalog_url": "https://maxgear.pl/pl/oferta/",
+  "access": "Підбір без входу не підтверджено",
+  "search": "Лише асортиментні групи",
+  "note": "Продукція: Обмежений доступ. Публічний підбір не підтверджений. Офіційна сторінка асортименту; повноцінного відкритого каталогу за номерами не встановлено.",
+  "official_url": "https://maxgear.pl/pl/oferta/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "MaXgear"
+ },
+ {
+  "id": 221,
+  "group": "Багатопрофільні каталоги",
+  "name": "NK / BORG Automotive Newman",
+  "brands": [
+   "NK",
+   "BORG Automotive Newman"
+  ],
+  "catalog_url": "https://shop.borgautomotive-newman.com/catalogue/",
+  "access": "Реєстрація / вхід",
+  "search": "",
+  "note": "Продукція: Гальма; кермування; підвіска; зчеплення; підшипники; приводи. Вхід потрібний. Офіційний сайт NK веде на новий магазин BORG Automotive Newman; при відкритті показано Login.",
+  "official_url": "https://nk-autoparts.com/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "NK"
+ },
+ {
+  "id": 222,
+  "group": "Електрика, датчики та паливо",
+  "name": "Astemo / Hitachi / HÜCO",
+  "brands": [
+   "Astemo",
+   "Hitachi",
+   "HÜCO"
+  ],
+  "catalog_url": "https://www.aftermarket.astemo.com/emea/en/automotive/",
+  "access": "Підбір без входу не підтверджено",
+  "search": "Групи продукції; Parts Search веде на TecAlliance",
+  "note": "Продукція: Електрика, запалювання, реле, датчики, паливо, клімат. Сторінка продукції; окремий відкритий каталог не підтверджено. Офіційний Parts Search веде на загальний сайт TecAlliance, а не фірмовий підбір. Продуктові сторінки та завантаження доступні; старі Hitachi назви змінюються на Astemo.",
+  "official_url": "https://www.aftermarket.astemo.com/emea/en/automotive/electronics/universalelectricalparts.html",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "tecdoc"
+ },
+ {
+  "id": 223,
+  "group": "Електрика, датчики та паливо",
+  "name": "BREMI",
+  "brands": [
+   "BREMI"
+  ],
+  "catalog_url": "https://www.bremi.de/en/ignition-coils/",
+  "access": "Підбір без входу не підтверджено",
+  "search": "Не встановлено",
+  "note": "Продукція: Котушки, запалювання, датчики. Офіційна сторінка з переходом у каталог; відкриття заблоковане 403. Індекс офіційної сторінки містить To the product catalogue. Кінцеву адресу й можливість анонімного підбору встановити не вдалося; не рахувати перевіреним відкритим каталогом.",
+  "official_url": "https://www.bremi.de/en/ignition-coils/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "BREMI"
+ },
+ {
+  "id": 224,
+  "group": "Світло, лампи та проводка",
+  "name": "DEPO",
+  "brands": [
+   "DEPO"
+  ],
+  "catalog_url": "https://www.depoautolamp.com/index_en.php",
+  "access": "Підбір без входу не підтверджено",
+  "search": "Форма пошуку DEPO number",
+  "note": "Продукція: Фари, ліхтарі, світлотехніка. Публічна пошукова форма; повний каталог/доступ не підтверджений. Офіційний сайт містить форму Enter your DEPO No. і окремий LOGIN. Не доведено, що повні результати доступні без входу.",
+  "official_url": "https://www.depoautolamp.com/index_en.php",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "DEPO"
+ },
+ {
+  "id": 225,
+  "group": "Охолодження та кондиціонування",
+  "name": "Saleri / SIL / Saleri Aftermarket",
+  "brands": [
+   "Saleri",
+   "SIL",
+   "Saleri Aftermarket"
+  ],
+  "catalog_url": "https://www.saleriaftermarket.com/en/portal/",
+  "access": "Реєстрація / вхід",
+  "search": "Крос/OE/авто (заявлено власником)",
+  "note": "Продукція: Водяні помпи та деталі термокерування. Потрібний вхід; доступ видає компанія. Your Parts прямо просить звернутися за обліковими даними; це не каталог з підтвердженим анонімним доступом.",
+  "official_url": "https://www.saleriaftermarket.com/en/portal/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Saleri"
+ },
+ {
+  "id": 226,
+  "group": "Охолодження та кондиціонування",
+  "name": "Airtex",
+  "brands": [
+   "Airtex"
+  ],
+  "catalog_url": "https://airtexproducts.es/?lang=en",
+  "access": "Підбір без входу не підтверджено",
+  "search": "TecDoc number; авто; Airtex/конкурент/OEM",
+  "note": "Продукція: Водяні та паливні помпи. Каталог підтверджений індексом; наразі відкриття 502. Офіційна індексована сторінка містить форму Product Catalogue; безпосередню працездатність під час перевірки не встановлено. Не плутати з доменом airtexproducts.com, де в індексі сторонній контент.",
+  "official_url": "https://airtexproducts.es/page/60/?et_blog=&lang=en",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Airtex"
+ },
+ {
+  "id": 227,
+  "group": "Двигун і приводи ГРМ",
+  "name": "Freccia",
+  "brands": [
+   "Freccia"
+  ],
+  "catalog_url": "https://ecommerce.freccia.com/",
+  "access": "Підбір без входу не підтверджено",
+  "search": "",
+  "note": "Продукція: Клапани; деталі ГРМ; компоненти двигуна. Публічний підбір не підтверджено; B2B/Area riservata. На офіційному сайті є E-commerce та Area riservata. Відкритий без входу каталог з номерами/підбором не підтверджений.",
+  "official_url": "https://www.freccia.com/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Freccia"
+ },
+ {
+  "id": 228,
+  "group": "Двигун і приводи ГРМ",
+  "name": "iwis",
+  "brands": [
+   "iwis"
+  ],
+  "catalog_url": "https://www.iwis.com/en-en/aftermarket",
+  "access": "Підбір без входу не підтверджено",
+  "search": "",
+  "note": "Продукція: Ланцюги ГРМ; комплекти приводу. Сторінка продукції; самостійний публічний підбір не підтверджено. Aftermarket сторінка описує асортимент та присутність у TecDoc/ACES/PIES; окремого публічного фірмового вебкаталогу з підбором не знайдено.",
+  "official_url": "https://www.iwis.com/en-en/aftermarket",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "tecdoc"
+ },
+ {
+  "id": 229,
+  "group": "Турбіни та вихлоп",
+  "name": "Eberspächer — вихлоп",
+  "brands": [
+   "Eberspächer"
+  ],
+  "catalog_url": "https://www.eberspaecher.com/fileadmin/data/corporatesite/pdf/en/et_gp_pkw_en.pdf",
+  "access": "Підбір без входу не підтверджено",
+  "search": "",
+  "note": "Продукція: Вихлоп. PDF-брошура; каталог запчастин з підбором не підтверджено. Знайдено корпоративні матеріали Exhaust Technology. Каталоги автомобільних підігрівачів/кліматичних систем належать іншому розділу, їх не слід змішувати з вихлопом.",
+  "official_url": "https://www.eberspaecher.com/fileadmin/data/corporatesite/pdf/en/et_gp_pkw_en.pdf",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Eberspächer"
+ },
+ {
+  "id": 230,
+  "group": "Гальма та ремкомплекти",
+  "name": "AUTOFREN SEINSA",
+  "brands": [
+   "AUTOFREN SEINSA"
+  ],
+  "catalog_url": "https://autofrenseinsa.com/en/content/online-catalog",
+  "access": "Підбір без входу не підтверджено",
+  "search": "Каталог на JavaScript; окремі PDF за маркою автомобіля",
+  "note": "Продукція: Ремкомплекти супортів, циліндрів і барабанних гальм; пильники приводів/кермування, захист амортизаторів. Офіційна сторінка вебкаталогу; PDF після реєстрації. Саме сторінка Online catalog, а не загальний асортимент. Пошуковий інтерфейс не відобразився у текстовому перегляді; PDF-сторінка прямо просить Sign up to download. Старі посилання catalogos тепер переадресовують до нового сайту.",
+  "official_url": "https://autofrenseinsa.com/en/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "AUTOFREN SEINSA"
+ },
+ {
+  "id": 231,
+  "group": "Гальма та ремкомплекти",
+  "name": "ERT SEINSA",
+  "brands": [
+   "ERT SEINSA"
+  ],
+  "catalog_url": "https://ertseinsa.com/en/content/online-catalog",
+  "access": "Підбір без входу не підтверджено",
+  "search": "Брендований каталог ERT; точні методи актуального інтерфейсу не підтверджені",
+  "note": "Продукція: Ремкомплекти гальм, пильники, ремонтні деталі підвіски, кермування й приводів. Офіційна сторінка вебкаталогу; PDF після реєстрації. Окремий каталог під артикулами ERT у групі Seinsa; також є https://catalogo.ertseinsa.com/es/catalogo-online. Вебкаталог вбудований; у текстовому перегляді видно оболонку та реєстрацію, а не результати підбору.",
+  "official_url": "https://ertseinsa.com/en/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "ERT SEINSA"
+ },
+ {
+  "id": 232,
+  "group": "Підвіска, кермування та гумометал",
+  "name": "TRISCAN",
+  "brands": [
+   "TRISCAN"
+  ],
+  "catalog_url": "https://tricat.triscan.dk/",
+  "access": "Підбір без входу не підтверджено",
+  "search": "Автомобіль; номер; номерний знак у підтримуваних країнах",
+  "note": "Продукція: Гальма; кермування; підвіска; приводи; інші групи. Вебкаталог TRICAT; комерційні функції залежать від входу. Офіційно замінює старий TRIWEB; точні умови гостьового пошуку в JS-інтерфейсі не підтверджені.",
+  "official_url": "https://www.triscan.dk/en/new-catalogue-goodbye-triweb-hello-tricat",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "TRISCAN"
+ },
+ {
+  "id": 233,
+  "group": "Підвіска, кермування та гумометал",
+  "name": "SASIC / SOFARE by SASIC",
+  "brands": [
+   "SASIC",
+   "SOFARE by SASIC"
+  ],
+  "catalog_url": "https://www.sasic-b2b.fr/html/index.php",
+  "access": "Реєстрація / вхід",
+  "search": "",
+  "note": "Продукція: Гума-метал; підвіска; кермування; зчеплення; інші групи. Професійний портал; реєстрація/вхід. Офіційна E-CATALOGUE; сторінка автентифікації позначає продаж лише професіоналам. Повний відкритий пошук без входу не підтверджено.",
+  "official_url": "https://sasic.fr/",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "SASIC"
+ },
+ {
+  "id": 234,
+  "group": "Підшипники, приводи та зчеплення",
+  "name": "Schaeffler / LuK / INA / FAG",
+  "brands": [
+   "Schaeffler",
+   "LuK",
+   "INA",
+   "FAG"
+  ],
+  "catalog_url": "https://www.repxpert.com/en",
+  "access": "Реєстрація / вхід",
+  "search": "Каталог TecDoc; деталі та ремонтна інформація",
+  "note": "Продукція: Зчеплення; трансмісія; підшипники; привід ГРМ. Безкоштовна реєстрація/вхід. REPXPERT прямо пропонує Register and browse catalog. Окремий сайт Vehicle Lifetime Solutions має розділ Online Catalog, але повний інтерфейс без входу тут не підтверджений.",
+  "official_url": "https://www.repxpert.com/en",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Schaeffler"
+ },
+ {
+  "id": 235,
+  "group": "Кузов та дзеркала",
+  "name": "Klokkerholm",
+  "brands": [
+   "Klokkerholm"
+  ],
+  "catalog_url": "https://www.klokkerholm.com/GB/Products.aspx",
+  "access": "Підбір без входу не підтверджено",
+  "search": "Асортимент і каталог кузовних деталей",
+  "note": "Продукція: Кузов, дзеркала та скло. Публічна сторінка каталогу. Кузовні та ремонтні панелі; режим повного підбору потребує уточнення. Номери/асортимент і повний підбір за автомобілем — різні рівні доступної інформації; другий не підтверджений.",
+  "official_url": "https://www.klokkerholm.com/GB/Products.aspx",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Klokkerholm"
+ },
+ {
+  "id": 236,
+  "group": "Кузов та дзеркала",
+  "name": "Van Wezel",
+  "brands": [
+   "Van Wezel"
+  ],
+  "catalog_url": "https://www.vanwezel.de/kataloge/webkatalog",
+  "access": "Реєстрація / вхід",
+  "search": "Кузовні деталі; дзеркала; охолодження",
+  "note": "Продукція: Обмежений доступ. Потрібні логін і пароль. Німецька офіційна сторінка прямо вимагає дані доступу; не зараховано до безумовно відкритих.",
+  "official_url": "https://www.vanwezel.de/kataloge/webkatalog",
+  "checked_at": "2026-10-12",
+  "kind": "manufacturer_catalog",
+  "lineage": "Van Wezel"
+ }
+]

@@ -13,6 +13,16 @@ import {
 } from "./steps/create-part-relationship"
 import { createPartsSourceStep, CreateSourceInput } from "./steps/create-source"
 import {
+  ingestLookupResultStep,
+  IngestLookupResultInput,
+} from "./steps/ingest-lookup-result"
+import {
+  claimLookupTasksStep,
+  ClaimLookupTasksInput,
+  createLookupTaskStep,
+  CreateLookupTaskInput,
+} from "./steps/lookup-tasks"
+import {
   deletePartsBrandStep,
   deletePartNumberStep,
   deletePartRelationshipStep,
@@ -29,7 +39,12 @@ export const createPartsBrandWorkflow = createWorkflow(
 export const createPartNumberWorkflow = createWorkflow(
   "create-part-number",
   function (input: CreatePartNumberInput) {
-    return new WorkflowResponse(createPartNumberStep(input))
+    const partNumber = createPartNumberStep(input)
+
+    // Every new number is queued for the parser service to look up.
+    createLookupTaskStep({ part_number_id: partNumber.id })
+
+    return new WorkflowResponse(partNumber)
   }
 )
 
@@ -65,5 +80,26 @@ export const deletePartRelationshipWorkflow = createWorkflow(
   "delete-part-relationship",
   function (input: DeleteRecordInput) {
     return new WorkflowResponse(deletePartRelationshipStep(input))
+  }
+)
+
+export const createLookupTaskWorkflow = createWorkflow(
+  "create-lookup-task",
+  function (input: CreateLookupTaskInput) {
+    return new WorkflowResponse(createLookupTaskStep(input))
+  }
+)
+
+export const claimLookupTasksWorkflow = createWorkflow(
+  "claim-lookup-tasks",
+  function (input: ClaimLookupTasksInput) {
+    return new WorkflowResponse(claimLookupTasksStep(input))
+  }
+)
+
+export const ingestLookupResultWorkflow = createWorkflow(
+  "ingest-lookup-result",
+  function (input: IngestLookupResultInput) {
+    return new WorkflowResponse(ingestLookupResultStep(input))
   }
 )

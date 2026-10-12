@@ -101,3 +101,65 @@ export function downgradeVerdict(
 
   return verdict
 }
+
+// Catalogs whose publisher is answerable for the data: one is enough.
+const CATALOG_SOURCE_KINDS: readonly SourceKind[] = [
+  "oem_catalog",
+  "manufacturer_catalog",
+  "licensed_database",
+]
+
+// Shops and price lists have to agree across this many lineages.
+const LINEAGES_TO_CONFIRM = 2
+
+/**
+ * Verdict given to a relationship when evidence arrives without a person
+ * deciding: confirmed by a catalog or by independent sources agreeing,
+ * otherwise a candidate waiting for review.
+ */
+export function autoVerdict(input: {
+  relation_type: RelationType
+  ambiguous?: boolean
+  has_constraints?: boolean
+  evidence: EvidenceSummary[]
+}): ApplicabilityVerdict {
+  if (isCandidateOnly(input.relation_type)) {
+    return "CANDIDATE"
+  }
+
+  if (input.relation_type === "NOT_APPLICABLE_TO") {
+    return "REJECTED"
+  }
+
+  const fromCatalog = authoritativeEvidence(input.evidence).some((item) =>
+    CATALOG_SOURCE_KINDS.includes(item.source_kind)
+  )
+  const confirmed =
+    fromCatalog ||
+    countIndependentConfirmations(input.evidence) >= LINEAGES_TO_CONFIRM
+
+  if (!confirmed || input.ambiguous) {
+    return "CANDIDATE"
+  }
+
+  return input.has_constraints ? "CONDITIONAL" : "ACCEPTED"
+}
+
+export function autoApplicationVerdict(
+  sourceKind: SourceKind,
+  hasConstraints: boolean
+): ApplicabilityVerdict {
+  if (!CATALOG_SOURCE_KINDS.includes(sourceKind)) {
+    return "CANDIDATE"
+  }
+
+  return hasConstraints ? "CONDITIONAL" : "ACCEPTED"
+}
+
+/**
+ * Verdicts the system may change when new evidence arrives. Anything else was
+ * decided by a person or is already settled, and is left alone.
+ */
+export function isAutoManagedVerdict(verdict: ApplicabilityVerdict): boolean {
+  return verdict === "CANDIDATE" || verdict === "UNRESOLVED"
+}

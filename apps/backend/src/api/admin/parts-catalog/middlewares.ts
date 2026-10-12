@@ -13,6 +13,11 @@ import {
   RELATIONSHIP_STATES,
   SOURCE_KINDS,
 } from "../../../modules/parts-catalog/constants"
+import {
+  ClaimLookupTasksSchema,
+  CreateLookupTaskSchema,
+  LookupResultSchema,
+} from "./lookup-tasks/schemas"
 
 const toInt = (value: unknown) =>
   typeof value === "string" ? Number.parseInt(value, 10) : value
@@ -117,5 +122,22 @@ export const partsCatalogMiddlewares: MiddlewareRoute[] = [
     matcher: "/admin/parts-catalog/relationships",
     method: "POST",
     middlewares: [validateAndTransformBody(CreatePartRelationshipSchema)],
+  },
+  {
+    matcher: "/admin/parts-catalog/lookup-tasks",
+    method: "POST",
+    middlewares: [validateAndTransformBody(CreateLookupTaskSchema)],
+  },
+  {
+    matcher: "/admin/parts-catalog/lookup-tasks/claim",
+    method: "POST",
+    middlewares: [validateAndTransformBody(ClaimLookupTasksSchema)],
+  },
+  {
+    matcher: "/admin/parts-catalog/lookup-tasks/:id/result",
+    method: "POST",
+    // A result can carry hundreds of fitment rows.
+    bodyParser: { sizeLimit: "2mb" },
+    middlewares: [validateAndTransformBody(LookupResultSchema)],
   },
 ]

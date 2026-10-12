@@ -60,7 +60,8 @@ export async function GET(
   const partNumber = await catalog.retrievePartNumber(id, {
     relations: ["brand", "search_keys"],
   })
-  const [outgoing, incoming] = await Promise.all([
+  const [outgoing, incoming, applications, attributes, lookupTasks] =
+    await Promise.all([
     catalog.listPartRelationships(
       { from_part_number_id: id },
       {
@@ -82,6 +83,26 @@ export async function GET(
         ],
         order: { created_at: "ASC" },
       }
+    ),
+    catalog.listPartApplications(
+      { part_number_id: id },
+      {
+        relations: ["observation", "observation.source"],
+        order: { make: "ASC", model: "ASC", year_from: "ASC" },
+        take: 500,
+      }
+    ),
+    catalog.listPartAttributes(
+      { part_number_id: id },
+      {
+        relations: ["observation", "observation.source"],
+        order: { name: "ASC" },
+        take: 200,
+      }
+    ),
+    catalog.listLookupTasks(
+      { part_number_id: id },
+      { order: { created_at: "DESC" }, take: 5 }
     ),
   ])
 
@@ -112,6 +133,9 @@ export async function GET(
     outgoing: outgoing.map(withConfirmations),
     incoming: incoming.map(withConfirmations),
     supersession_chain: supersessionChain,
+    applications,
+    attributes,
+    lookup_tasks: lookupTasks,
   })
 }
 

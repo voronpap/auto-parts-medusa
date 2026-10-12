@@ -90,10 +90,18 @@ export const APPLICABILITY_VERDICTS = [
   "UNRESOLVED",
 ] as const
 
+export const LOOKUP_TASK_STATUSES = [
+  "pending",
+  "claimed",
+  "done",
+  "failed",
+] as const
+
 export type BrandKind = (typeof BRAND_KINDS)[number]
 export type NumberType = (typeof NUMBER_TYPES)[number]
 export type SourceKind = (typeof SOURCE_KINDS)[number]
 export type LicenseClass = (typeof LICENSE_CLASSES)[number]
+export type LookupTaskStatus = (typeof LOOKUP_TASK_STATUSES)[number]
 export type ObservationStatus = (typeof OBSERVATION_STATUSES)[number]
 export type RelationType = (typeof RELATION_TYPES)[number]
 export type RelationshipState = (typeof RELATIONSHIP_STATES)[number]

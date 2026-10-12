@@ -50,8 +50,53 @@ export type Relationship = {
   evidence?: Evidence[]
 }
 
+export type ObservationRef = {
+  id: string
+  url: string | null
+  source?: Source | null
+} | null
+
+export type Application = {
+  id: string
+  applicability_verdict: string
+  make: string
+  model: string | null
+  generation: string | null
+  year_from: number | null
+  year_to: number | null
+  engine: string | null
+  engine_code: string | null
+  power_kw: number | null
+  position: string | null
+  side: string | null
+  constraints: Record<string, unknown> | null
+  raw_text: string | null
+  observation?: ObservationRef
+}
+
+export type Attribute = {
+  id: string
+  name: string
+  value: string
+  unit: string | null
+  observation?: ObservationRef
+}
+
+export type LookupTask = {
+  id: string
+  status: string
+  worker: string | null
+  created_at: string
+  completed_at: string | null
+  summary: Record<string, number> | null
+  errors: { items?: { source?: string | null; message: string }[] } | null
+}
+
 export type PartNumberDetail = {
   part_number: PartNumber
+  applications: Application[]
+  attributes: Attribute[]
+  lookup_tasks: LookupTask[]
   outgoing: Relationship[]
   incoming: Relationship[]
   supersession_chain: PartNumber[]
@@ -151,3 +196,13 @@ export const CATALOG_QUERY_KEY = "parts-catalog"
 
 export const errorMessage = (error: unknown) =>
   error instanceof Error ? error.message : "Сталася помилка"
+
+export const LOOKUP_STATUS_LABELS: Record<
+  string,
+  { label: string; color: BadgeColor }
+> = {
+  pending: { label: "У черзі", color: "grey" },
+  claimed: { label: "Парсери працюють", color: "blue" },
+  done: { label: "Виконано", color: "green" },
+  failed: { label: "Помилка джерел", color: "red" },
+}

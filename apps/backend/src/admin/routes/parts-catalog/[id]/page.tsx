@@ -16,8 +16,11 @@ import { Link, useNavigate, useParams } from "react-router-dom"
 import { CreateRelationshipModal } from "../../../components/parts-catalog/forms"
 import { sdk } from "../../../lib/client"
 import {
+  Application,
   CATALOG_QUERY_KEY,
   errorMessage,
+  LOOKUP_STATUS_LABELS,
+  LookupTask,
   INVERSE_RELATION_LABELS,
   NUMBER_TYPE_LABELS,
   PartNumber,
@@ -139,6 +142,116 @@ const RelationshipsTable = ({
   </Table>
 )
 
+const years = (item: Application) =>
+  item.year_from || item.year_to
+    ? `${item.year_from ?? "…"}–${item.year_to ?? "…"}`
+    : "—"
+
+const ApplicationsTable = ({ applications }: { applications: Application[] }) => (
+  <Table>
+    <Table.Header>
+      <Table.Row>
+        <Table.HeaderCell>Авто</Table.HeaderCell>
+        <Table.HeaderCell>Роки</Table.HeaderCell>
+        <Table.HeaderCell>Двигун</Table.HeaderCell>
+        <Table.HeaderCell>Позиція</Table.HeaderCell>
+        <Table.HeaderCell>Вердикт</Table.HeaderCell>
+        <Table.HeaderCell>Джерело</Table.HeaderCell>
+      </Table.Row>
+    </Table.Header>
+    <Table.Body>
+      {applications.map((item) => {
+        const verdict = VERDICT_LABELS[item.applicability_verdict]
+        const conditions = item.constraints
+          ? String(item.constraints.raw ?? JSON.stringify(item.constraints))
+          : null
+
+        return (
+          <Table.Row key={item.id}>
+            <Table.Cell>
+              <div className="flex flex-col gap-y-1 py-2">
+                <Text size="small" leading="compact" weight="plus">
+                  {[item.make, item.model, item.generation]
+                    .filter(Boolean)
+                    .join(" ")}
+                </Text>
+                {conditions && (
+                  <Text size="xsmall" className="text-ui-fg-subtle">
+                    Умови: {conditions}
+                  </Text>
+                )}
+              </div>
+            </Table.Cell>
+            <Table.Cell>{years(item)}</Table.Cell>
+            <Table.Cell>
+              {[
+                item.engine,
+                item.engine_code,
+                item.power_kw ? `${item.power_kw} кВт` : null,
+              ]
+                .filter(Boolean)
+                .join(" · ") || "—"}
+            </Table.Cell>
+            <Table.Cell>
+              {[item.position, item.side].filter(Boolean).join(", ") || "—"}
+            </Table.Cell>
+            <Table.Cell>
+              <Badge size="2xsmall" color={verdict?.color ?? "grey"}>
+                {verdict?.label ?? item.applicability_verdict}
+              </Badge>
+            </Table.Cell>
+            <Table.Cell>{item.observation?.source?.name ?? "—"}</Table.Cell>
+          </Table.Row>
+        )
+      })}
+    </Table.Body>
+  </Table>
+)
+
+const LookupStatus = ({ task }: { task?: LookupTask }) => {
+  if (!task) {
+    return (
+      <Text size="small" leading="compact" className="text-ui-fg-subtle">
+        Пошук по джерелах ще не запускався.
+      </Text>
+    )
+  }
+
+  const status = LOOKUP_STATUS_LABELS[task.status]
+  const summary = task.summary
+  const errors = task.errors?.items ?? []
+
+  return (
+    <div className="flex flex-col gap-y-1">
+      <div className="flex flex-wrap items-center gap-2">
+        <Badge size="2xsmall" color={status?.color ?? "grey"}>
+          {status?.label ?? task.status}
+        </Badge>
+        <Text size="small" leading="compact" className="text-ui-fg-subtle">
+          {new Date(task.completed_at ?? task.created_at).toLocaleString(
+            "uk-UA"
+          )}
+          {task.worker ? ` · ${task.worker}` : ""}
+        </Text>
+      </div>
+      {summary && (
+        <Text size="small" leading="compact" className="text-ui-fg-subtle">
+          Нових зв'язків: {summary.relationships_added ?? 0}, підтверджено
+          наявних: {summary.relationships_confirmed ?? 0}, застосовностей:{" "}
+          {summary.applications_added ?? 0}, характеристик:{" "}
+          {summary.attributes_added ?? 0}, пропущено: {summary.skipped ?? 0}
+        </Text>
+      )}
+      {errors.map((item, index) => (
+        <Text key={index} size="xsmall" className="text-ui-fg-error">
+          {item.source ? `${item.source}: ` : ""}
+          {item.message}
+        </Text>
+      ))}
+    </div>
+  )
+}
+
 const PartNumberPage = () => {
   const { id } = useParams()
   const navigate = useNavigate()
@@ -152,6 +265,21 @@ const PartNumberPage = () => {
         `/admin/parts-catalog/part-numbers/${id}`
       ),
     queryKey: [CATALOG_QUERY_KEY, "part-number", id],
+    // Results arrive from the parser service on their own schedule.
+    refetchInterval: 15_000,
+  })
+
+  const lookupMutation = useMutation({
+    mutationFn: () =>
+      sdk.client.fetch("/admin/parts-catalog/lookup-tasks", {
+        method: "POST",
+        body: { part_number_id: id },
+      }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [CATALOG_QUERY_KEY] })
+      toast.success("Завдання для парсерів поставлено в чергу")
+    },
+    onError: (error) => toast.error(errorMessage(error)),
   })
 
   const deleteMutation = useMutation({
@@ -200,6 +328,8 @@ const PartNumberPage = () => {
 
   const { part_number: partNumber, outgoing, incoming } = data
   const chain = data.supersession_chain
+  const { applications, attributes } = data
+  const lastTask = data.lookup_tasks[0]
 
   return (
     <div className="flex flex-col gap-y-3">
@@ -222,7 +352,19 @@ const PartNumberPage = () => {
             </Text>
           </div>
           <div className="flex items-center gap-x-2">
-            <Button size="small" onClick={() => setCreateOpen(true)}>
+            <Button
+              size="small"
+              onClick={() => lookupMutation.mutate()}
+              disabled={lookupMutation.isPending}
+              isLoading={lookupMutation.isPending}
+            >
+              Знайти аналоги й застосовність
+            </Button>
+            <Button
+              size="small"
+              variant="secondary"
+              onClick={() => setCreateOpen(true)}
+            >
               Додати зв'язок
             </Button>
             <Button
@@ -234,6 +376,12 @@ const PartNumberPage = () => {
               Видалити номер
             </Button>
           </div>
+        </div>
+        <div className="flex flex-col gap-y-2 px-6 py-4">
+          <Text size="small" leading="compact" weight="plus">
+            Пошук по джерелах
+          </Text>
+          <LookupStatus task={lastTask} />
         </div>
         {chain.length > 1 && (
           <div className="flex flex-col gap-y-2 px-6 py-4">
@@ -296,6 +444,56 @@ const PartNumberPage = () => {
           </div>
         )}
       </Container>
+
+      <Container className="divide-y p-0">
+        <div className="flex flex-col gap-y-1 px-6 py-4">
+          <Heading level="h2">Застосовність</Heading>
+          <Text size="small" leading="compact" className="text-ui-fg-subtle">
+            Авто описані так, як їх подало джерело. Дані з каталогів виробників
+            позначаються підтвердженими, з магазинів і прайсів — кандидатами.
+          </Text>
+        </div>
+        {applications.length ? (
+          <ApplicationsTable applications={applications} />
+        ) : (
+          <div className="px-6 py-4">
+            <Text size="small" leading="compact" className="text-ui-fg-subtle">
+              Даних про застосовність ще немає.
+            </Text>
+          </div>
+        )}
+      </Container>
+
+      {attributes.length > 0 && (
+        <Container className="divide-y p-0">
+          <div className="px-6 py-4">
+            <Heading level="h2">Характеристики</Heading>
+          </div>
+          <div className="flex flex-col gap-y-2 px-6 py-4">
+            {attributes.map((item) => (
+              <div
+                key={item.id}
+                className="flex items-center justify-between gap-x-4"
+              >
+                <Text size="small" leading="compact" weight="plus">
+                  {item.name}
+                </Text>
+                <Text
+                  size="small"
+                  leading="compact"
+                  className="text-ui-fg-subtle"
+                >
+                  {item.value}
+                  {item.unit ? ` ${item.unit}` : ""}
+                  {item.observation?.source
+                    ? ` · ${item.observation.source.name}`
+                    : ""}
+                </Text>
+              </div>
+            ))}
+          </div>
+        </Container>
+      )}
 
       <CreateRelationshipModal
         open={createOpen}

@@ -1,5 +1,7 @@
 import { model } from "@medusajs/framework/utils"
 import { OBSERVATION_STATUSES } from "../constants"
+import PartApplication from "./part-application"
+import PartAttribute from "./part-attribute"
 import RelationshipEvidence from "./relationship-evidence"
 import Source from "./source"
 
@@ -16,6 +18,12 @@ const Observation = model
     retrieved_at: model.dateTime(),
     status: model.enum([...OBSERVATION_STATUSES]).default("active"),
     evidence: model.hasMany(() => RelationshipEvidence, {
+      mappedBy: "observation",
+    }),
+    applications: model.hasMany(() => PartApplication, {
+      mappedBy: "observation",
+    }),
+    attributes: model.hasMany(() => PartAttribute, {
       mappedBy: "observation",
     }),
   })

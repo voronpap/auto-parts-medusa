@@ -1,6 +1,9 @@
 import { model } from "@medusajs/framework/utils"
 import { NUMBER_TYPES } from "../constants"
 import Brand from "./brand"
+import LookupTask from "./lookup-task"
+import PartApplication from "./part-application"
+import PartAttribute from "./part-attribute"
 import PartNumberSearchKey from "./part-number-search-key"
 import PartRelationship from "./part-relationship"
 
@@ -23,9 +26,18 @@ const PartNumber = model
     incoming_relationships: model.hasMany(() => PartRelationship, {
       mappedBy: "to_part_number",
     }),
+    applications: model.hasMany(() => PartApplication, {
+      mappedBy: "part_number",
+    }),
+    attributes: model.hasMany(() => PartAttribute, {
+      mappedBy: "part_number",
+    }),
+    lookup_tasks: model.hasMany(() => LookupTask, {
+      mappedBy: "part_number",
+    }),
   })
   .cascades({
-    delete: ["search_keys"],
+    delete: ["search_keys", "applications", "attributes", "lookup_tasks"],
   })
   .indexes([
     {

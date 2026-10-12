@@ -1,9 +1,12 @@
 import {
+  autoApplicationVerdict,
+  autoVerdict,
   countIndependentConfirmations,
   defaultRelationshipState,
   downgradeVerdict,
   EvidenceSummary,
   getVerdictViolation,
+  isAutoManagedVerdict,
 } from "../utils/verdict"
 
 const catalog: EvidenceSummary = {
@@ -120,5 +123,79 @@ describe("downgradeVerdict", () => {
     ).toBe("UNRESOLVED")
     expect(downgradeVerdict("ACCEPTED", [catalog])).toBe("ACCEPTED")
     expect(downgradeVerdict("REJECTED", [])).toBe("REJECTED")
+  })
+})
+
+describe("autoVerdict", () => {
+  const cross = "AFTERMARKET_CROSS" as const
+
+  it("accepts what a manufacturer catalog states", () => {
+    expect(autoVerdict({ relation_type: cross, evidence: [catalog] })).toBe(
+      "ACCEPTED"
+    )
+  })
+
+  it("keeps a single shop's claim as a candidate", () => {
+    expect(autoVerdict({ relation_type: cross, evidence: [shopA] })).toBe(
+      "CANDIDATE"
+    )
+  })
+
+  it("does not let two shops on one database confirm each other", () => {
+    expect(
+      autoVerdict({ relation_type: cross, evidence: [shopA, shopB] })
+    ).toBe("CANDIDATE")
+  })
+
+  it("accepts when independent lineages agree", () => {
+    const other: EvidenceSummary = { ...shopA, lineage: "other-db" }
+
+    expect(autoVerdict({ relation_type: cross, evidence: [shopA, other] })).toBe(
+      "ACCEPTED"
+    )
+  })
+
+  it("is conditional when the source attached conditions", () => {
+    expect(
+      autoVerdict({
+        relation_type: cross,
+        evidence: [catalog],
+        has_constraints: true,
+      })
+    ).toBe("CONDITIONAL")
+  })
+
+  it("never accepts an ambiguous or inferred relation", () => {
+    expect(
+      autoVerdict({ relation_type: cross, evidence: [catalog], ambiguous: true })
+    ).toBe("CANDIDATE")
+    expect(
+      autoVerdict({
+        relation_type: "SPEC_MATCH_CANDIDATE",
+        evidence: [catalog],
+      })
+    ).toBe("CANDIDATE")
+  })
+
+  it("rejects a negative statement", () => {
+    expect(
+      autoVerdict({ relation_type: "NOT_APPLICABLE_TO", evidence: [shopA] })
+    ).toBe("REJECTED")
+  })
+})
+
+describe("autoApplicationVerdict", () => {
+  it("accepts catalog fitment and holds back shop fitment", () => {
+    expect(autoApplicationVerdict("oem_catalog", false)).toBe("ACCEPTED")
+    expect(autoApplicationVerdict("oem_catalog", true)).toBe("CONDITIONAL")
+    expect(autoApplicationVerdict("supplier_price", false)).toBe("CANDIDATE")
+  })
+})
+
+describe("isAutoManagedVerdict", () => {
+  it("leaves decided verdicts alone", () => {
+    expect(isAutoManagedVerdict("CANDIDATE")).toBe(true)
+    expect(isAutoManagedVerdict("REJECTED")).toBe(false)
+    expect(isAutoManagedVerdict("ACCEPTED")).toBe(false)
   })
 })

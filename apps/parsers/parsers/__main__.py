@@ -3,6 +3,7 @@
     python -m parsers adapters
     python -m parsers lookup --brand Bosch --number "0 986 478 123"
     python -m parsers run
+    python -m parsers import-monroe
 """
 
 from __future__ import annotations
@@ -49,6 +50,10 @@ def main(argv: list[str] | None = None) -> int:
 
     commands.add_parser("run", help="claim tasks from the catalog and post results")
 
+    load = commands.add_parser("import-monroe", help="load the parsed Monroe PDF catalogue into the catalog")
+    load.add_argument("--index", default=".cache/index/monroe.json")
+    load.add_argument("--limit", type=int)
+
     args = parser.parse_args(argv)
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
     adapters = build_adapters(Path(args.cache) if args.cache else None)
@@ -82,7 +87,16 @@ def main(argv: list[str] | None = None) -> int:
         print("CATALOG_URL and CATALOG_API_KEY must be set", file=sys.stderr)
         return 2
 
-    run_forever(CatalogClient(base_url, api_key), adapters, worker, schema=schema)
+    client = CatalogClient(base_url, api_key)
+
+    if args.command == "import-monroe":
+        from .pdf.loader import load_monroe
+
+        totals = load_monroe(client, Path(args.index), worker, limit=args.limit)
+        print(json.dumps(totals))
+        return 0 if not totals["failed"] else 1
+
+    run_forever(client, adapters, worker, schema=schema)
     return 0
 
 

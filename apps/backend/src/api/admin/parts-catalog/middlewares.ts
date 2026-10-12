@@ -16,6 +16,7 @@ import {
 import {
   ClaimLookupTasksSchema,
   CreateLookupTaskSchema,
+  ImportResultSchema,
   LookupResultSchema,
 } from "./lookup-tasks/schemas"
 
@@ -160,6 +161,12 @@ export const partsCatalogMiddlewares: MiddlewareRoute[] = [
     matcher: "/admin/parts-catalog/products/:id",
     method: "POST",
     middlewares: [validateAndTransformBody(CatalogProductSchema)],
+  },
+  {
+    matcher: "/admin/parts-catalog/import",
+    method: "POST",
+    bodyParser: { sizeLimit: "2mb" },
+    middlewares: [validateAndTransformBody(ImportResultSchema)],
   },
   {
     matcher: "/admin/parts-catalog/lookup-tasks",

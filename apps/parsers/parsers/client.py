@@ -48,3 +48,7 @@ class CatalogClient:
         return self._post(
             f"/admin/parts-catalog/lookup-tasks/{task_id}/result", payload
         )
+
+    def import_result(self, payload: dict[str, Any]) -> dict[str, Any]:
+        """Loads bulk-read data for one part number, bypassing the queue."""
+        return self._post("/admin/parts-catalog/import", payload)

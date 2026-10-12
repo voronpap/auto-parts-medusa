@@ -125,3 +125,11 @@ export const LookupResultSchema = z.object({
 export type CreateLookupTaskBody = z.infer<typeof CreateLookupTaskSchema>
 export type ClaimLookupTasksBody = z.infer<typeof ClaimLookupTasksSchema>
 export type LookupResultBody = z.infer<typeof LookupResultSchema>
+
+export const ImportResultSchema = z.object({
+  worker: text(100).min(1),
+  number: NumberRefSchema,
+  result: LookupResultSchema,
+})
+
+export type ImportResultBody = z.infer<typeof ImportResultSchema>

@@ -1,5 +1,6 @@
 import {
   createWorkflow,
+  transform,
   WorkflowResponse,
 } from "@medusajs/framework/workflows-sdk"
 import { createPartsBrandStep, CreateBrandInput } from "./steps/create-brand"
@@ -20,6 +21,7 @@ import {
 import {
   ingestLookupResultStep,
   IngestLookupResultInput,
+  LookupResult,
 } from "./steps/ingest-lookup-result"
 import {
   createVehicleMakeStep,
@@ -35,6 +37,8 @@ import {
   ClaimLookupTasksInput,
   createLookupTaskStep,
   CreateLookupTaskInput,
+  prepareImportStep,
+  PrepareImportInput,
 } from "./steps/lookup-tasks"
 import {
   deletePartsBrandStep,
@@ -150,5 +154,22 @@ export const updatePartsSourceWorkflow = createWorkflow(
   "update-parts-source",
   function (input: UpdateSourceInput) {
     return new WorkflowResponse(updatePartsSourceStep(input))
+  }
+)
+
+export type ImportPartNumberResultInput = PrepareImportInput & {
+  result: LookupResult
+}
+
+export const importPartNumberResultWorkflow = createWorkflow(
+  "import-part-number-result",
+  function (input: ImportPartNumberResultInput) {
+    const prepared = prepareImportStep(input)
+    const ingest = transform({ prepared, input }, (data) => ({
+      task_id: data.prepared.task_id,
+      result: data.input.result,
+    }))
+
+    return new WorkflowResponse(ingestLookupResultStep(ingest))
   }
 )

@@ -239,10 +239,20 @@ export const ingestLookupResultStep = createStep(
         })
       }
 
+      // Facts read from the same record of a source (one catalogue page,
+      // one article card) share an observation.
+      const observations = new Map<string, { id: string }>()
       const observe = async (
         source: { id: string; meta: LookupResult["sources"][number] },
         item: { record_ref?: string | null; record_url?: string | null }
       ) => {
+        const key = `${source.id}|${clean(item.record_ref) ?? ""}|${clean(item.record_url) ?? ""}`
+        const known = observations.get(key)
+
+        if (known) {
+          return known
+        }
+
         const observation = await catalog.createObservations({
           source_id: source.id,
           record_ref: clean(item.record_ref),
@@ -259,6 +269,7 @@ export const ingestLookupResultStep = createStep(
           status: "active",
         })
         created.observations.push(observation.id)
+        observations.set(key, observation)
 
         return observation
       }
@@ -541,6 +552,10 @@ export const ingestLookupResultStep = createStep(
         )
       )
 
+      const newApplications: Parameters<
+        typeof catalog.createPartApplications
+      >[0] = []
+
       for (const item of result.applications) {
         const source = sources.get(item.source)
         const make = item.make.trim()
@@ -558,7 +573,7 @@ export const ingestLookupResultStep = createStep(
           ? await resolveModelId(vehicleMakeId, item.model)
           : null
         const observation = await observe(source, item)
-        const application = await catalog.createPartApplications({
+        newApplications.push({
           part_number_id: subject.id,
           observation_id: observation.id,
           vehicle_make_id: vehicleMakeId,
@@ -586,8 +601,15 @@ export const ingestLookupResultStep = createStep(
           constraints: hasKeys(item.constraints) ? item.constraints : null,
           raw_text: clean(item.raw_text),
         })
-        created.applications.push(application.id)
         summary.applications_added += 1
+      }
+
+      if (newApplications.length) {
+        const applications =
+          await catalog.createPartApplications(newApplications)
+        created.applications.push(
+          ...applications.map((application) => application.id)
+        )
       }
 
       const knownAttributes = new Set(

@@ -77,6 +77,12 @@ importers:
         specifier: 4.2.0
         version: 4.2.0
     devDependencies:
+      '@medusajs/icons':
+        specifier: 2.21.2
+        version: 2.21.2(react@18.3.1)
+      '@medusajs/js-sdk':
+        specifier: 2.21.2
+        version: 2.21.2
       '@medusajs/test-utils':
         specifier: 2.21.2
         version: 2.21.2(@medusajs/core-flows@2.21.2(@medusajs/framework@2.21.2(@medusajs/cli@2.21.2(@types/node@20.19.43))(@types/node@20.19.43)(ioredis@5.11.1)(vite@7.3.6(@types/node@20.19.43)(jiti@1.21.7)(terser@5.51.0)(yaml@2.9.0))(zod@4.2.0)))(@medusajs/framework@2.21.2(@medusajs/cli@2.21.2(@types/node@20.19.43))(@types/node@20.19.43)(ioredis@5.11.1)(vite@7.3.6(@types/node@20.19.43)(jiti@1.21.7)(terser@5.51.0)(yaml@2.9.0))(zod@4.2.0))(@medusajs/medusa@2.21.2)

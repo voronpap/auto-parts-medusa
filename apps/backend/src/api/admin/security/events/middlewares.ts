@@ -3,6 +3,7 @@ import {
   validateAndTransformQuery,
 } from "@medusajs/framework/http"
 import { z } from "@medusajs/framework/zod"
+import { SECURITY_EVENT_CATEGORIES } from "../../../../modules/security/event-types"
 
 export const GetSecurityEventsSchema = z.object({
   limit: z.preprocess(
@@ -15,6 +16,8 @@ export const GetSecurityEventsSchema = z.object({
   ),
   type: z.string().min(1).max(64).optional(),
   severity: z.string().min(1).max(32).optional(),
+  category: z.enum(SECURITY_EVENT_CATEGORIES).optional(),
+  ip: z.string().min(2).max(64).optional(),
 })
 
 export type GetSecurityEventsQuery = z.infer<typeof GetSecurityEventsSchema>

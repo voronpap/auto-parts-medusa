@@ -37,6 +37,8 @@
     "zod": "4.2.0"
   },
   "devDependencies": {
+    "@medusajs/icons": "2.21.2",
+    "@medusajs/js-sdk": "2.21.2",
     "@medusajs/test-utils": "2.21.2",
     "@swc/core": "^1.7.28",
     "@swc/jest": "^0.2.36",

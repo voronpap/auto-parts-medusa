@@ -6,6 +6,7 @@ import {
 } from "@medusajs/framework/http"
 import { ContainerRegistrationKeys } from "@medusajs/framework/utils"
 import { recordSecurityEventWorkflow } from "../../../workflows/record-security-event"
+import { SECURITY_EVENT_TYPES } from "../event-types"
 import { resolveClientIp } from "./client-ip"
 import { FixedWindowRateLimiter } from "./rate-limiter"
 
@@ -84,24 +85,45 @@ function getRequestId(req: MedusaRequest): string {
   return randomUUID()
 }
 
-function getAuditEvent(status: number) {
+// POST /auth/{actor}/{provider}, e.g. /auth/user/emailpass.
+function isLoginAttempt(method: string, path: string): boolean {
+  return method === "POST" && /^\/auth\/[^/]+\/[^/]+\/?$/.test(path)
+}
+
+function getAuditEvent(status: number, method: string, path: string) {
   if (status === 429) {
     return {
-      type: "rate_limited",
+      type: SECURITY_EVENT_TYPES.RATE_LIMITED,
       severity: "warning",
+    }
+  }
+
+  if (isLoginAttempt(method, path)) {
+    if (status === 200) {
+      return {
+        type: SECURITY_EVENT_TYPES.LOGIN_SUCCEEDED,
+        severity: "info",
+      }
+    }
+
+    if (status === 401) {
+      return {
+        type: SECURITY_EVENT_TYPES.LOGIN_FAILED,
+        severity: "warning",
+      }
     }
   }
 
   if (status === 401 || status === 403) {
     return {
-      type: "access_denied",
+      type: SECURITY_EVENT_TYPES.ACCESS_DENIED,
       severity: "warning",
     }
   }
 
   if (status >= 500) {
     return {
-      type: "server_error",
+      type: SECURITY_EVENT_TYPES.SERVER_ERROR,
       severity: "error",
     }
   }
@@ -149,7 +171,7 @@ export async function securityMiddleware(
   setSecurityHeaders(req, res, requestId)
 
   res.once("finish", () => {
-    const audit = getAuditEvent(res.statusCode)
+    const audit = getAuditEvent(res.statusCode, req.method, path)
 
     if (!audit) {
       return

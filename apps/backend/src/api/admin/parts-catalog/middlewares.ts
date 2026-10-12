@@ -89,6 +89,12 @@ export const MergeVehiclesSchema = z.object({
 
 export type CreateVehicleMakeBody = z.infer<typeof CreateVehicleMakeSchema>
 export type MergeVehiclesBody = z.infer<typeof MergeVehiclesSchema>
+export const CatalogProductSchema = z.object({
+  brand_id: z.string().min(1),
+  number_type: z.enum(NUMBER_TYPES),
+})
+
+export type CatalogProductBody = z.infer<typeof CatalogProductSchema>
 export type ListCatalogQuery = z.infer<typeof ListCatalogSchema>
 export type CreateBrandBody = z.infer<typeof CreateBrandSchema>
 export type CreateSourceBody = z.infer<typeof CreateSourceSchema>
@@ -149,6 +155,11 @@ export const partsCatalogMiddlewares: MiddlewareRoute[] = [
     matcher: "/admin/parts-catalog/vehicle-models/merge",
     method: "POST",
     middlewares: [validateAndTransformBody(MergeVehiclesSchema)],
+  },
+  {
+    matcher: "/admin/parts-catalog/products/:id",
+    method: "POST",
+    middlewares: [validateAndTransformBody(CatalogProductSchema)],
   },
   {
     matcher: "/admin/parts-catalog/lookup-tasks",

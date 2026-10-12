@@ -10,7 +10,10 @@ import Source from "./models/source"
 
 class PartsCatalogModuleService extends MedusaService({
   Brand,
-  BrandAlias,
+  // Keyed as "record" because generated method names for a model ending in
+  // "s" differ between the types (listBrandAlias) and runtime
+  // (listBrandAliases).
+  BrandAliasRecord: BrandAlias,
   PartNumber,
   PartNumberSearchKey,
   PartRelationship,

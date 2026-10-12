@@ -1,5 +1,6 @@
 import { configureStoreSearch, defineMiddlewares } from "@medusajs/framework/http"
 import { securityMiddleware } from "../modules/security/http/security-middleware"
+import { partsCatalogMiddlewares } from "./admin/parts-catalog/middlewares"
 import { securityEventsMiddlewares } from "./admin/security/events/middlewares"
 
 // The product index declares filterable `status` and `sales_channel_ids`, so
@@ -22,5 +23,6 @@ export default defineMiddlewares({
       ],
     },
     ...securityEventsMiddlewares,
+    ...partsCatalogMiddlewares,
   ],
 })

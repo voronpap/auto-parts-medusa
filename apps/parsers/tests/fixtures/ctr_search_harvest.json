@@ -1,0 +1,83 @@
+{
+  "statusCode": 200,
+  "message": "search 목록 조회 성공",
+  "data": {
+    "list": [
+      {
+        "ctrNo": "CB0671",
+        "article": "CB0671",
+        "etc": "CBJ1263",
+        "part": "BALL JOINT",
+        "seq": "1777152",
+        "image": "https://ctr-cdn2-e7f6e5bugjh6gfc0.z01.azurefd.net/aftermarket/ncu_rus/CB0671_1.jpg",
+        "status": "02"
+      },
+      {
+        "ctrNo": "CB0672",
+        "article": "CB0672",
+        "etc": "CBJ1264",
+        "part": "BALL JOINT",
+        "seq": "6926584",
+        "image": "https://ctr-cdn2-e7f6e5bugjh6gfc0.z01.azurefd.net/aftermarket/ncu_rus/CB0672_1.jpg",
+        "status": "01"
+      },
+      {
+        "ctrNo": "CE0228",
+        "article": "CEHO-41",
+        "etc": "ROT0876",
+        "part": "OUTER TIE ROD",
+        "seq": "9581437",
+        "image": "https://ctr-cdn2-e7f6e5bugjh6gfc0.z01.azurefd.net/aftermarket/ncu_rus/CE0228_1.jpg",
+        "status": "01"
+      },
+      {
+        "ctrNo": "CE0264",
+        "article": "CEIS-25",
+        "etc": "ROT0513",
+        "part": "OUTER TIE ROD",
+        "seq": "9744506",
+        "image": "https://ctr-cdn2-e7f6e5bugjh6gfc0.z01.azurefd.net/aftermarket/ncu_rus/CE0264_1.jpg",
+        "status": "01"
+      },
+      {
+        "ctrNo": "CL0194",
+        "article": "CLHO-63",
+        "etc": "CSL0519",
+        "part": "STABILIZER LINK",
+        "seq": "8831200",
+        "image": "https://ctr-cdn2-e7f6e5bugjh6gfc0.z01.azurefd.net/aftermarket/ncu_rus/CL0194_1.jpg",
+        "status": "01"
+      },
+      {
+        "ctrNo": "CL0195",
+        "article": "CLHO-64",
+        "etc": "CSL0516",
+        "part": "STABILIZER LINK",
+        "seq": "1906202",
+        "image": "https://ctr-cdn2-e7f6e5bugjh6gfc0.z01.azurefd.net/aftermarket/ncu_rus/CL0195_1.jpg",
+        "status": "01"
+      },
+      {
+        "ctrNo": "CL0973",
+        "article": "CL0973",
+        "etc": "CSL2316",
+        "part": "STABILIZER LINK",
+        "seq": "4835475",
+        "image": "https://ctr-cdn2-e7f6e5bugjh6gfc0.z01.azurefd.net/aftermarket/ncu_rus/CL0973_1.jpg",
+        "status": "02"
+      },
+      {
+        "ctrNo": "CL1018",
+        "article": "CL1018",
+        "etc": "CSL2560",
+        "part": "STABILIZER LINK",
+        "seq": "6833380",
+        "image": "https://ctr-cdn2-e7f6e5bugjh6gfc0.z01.azurefd.net/aftermarket/ncu_rus/CL1018_1.jpg",
+        "status": "01"
+      }
+    ],
+    "cnt": 37,
+    "str": null,
+    "keywords": null
+  }
+}

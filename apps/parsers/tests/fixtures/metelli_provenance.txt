@@ -1,0 +1,10 @@
+Retrieved 2026-10-13 from the anonymous English Metelli Group catalogue.
+Finite BeautifulSoup excerpts of actual public responses, not synthetic data.
+Search fixtures retain the source tables; product fixtures retain visible
+identity, information, additional numbers, vehicle maker options and literal
+public vehicle-route variables. Images, navigation, login modal and analytics
+are omitted. Vehicles retains the first three vehicles and their adjacent
+condition rows. Harvest fixtures retain one CHERY Tiggo model/engine and its
+three actual products. All network requests used PoliteSession, 5s per host.
+Raw full responses are in the local probe cache outside apps/parsers/.cache;
+runtime archiving remains the responsibility of PoliteSession.

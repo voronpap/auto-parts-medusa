@@ -8,6 +8,7 @@ from .bosch import BoschAdapter
 from .febest import FebestAdapter
 from .geely_ksa import GeelyKsaAdapter
 from .mann_hummel import FiltronAdapter, MannFilterAdapter
+from .metelli import MetelliAdapter
 from .nibk import NibkAdapter
 from .nissens import NissensAdapter
 from .zf import ZfAdapter
@@ -23,6 +24,7 @@ ADAPTERS: list[type[Adapter]] = [
     NissensAdapter,
     ZfAdapter,
     GeelyKsaAdapter,
+    MetelliAdapter,
 ]
 
 __all__ = ["ADAPTERS", "Adapter", "LookupRequest", "canonical_brand", "label_has_brand", "normalize_brand"]

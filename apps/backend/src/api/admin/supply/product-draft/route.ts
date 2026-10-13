@@ -6,9 +6,13 @@ import { ContainerRegistrationKeys } from "@medusajs/framework/utils"
 import productVariantPartNumber from "../../../../links/product-variant-part-number"
 import { PARTS_CATALOG_MODULE } from "../../../../modules/parts-catalog"
 import PartsCatalogModuleService from "../../../../modules/parts-catalog/service"
-import { normalizePartNumber } from "../../../../modules/parts-catalog/utils/normalize"
+import {
+  normalizeBrandName,
+  normalizePartNumber,
+} from "../../../../modules/parts-catalog/utils/normalize"
 import { SUPPLY_MODULE } from "../../../../modules/supply"
 import SupplyModuleService from "../../../../modules/supply/service"
+import { partNameInUkrainian } from "../../../../modules/supply/utils/part-names"
 import { createProductByNumberWorkflow } from "../../../../workflows/supply"
 import { CreateProductDraftBody, ProductDraftQuery } from "../middlewares"
 
@@ -19,6 +23,8 @@ type Candidate = {
   title: string | null
   part_number_id: string | null
   product_id: string | null
+  /** Where the shop learned of the part. */
+  found_in: string[]
   offers: {
     supplier: string
     price: number
@@ -42,10 +48,10 @@ export async function GET(
   const query = req.scope.resolve(ContainerRegistrationKeys.QUERY)
 
   if (!normalized) {
-    return res.status(200).json({ candidates: [] })
+    return res.status(200).json({ candidates: [], search: null })
   }
 
-  const [numbers, offers] = await Promise.all([
+  const [numbers, offers, [search]] = await Promise.all([
     catalog.listPartNumbers(
       { normalized_number: normalized },
       { relations: ["brand"], take: 30 }
@@ -54,8 +60,22 @@ export async function GET(
       { normalized_number: normalized, is_listed: true },
       { relations: ["supplier"], take: 60, order: { price_minor: "ASC" } }
     ),
+    catalog.listNumberSearches(
+      { normalized_number: normalized },
+      { order: { created_at: "DESC" }, take: 1 }
+    ),
   ])
-  const offerBrands = [...new Set(offers.map((offer) => offer.normalized_brand))]
+  const external = (
+    (search?.candidates as unknown as
+      | { brand: string; number: string; title?: string | null; source: string }[]
+      | null) ?? []
+  ).map((item) => ({ ...item, key: normalizeBrandName(item.brand) }))
+  const offerBrands = [
+    ...new Set([
+      ...offers.map((offer) => offer.normalized_brand),
+      ...external.map((item) => item.key),
+    ]),
+  ]
   const aliases = offerBrands.length
     ? await catalog.listBrandAliasRecords(
         { normalized_alias: offerBrands },
@@ -76,6 +96,7 @@ export async function GET(
       title: null,
       part_number_id: number.id,
       product_id: null,
+      found_in: ["каталог номерів"],
       offers: [],
     })
   }
@@ -89,7 +110,12 @@ export async function GET(
       title: null,
       part_number_id: null,
       product_id: null,
+      found_in: [],
       offers: [],
+    }
+
+    if (!candidate.found_in.includes("прайс постачальника")) {
+      candidate.found_in.push("прайс постачальника")
     }
 
     candidate.title = candidate.title ?? (offer.title?.trim() || null)
@@ -99,6 +125,27 @@ export async function GET(
       currency_code: offer.currency_code,
       stock_quantity: offer.stock_quantity,
     })
+    candidates.set(key, candidate)
+  }
+
+  for (const item of external) {
+    const key = `${brandKey.get(item.key) ?? item.key}|aftermarket`
+    const candidate = candidates.get(key) ?? {
+      brand: item.brand,
+      number: item.number,
+      number_type: "aftermarket",
+      title: null,
+      part_number_id: null,
+      product_id: null,
+      found_in: [],
+      offers: [],
+    }
+
+    if (!candidate.found_in.includes(item.source)) {
+      candidate.found_in.push(item.source)
+    }
+
+    candidate.title = candidate.title ?? partNameInUkrainian(item.title)
     candidates.set(key, candidate)
   }
 
@@ -124,11 +171,23 @@ export async function GET(
         .sort((a, b) => a.name.length - b.name.length)[0]
 
       candidate.product_id = linked?.product_variant?.product_id ?? null
-      candidate.title = candidate.title ?? named?.value ?? null
+      candidate.title =
+        candidate.title ?? partNameInUkrainian(named?.value) ?? null
     }
   }
 
-  return res.status(200).json({ candidates: [...candidates.values()] })
+  return res.status(200).json({
+    candidates: [...candidates.values()],
+    search: search
+      ? {
+          status: search.status,
+          age_seconds: Math.round(
+            (Date.now() - new Date(search.created_at).getTime()) / 1000
+          ),
+          errors: (search.errors as unknown as { message: string }[] | null) ?? [],
+        }
+      : null,
+  })
 }
 
 export async function POST(

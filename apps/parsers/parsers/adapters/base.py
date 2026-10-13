@@ -92,6 +92,13 @@ class Adapter(ABC):
         wanted = normalize_brand(request.brand)
         return any(normalize_brand(brand) == wanted for brand in self.brands)
 
+    def identify(self, number: str) -> list[dict[str, str | None]]:
+        """Parts of any brand the source lists under exactly this number, as
+        ``{"brand", "number", "title"}``. Asked when the brand is not known
+        yet, so it must be one quick request. Sources that cannot be searched
+        by a bare number return nothing."""
+        return []
+
     @abstractmethod
     def lookup(self, request: LookupRequest) -> SourceResult:
         """Returns what the source says about the number.

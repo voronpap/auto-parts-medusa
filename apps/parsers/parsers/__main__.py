@@ -19,7 +19,7 @@ from pathlib import Path
 from .adapters import ADAPTERS, Adapter, LookupRequest
 from .client import CatalogClient
 from .http import PoliteSession, RateLimiter, ResponseCache
-from .worker import load_schema, run_forever, run_lookup
+from .worker import identify_forever, identify_number, load_schema, run_forever, run_lookup
 
 
 def build_adapters(cache_path: Path | None) -> list[Adapter]:
@@ -49,6 +49,10 @@ def main(argv: list[str] | None = None) -> int:
     lookup.add_argument("--adapter", help="use only this adapter")
 
     commands.add_parser("run", help="claim tasks from the catalog and post results")
+
+    identify = commands.add_parser("identify", help="print whose part a bare number is")
+    identify.add_argument("--number", required=True)
+    commands.add_parser("identify-run", help="answer number searches typed in the admin")
 
     load = commands.add_parser("import-pdf", help="load a parsed PDF catalogue into the catalog")
     load.add_argument("catalogue", choices=["monroe", "kyb", "kyb-kits"])
@@ -92,6 +96,10 @@ def main(argv: list[str] | None = None) -> int:
 
         result = run_lookup(chosen, request, worker, schema)
         print(json.dumps(result.to_payload(), ensure_ascii=False, indent=2))
+        return 0
+
+    if args.command == "identify":
+        print(json.dumps(identify_number(adapters, args.number, worker), ensure_ascii=False, indent=2))
         return 0
 
     # The key comes from the environment only; it is never an argument, so it
@@ -146,6 +154,10 @@ def main(argv: list[str] | None = None) -> int:
         totals = load_catalogue(args.catalogue, client, index, worker, limit=args.limit)
         print(json.dumps(totals))
         return 0 if not totals["failed"] else 1
+
+    if args.command == "identify-run":
+        identify_forever(client, adapters, worker)
+        return 0
 
     run_forever(client, adapters, worker, schema=schema)
     return 0

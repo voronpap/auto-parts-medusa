@@ -57,6 +57,23 @@ def _brand(name: str) -> str:
     return BRAND_NAMES.get(canonical_brand(name), name)
 
 
+def parse_card_names(page: str) -> list[tuple[str, str, str]]:
+    """(brand, number, name) of every product card on a list page."""
+    soup = BeautifulSoup(page, "html.parser")
+    found: list[tuple[str, str, str]] = []
+
+    for card in soup.select("[data-variant-card-gtm-item-value]"):
+        try:
+            item = json.loads(html.unescape(card["data-variant-card-gtm-item-value"]))
+        except (ValueError, KeyError):
+            continue
+
+        if item.get("item_brand") and item.get("item_id"):
+            found.append((str(item["item_brand"]), str(item["item_id"]), str(item.get("item_name") or "")))
+
+    return found
+
+
 def parse_cards(page: str) -> list[tuple[str, str, str]]:
     """(brand, number, product address) of every product card on a list page."""
     soup = BeautifulSoup(page, "html.parser")
@@ -229,6 +246,25 @@ class SparetoAdapter(Adapter):
     def supports(self, request: LookupRequest) -> bool:
         """The shop lists parts of every aftermarket brand."""
         return request.number_type != "oem"
+
+    def identify(self, number: str) -> list[dict[str, str | None]]:
+        wanted = _compact(number)
+
+        if len(wanted) < 3:
+            return []
+
+        page = self.http.fetch(f"{BASE_URL}/products?keywords={quote(wanted)}")
+        found: dict[tuple[str, str], dict[str, str | None]] = {}
+
+        # The search also returns analogs; only cards of this very number count.
+        for brand, value, name in parse_card_names(page):
+            if _compact(value) == wanted:
+                found.setdefault(
+                    (canonical_brand(_brand(brand)), wanted),
+                    {"brand": _brand(brand), "number": value, "title": name or None},
+                )
+
+        return list(found.values())
 
     def lookup(self, request: LookupRequest) -> SourceResult:
         wanted = _compact(request.number)

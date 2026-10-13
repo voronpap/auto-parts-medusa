@@ -70,6 +70,11 @@ export const CreateProductDraftSchema = z.object({
   quantity: z.number().int().min(0).max(100_000).default(0),
 })
 
+export const ProductDraftProgressSchema = z.object({
+  part_number_id: z.string().min(1).max(100),
+})
+
+export type ProductDraftProgressQuery = z.infer<typeof ProductDraftProgressSchema>
 export type ProductDraftQuery = z.infer<typeof ProductDraftSchema>
 export type CreateProductDraftBody = z.infer<typeof CreateProductDraftSchema>
 export type UpdatePricingBody = z.infer<typeof UpdatePricingSchema>
@@ -110,6 +115,16 @@ export const supplyMiddlewares: MiddlewareRoute[] = [
     matcher: "/admin/supply/product-draft",
     method: "GET",
     middlewares: [validateAndTransformQuery(ProductDraftSchema, {})],
+  },
+  {
+    matcher: "/admin/supply/product-draft/search",
+    method: "POST",
+    middlewares: [validateAndTransformBody(ProductDraftSchema)],
+  },
+  {
+    matcher: "/admin/supply/product-draft/progress",
+    method: "GET",
+    middlewares: [validateAndTransformQuery(ProductDraftProgressSchema, {})],
   },
   {
     matcher: "/admin/supply/product-draft",

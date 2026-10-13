@@ -152,6 +152,65 @@ def process_tasks(
     return len(tasks)
 
 
+def identify_number(adapters: Iterable[Adapter], number: str, worker: str) -> dict[str, Any]:
+    """Asks every source whose part a bare number is; one failing does not
+    stop the rest."""
+    candidates: list[dict[str, Any]] = []
+    errors: list[dict[str, Any]] = []
+
+    for adapter in adapters:
+        try:
+            found = adapter.identify(number)
+        except SourceError as error:
+            log.warning("%s could not identify %s: %s", adapter.name, number, error)
+            errors.append({"source": adapter.name, "message": str(error)[:2000]})
+            continue
+        except Exception as error:  # an adapter bug must not lose the other sources
+            log.exception("%s crashed identifying %s", adapter.name, number)
+            errors.append({"source": adapter.name, "message": f"adapter error: {type(error).__name__}: {error}"[:2000]})
+            continue
+
+        candidates += [
+            {
+                "brand": str(item["brand"])[:200],
+                "number": str(item["number"])[:100],
+                "title": (item.get("title") or None) and str(item["title"])[:300],
+                "source": adapter.name,
+            }
+            for item in found
+            if item.get("brand") and item.get("number")
+        ]
+
+    return {"worker": worker, "candidates": candidates[:100], "errors": errors[:50]}
+
+
+def identify_forever(
+    client: CatalogClient,
+    adapters: list[Adapter],
+    worker: str,
+    idle_seconds: float = 2.0,
+) -> None:
+    """Answers number searches as they are typed. Runs beside the lookup
+    worker, so a person is never kept waiting behind a long lookup."""
+    log.info("Identifier %s started with %d adapters", worker, len(adapters))
+
+    while True:
+        try:
+            searches = client.pending_searches()
+
+            for search in searches:
+                payload = identify_number(adapters, search["number"], worker)
+                client.post_search_result(search["id"], payload)
+                log.info("%s: %d candidates, %d errors", search["number"], len(payload["candidates"]), len(payload["errors"]))
+        except CatalogError as error:
+            log.error("Catalog unavailable: %s", error)
+            searches = []
+            time.sleep(15)
+
+        if not searches:
+            time.sleep(idle_seconds)
+
+
 def run_forever(
     client: CatalogClient,
     adapters: list[Adapter],

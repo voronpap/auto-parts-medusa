@@ -66,6 +66,11 @@ class Adapter(ABC):
     #: Seconds between requests to this source's host.
     min_interval: float = 5.0
 
+    #: Bulk collection sets this to take crosses and specifications first and
+    #: leave fitment, which costs most requests, for a second pass. Only
+    #: adapters that read fitment with separate requests look at it.
+    skip_fitment: bool = False
+
     #: Whether the source can also be asked which of its products are listed
     #: for a number of another maker (see `lookup_foreign`).
     cross_search: bool = False

@@ -243,10 +243,11 @@ class ZfAdapter(Adapter):
         url = _record_url(number, str(hit["productDetailsPageHref"]))
         result = parse_details(data, url)
         self._linked_relations(data, number, url, result)
-        fitment = self.http.fetch_json(FITMENT_URL, params={
-            "articleID": number, "languageID": 4, "brandIDs": BRAND_IDS[brand], "countryID": "UA",
-        }, headers={"X-Requested-With": "XMLHttpRequest"})
-        result.applications = parse_fitment(fitment, number, url)
+        if not self.skip_fitment:
+            fitment = self.http.fetch_json(FITMENT_URL, params={
+                "articleID": number, "languageID": 4, "brandIDs": BRAND_IDS[brand], "countryID": "UA",
+            }, headers={"X-Requested-With": "XMLHttpRequest"})
+            result.applications = parse_fitment(fitment, number, url)
         for values, limit, label in ((result.relationships, MAX_RELATIONSHIPS, "Кроси"),
                                      (result.applications, MAX_APPLICATIONS, "Застосовність"),
                                      (result.attributes, 295, "Характеристики")):

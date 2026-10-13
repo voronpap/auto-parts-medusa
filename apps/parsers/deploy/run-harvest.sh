@@ -10,6 +10,10 @@
 cd /home/vrn/medusa-store/apps/parsers
 set -a; . ./.env; . ../backend/.env; set +a
 export CATALOG_URL=http://127.0.0.1:9000
+# Crosses and specifications first; fitment is a second pass (see the end).
+export PARSERS_SKIP_FITMENT=1
+# None of these sites states a pause of its own; two seconds between requests.
+export PARSERS_INTERVAL=2
 D=.cache/harvest
 mkdir -p $D
 PY=.venv/bin/python

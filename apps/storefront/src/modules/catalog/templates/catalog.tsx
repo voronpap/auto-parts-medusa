@@ -1,5 +1,6 @@
 import { listCategories } from "@lib/data/categories"
-import { listProductsWithSort } from "@lib/data/products"
+import { searchByPartNumber } from "@lib/data/parts-catalog"
+import { listProducts, listProductsWithSort } from "@lib/data/products"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import { SortOptions } from "@modules/store/components/refinement-list/sort-products"
 import ProductTable from "@modules/catalog/components/product-table"
@@ -47,6 +48,32 @@ export default async function Catalog({
       },
     }),
   ])
+  // A typed part number also finds products through the parts catalog:
+  // the product with that number and the confirmed crosses of that number.
+  const matches = q && !categoryId && page === 1 ? await searchByPartNumber(q) : []
+  const byNumber = matches.length
+    ? await listProducts({
+        countryCode,
+        queryParams: {
+          id: matches.map((match) => match.product_id),
+          limit: 50,
+        },
+      })
+        .then(({ response }) => response.products)
+        .catch(() => [])
+    : []
+  const order = new Map(matches.map((match, index) => [match.product_id, index]))
+  byNumber.sort((a, b) => (order.get(a.id!) ?? 0) - (order.get(b.id!) ?? 0))
+  const notes = Object.fromEntries(
+    matches.map((match) => [
+      match.product_id,
+      match.via === "number"
+        ? `Номер ${match.matched.brand} ${match.matched.number}`
+        : `Аналог номера ${match.matched.brand} ${match.matched.number}`,
+    ])
+  )
+  const listed = response.products.filter((product) => !order.has(product.id!))
+  const found = byNumber.length + (response.count - (response.products.length - listed.length))
   const pages = Math.max(1, Math.ceil(response.count / PAGE_SIZE))
   const total = categories.reduce(
     (sum, category) =>
@@ -103,9 +130,7 @@ export default async function Catalog({
                 <h1 data-testid="store-page-title">{title}</h1>
                 <p>
                   {q ? `Пошук «${q}» · ` : ""}
-                  {response.count
-                    ? `Знайдено: ${response.count}`
-                    : "Нічого не знайдено"}
+                  {found ? `Знайдено: ${found}` : "Нічого не знайдено"}
                   {description ? ` · ${description}` : ""}
                 </p>
               </div>
@@ -137,12 +162,22 @@ export default async function Catalog({
               </div>
             </div>
 
-            {response.products.length ? (
-              <ProductTable
-                products={response.products}
-                countryCode={countryCode}
-              />
-            ) : (
+            {byNumber.length > 0 && (
+              <>
+                <div className="ap-result-head">За номером деталі</div>
+                <ProductTable
+                  products={byNumber}
+                  countryCode={countryCode}
+                  notes={notes}
+                />
+                {listed.length > 0 && (
+                  <div className="ap-result-head">За назвою</div>
+                )}
+              </>
+            )}
+            {listed.length ? (
+              <ProductTable products={listed} countryCode={countryCode} />
+            ) : byNumber.length ? null : (
               <div className="ap-empty">
                 За цим запитом товарів немає.{" "}
                 <LocalizedClientLink className="ap-link" href="/store">

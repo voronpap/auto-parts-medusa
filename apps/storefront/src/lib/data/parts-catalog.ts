@@ -51,3 +51,24 @@ export const retrievePartsCatalog = async (
       ),
     }))
     .catch(() => EMPTY)
+
+export type NumberMatch = {
+  product_id: string
+  handle: string
+  via: "number" | "cross"
+  matched: { brand: string; number: string }
+}
+
+/**
+ * Products for a typed part number: the one carrying the number and the ones
+ * the catalog lists as its confirmed crosses.
+ */
+export const searchByPartNumber = async (q: string): Promise<NumberMatch[]> =>
+  sdk.client
+    .fetch<{ matches: NumberMatch[] }>("/store/parts-catalog/search", {
+      method: "GET",
+      query: { q },
+      next: { revalidate: 300, tags: ["parts-catalog"] },
+    })
+    .then(({ matches }) => matches)
+    .catch(() => [])

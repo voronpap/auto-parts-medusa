@@ -299,3 +299,8 @@
   .ap-cross-group, .ap-section-head { padding-left: 16px; padding-right: 16px; }
   .ap-makes summary { padding: 13px 16px; }
 }
+
+/* Catalog: results found through the parts catalog */
+.ap-result-head { padding: 10px 21px; border-top: 1px solid var(--ap-line); color: var(--ap-brand); background: var(--ap-brand-soft); font-size: 11px; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; }
+.ap-catalog-head + .ap-result-head { border-top: 0; }
+.ap-why { display: block; margin-top: 3px; color: var(--ap-good); font-size: 11px; font-style: normal; font-weight: 700; }

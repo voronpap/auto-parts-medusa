@@ -62,9 +62,12 @@ const Stock = ({ variant }: { variant?: HttpTypes.StoreProductVariant }) => {
 export default function ProductTable({
   products,
   countryCode,
+  notes,
 }: {
   products: HttpTypes.StoreProduct[]
   countryCode: string
+  /** A line under a product saying why it is in the list, by product id. */
+  notes?: Record<string, string>
 }) {
   return (
     <table className="ap-table">
@@ -99,6 +102,9 @@ export default function ProductTable({
                   <span>
                     <strong>{product.title}</strong>
                     <small>{product.subtitle || variant?.sku || ""}</small>
+                    {notes?.[product.id!] && (
+                      <em className="ap-why">{notes[product.id!]}</em>
+                    )}
                   </span>
                 </LocalizedClientLink>
               </td>

@@ -100,7 +100,8 @@ export default function SteelHome({
               <LocalizedClientLink href="/store?q=амортизатор">
                 амортизатор
               </LocalizedClientLink>
-              <LocalizedClientLink href="/vin">підбір за VIN →</LocalizedClientLink>
+              <LocalizedClientLink href="/cars">підбір за авто →</LocalizedClientLink>
+              <LocalizedClientLink href="/vin">за VIN →</LocalizedClientLink>
             </div>
           </div>
           <div className="ap-hero-visual" aria-hidden="true">
@@ -125,8 +126,8 @@ export default function SteelHome({
             <span>Нова пошта, Укрпошта, самовивіз</span>
           </div>
           <div className="ap-perk">
-            <strong>Підбір за VIN</strong>
-            <span>деталі саме для вашого авто</span>
+            <strong>Підбір за авто та VIN</strong>
+            <span>деталі саме для вашої машини</span>
           </div>
         </section>
 

@@ -8,6 +8,10 @@ import { PARTS_CATALOG_MODULE } from "../../../../../modules/parts-catalog"
 import PartsCatalogModuleService from "../../../../../modules/parts-catalog/service"
 import { normalizeBrandName } from "../../../../../modules/parts-catalog/utils/normalize"
 import {
+  familyOf,
+  inFamily,
+} from "../../../../../modules/parts-catalog/utils/vehicle-family"
+import {
   decodeVin,
   modelHasTypeCode,
 } from "../../../../../modules/parts-catalog/utils/vin"
@@ -16,7 +20,6 @@ const PUBLIC_VERDICTS = ["ACCEPTED", "CONDITIONAL"] as const
 const VPIC_URL = "https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVinValues"
 const VPIC_TIMEOUT_MS = 6000
 const CACHE_LIMIT = 500
-const GENERATION_RE = /^(?:[ivx]+|\d{1,2})$/i
 
 type Vpic = { make?: string; model?: string; year?: number; engine?: string }
 
@@ -72,33 +75,6 @@ async function askVpic(vin: string): Promise<Vpic> {
   vpicCache.set(vin, answer)
 
   return answer
-}
-
-const tokens = (name: string) =>
-  name
-    .replace(/\([^)]*\)/g, " ")
-    .toLowerCase()
-    .split(/[\s/,]+/)
-    .filter(Boolean)
-
-/** Name and generation of a model: "OCTAVIA II Combi (1Z5)" -> octavia, ii. */
-const familyOf = (name: string) => {
-  const parts = tokens(name)
-
-  return parts.length > 1 && GENERATION_RE.test(parts[1])
-    ? parts.slice(0, 2)
-    : parts.slice(0, 1)
-}
-
-const inFamily = (name: string, family: string[]) => {
-  const parts = tokens(name)
-
-  if (!family.length || family.some((part, index) => parts[index] !== part)) {
-    return false
-  }
-
-  // "Golf" alone must not take in "Golf V".
-  return family.length > 1 || !GENERATION_RE.test(parts[1] ?? "")
 }
 
 /**

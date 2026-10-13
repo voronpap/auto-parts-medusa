@@ -18,7 +18,10 @@ auto-parts.pp.ua. Сервіс уже працює; твоє завдання �
   як користувацький юніт: `systemctl --user restart auto-parts-parsers`
   (перед цим `export XDG_RUNTIME_DIR=/run/user/$(id -u)`).
 - Спершу прочитай: `apps/parsers/README.md`, `docs/LOOKUP_FORMAT.md`,
-  `docs/SOURCES_TRIAGE.md` (236 каталогів, розкладених за способом доступу),
+  `docs/SOURCES_TRIAGE.md` — список із 236 каталогів, розкладених за способом
+  доступу; на його початку розділ «Стан роботи»: що підключено, що закрите,
+  що розвідано. Повний реєстр з адресами —
+  `apps/backend/src/modules/parts-catalog/data/manufacturer-catalogs.json`,
   і два адаптери як зразки: `parsers/adapters/febest.py` (HTML) та
   `parsers/adapters/bosch.py` (JSON API).
 

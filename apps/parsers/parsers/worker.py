@@ -191,7 +191,7 @@ def identify_number(adapters: Iterable[Adapter], number: str, worker: str) -> di
 # Attributes in which catalogues give the name of the part.
 TITLE_ATTRIBUTES = ("назва", "найменування", "тип деталі", "product", "name", "description", "опис")
 # A person is waiting: catalogues are asked only this long.
-IDENTIFY_BUDGET_SECONDS = 40.0
+IDENTIFY_BUDGET_SECONDS = 60.0
 
 
 def identify_by_lookup(adapters: Iterable[Adapter], number: str) -> list[dict[str, Any]]:

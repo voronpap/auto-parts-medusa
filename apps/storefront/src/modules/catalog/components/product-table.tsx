@@ -7,7 +7,7 @@ export const money = (amount: number | null | undefined) =>
     amount ?? 0
   )} ₴`
 
-const PartIcon = ({ title }: { title: string }) => {
+export const PartIcon = ({ title }: { title: string }) => {
   const name = title.toLowerCase()
 
   if (name.includes("фільтр")) {
@@ -36,7 +36,7 @@ const PartIcon = ({ title }: { title: string }) => {
   )
 }
 
-const isAvailable = (variant?: HttpTypes.StoreProductVariant) =>
+export const isAvailable = (variant?: HttpTypes.StoreProductVariant) =>
   Boolean(variant) &&
   (!variant!.manage_inventory ||
     Boolean(variant!.allow_backorder) ||

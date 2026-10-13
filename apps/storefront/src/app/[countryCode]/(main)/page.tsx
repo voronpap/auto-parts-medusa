@@ -1,6 +1,5 @@
 import { Metadata } from "next"
 
-import { retrieveCart } from "@lib/data/cart"
 import { listCategories } from "@lib/data/categories"
 import { listProducts } from "@lib/data/products"
 import { getRegion } from "@lib/data/regions"
@@ -12,7 +11,7 @@ export const metadata: Metadata = {
     "Auto Parts — автозапчастини для СТО, магазинів та автомобілістів. Пошук за артикулом і назвою.",
 }
 
-const HOME_PRODUCTS = 15
+const HOME_PRODUCTS = 60
 
 export default async function Home(props: {
   params: Promise<{ countryCode: string }>
@@ -24,10 +23,9 @@ export default async function Home(props: {
     return null
   }
 
-  const [{ response }, categories, cart] = await Promise.all([
+  const [{ response }, categories] = await Promise.all([
     listProducts({ countryCode, queryParams: { limit: HOME_PRODUCTS } }),
     listCategories().catch(() => []),
-    retrieveCart().catch(() => null),
   ])
 
   return (
@@ -36,7 +34,6 @@ export default async function Home(props: {
       products={response.products}
       count={response.count}
       categories={categories}
-      cart={cart}
     />
   )
 }

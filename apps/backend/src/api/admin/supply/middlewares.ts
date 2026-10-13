@@ -43,6 +43,21 @@ export const ListOffersSchema = z.object({
   q: z.string().trim().min(1).max(100).optional(),
 })
 
+export const UpdatePricingSchema = z.object({
+  default_markup_percent: z.number().min(0).max(1000).nullish(),
+  rounding_step: z.number().min(0.01).max(1000).optional(),
+  sync_stock: z.boolean().optional(),
+})
+
+export const CreatePricingRuleSchema = z.object({
+  brand: z.string().trim().max(200).nullish(),
+  price_from: z.number().min(0).max(10_000_000).nullish(),
+  price_to: z.number().min(0).max(10_000_000).nullish(),
+  markup_percent: z.number().min(0).max(1000),
+})
+
+export type UpdatePricingBody = z.infer<typeof UpdatePricingSchema>
+export type CreatePricingRuleBody = z.infer<typeof CreatePricingRuleSchema>
 export type CreateSupplierBody = z.infer<typeof CreateSupplierSchema>
 export type OpenImportRunBody = z.infer<typeof OpenImportRunSchema>
 export type ImportRowsBody = z.infer<typeof ImportRowsSchema>
@@ -64,6 +79,16 @@ export const supplyMiddlewares: MiddlewareRoute[] = [
     method: "POST",
     bodyParser: { sizeLimit: "2mb" },
     middlewares: [validateAndTransformBody(ImportRowsSchema)],
+  },
+  {
+    matcher: "/admin/supply/pricing",
+    method: "POST",
+    middlewares: [validateAndTransformBody(UpdatePricingSchema)],
+  },
+  {
+    matcher: "/admin/supply/pricing/rules",
+    method: "POST",
+    middlewares: [validateAndTransformBody(CreatePricingRuleSchema)],
   },
   {
     matcher: "/admin/supply/offers",

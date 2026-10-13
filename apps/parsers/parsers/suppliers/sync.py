@@ -5,7 +5,7 @@ from __future__ import annotations
 import logging
 from typing import Any
 
-from ..client import CatalogClient
+from ..client import CatalogClient, CatalogError
 from .base import SupplierAdapter
 
 log = logging.getLogger("parsers")
@@ -62,5 +62,14 @@ def sync_supplier(client: CatalogClient, adapter: SupplierAdapter, file_name: st
         raise ValueError(f"The price list of {meta.name} has no rows")
 
     finished = client.finish_run(run["id"])
+    result = {**totals, "delisted": finished.get("offers_delisted", 0), "errors": finished.get("errors")}
 
-    return {**totals, "delisted": finished.get("offers_delisted", 0), "errors": finished.get("errors")}
+    # New prices and stock reach the products right away. The store refuses
+    # while no markup is set; the price list is loaded all the same.
+    try:
+        result["products"] = client.apply_pricing()
+    except CatalogError as error:
+        log.warning("Prices were not carried over to products: %s", error)
+        result["products"] = None
+
+    return result

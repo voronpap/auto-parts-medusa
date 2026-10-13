@@ -142,3 +142,7 @@ class CatalogClient:
 
     def finish_run(self, run_id: str) -> dict[str, Any]:
         return self._post(f"/admin/supply/import-runs/{run_id}/finish", {}, timeout=1800)["import_run"]
+
+    def apply_pricing(self) -> dict[str, Any]:
+        """Carries supplier prices and stock over to the store products."""
+        return self._post("/admin/supply/pricing/apply", {}, timeout=1800)

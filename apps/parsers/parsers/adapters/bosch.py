@@ -194,6 +194,9 @@ class BoschAdapter(Adapter):
 
             result.attributes.append(Attribute(name=columns[0], value=columns[1]))
 
+        if self.skip_fitment:
+            return result
+
         makers = self._get(f"/usage-in-vehicles/{quote(wanted, safe='')}/makers").get("makers") or []
         total = 0
 

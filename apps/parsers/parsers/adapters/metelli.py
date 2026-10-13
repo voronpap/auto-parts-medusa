@@ -226,7 +226,7 @@ class MetelliAdapter(Adapter):
                 break
         if product is None:
             return SourceResult()
-        if product.vehicle_url and product.internal_code and product.brand_key:
+        if not self.skip_fitment and product.vehicle_url and product.internal_code and product.brand_key:
             html = self.http.fetch(product.vehicle_url, params={"brand": product.brand_key,
                                    "code": product.internal_code, "language": "en", "make": "-1"})
             product.result.applications = parse_vehicles(html, product, hit.url)

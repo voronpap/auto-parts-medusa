@@ -103,6 +103,13 @@ def parse_product_page(html: str, record_url: str) -> tuple[str | None, SourceRe
             continue
 
         match = VEHICLE_RE.match(text)
+
+        # "LADA 2105 - 2107" is a pair of model names, not years of production.
+        if match and not all(
+            1950 <= int(year) <= 2050 for year in (match.group("from"), match.group("to")) if year
+        ):
+            match = None
+
         make, model = split_vehicle(match.group("vehicle") if match else text)
 
         if not make:
@@ -177,7 +184,7 @@ def parse_product_page(html: str, record_url: str) -> tuple[str | None, SourceRe
 
 
 class FebestAdapter(Adapter):
-    version = "1.0.1"
+    version = "1.0.2"
     min_interval = 5.0
     cross_search = True
 

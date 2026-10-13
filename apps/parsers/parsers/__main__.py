@@ -26,11 +26,25 @@ def build_adapters(cache_path: Path | None) -> list[Adapter]:
     limiter = RateLimiter()
     http = PoliteSession(cache=ResponseCache(cache_path), limiter=limiter)
     adapters = [adapter_class(http) for adapter_class in ADAPTERS]
+    # Bulk collection only: crosses first, and a shorter pause for sites
+    # that state none themselves. The service itself runs with neither.
+    skip_fitment = os.environ.get("PARSERS_SKIP_FITMENT") == "1"
+    pause = float(os.environ.get("PARSERS_INTERVAL") or 0)
+
+    if pause:
+        # Also for hosts an adapter reaches besides its catalogue page (an API host).
+        limiter = RateLimiter(min_interval=max(pause, 2.0))
+        http.limiter = limiter
 
     for adapter in adapters:
+        adapter.skip_fitment = skip_fitment
+
         if adapter.source.url:
             host = adapter.source.url.split("/")[2]
-            limiter.set_interval(host, adapter.min_interval)
+            # A source that asks for more than the usual pause keeps it.
+            limiter.set_interval(
+                host, max(pause, 2.0) if pause and adapter.min_interval <= 5.0 else adapter.min_interval
+            )
 
     return adapters
 

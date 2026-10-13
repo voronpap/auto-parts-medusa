@@ -111,3 +111,18 @@ def test_archive_is_sent_in_batches_and_oversized_responses_are_left_out():
     assert [len(payload["documents"]) for _, payload in client.posts] == [2, 2, 1]
     assert {path for path, _ in client.posts} == {"/admin/parts-catalog/documents"}
     assert client.posts[0][1]["number"]["number"] == "X 1"
+
+
+def test_form_values_and_ajax_header_have_separate_cache_entries(tmp_path):
+    http = session({"https://c.example/search": "result"}, tmp_path)
+    http.recorder = []
+    url = "https://c.example/search"
+    http.fetch(url, method="POST", form_body={"number": "0001"})
+    http.fetch(url, method="POST", form_body={"number": "0002"})
+    http.fetch(url)
+    http.fetch(url, headers={"X-Requested-With": "XMLHttpRequest"})
+    assert http._session.requests == 4
+    assert len({r["request_key"] for r in http.recorder}) == 4
+    assert http.recorder[0]["params"] == {"form": {"number": "0001"}}
+    http.fetch(url, method="POST", form_body={"number": "0001"})
+    assert http._session.requests == 4

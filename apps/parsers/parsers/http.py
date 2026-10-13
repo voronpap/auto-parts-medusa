@@ -151,6 +151,7 @@ class PoliteSession:
         url: str,
         params: dict[str, Any] | None,
         json_body: Any,
+        form_body: dict[str, Any] | None,
         status: int,
         body: str,
         fetched_at: float,
@@ -162,6 +163,8 @@ class PoliteSession:
 
         if json_body is not None:
             request["json"] = json_body
+        if form_body is not None:
+            request["form"] = form_body
 
         self.recorder.append(
             {
@@ -182,28 +185,38 @@ class PoliteSession:
         method: str = "GET",
         params: dict[str, Any] | None = None,
         json_body: Any = None,
+        form_body: dict[str, Any] | None = None,
         headers: dict[str, str] | None = None,
         use_cache: bool = True,
     ) -> str:
         """Returns the response body, raising SourceError on any failure."""
-        key = ResponseCache.key(method, url, [params, json_body])
+        if json_body is not None and form_body is not None:
+            raise ValueError("Send either JSON or form data, not both")
+
+        payload = [params, json_body]
+        if form_body is not None:
+            payload.append({"form": form_body})
+        if headers is not None:
+            payload.append({"headers": headers})
+        key = ResponseCache.key(method, url, payload)
 
         if use_cache:
             cached = self._cache.get_entry(key)
 
             if cached is not None:
-                self._record(key, method, url, params, json_body, cached[1], cached[2], cached[0])
+                self._record(key, method, url, params, json_body, form_body, cached[1], cached[2], cached[0])
 
                 return cached[2]
 
         self.limiter.wait(urlsplit(url).netloc)
 
         try:
+            body_args = {"data": form_body} if form_body is not None else {"json": json_body}
             response = self._session.request(
                 method,
                 url,
                 params=params,
-                json=json_body,
+                **body_args,
                 headers=headers,
                 timeout=self._timeout,
             )
@@ -228,7 +241,7 @@ class PoliteSession:
         if use_cache:
             self._cache.put(key, response.status_code, body)
 
-        self._record(key, method, url, params, json_body, response.status_code, body, time.time())
+        self._record(key, method, url, params, json_body, form_body, response.status_code, body, time.time())
 
         return body
 

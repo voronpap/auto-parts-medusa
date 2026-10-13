@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import logging
 import time
+from concurrent.futures import ThreadPoolExecutor, wait
 from pathlib import Path
 from typing import Any, Iterable
 
@@ -181,7 +182,67 @@ def identify_number(adapters: Iterable[Adapter], number: str, worker: str) -> di
             if item.get("brand") and item.get("number")
         ]
 
+    if not candidates:
+        candidates = identify_by_lookup(adapters, number)
+
     return {"worker": worker, "candidates": candidates[:100], "errors": errors[:50]}
+
+
+# Attributes in which catalogues give the name of the part.
+TITLE_ATTRIBUTES = ("назва", "найменування", "тип деталі", "product", "name", "description", "опис")
+# A person is waiting: catalogues are asked only this long.
+IDENTIFY_BUDGET_SECONDS = 40.0
+
+
+def identify_by_lookup(adapters: Iterable[Adapter], number: str) -> list[dict[str, Any]]:
+    """When no source can be searched by a bare number, each manufacturer's
+    catalogue is asked whether the number is its own part. A catalogue that
+    returns anything for it knows the part. What it returned stays in the
+    cache, so the lookup that follows does not ask again.
+
+    The catalogues are different sites, so they are asked side by side; the
+    pause between requests to one site is kept by the shared rate limiter."""
+
+    def ask(adapter: Adapter) -> dict[str, Any] | None:
+        brand = adapter.brands[0]
+
+        try:
+            result = adapter.lookup(LookupRequest(brand, number, "aftermarket"))
+        except Exception as error:  # a source that fails simply does not answer
+            log.info("%s did not answer for %s: %s", adapter.name, number, error)
+            return None
+
+        if result.is_empty:
+            return None
+
+        title = next(
+            (
+                attribute.value
+                for wanted in TITLE_ATTRIBUTES
+                for attribute in result.attributes
+                if attribute.name.lower().startswith(wanted)
+            ),
+            None,
+        )
+
+        return {"brand": brand, "number": number.strip()[:100], "title": title and title[:300], "source": adapter.name}
+
+    makers = [adapter for adapter in adapters if adapter.brands]
+
+    if not makers:
+        return []
+
+    pool = ThreadPoolExecutor(max_workers=len(makers), thread_name_prefix="identify")
+    asked = [pool.submit(ask, adapter) for adapter in makers]
+    done, late = wait(asked, timeout=IDENTIFY_BUDGET_SECONDS)
+    # Catalogues still answering are left to finish into the cache.
+    pool.shutdown(wait=False)
+
+    if late:
+        log.warning("Identification of %s: %d catalogues did not answer in time", number, len(late))
+
+    # In the order the adapters are registered.
+    return [found for future in asked if future in done and (found := future.result())]
 
 
 def identify_forever(

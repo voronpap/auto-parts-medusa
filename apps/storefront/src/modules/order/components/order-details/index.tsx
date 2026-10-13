@@ -7,16 +7,31 @@ type OrderDetailsProps = {
 }
 
 const OrderDetails = ({ order, showStatus }: OrderDetailsProps) => {
-  const formatStatus = (str: string) => {
-    const formatted = str.split("_").join(" ")
-
-    return formatted.slice(0, 1).toUpperCase() + formatted.slice(1)
+  const STATUSES: Record<string, string> = {
+    not_fulfilled: "Обробляється",
+    partially_fulfilled: "Частково зібрано",
+    fulfilled: "Зібрано",
+    partially_shipped: "Частково відправлено",
+    shipped: "Відправлено",
+    partially_delivered: "Частково доставлено",
+    delivered: "Доставлено",
+    canceled: "Скасовано",
+    not_paid: "Не оплачено",
+    awaiting: "Очікує оплати",
+    authorized: "Оплату підтверджено",
+    partially_authorized: "Оплату підтверджено частково",
+    captured: "Оплачено",
+    partially_captured: "Оплачено частково",
+    refunded: "Кошти повернено",
+    partially_refunded: "Кошти повернено частково",
+    requires_action: "Потрібна дія",
   }
+  const formatStatus = (str: string) => STATUSES[str] ?? str
 
   return (
     <div>
       <Text>
-        We have sent the order confirmation details to{" "}
+        Підтвердження замовлення надіслано на{" "}
         <span
           className="text-ui-fg-medium-plus font-semibold"
           data-testid="order-email"
@@ -26,26 +41,26 @@ const OrderDetails = ({ order, showStatus }: OrderDetailsProps) => {
         .
       </Text>
       <Text className="mt-2">
-        Order date:{" "}
+        Дата замовлення:{" "}
         <span data-testid="order-date">
-          {new Date(order.created_at).toDateString()}
+          {new Date(order.created_at).toLocaleDateString("uk-UA")}
         </span>
       </Text>
       <Text className="mt-2 text-ui-fg-interactive">
-        Order number: <span data-testid="order-id">{order.display_id}</span>
+        Номер замовлення: <span data-testid="order-id">{order.display_id}</span>
       </Text>
 
       <div className="flex items-center text-compact-small gap-x-4 mt-4">
         {showStatus && (
           <>
             <Text>
-              Order status:{" "}
+              Стан замовлення:{" "}
               <span className="text-ui-fg-subtle " data-testid="order-status">
                 {formatStatus(order.fulfillment_status)}
               </span>
             </Text>
             <Text>
-              Payment status:{" "}
+              Стан оплати:{" "}
               <span
                 className="text-ui-fg-subtle "
                 sata-testid="order-payment-status"

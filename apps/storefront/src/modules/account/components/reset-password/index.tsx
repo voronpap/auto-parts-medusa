@@ -20,16 +20,15 @@ const ResetPassword = () => {
       className="max-w-sm w-full flex flex-col items-center text-center gap-y-4"
       data-testid="reset-password-page"
     >
-      <h1 className="text-large-semi uppercase">Set a new password</h1>
+      <h1 className="text-large-semi uppercase">Новий пароль</h1>
 
       {(!token || !email) && (
         <>
           <p className="text-base-regular text-ui-fg-base">
-            This reset link is invalid or has expired. Request a new one from
-            the sign in page.
+            Посилання для зміни пароля недійсне або застаріло. Запросіть нове на сторінці входу.
           </p>
           <LocalizedClientLink href="/account">
-            <Button variant="secondary">Go to sign in</Button>
+            <Button variant="secondary">До входу</Button>
           </LocalizedClientLink>
         </>
       )}
@@ -37,10 +36,10 @@ const ResetPassword = () => {
       {token && email && message?.state === "success" && (
         <>
           <p className="text-base-regular text-ui-fg-base">
-            Your password has been changed. You can now sign in.
+            Пароль змінено. Тепер можна увійти.
           </p>
           <LocalizedClientLink href="/account">
-            <Button variant="primary">Go to sign in</Button>
+            <Button variant="primary">До входу</Button>
           </LocalizedClientLink>
         </>
       )}
@@ -51,7 +50,7 @@ const ResetPassword = () => {
           <input type="hidden" name="email" value={email} />
           <div className="flex flex-col w-full gap-y-2">
             <Input
-              label="New password"
+              label="Новий пароль"
               name="password"
               type="password"
               autoComplete="new-password"
@@ -59,7 +58,7 @@ const ResetPassword = () => {
               data-testid="new-password-input"
             />
             <Input
-              label="Confirm password"
+              label="Повторіть пароль"
               name="confirm_password"
               type="password"
               autoComplete="new-password"
@@ -75,7 +74,7 @@ const ResetPassword = () => {
             data-testid="reset-password-button"
             className="w-full mt-6"
           >
-            Save password
+            Зберегти пароль
           </SubmitButton>
         </form>
       )}

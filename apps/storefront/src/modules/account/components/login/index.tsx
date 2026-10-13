@@ -17,9 +17,9 @@ const Login = ({ setCurrentView }: Props) => {
       className="max-w-sm w-full flex flex-col items-center"
       data-testid="login-page"
     >
-      <h1 className="text-large-semi uppercase mb-6">Welcome back</h1>
+      <h1 className="text-large-semi uppercase mb-6">Вхід</h1>
       <p className="text-center text-base-regular text-ui-fg-base mb-8">
-        Sign in to access an enhanced shopping experience.
+        Увійдіть, щоб бачити замовлення й швидше оформлювати нові.
       </p>
       {message?.state === "verification_required" && (
         <div
@@ -27,7 +27,7 @@ const Login = ({ setCurrentView }: Props) => {
           data-testid="login-verification-message"
         >
           We sent a verification link to <strong>{message.email}</strong>.
-          Please verify your email, then sign in.
+          Підтвердьте email, потім увійдіть.
         </div>
       )}
       <form className="w-full" action={formAction}>
@@ -36,13 +36,13 @@ const Login = ({ setCurrentView }: Props) => {
             label="Email"
             name="email"
             type="email"
-            title="Enter a valid email address."
+            title="Вкажіть коректний email."
             autoComplete="email"
             required
             data-testid="email-input"
           />
           <Input
-            label="Password"
+            label="Пароль"
             name="password"
             type="password"
             autoComplete="current-password"
@@ -55,7 +55,7 @@ const Login = ({ setCurrentView }: Props) => {
           data-testid="login-error-message"
         />
         <SubmitButton data-testid="sign-in-button" className="w-full mt-6">
-          Sign in
+          Увійти
         </SubmitButton>
       </form>
       <button
@@ -63,16 +63,16 @@ const Login = ({ setCurrentView }: Props) => {
         className="underline text-ui-fg-base text-small-regular mt-4"
         data-testid="forgot-password-button"
       >
-        Forgot your password?
+        Забули пароль?
       </button>
       <span className="text-center text-ui-fg-base text-small-regular mt-6">
-        Not a member?{" "}
+        Ще не зареєстровані?{" "}
         <button
           onClick={() => setCurrentView(LOGIN_VIEW.REGISTER)}
           className="underline"
           data-testid="register-button"
         >
-          Join us
+          Зареєструватися
         </button>
         .
       </span>

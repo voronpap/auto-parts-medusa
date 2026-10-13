@@ -64,10 +64,10 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
               className="txt-medium text-ui-fg-interactive hover:text-ui-fg-interactive-hover"
               data-testid="add-discount-button"
             >
-              Add Promotion Code(s)
+              Додати промокод
             </button>
 
-            {/* <Tooltip content="You can add multiple promotion codes">
+            {/* <Tooltip content="Можна додати кілька промокодів">
               <InformationCircleSolid color="var(--fg-muted)" />
             </Tooltip> */}
           </Label>
@@ -87,7 +87,7 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
                   variant="secondary"
                   data-testid="discount-apply-button"
                 >
-                  Apply
+                  Застосувати
                 </SubmitButton>
               </div>
 
@@ -103,7 +103,7 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
           <div className="w-full flex items-center">
             <div className="flex flex-col w-full">
               <Heading className="txt-medium mb-2">
-                Promotion(s) applied:
+                Застосовані промокоди:
               </Heading>
 
               {promotions.map((promotion) => {
@@ -138,7 +138,7 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
                           )}
                         )
                         {/* {promotion.is_automatic && (
-                          <Tooltip content="This promotion is automatically applied">
+                          <Tooltip content="Ця знижка застосовується автоматично">
                             <InformationCircleSolid className="inline text-zinc-400" />
                           </Tooltip>
                         )} */}
@@ -158,7 +158,7 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
                       >
                         <Trash size={14} />
                         <span className="sr-only">
-                          Remove discount code from order
+                          Прибрати промокод із замовлення
                         </span>
                       </button>
                     )}

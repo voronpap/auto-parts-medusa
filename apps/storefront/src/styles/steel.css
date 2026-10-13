@@ -41,6 +41,16 @@
 .ap-subnav-in [data-testid="nav-menu-button"] { color: #c9d2d8; }
 .ap-subnav-in [data-testid="nav-menu-button"]:hover { color: #fff; }
 
+/* Footer */
+.ap-footer { color: #c9d2d8; background: var(--ap-brand-2); }
+.ap-footer-in { width: min(var(--ap-max), calc(100% - 40px)); display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 32px; margin: auto; padding: 38px 0 30px; }
+.ap-footer-in p { max-width: 340px; margin: 14px 0 0; font-size: 13px; }
+.ap-footer-in nav { display: flex; flex-direction: column; gap: 8px; font-size: 13px; }
+.ap-footer-in nav strong { margin-bottom: 4px; color: #fff; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; }
+.ap-footer-in nav a:hover { color: #fff; }
+.ap-footer-copy { padding: 14px 20px; border-top: 1px solid rgba(255, 255, 255, 0.08); color: #8b98a2; font-size: 12px; text-align: center; }
+@media (max-width: 800px) { .ap-footer-in { grid-template-columns: 1fr; gap: 22px; } }
+
 /* Home */
 .ap-page { background: var(--ap-bg); padding: 1px 0; }
 .ap-shell { width: min(var(--ap-max), calc(100% - 40px)); margin: 27px auto 70px; }

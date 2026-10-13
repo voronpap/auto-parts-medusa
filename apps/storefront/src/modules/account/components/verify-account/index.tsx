@@ -37,21 +37,21 @@ const VerifyAccount = () => {
       className="max-w-sm w-full flex flex-col items-center text-center gap-y-4"
       data-testid="verify-account-page"
     >
-      <h1 className="text-large-semi uppercase">Email verification</h1>
+      <h1 className="text-large-semi uppercase">Підтвердження email</h1>
 
       {state === "verifying" && (
         <p className="text-base-regular text-ui-fg-base">
-          Verifying your email...
+          Перевіряємо email…
         </p>
       )}
 
       {state === "success" && (
         <>
           <p className="text-base-regular text-ui-fg-base">
-            Your email is verified. You can now sign in to your account.
+            Email підтверджено. Тепер можна увійти.
           </p>
           <LocalizedClientLink href="/account">
-            <Button variant="primary">Go to sign in</Button>
+            <Button variant="primary">До входу</Button>
           </LocalizedClientLink>
         </>
       )}
@@ -59,11 +59,10 @@ const VerifyAccount = () => {
       {state === "error" && (
         <>
           <p className="text-base-regular text-ui-fg-base">
-            This verification link is invalid or has expired. Sign in to receive
-            a new verification email.
+            Посилання для підтвердження недійсне або застаріло. Увійдіть, щоб отримати новий лист.
           </p>
           <LocalizedClientLink href="/account">
-            <Button variant="secondary">Go to sign in</Button>
+            <Button variant="secondary">До входу</Button>
           </LocalizedClientLink>
         </>
       )}

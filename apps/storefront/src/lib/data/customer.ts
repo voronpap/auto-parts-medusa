@@ -154,7 +154,7 @@ async function completeLogin(
   if (typeof result === "object" && "location" in result) {
     return {
       state: "error",
-      error: "This login method isn't supported by the storefront.",
+      error: "Цей спосіб входу не підтримується.",
     }
   }
 
@@ -176,7 +176,7 @@ async function completeLogin(
   if (typeof result !== "string") {
     return {
       state: "error",
-      error: "Authentication requires additional steps that aren't supported.",
+      error: "Вхід потребує додаткових кроків, які не підтримуються.",
     }
   }
 
@@ -268,7 +268,7 @@ export async function requestPasswordReset(
     if (error instanceof FetchError && error.status === 429) {
       return {
         state: "error",
-        error: "Too many attempts. Please try again in a minute.",
+        error: "Забагато спроб. Спробуйте за хвилину.",
       }
     }
   }
@@ -287,7 +287,7 @@ export async function resetPassword(
   const confirmPassword = formData.get("confirm_password") as string
 
   if (password !== confirmPassword) {
-    return { state: "error", error: "Passwords do not match." }
+    return { state: "error", error: "Паролі не збігаються." }
   }
 
   try {
@@ -300,7 +300,7 @@ export async function resetPassword(
   } catch {
     return {
       state: "error",
-      error: "This reset link is invalid or has expired. Request a new one.",
+      error: "Посилання для зміни пароля недійсне або застаріло. Запросіть нове.",
     }
   }
 

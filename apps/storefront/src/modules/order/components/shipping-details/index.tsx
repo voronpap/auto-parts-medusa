@@ -12,7 +12,7 @@ const ShippingDetails = ({ order }: ShippingDetailsProps) => {
   return (
     <div>
       <Heading level="h2" className="flex flex-row text-3xl-regular my-6">
-        Delivery
+        Доставка
       </Heading>
       <div className="flex items-start gap-x-8">
         <div
@@ -20,7 +20,7 @@ const ShippingDetails = ({ order }: ShippingDetailsProps) => {
           data-testid="shipping-address-summary"
         >
           <Text className="txt-medium-plus text-ui-fg-base mb-1">
-            Shipping Address
+            Адреса доставки
           </Text>
           <Text className="txt-medium text-ui-fg-subtle">
             {order.shipping_address?.first_name}{" "}
@@ -43,7 +43,7 @@ const ShippingDetails = ({ order }: ShippingDetailsProps) => {
           className="flex flex-col w-1/3 "
           data-testid="shipping-contact-summary"
         >
-          <Text className="txt-medium-plus text-ui-fg-base mb-1">Contact</Text>
+          <Text className="txt-medium-plus text-ui-fg-base mb-1">Контакти</Text>
           <Text className="txt-medium text-ui-fg-subtle">
             {order.shipping_address?.phone}
           </Text>
@@ -54,7 +54,7 @@ const ShippingDetails = ({ order }: ShippingDetailsProps) => {
           className="flex flex-col w-1/3"
           data-testid="shipping-method-summary"
         >
-          <Text className="txt-medium-plus text-ui-fg-base mb-1">Method</Text>
+          <Text className="txt-medium-plus text-ui-fg-base mb-1">Спосіб</Text>
           <Text className="txt-medium text-ui-fg-subtle">
             {(order.shipping_methods?.[0] as { name?: string })?.name} (
             {convertToLocale({

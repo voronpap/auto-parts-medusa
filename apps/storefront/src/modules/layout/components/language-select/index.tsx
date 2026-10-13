@@ -63,8 +63,8 @@ const getLocalizedLanguageName = (
 
 const DEFAULT_OPTION: LanguageOption = {
   code: "",
-  name: "Default",
-  localizedName: "Default",
+  name: "Типова",
+  localizedName: "Типова",
   countryCode: "",
 }
 
@@ -128,7 +128,7 @@ const LanguageSelect = ({
       >
         <ListboxButton className="py-1 w-full">
           <div className="txt-compact-small flex items-start gap-x-2">
-            <span>Language:</span>
+            <span>Мова:</span>
             {current && (
               <span className="txt-compact-small flex items-center gap-x-2">
                 {current.countryCode && (

@@ -53,7 +53,7 @@ const PriceRange = ({ currencyCode }: { currencyCode: string }) => {
 
   return (
     <div className="flex flex-col gap-y-4">
-      <span className="txt-compact-small-plus text-ui-fg-subtle">Price</span>
+      <span className="txt-compact-small-plus text-ui-fg-subtle">Ціна</span>
 
       <div className="flex flex-col gap-y-3 pr-6">
         <Slider.Root
@@ -67,7 +67,7 @@ const PriceRange = ({ currencyCode }: { currencyCode: string }) => {
           // Only refine when the thumb is released, so dragging doesn't fire a
           // search per pixel.
           onValueCommit={(committed) => refine([committed[0], committed[1]])}
-          aria-label="Price range"
+          aria-label="Діапазон цін"
           data-testid="price-range"
         >
           <Slider.Track className="relative h-0.5 w-full grow rounded-full bg-ui-border-base">
@@ -77,7 +77,7 @@ const PriceRange = ({ currencyCode }: { currencyCode: string }) => {
             <Slider.Thumb
               key={index}
               className="block h-4 w-4 rounded-full border border-ui-border-interactive bg-ui-bg-base shadow-elevation-card-rest outline-none focus-visible:ring-2 focus-visible:ring-ui-fg-interactive"
-              aria-label={index === 0 ? "Minimum price" : "Maximum price"}
+              aria-label={index === 0 ? "Мінімальна ціна" : "Максимальна ціна"}
             />
           ))}
         </Slider.Root>

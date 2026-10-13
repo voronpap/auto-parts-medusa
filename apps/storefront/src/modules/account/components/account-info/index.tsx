@@ -22,7 +22,7 @@ const AccountInfo = ({
   isSuccess,
   isError,
   clearState,
-  errorMessage = "An error occurred, please try again",
+  errorMessage = "Сталася помилка, спробуйте ще раз",
   children,
   'data-testid': dataTestid
 }: AccountInfoProps) => {
@@ -63,7 +63,7 @@ const AccountInfo = ({
             data-testid="edit-button"
             data-active={state}
           >
-            {state ? "Cancel" : "Edit"}
+            {state ? "Скасувати" : "Змінити"}
           </Button>
         </div>
       </div>
@@ -126,7 +126,7 @@ const AccountInfo = ({
                 type="submit"
                 data-testid="save-button"
               >
-                Save changes
+                Зберегти зміни
               </Button>
             </div>
           </div>

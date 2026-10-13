@@ -54,7 +54,7 @@ const StoreHits = ({ hitsPerPage, currencyCode }: StoreHitsProps) => {
         className="py-16 text-center text-ui-fg-error"
         data-testid="products-error"
       >
-        Couldn&apos;t load products
+        Не вдалося завантажити товари
         {error?.message ? `: ${error.message}` : "."}
       </Text>
     )
@@ -69,7 +69,7 @@ const StoreHits = ({ hitsPerPage, currencyCode }: StoreHitsProps) => {
           className="py-16 text-center text-ui-fg-subtle"
           data-testid="no-products"
         >
-          No products matched these filters.
+          За цими фільтрами товарів немає.
         </Text>
       ) : (
         <ul

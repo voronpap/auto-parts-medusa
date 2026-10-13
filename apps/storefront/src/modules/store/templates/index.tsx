@@ -14,7 +14,7 @@ const StoreTemplate = ({ currencyCode }: { currencyCode: string }) => {
   return (
     <div className="py-6 content-container" data-testid="category-container">
       <div className="mb-8 text-2xl-semi">
-        <h1 data-testid="store-page-title">All products</h1>
+        <h1 data-testid="store-page-title">Усі товари</h1>
       </div>
 
       <div className="flex flex-col small:flex-row small:items-start">

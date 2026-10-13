@@ -177,10 +177,10 @@ export default function ProductActions({
           data-testid="add-product-button"
         >
           {!selectedVariant
-            ? "Select variant"
+            ? "Виберіть варіант"
             : !inStock || !isValidVariant
-            ? "Out of stock"
-            : "Add to cart"}
+            ? "Немає в наявності"
+            : "Додати в кошик"}
         </Button>
         <MobileActions
           product={product}

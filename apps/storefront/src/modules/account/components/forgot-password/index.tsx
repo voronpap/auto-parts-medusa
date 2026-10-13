@@ -17,17 +17,17 @@ const ForgotPassword = ({ setCurrentView }: Props) => {
       className="max-w-sm w-full flex flex-col items-center"
       data-testid="forgot-password-page"
     >
-      <h1 className="text-large-semi uppercase mb-6">Reset password</h1>
+      <h1 className="text-large-semi uppercase mb-6">Відновлення пароля</h1>
       <p className="text-center text-base-regular text-ui-fg-base mb-8">
-        Enter your email and we will send you a link to set a new password.
+        Вкажіть email — надішлемо посилання для встановлення нового пароля.
       </p>
       {message?.state === "success" ? (
         <div
           className="w-full mb-6 text-center text-base-regular text-ui-fg-base bg-ui-bg-subtle border border-ui-border-base rounded-rounded p-4"
           data-testid="forgot-password-success-message"
         >
-          If an account exists for this email, a reset link is on its way.
-          Please check your inbox.
+          Якщо обліковий запис із цим email існує, посилання вже надіслано.
+          Перевірте пошту.
         </div>
       ) : (
         <form className="w-full" action={formAction}>
@@ -36,7 +36,7 @@ const ForgotPassword = ({ setCurrentView }: Props) => {
               label="Email"
               name="email"
               type="email"
-              title="Enter a valid email address."
+              title="Вкажіть коректний email."
               autoComplete="email"
               required
               data-testid="email-input"
@@ -50,7 +50,7 @@ const ForgotPassword = ({ setCurrentView }: Props) => {
             data-testid="request-reset-button"
             className="w-full mt-6"
           >
-            Send reset link
+            Надіслати посилання
           </SubmitButton>
         </form>
       )}
@@ -60,7 +60,7 @@ const ForgotPassword = ({ setCurrentView }: Props) => {
           className="underline"
           data-testid="back-to-sign-in-button"
         >
-          Back to sign in
+          Назад до входу
         </button>
       </span>
     </div>

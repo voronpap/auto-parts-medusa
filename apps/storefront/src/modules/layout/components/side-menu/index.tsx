@@ -13,10 +13,10 @@ import { Locale } from "@lib/data/locales"
 
 
 const SideMenuItems = {
-  Home: "/",
-  Store: "/store",
-  Account: "/account",
-  Cart: "/cart",
+  "Головна": "/",
+  "Каталог": "/store",
+  "Кабінет": "/account",
+  "Кошик": "/cart",
 }
 
 type SideMenuProps = {
@@ -127,8 +127,7 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
                         />
                       </div>
                       <Text className="flex justify-between txt-compact-small">
-                        © {new Date().getFullYear()} Medusa Store. All rights
-                        reserved.
+                        © {new Date().getFullYear()} Auto Parts. Усі права захищено.
                       </Text>
                     </div>
                   </div>

@@ -4,8 +4,8 @@ import { Suspense } from "react"
 import ResetPassword from "@modules/account/components/reset-password"
 
 export const metadata: Metadata = {
-  title: "Set a new password",
-  description: "Set a new password for your account.",
+  title: "Новий пароль",
+  description: "Встановлення нового пароля.",
 }
 
 export default function ResetPasswordPage() {
@@ -13,7 +13,7 @@ export default function ResetPasswordPage() {
     <div className="w-full flex justify-center px-8 py-12">
       <Suspense
         fallback={
-          <p className="text-base-regular text-ui-fg-base">Loading...</p>
+          <p className="text-base-regular text-ui-fg-base">Завантаження…</p>
         }
       >
         <ResetPassword />

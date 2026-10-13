@@ -1,0 +1,46 @@
+{
+  "content": [
+    {
+      "vehicleIDs": [
+        9829
+      ],
+      "manufacturerID": 75,
+      "modelID": 9580,
+      "countryID": "NULL",
+      "name": "1.8",
+      "yearOfConstructionFrom": "201011",
+      "yearOfConstructionTo": null,
+      "kw": "98",
+      "ps": "133",
+      "ccm": "01795",
+      "driveTypeName": "Front-Wheel Drive",
+      "vehicleTypeIDs": [
+        "P"
+      ],
+      "kbaNumbers": null,
+      "concepts": null,
+      "engineCodes": null
+    },
+    {
+      "vehicleIDs": [
+        9828
+      ],
+      "manufacturerID": 75,
+      "modelID": 9580,
+      "countryID": "NULL",
+      "name": "1.8 T",
+      "yearOfConstructionFrom": "201011",
+      "yearOfConstructionTo": null,
+      "kw": "118",
+      "ps": "160",
+      "ccm": "01796",
+      "driveTypeName": "Front-Wheel Drive",
+      "vehicleTypeIDs": [
+        "P"
+      ],
+      "kbaNumbers": null,
+      "concepts": null,
+      "engineCodes": null
+    }
+  ]
+}

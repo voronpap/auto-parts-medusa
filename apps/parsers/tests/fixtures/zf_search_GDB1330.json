@@ -1,0 +1,415 @@
+{
+  "term": "GDB1330",
+  "products": {
+    "label": "Products",
+    "sorts": {
+      "title": "Sort by:",
+      "options": [
+        {
+          "id": "relevance",
+          "label": "Relevance",
+          "active": true
+        },
+        {
+          "id": "article-number-desc",
+          "label": "Article Number (Desc)",
+          "active": false
+        },
+        {
+          "id": "article-number-asc",
+          "label": "Article Number (Asc)",
+          "active": false
+        },
+        {
+          "id": "product-name-asc",
+          "label": "Product Name (Asc)",
+          "active": false
+        },
+        {
+          "id": "product-name-desc",
+          "label": "Product Name (Desc)",
+          "active": false
+        }
+      ]
+    },
+    "pagination": {
+      "totalItems": 125,
+      "firstItemIndex": 0,
+      "itemsPerPage": 12,
+      "label": "Page:"
+    },
+    "items": [
+      {
+        "number": "<span class=\"highlighted\">GDB1330</span>DTE",
+        "productNumber": "GDB1330DTE",
+        "name": "Brake Pad Set, disc brake | DTEC COTEC",
+        "brandName": "TRW",
+        "productDetailsPageHref": "/products/GDB1330DTE",
+        "productTypes": [],
+        "group": "standard",
+        "datasource": "IAMP",
+        "moreDetails": {
+          "text": "More details",
+          "href": "/products/GDB1330DTE"
+        },
+        "technicalInfo": null,
+        "replacedBy": null,
+        "status": {
+          "key": 1,
+          "value": "Normal"
+        },
+        "partsList": null,
+        "inPartsList": null,
+        "foundVia": {
+          "label": "Found via",
+          "value": "<span class=\"highlighted\">GDB1330</span>"
+        }
+      },
+      {
+        "number": "<span class=\"highlighted\">GDB1330</span>BTE",
+        "productNumber": "GDB1330BTE",
+        "name": "Brake Pad Set, disc brake | ELECTRIC BLUE",
+        "brandName": "TRW",
+        "productDetailsPageHref": "/products/GDB1330BTE",
+        "productTypes": [],
+        "group": "standard",
+        "datasource": "IAMP",
+        "moreDetails": {
+          "text": "More details",
+          "href": "/products/GDB1330BTE"
+        },
+        "technicalInfo": null,
+        "replacedBy": null,
+        "status": {
+          "key": 1,
+          "value": "Normal"
+        },
+        "partsList": null,
+        "inPartsList": null,
+        "foundVia": null
+      },
+      {
+        "number": "<span class=\"highlighted\">GDB1330</span>",
+        "productNumber": "GDB1330",
+        "name": "Brake Pad Set, disc brake | COTEC",
+        "brandName": "TRW",
+        "productDetailsPageHref": "/products/GDB1330",
+        "productTypes": [],
+        "group": "standard",
+        "datasource": "IAMP",
+        "moreDetails": {
+          "text": "More details",
+          "href": "/products/GDB1330"
+        },
+        "technicalInfo": null,
+        "replacedBy": null,
+        "status": {
+          "key": 1,
+          "value": "Normal"
+        },
+        "partsList": null,
+        "inPartsList": null,
+        "foundVia": null
+      },
+      {
+        "number": "GDB1300",
+        "productNumber": "GDB1300",
+        "name": "Brake Pad Set, disc brake | COTEC",
+        "brandName": "TRW",
+        "productDetailsPageHref": "/products/GDB1300",
+        "productTypes": [],
+        "group": "standard",
+        "datasource": "IAMP",
+        "moreDetails": {
+          "text": "More details",
+          "href": "/products/GDB1300"
+        },
+        "technicalInfo": null,
+        "replacedBy": null,
+        "status": {
+          "key": 1,
+          "value": "Normal"
+        },
+        "partsList": null,
+        "inPartsList": null,
+        "foundVia": null
+      },
+      {
+        "number": "GDB1335",
+        "productNumber": "GDB1335",
+        "name": "Brake Pad Set, disc brake | COTEC",
+        "brandName": "TRW",
+        "productDetailsPageHref": "/products/GDB1335",
+        "productTypes": [],
+        "group": "standard",
+        "datasource": "IAMP",
+        "moreDetails": {
+          "text": "More details",
+          "href": "/products/GDB1335"
+        },
+        "technicalInfo": null,
+        "replacedBy": null,
+        "status": {
+          "key": 1,
+          "value": "Normal"
+        },
+        "partsList": null,
+        "inPartsList": null,
+        "foundVia": null
+      },
+      {
+        "number": "GDB1335DTE",
+        "productNumber": "GDB1335DTE",
+        "name": "Brake Pad Set, disc brake | DTEC COTEC",
+        "brandName": "TRW",
+        "productDetailsPageHref": "/products/GDB1335DTE",
+        "productTypes": [],
+        "group": "standard",
+        "datasource": "IAMP",
+        "moreDetails": {
+          "text": "More details",
+          "href": "/products/GDB1335DTE"
+        },
+        "technicalInfo": null,
+        "replacedBy": null,
+        "status": {
+          "key": 1,
+          "value": "Normal"
+        },
+        "partsList": null,
+        "inPartsList": null,
+        "foundVia": {
+          "label": "Found via",
+          "value": "<span class=\"highlighted\">GDB1335</span>"
+        }
+      },
+      {
+        "number": "GDB1338",
+        "productNumber": "GDB1338",
+        "name": "Brake Pad Set, disc brake",
+        "brandName": "TRW",
+        "productDetailsPageHref": "/products/GDB1338",
+        "productTypes": [],
+        "group": "standard",
+        "datasource": "IAMP",
+        "moreDetails": {
+          "text": "More details",
+          "href": "/products/GDB1338"
+        },
+        "technicalInfo": null,
+        "replacedBy": {
+          "label": "Replaced by",
+          "values": [
+            {
+              "text": "GDB1212",
+              "href": "/products/GDB1212",
+              "datasource": {
+                "name": "IAMP"
+              }
+            }
+          ]
+        },
+        "status": {
+          "key": 9,
+          "value": "No longer deliverable by the manufacturer"
+        },
+        "partsList": null,
+        "inPartsList": null,
+        "foundVia": null
+      },
+      {
+        "number": "GDB1303",
+        "productNumber": "GDB1303",
+        "name": "Brake Pad Set, disc brake",
+        "brandName": "TRW",
+        "productDetailsPageHref": "/products/GDB1303",
+        "productTypes": [],
+        "group": "standard",
+        "datasource": "IAMP",
+        "moreDetails": {
+          "text": "More details",
+          "href": "/products/GDB1303"
+        },
+        "technicalInfo": null,
+        "replacedBy": null,
+        "status": {
+          "key": 1,
+          "value": "Normal"
+        },
+        "partsList": null,
+        "inPartsList": null,
+        "foundVia": null
+      },
+      {
+        "number": "GDB1331",
+        "productNumber": "GDB1331",
+        "name": "Brake Pad Set, disc brake",
+        "brandName": "TRW",
+        "productDetailsPageHref": "/products/GDB1331",
+        "productTypes": [],
+        "group": "standard",
+        "datasource": "IAMP",
+        "moreDetails": {
+          "text": "More details",
+          "href": "/products/GDB1331"
+        },
+        "technicalInfo": null,
+        "replacedBy": null,
+        "status": {
+          "key": 1,
+          "value": "Normal"
+        },
+        "partsList": null,
+        "inPartsList": null,
+        "foundVia": null
+      },
+      {
+        "number": "GDB1332",
+        "productNumber": "GDB1332",
+        "name": "Brake Pad Set, disc brake | COTEC",
+        "brandName": "TRW",
+        "productDetailsPageHref": "/products/GDB1332",
+        "productTypes": [],
+        "group": "standard",
+        "datasource": "IAMP",
+        "moreDetails": {
+          "text": "More details",
+          "href": "/products/GDB1332"
+        },
+        "technicalInfo": null,
+        "replacedBy": null,
+        "status": {
+          "key": 1,
+          "value": "Normal"
+        },
+        "partsList": null,
+        "inPartsList": null,
+        "foundVia": null
+      },
+      {
+        "number": "GDB1333",
+        "productNumber": "GDB1333",
+        "name": "Brake Pad Set, disc brake | COTEC",
+        "brandName": "TRW",
+        "productDetailsPageHref": "/products/GDB1333",
+        "productTypes": [],
+        "group": "standard",
+        "datasource": "IAMP",
+        "moreDetails": {
+          "text": "More details",
+          "href": "/products/GDB1333"
+        },
+        "technicalInfo": null,
+        "replacedBy": null,
+        "status": {
+          "key": 1,
+          "value": "Normal"
+        },
+        "partsList": null,
+        "inPartsList": null,
+        "foundVia": null
+      },
+      {
+        "number": "GDB1334",
+        "productNumber": "GDB1334",
+        "name": "Brake Pad Set, disc brake | COTEC",
+        "brandName": "TRW",
+        "productDetailsPageHref": "/products/GDB1334",
+        "productTypes": [],
+        "group": "standard",
+        "datasource": "IAMP",
+        "moreDetails": {
+          "text": "More details",
+          "href": "/products/GDB1334"
+        },
+        "technicalInfo": null,
+        "replacedBy": null,
+        "status": {
+          "key": 1,
+          "value": "Normal"
+        },
+        "partsList": null,
+        "inPartsList": null,
+        "foundVia": null
+      }
+    ],
+    "mainFilters": [
+      {
+        "id": "brandname",
+        "label": "Brand",
+        "type": "single-select",
+        "values": [
+          {
+            "id": "TRW",
+            "count": 90,
+            "active": false
+          },
+          {
+            "id": "LEMFÖRDER",
+            "count": 35,
+            "active": false
+          }
+        ]
+      }
+    ],
+    "subFilters": [],
+    "specialFilters": [
+      {
+        "id": "available_countries",
+        "label": "Display Available Products Only",
+        "type": "single-select",
+        "values": [
+          {
+            "id": null,
+            "count": null,
+            "active": false
+          }
+        ]
+      }
+    ],
+    "mobileFilters": {
+      "buttonLabelClose": "Close Filters",
+      "buttonLabelFilter": "Filter",
+      "buttonLabelApplyParts": [
+        "Show",
+        "Result"
+      ],
+      "numberOfResults": 125,
+      "marketSelection": {
+        "text": "Selected country: ",
+        "actionText": "Change"
+      },
+      "highlightCheckboxLabel": "Highlight Criteria"
+    },
+    "marketSelection": {
+      "text": "Selected country: ",
+      "actionText": "Change"
+    },
+    "filterTags": {
+      "removeAll": "Remove All"
+    },
+    "counterTextParts": [
+      "Displaying",
+      "of",
+      "results"
+    ],
+    "filterDropdown": {
+      "title": "Filter",
+      "hint": "Select a Brand for more detailed filtering",
+      "allBrandsLabel": "All Brands",
+      "availableProductsCheckbox": {
+        "label": "Hide Discontinued Products",
+        "someDiscontinued": false
+      }
+    },
+    "searchedFor": {
+      "label": "You searched for",
+      "applyButtonLabel": "Apply",
+      "error": "Please type in at least 3 characters to start searching..."
+    },
+    "searchBanner": {
+      "alt": "Hero Banner",
+      "src": " https://media-aftermarket.zf.com/dam/org/SearchResultsBannerDark.jpg"
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "statusCode": 200,
+  "message": "search 목록 조회 성공",
+  "data": {
+    "list": [
+      {
+        "ctrNo": "CB0172",
+        "article": "CBKD-8",
+        "etc": "CBJ0440",
+        "part": "BALL JOINT",
+        "seq": "6513290",
+        "image": "https://ctr-cdn2-e7f6e5bugjh6gfc0.z01.azurefd.net/aftermarket/ncu_rus/CB0172_1.jpg",
+        "status": "01"
+      }
+    ],
+    "cnt": 1,
+    "str": null,
+    "keywords": null
+  }
+}

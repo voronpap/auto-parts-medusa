@@ -1,0 +1,204 @@
+{
+  "details": {
+    "number": "1878 002 205",
+    "name": "Clutch Disc",
+    "brandName": "SACHS",
+    "textModules": {
+      "additionalTextShowMoreLabel": "Show more",
+      "additionalTextShowLessLabel": "Show less",
+      "values": []
+    },
+    "status": {
+      "key": 9,
+      "value": "No longer deliverable by the manufacturer"
+    },
+    "replacedBy": {
+      "label": "Replaced by",
+      "values": [
+        {
+          "text": "1878 634 205",
+          "href": "/products/1878+634+205",
+          "datasource": {
+            "name": "IAMP"
+          },
+          "id": 1
+        }
+      ]
+    },
+    "mainStage": {
+      "ean": {
+        "label": "EAN",
+        "value": "4013872468126"
+      },
+      "weight": {
+        "label": "Gross Weight (kg)",
+        "value": "1,09"
+      }
+    },
+    "distributorFinder": {
+      "text": "Find a Distributor",
+      "href": "https://aftermarket.zf.com/en/partner-finder/#/result?countryIso=UA&services=2&brands=32"
+    },
+    "productTypes": [
+      {
+        "productTypeId": "00",
+        "productTypeLabel": null,
+        "netWeight": "1,00",
+        "grossWeight": "1,09",
+        "weightUnit": "kg"
+      }
+    ],
+    "pagePrinter": {
+      "label": "Print this page",
+      "icon": "navigationIcons/print"
+    }
+  },
+  "specifications": {
+    "label": "Specifications",
+    "type": "tab",
+    "content": {
+      "generalSpecifications": {
+        "label": "General Specifications",
+        "specifications": [
+          {
+            "id": 0,
+            "label": "Brand",
+            "meta": null,
+            "values": [
+              {
+                "text": "SACHS",
+                "href": null
+              }
+            ]
+          },
+          {
+            "id": 1,
+            "label": "Warranty",
+            "meta": null,
+            "values": [
+              {
+                "text": "3 years warranty",
+                "href": null
+              }
+            ]
+          },
+          {
+            "id": 2,
+            "label": "Hub Profile",
+            "meta": null,
+            "values": [
+              {
+                "text": "20,1x22,6-20N",
+                "href": null
+              }
+            ]
+          },
+          {
+            "id": 3,
+            "label": "Diameter [mm]",
+            "meta": null,
+            "values": [
+              {
+                "text": "215",
+                "href": null
+              }
+            ]
+          },
+          {
+            "id": 4,
+            "label": "Parameter",
+            "meta": null,
+            "values": [
+              {
+                "text": "215VTB",
+                "href": null
+              }
+            ]
+          },
+          {
+            "id": 5,
+            "label": "Number of Teeth",
+            "meta": null,
+            "values": [
+              {
+                "text": "20",
+                "href": null
+              }
+            ]
+          },
+          {
+            "id": 6,
+            "label": "Net Weight (kg)",
+            "isNetWeight": true,
+            "meta": null,
+            "values": [
+              {
+                "text": "1,00"
+              }
+            ]
+          }
+        ]
+      },
+      "additionalInformation": null,
+      "partsList": null,
+      "inPartsList": {
+        "label": "Included In ",
+        "isLimitedCount": false,
+        "parts": [
+          {
+            "id": 0,
+            "label": "Clutch Kit",
+            "values": [
+              {
+                "text": "3000 951 003",
+                "href": "/products/3000+951+003"
+              }
+            ]
+          }
+        ]
+      },
+      "referenceNumbers": null,
+      "competitorReferences": null,
+      "alternatives": {
+        "label": "Alternatives",
+        "alternatives": [
+          {
+            "id": 1,
+            "label": "SACHS",
+            "values": [
+              {
+                "text": "15 1878 002 205",
+                "href": null,
+                "info": null
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "serviceAndRepair": null,
+  "builtIn": null,
+  "technicalInformation": null,
+  "videos": null,
+  "meta": {
+    "locale": "en_US",
+    "country": "UA",
+    "group": "standard",
+    "fallbackLanguageUsage": [],
+    "isReman": false,
+    "datasource": {
+      "name": "IAMP"
+    }
+  },
+  "accessoriesAndRelatedProducts": null,
+  "serviceAvailability": {
+    "label": "Service Finder"
+  },
+  "productAvailability": {
+    "label": "Distributor Finder"
+  },
+  "navBackToSearch": "Back to search results",
+  "navBackToPrevious": "Back to previous page",
+  "requestTime": 1791909666289
+}

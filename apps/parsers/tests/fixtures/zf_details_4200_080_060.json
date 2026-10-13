@@ -1,0 +1,239 @@
+{
+  "details": {
+    "number": "4200 080 060",
+    "name": "Grease | high-performance lubricant",
+    "brandName": "SACHS",
+    "textModules": {
+      "additionalTextShowMoreLabel": "Show more",
+      "additionalTextShowLessLabel": "Show less",
+      "values": []
+    },
+    "status": {
+      "key": 1,
+      "value": "Normal"
+    },
+    "replacedBy": null,
+    "mainStage": {
+      "ean": {
+        "label": "EAN",
+        "value": "4013872335299"
+      }
+    },
+    "distributorFinder": {
+      "text": "Find a Distributor",
+      "href": "https://aftermarket.zf.com/en/partner-finder/#/result?countryIso=UA&services=2&brands=32"
+    },
+    "productTypes": [
+      {
+        "productTypeId": "00",
+        "productTypeLabel": null,
+        "netWeight": "0,00",
+        "grossWeight": "0,00",
+        "weightUnit": "kg"
+      }
+    ],
+    "pagePrinter": {
+      "label": "Print this page",
+      "icon": "navigationIcons/print"
+    }
+  },
+  "specifications": {
+    "label": "Specifications",
+    "type": "tab",
+    "content": {
+      "generalSpecifications": {
+        "label": "General Specifications",
+        "specifications": [
+          {
+            "id": 0,
+            "label": "Brand",
+            "meta": null,
+            "values": [
+              {
+                "text": "SACHS",
+                "href": null
+              }
+            ]
+          },
+          {
+            "id": 1,
+            "label": "Container Type",
+            "meta": null,
+            "values": [
+              {
+                "text": "Bag",
+                "href": null
+              }
+            ]
+          },
+          {
+            "id": 2,
+            "label": "Quantity Unit",
+            "meta": null,
+            "values": [
+              {
+                "text": "Gram",
+                "href": null
+              }
+            ]
+          },
+          {
+            "id": 3,
+            "label": "Warranty",
+            "meta": null,
+            "values": [
+              {
+                "text": "3 years warranty",
+                "href": null
+              }
+            ]
+          },
+          {
+            "id": 4,
+            "label": "Weight [g]",
+            "meta": null,
+            "values": [
+              {
+                "text": "1",
+                "href": null
+              }
+            ]
+          },
+          {
+            "id": 5,
+            "label": "Net Weight (kg)",
+            "isNetWeight": true,
+            "meta": null,
+            "values": [
+              {
+                "text": "0,00"
+              }
+            ]
+          }
+        ]
+      },
+      "additionalInformation": null,
+      "partsList": null,
+      "inPartsList": {
+        "label": "Included In ",
+        "isLimitedCount": false,
+        "parts": [
+          {
+            "id": 0,
+            "label": "Clutch Kit",
+            "values": [
+              {
+                "text": "3000 481 002",
+                "href": "/products/3000+481+002"
+              }
+            ]
+          },
+          {
+            "id": 1,
+            "label": "Clutch Kit",
+            "values": [
+              {
+                "text": "3000 484 001",
+                "href": "/products/3000+484+001"
+              }
+            ]
+          }
+        ]
+      },
+      "referenceNumbers": {
+        "label": "Comparable OE Numbers",
+        "referenceNumbers": [
+          {
+            "id": 0,
+            "label": "PIVI",
+            "values": [
+              {
+                "text": "12.000.100"
+              }
+            ]
+          },
+          {
+            "id": 1,
+            "label": "RENAULT",
+            "values": [
+              {
+                "text": "77 01 032 832"
+              }
+            ]
+          }
+        ]
+      },
+      "competitorReferences": null,
+      "alternatives": {
+        "label": "Alternatives",
+        "alternatives": [
+          {
+            "id": 1,
+            "label": "SACHS",
+            "values": [
+              {
+                "text": "18 4200 080 060",
+                "href": null,
+                "info": null
+              },
+              {
+                "text": "4200-080-060-18",
+                "href": null,
+                "info": null
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "serviceAndRepair": null,
+  "builtIn": null,
+  "technicalInformation": {
+    "label": "Technical Information",
+    "type": "tab",
+    "content": [
+      {
+        "title": null,
+        "titleDescription": null,
+        "category": "DOC009",
+        "iconForCategory": null,
+        "documentId": null,
+        "publishOn": null,
+        "languageDropdown": [
+          "en_US"
+        ],
+        "viewPdf": {
+          "icon": "#",
+          "text": "image/tiff",
+          "href": {
+            "en_US": "https://aftermarket.zf.com/find/ti/11559?utm_source=link&utm_medium=cdb&utm_campaign=11559"
+          }
+        }
+      }
+    ]
+  },
+  "videos": null,
+  "meta": {
+    "locale": "en_US",
+    "country": "UA",
+    "group": "standard",
+    "fallbackLanguageUsage": [
+      "names"
+    ],
+    "isReman": false,
+    "datasource": {
+      "name": "IAMP"
+    }
+  },
+  "accessoriesAndRelatedProducts": null,
+  "serviceAvailability": {
+    "label": "Service Finder"
+  },
+  "productAvailability": {
+    "label": "Distributor Finder"
+  },
+  "navBackToSearch": "Back to search results",
+  "navBackToPrevious": "Back to previous page",
+  "requestTime": 1791909690642
+}

@@ -1,0 +1,1563 @@
+{
+  "content": [
+    {
+      "articleID": "GDB1344DTE",
+      "name": "Brake Pad Set, disc brake DTEC COTEC",
+      "brandID": 161,
+      "brandName": "TRW",
+      "articleStatus": {
+        "status": 1,
+        "packingUnit": "1"
+      },
+      "articleCriterias": [
+        {
+          "criteriaID": 122,
+          "name": "Manufacturer Restriction",
+          "unit": null,
+          "values": [
+            "ATE"
+          ]
+        },
+        {
+          "criteriaID": 593,
+          "name": "Wear Warning Contact",
+          "unit": null,
+          "values": [
+            "prepared for wear warning indicator"
+          ]
+        },
+        {
+          "criteriaID": 206,
+          "name": "Width [mm]",
+          "unit": "mm",
+          "values": [
+            "123,1"
+          ]
+        },
+        {
+          "criteriaID": 209,
+          "name": "Height [mm]",
+          "unit": "mm",
+          "values": [
+            "44,9"
+          ]
+        },
+        {
+          "criteriaID": 124,
+          "name": "Thickness [mm]",
+          "unit": "mm",
+          "values": [
+            "17"
+          ]
+        },
+        {
+          "criteriaID": 608,
+          "name": "Braking System",
+          "unit": null,
+          "values": [
+            "Low dust brake pads",
+            "also for perforated brake discs"
+          ]
+        },
+        {
+          "criteriaID": 190,
+          "name": "Test Mark",
+          "unit": null,
+          "values": [
+            "E9 90R-02A1148/3308"
+          ]
+        }
+      ],
+      "articleShortInfo": {
+        "criterias": [
+          {
+            "criteriaID": 100,
+            "name": "Fitting Position",
+            "unit": null,
+            "values": [
+              "Rear Axle"
+            ]
+          }
+        ],
+        "marketingTexts": [],
+        "medias": []
+      },
+      "articleCountryExcludes": [],
+      "articleMarketingTexts": [],
+      "articleParts": [],
+      "articleInParts": [],
+      "articleImageMedias": [
+        {
+          "mediaID": 16165844,
+          "mediaTypeID": 5,
+          "fileName": "0161GDB1344DTE_00",
+          "url": "https://aftermarket.zf.com/app/controller/opc/getMedia?fileName=0161GDB1344DTE_00&typeID=5",
+          "thumbnailUrl": "https://aftermarket.zf.com/app/controller/opc/getMedia?fileName=0161GDB1344DTE_00&typeID=5&thumbnail=true",
+          "documentTypeId": 1,
+          "size": null
+        },
+        {
+          "mediaID": 16165845,
+          "mediaTypeID": 5,
+          "fileName": "0161GDB1344DTE_04",
+          "url": "https://aftermarket.zf.com/app/controller/opc/getMedia?fileName=0161GDB1344DTE_04&typeID=5",
+          "thumbnailUrl": "https://aftermarket.zf.com/app/controller/opc/getMedia?fileName=0161GDB1344DTE_04&typeID=5&thumbnail=true",
+          "documentTypeId": 1,
+          "size": null
+        },
+        {
+          "mediaID": 16165846,
+          "mediaTypeID": 5,
+          "fileName": "0161GDB1344DTE_20",
+          "url": "https://aftermarket.zf.com/app/controller/opc/getMedia?fileName=0161GDB1344DTE_20&typeID=5",
+          "thumbnailUrl": "https://aftermarket.zf.com/app/controller/opc/getMedia?fileName=0161GDB1344DTE_20&typeID=5&thumbnail=true",
+          "documentTypeId": 1,
+          "size": null
+        }
+      ],
+      "articleSupersessions": [],
+      "articleReplaceSupersessions": []
+    },
+    {
+      "articleID": "GDB1344",
+      "name": "Brake Pad Set, disc brake COTEC",
+      "brandID": 161,
+      "brandName": "TRW",
+      "articleStatus": {
+        "status": 1,
+        "packingUnit": "1"
+      },
+      "articleCriterias": [
+        {
+          "criteriaID": 122,
+          "name": "Manufacturer Restriction",
+          "unit": null,
+          "values": [
+            "ATE"
+          ]
+        },
+        {
+          "criteriaID": 593,
+          "name": "Wear Warning Contact",
+          "unit": null,
+          "values": [
+            "prepared for wear warning indicator"
+          ]
+        },
+        {
+          "criteriaID": 190,
+          "name": "Test Mark",
+          "unit": null,
+          "values": [
+            "E1 90R 01025/196"
+          ]
+        },
+        {
+          "criteriaID": 209,
+          "name": "Height [mm]",
+          "unit": "mm",
+          "values": [
+            "44,9"
+          ]
+        },
+        {
+          "criteriaID": 206,
+          "name": "Width [mm]",
+          "unit": "mm",
+          "values": [
+            "123,1"
+          ]
+        },
+        {
+          "criteriaID": 124,
+          "name": "Thickness [mm]",
+          "unit": "mm",
+          "values": [
+            "17"
+          ]
+        }
+      ],
+      "articleShortInfo": {
+        "criterias": [
+          {
+            "criteriaID": 100,
+            "name": "Fitting Position",
+            "unit": null,
+            "values": [
+              "Rear Axle"
+            ]
+          }
+        ],
+        "marketingTexts": [],
+        "medias": []
+      },
+      "articleCountryExcludes": [],
+      "articleMarketingTexts": [],
+      "articleParts": [],
+      "articleInParts": [],
+      "articleImageMedias": [
+        {
+          "mediaID": 16111211,
+          "mediaTypeID": 5,
+          "fileName": "0161GDB1344",
+          "url": "https://aftermarket.zf.com/app/controller/opc/getMedia?fileName=0161GDB1344&typeID=5",
+          "thumbnailUrl": "https://aftermarket.zf.com/app/controller/opc/getMedia?fileName=0161GDB1344&typeID=5&thumbnail=true",
+          "documentTypeId": 1,
+          "size": null
+        },
+        {
+          "mediaID": 16158613,
+          "mediaTypeID": 5,
+          "fileName": "0161GDB1344_00",
+          "url": "https://aftermarket.zf.com/app/controller/opc/getMedia?fileName=0161GDB1344_00&typeID=5",
+          "thumbnailUrl": "https://aftermarket.zf.com/app/controller/opc/getMedia?fileName=0161GDB1344_00&typeID=5&thumbnail=true",
+          "documentTypeId": 1,
+          "size": null
+        },
+        {
+          "mediaID": 16158614,
+          "mediaTypeID": 5,
+          "fileName": "0161GDB1344_03",
+          "url": "https://aftermarket.zf.com/app/controller/opc/getMedia?fileName=0161GDB1344_03&typeID=5",
+          "thumbnailUrl": "https://aftermarket.zf.com/app/controller/opc/getMedia?fileName=0161GDB1344_03&typeID=5&thumbnail=true",
+          "documentTypeId": 1,
+          "size": null
+        },
+        {
+          "mediaID": 16111212,
+          "mediaTypeID": 5,
+          "fileName": "0161GDB1344_1",
+          "url": "https://aftermarket.zf.com/app/controller/opc/getMedia?fileName=0161GDB1344_1&typeID=5",
+          "thumbnailUrl": "https://aftermarket.zf.com/app/controller/opc/getMedia?fileName=0161GDB1344_1&typeID=5&thumbnail=true",
+          "documentTypeId": 1,
+          "size": null
+        },
+        {
+          "mediaID": 16158615,
+          "mediaTypeID": 5,
+          "fileName": "0161GDB1344_20",
+          "url": "https://aftermarket.zf.com/app/controller/opc/getMedia?fileName=0161GDB1344_20&typeID=5",
+          "thumbnailUrl": "https://aftermarket.zf.com/app/controller/opc/getMedia?fileName=0161GDB1344_20&typeID=5&thumbnail=true",
+          "documentTypeId": 1,
+          "size": null
+        }
+      ],
+      "articleSupersessions": [
+        {
+          "articleID": "GDB1344",
+          "replaceArticleID": "GDB1430",
+          "replacements": []
+        }
+      ],
+      "articleReplaceSupersessions": []
+    },
+    {
+      "articleID": "GDB1344",
+      "name": "Brake Pad Set, disc brake COTEC",
+      "brandID": 161,
+      "brandName": "TRW",
+      "articleStatus": {
+        "status": 1,
+        "packingUnit": "1"
+      },
+      "articleCriterias": [
+        {
+          "criteriaID": 122,
+          "name": "Manufacturer Restriction",
+          "unit": null,
+          "values": [
+            "ATE"
+          ]
+        },
+        {
+          "criteriaID": 593,
+          "name": "Wear Warning Contact",
+          "unit": null,
+          "values": [
+            "prepared for wear warning indicator"
+          ]
+        },
+        {
+          "criteriaID": 190,
+          "name": "Test Mark",
+          "unit": null,
+          "values": [
+            "E1 90R 01025/196"
+          ]
+        },
+        {
+          "criteriaID": 209,
+          "name": "Height [mm]",
+          "unit": "mm",
+          "values": [
+            "44,9"
+          ]
+        },
+        {
+          "criteriaID": 206,
+          "name": "Width [mm]",
+          "unit": "mm",
+          "values": [
+            "123,1"
+          ]
+        },
+        {
+          "criteriaID": 124,
+          "name": "Thickness [mm]",
+          "unit": "mm",
+          "values": [
+            "17"
+          ]
+        }
+      ],
+      "articleShortInfo": {
+        "criterias": [
+          {
+            "criteriaID": 100,
+            "name": "Fitting Position",
+            "unit": null,
+            "values": [
+              "Rear Axle"
+            ]
+          }
+        ],
+        "marketingTexts": [],
+        "medias": []
+      },
+      "articleCountryExcludes": [],
+      "articleMarketingTexts": [],
+      "articleParts": [],
+      "articleInParts": [],
+      "articleImageMedias": [
+        {
+          "mediaID": 16111211,
+          "mediaTypeID": 5,
+          "fileName": "0161GDB1344",
+          "url": "https://aftermarket.zf.com/app/controller/opc/getMedia?fileName=0161GDB1344&typeID=5",
+          "thumbnailUrl": "https://aftermarket.zf.com/app/controller/opc/getMedia?fileName=0161GDB1344&typeID=5&thumbnail=true",
+          "documentTypeId": 1,
+          "size": null
+        },
+        {
+          "mediaID": 16158613,
+          "mediaTypeID": 5,
+          "fileName": "0161GDB1344_00",
+          "url": "https://aftermarket.zf.com/app/controller/opc/getMedia?fileName=0161GDB1344_00&typeID=5",
+          "thumbnailUrl": "https://aftermarket.zf.com/app/controller/opc/getMedia?fileName=0161GDB1344_00&typeID=5&thumbnail=true",
+          "documentTypeId": 1,
+          "size": null
+        },
+        {
+          "mediaID": 16158614,
+          "mediaTypeID": 5,
+          "fileName": "0161GDB1344_03",
+          "url": "https://aftermarket.zf.com/app/controller/opc/getMedia?fileName=0161GDB1344_03&typeID=5",
+          "thumbnailUrl": "https://aftermarket.zf.com/app/controller/opc/getMedia?fileName=0161GDB1344_03&typeID=5&thumbnail=true",
+          "documentTypeId": 1,
+          "size": null
+        },
+        {
+          "mediaID": 16111212,
+          "mediaTypeID": 5,
+          "fileName": "0161GDB1344_1",
+          "url": "https://aftermarket.zf.com/app/controller/opc/getMedia?fileName=0161GDB1344_1&typeID=5",
+          "thumbnailUrl": "https://aftermarket.zf.com/app/controller/opc/getMedia?fileName=0161GDB1344_1&typeID=5&thumbnail=true",
+          "documentTypeId": 1,
+          "size": null
+        },
+        {
+          "mediaID": 16158615,
+          "mediaTypeID": 5,
+          "fileName": "0161GDB1344_20",
+          "url": "https://aftermarket.zf.com/app/controller/opc/getMedia?fileName=0161GDB1344_20&typeID=5",
+          "thumbnailUrl": "https://aftermarket.zf.com/app/controller/opc/getMedia?fileName=0161GDB1344_20&typeID=5&thumbnail=true",
+          "documentTypeId": 1,
+          "size": null
+        }
+      ],
+      "articleSupersessions": [
+        {
+          "articleID": "GDB1344",
+          "replaceArticleID": "GDB1430",
+          "replacements": []
+        }
+      ],
+      "articleReplaceSupersessions": []
+    },
+    {
+      "articleID": "STA1498",
+      "name": "Control Element, parking brake caliper",
+      "brandID": 161,
+      "brandName": "TRW",
+      "articleStatus": {
+        "status": 1,
+        "packingUnit": "1"
+      },
+      "articleCriterias": [
+        {
+          "criteriaID": 122,
+          "name": "Manufacturer Restriction",
+          "unit": null,
+          "values": [
+            "TRW"
+          ]
+        },
+        {
+          "criteriaID": 565,
+          "name": "Vehicle Equipment",
+          "unit": null,
+          "values": [
+            "for vehicles with electric parking brake"
+          ]
+        },
+        {
+          "criteriaID": 836,
+          "name": "Supplementary Article/Supplementary Info 2",
+          "unit": null,
+          "values": [
+            "with bolts/screws",
+            "with seal ring"
+          ]
+        }
+      ],
+      "articleShortInfo": {
+        "criterias": [
+          {
+            "criteriaID": 100,
+            "name": "Fitting Position",
+            "unit": null,
+            "values": [
+              "Rear Axle"
+            ]
+          },
+          {
+            "criteriaID": 100,
+            "name": "Fitting Position",
+            "unit": null,
+            "values": [
+              "both sides"
+            ]
+          }
+        ],
+        "marketingTexts": [],
+        "medias": []
+      },
+      "articleCountryExcludes": [],
+      "articleMarketingTexts": [
+        {
+          "marketingTsID": "TRW14",
+          "text": "Due to the system's electronic settings, it is only possible to replace this article using a suitable diagnostics tool. In this connection, please refer to the information provided in the enclosed documents."
+        }
+      ],
+      "articleParts": [],
+      "articleInParts": [],
+      "articleImageMedias": [
+        {
+          "mediaID": 16157197,
+          "mediaTypeID": 5,
+          "fileName": "0161STA1498",
+          "url": "https://aftermarket.zf.com/app/controller/opc/getMedia?fileName=0161STA1498&typeID=5",
+          "thumbnailUrl": "https://aftermarket.zf.com/app/controller/opc/getMedia?fileName=0161STA1498&typeID=5&thumbnail=true",
+          "documentTypeId": 1,
+          "size": null
+        }
+      ],
+      "articleSupersessions": [],
+      "articleReplaceSupersessions": []
+    },
+    {
+      "articleID": "STA1498",
+      "name": "Control Element, parking brake caliper",
+      "brandID": 161,
+      "brandName": "TRW",
+      "articleStatus": {
+        "status": 1,
+        "packingUnit": "1"
+      },
+      "articleCriterias": [
+        {
+          "criteriaID": 122,
+          "name": "Manufacturer Restriction",
+          "unit": null,
+          "values": [
+            "TRW"
+          ]
+        },
+        {
+          "criteriaID": 565,
+          "name": "Vehicle Equipment",
+          "unit": null,
+          "values": [
+            "for vehicles with electric parking brake"
+          ]
+        },
+        {
+          "criteriaID": 836,
+          "name": "Supplementary Article/Supplementary Info 2",
+          "unit": null,
+          "values": [
+            "with bolts/screws",
+            "with seal ring"
+          ]
+        }
+      ],
+      "articleShortInfo": {
+        "criterias": [
+          {
+            "criteriaID": 100,
+            "name": "Fitting Position",
+            "unit": null,
+            "values": [
+              "Rear Axle"
+            ]
+          },
+          {
+            "criteriaID": 100,
+            "name": "Fitting Position",
+            "unit": null,
+            "values": [
+              "both sides"
+            ]
+          }
+        ],
+        "marketingTexts": [],
+        "medias": []
+      },
+      "articleCountryExcludes": [],
+      "articleMarketingTexts": [
+        {
+          "marketingTsID": "TRW14",
+          "text": "Due to the system's electronic settings, it is only possible to replace this article using a suitable diagnostics tool. In this connection, please refer to the information provided in the enclosed documents."
+        }
+      ],
+      "articleParts": [],
+      "articleInParts": [],
+      "articleImageMedias": [
+        {
+          "mediaID": 16157197,
+          "mediaTypeID": 5,
+          "fileName": "0161STA1498",
+          "url": "https://aftermarket.zf.com/app/controller/opc/getMedia?fileName=0161STA1498&typeID=5",
+          "thumbnailUrl": "https://aftermarket.zf.com/app/controller/opc/getMedia?fileName=0161STA1498&typeID=5&thumbnail=true",
+          "documentTypeId": 1,
+          "size": null
+        }
+      ],
+      "articleSupersessions": [],
+      "articleReplaceSupersessions": []
+    },
+    {
+      "articleID": "GDB1374",
+      "name": "Brake Pad Set, disc brake COTEC",
+      "brandID": 161,
+      "brandName": "TRW",
+      "articleStatus": {
+        "status": 1,
+        "packingUnit": "1"
+      },
+      "articleCriterias": [
+        {
+          "criteriaID": 122,
+          "name": "Manufacturer Restriction",
+          "unit": null,
+          "values": [
+            "ATE"
+          ]
+        },
+        {
+          "criteriaID": 593,
+          "name": "Wear Warning Contact",
+          "unit": null,
+          "values": [
+            "prepared for wear warning indicator"
+          ]
+        },
+        {
+          "criteriaID": 190,
+          "name": "Test Mark",
+          "unit": null,
+          "values": [
+            "E9 90R 01107/227"
+          ]
+        },
+        {
+          "criteriaID": 209,
+          "name": "Height [mm]",
+          "unit": "mm",
+          "values": [
+            "70,5"
+          ]
+        },
+        {
+          "criteriaID": 206,
+          "name": "Width [mm]",
+          "unit": "mm",
+          "values": [
+            "155,4"
+          ]
+        },
+        {
+          "criteriaID": 124,
+          "name": "Thickness [mm]",
+          "unit": "mm",
+          "values": [
+            "18,5"
+          ]
+        },
+        {
+          "criteriaID": 1538,
+          "name": "article number of recommended accessories",
+          "unit": null,
+          "values": [
+            "PFK302"
+          ]
+        }
+      ],
+      "articleShortInfo": {
+        "criterias": [
+          {
+            "criteriaID": 100,
+            "name": "Fitting Position",
+            "unit": null,
+            "values": [
+              "Front Axle"
+            ]
+          }
+        ],
+        "marketingTexts": [],
+        "medias": []
+      },
+      "articleCountryExcludes": [],
+      "articleMarketingTexts": [],
+      "articleParts": [],
+      "articleInParts": [],
+      "articleImageMedias": [
+        {
+          "mediaID": 16111268,
+          "mediaTypeID": 5,
+          "fileName": "0161GDB1374",
+          "url": "https://aftermarket.zf.com/app/controller/opc/getMedia?fileName=0161GDB1374&typeID=5",
+          "thumbnailUrl": "https://aftermarket.zf.com/app/controller/opc/getMedia?fileName=0161GDB1374&typeID=5&thumbnail=true",
+          "documentTypeId": 1,
+          "size": null
+        },
+        {
+          "mediaID": 16111269,
+          "mediaTypeID": 5,
+          "fileName": "0161GDB1374_1",
+          "url": "https://aftermarket.zf.com/app/controller/opc/getMedia?fileName=0161GDB1374_1&typeID=5",
+          "thumbnailUrl": "https://aftermarket.zf.com/app/controller/opc/getMedia?fileName=0161GDB1374_1&typeID=5&thumbnail=true",
+          "documentTypeId": 1,
+          "size": null
+        }
+      ],
+      "articleSupersessions": [],
+      "articleReplaceSupersessions": []
+    },
+    {
+      "articleID": "GDB1374",
+      "name": "Brake Pad Set, disc brake COTEC",
+      "brandID": 161,
+      "brandName": "TRW",
+      "articleStatus": {
+        "status": 1,
+        "packingUnit": "1"
+      },
+      "articleCriterias": [
+        {
+          "criteriaID": 122,
+          "name": "Manufacturer Restriction",
+          "unit": null,
+          "values": [
+            "ATE"
+          ]
+        },
+        {
+          "criteriaID": 593,
+          "name": "Wear Warning Contact",
+          "unit": null,
+          "values": [
+            "prepared for wear warning indicator"
+          ]
+        },
+        {
+          "criteriaID": 190,
+          "name": "Test Mark",
+          "unit": null,
+          "values": [
+            "E9 90R 01107/227"
+          ]
+        },
+        {
+          "criteriaID": 209,
+          "name": "Height [mm]",
+          "unit": "mm",
+          "values": [
+            "70,5"
+          ]
+        },
+        {
+          "criteriaID": 206,
+          "name": "Width [mm]",
+          "unit": "mm",
+          "values": [
+            "155,4"
+          ]
+        },
+        {
+          "criteriaID": 124,
+          "name": "Thickness [mm]",
+          "unit": "mm",
+          "values": [
+            "18,5"
+          ]
+        },
+        {
+          "criteriaID": 1538,
+          "name": "article number of recommended accessories",
+          "unit": null,
+          "values": [
+            "PFK302"
+          ]
+        }
+      ],
+      "articleShortInfo": {
+        "criterias": [
+          {
+            "criteriaID": 100,
+            "name": "Fitting Position",
+            "unit": null,
+            "values": [
+              "Front Axle"
+            ]
+          }
+        ],
+        "marketingTexts": [],
+        "medias": []
+      },
+      "articleCountryExcludes": [],
+      "articleMarketingTexts": [],
+      "articleParts": [],
+      "articleInParts": [],
+      "articleImageMedias": [
+        {
+          "mediaID": 16111268,
+          "mediaTypeID": 5,
+          "fileName": "0161GDB1374",
+          "url": "https://aftermarket.zf.com/app/controller/opc/getMedia?fileName=0161GDB1374&typeID=5",
+          "thumbnailUrl": "https://aftermarket.zf.com/app/controller/opc/getMedia?fileName=0161GDB1374&typeID=5&thumbnail=true",
+          "documentTypeId": 1,
+          "size": null
+        },
+        {
+          "mediaID": 16111269,
+          "mediaTypeID": 5,
+          "fileName": "0161GDB1374_1",
+          "url": "https://aftermarket.zf.com/app/controller/opc/getMedia?fileName=0161GDB1374_1&typeID=5",
+          "thumbnailUrl": "https://aftermarket.zf.com/app/controller/opc/getMedia?fileName=0161GDB1374_1&typeID=5&thumbnail=true",
+          "documentTypeId": 1,
+          "size": null
+        }
+      ],
+      "articleSupersessions": [],
+      "articleReplaceSupersessions": []
+    },
+    {
+      "articleID": "DF4202",
+      "name": "Brake Disc",
+      "brandID": 161,
+      "brandName": "TRW",
+      "articleStatus": {
+        "status": 1,
+        "packingUnit": "2"
+      },
+      "articleCriterias": [
+        {
+          "criteriaID": 599,
+          "name": "Surface",
+          "unit": null,
+          "values": [
+            "painted"
+          ]
+        },
+        {
+          "criteriaID": 232,
+          "name": "Brake Disc Type",
+          "unit": null,
+          "values": [
+            "Vented"
+          ]
+        },
+        {
+          "criteriaID": 497,
+          "name": "Outer Diameter [mm]",
+          "unit": "mm",
+          "values": [
+            "284"
+          ]
+        },
+        {
+          "criteriaID": 274,
+          "name": "Brake Disc Thickness [mm]",
+          "unit": "mm",
+          "values": [
+            "22"
+          ]
+        },
+        {
+          "criteriaID": 328,
+          "name": "Minimum thickness [mm]",
+          "unit": "mm",
+          "values": [
+            "19"
+          ]
+        },
+        {
+          "criteriaID": 501,
+          "name": "Centering Diameter [mm]",
+          "unit": "mm",
+          "values": [
+            "64"
+          ]
+        },
+        {
+          "criteriaID": 209,
+          "name": "Height [mm]",
+          "unit": "mm",
+          "values": [
+            "38"
+          ]
+        },
+        {
+          "criteriaID": 500,
+          "name": "Number of Holes",
+          "unit": null,
+          "values": [
+            "5"
+          ]
+        },
+        {
+          "criteriaID": 289,
+          "name": "Thread Size",
+          "unit": null,
+          "values": [
+            "15"
+          ]
+        },
+        {
+          "criteriaID": 560,
+          "name": "Bolt Hole Circle Ø [mm]",
+          "unit": "mm",
+          "values": [
+            "100"
+          ]
+        },
+        {
+          "criteriaID": 436,
+          "name": "Colour",
+          "unit": null,
+          "values": [
+            "black"
+          ]
+        }
+      ],
+      "articleShortInfo": {
+        "criterias": [
+          {
+            "criteriaID": 100,
+            "name": "Fitting Position",
+            "unit": null,
+            "values": [
+              "Front Axle"
+            ]
+          }
+        ],
+        "marketingTexts": [],
+        "medias": []
+      },
+      "articleCountryExcludes": [],
+      "articleMarketingTexts": [],
+      "articleParts": [],
+      "articleInParts": [],
+      "articleImageMedias": [
+        {
+          "mediaID": 16107187,
+          "mediaTypeID": 5,
+          "fileName": "0161DF4202",
+          "url": "https://aftermarket.zf.com/app/controller/opc/getMedia?fileName=0161DF4202&typeID=5",
+          "thumbnailUrl": "https://aftermarket.zf.com/app/controller/opc/getMedia?fileName=0161DF4202&typeID=5&thumbnail=true",
+          "documentTypeId": 1,
+          "size": null
+        },
+        {
+          "mediaID": 16144511,
+          "mediaTypeID": 5,
+          "fileName": "0161DF4202_1",
+          "url": "https://aftermarket.zf.com/app/controller/opc/getMedia?fileName=0161DF4202_1&typeID=5",
+          "thumbnailUrl": "https://aftermarket.zf.com/app/controller/opc/getMedia?fileName=0161DF4202_1&typeID=5&thumbnail=true",
+          "documentTypeId": 1,
+          "size": null
+        }
+      ],
+      "articleSupersessions": [],
+      "articleReplaceSupersessions": []
+    },
+    {
+      "articleID": "DF4202",
+      "name": "Brake Disc",
+      "brandID": 161,
+      "brandName": "TRW",
+      "articleStatus": {
+        "status": 1,
+        "packingUnit": "2"
+      },
+      "articleCriterias": [
+        {
+          "criteriaID": 599,
+          "name": "Surface",
+          "unit": null,
+          "values": [
+            "painted"
+          ]
+        },
+        {
+          "criteriaID": 232,
+          "name": "Brake Disc Type",
+          "unit": null,
+          "values": [
+            "Vented"
+          ]
+        },
+        {
+          "criteriaID": 497,
+          "name": "Outer Diameter [mm]",
+          "unit": "mm",
+          "values": [
+            "284"
+          ]
+        },
+        {
+          "criteriaID": 274,
+          "name": "Brake Disc Thickness [mm]",
+          "unit": "mm",
+          "values": [
+            "22"
+          ]
+        },
+        {
+          "criteriaID": 328,
+          "name": "Minimum thickness [mm]",
+          "unit": "mm",
+          "values": [
+            "19"
+          ]
+        },
+        {
+          "criteriaID": 501,
+          "name": "Centering Diameter [mm]",
+          "unit": "mm",
+          "values": [
+            "64"
+          ]
+        },
+        {
+          "criteriaID": 209,
+          "name": "Height [mm]",
+          "unit": "mm",
+          "values": [
+            "38"
+          ]
+        },
+        {
+          "criteriaID": 500,
+          "name": "Number of Holes",
+          "unit": null,
+          "values": [
+            "5"
+          ]
+        },
+        {
+          "criteriaID": 289,
+          "name": "Thread Size",
+          "unit": null,
+          "values": [
+            "15"
+          ]
+        },
+        {
+          "criteriaID": 560,
+          "name": "Bolt Hole Circle Ø [mm]",
+          "unit": "mm",
+          "values": [
+            "100"
+          ]
+        },
+        {
+          "criteriaID": 436,
+          "name": "Colour",
+          "unit": null,
+          "values": [
+            "black"
+          ]
+        }
+      ],
+      "articleShortInfo": {
+        "criterias": [
+          {
+            "criteriaID": 100,
+            "name": "Fitting Position",
+            "unit": null,
+            "values": [
+              "Front Axle"
+            ]
+          }
+        ],
+        "marketingTexts": [],
+        "medias": []
+      },
+      "articleCountryExcludes": [],
+      "articleMarketingTexts": [],
+      "articleParts": [],
+      "articleInParts": [],
+      "articleImageMedias": [
+        {
+          "mediaID": 16107187,
+          "mediaTypeID": 5,
+          "fileName": "0161DF4202",
+          "url": "https://aftermarket.zf.com/app/controller/opc/getMedia?fileName=0161DF4202&typeID=5",
+          "thumbnailUrl": "https://aftermarket.zf.com/app/controller/opc/getMedia?fileName=0161DF4202&typeID=5&thumbnail=true",
+          "documentTypeId": 1,
+          "size": null
+        },
+        {
+          "mediaID": 16144511,
+          "mediaTypeID": 5,
+          "fileName": "0161DF4202_1",
+          "url": "https://aftermarket.zf.com/app/controller/opc/getMedia?fileName=0161DF4202_1&typeID=5",
+          "thumbnailUrl": "https://aftermarket.zf.com/app/controller/opc/getMedia?fileName=0161DF4202_1&typeID=5&thumbnail=true",
+          "documentTypeId": 1,
+          "size": null
+        }
+      ],
+      "articleSupersessions": [],
+      "articleReplaceSupersessions": []
+    },
+    {
+      "articleID": "BHX222E",
+      "name": "Brake Caliper",
+      "brandID": 161,
+      "brandName": "TRW",
+      "articleStatus": {
+        "status": 1,
+        "packingUnit": "1"
+      },
+      "articleCriterias": [
+        {
+          "criteriaID": 122,
+          "name": "Manufacturer Restriction",
+          "unit": null,
+          "values": [
+            "ATE"
+          ]
+        },
+        {
+          "criteriaID": 262,
+          "name": "Brake Caliper Type",
+          "unit": null,
+          "values": [
+            "Brake Caliper (1 piston)"
+          ]
+        },
+        {
+          "criteriaID": 468,
+          "name": "Material",
+          "unit": null,
+          "values": [
+            "Cast Iron"
+          ]
+        },
+        {
+          "criteriaID": 3788,
+          "name": "Piston Diameter [mm]",
+          "unit": "mm",
+          "values": [
+            "57"
+          ]
+        },
+        {
+          "criteriaID": 1564,
+          "name": "paired article number",
+          "unit": null,
+          "values": [
+            "BHX223E"
+          ]
+        },
+        {
+          "criteriaID": 591,
+          "name": "Exchange Part",
+          "unit": null,
+          "values": [
+            null
+          ]
+        },
+        {
+          "criteriaID": 585,
+          "name": "Observe technical data",
+          "unit": null,
+          "values": [
+            null
+          ]
+        }
+      ],
+      "articleShortInfo": {
+        "criterias": [
+          {
+            "criteriaID": 100,
+            "name": "Fitting Position",
+            "unit": null,
+            "values": [
+              "Front Axle Left"
+            ]
+          }
+        ],
+        "marketingTexts": [],
+        "medias": []
+      },
+      "articleCountryExcludes": [],
+      "articleMarketingTexts": [],
+      "articleParts": [],
+      "articleInParts": [],
+      "articleImageMedias": [],
+      "articleSupersessions": [],
+      "articleReplaceSupersessions": []
+    },
+    {
+      "articleID": "BHX223E",
+      "name": "Brake Caliper",
+      "brandID": 161,
+      "brandName": "TRW",
+      "articleStatus": {
+        "status": 1,
+        "packingUnit": "1"
+      },
+      "articleCriterias": [
+        {
+          "criteriaID": 122,
+          "name": "Manufacturer Restriction",
+          "unit": null,
+          "values": [
+            "ATE"
+          ]
+        },
+        {
+          "criteriaID": 262,
+          "name": "Brake Caliper Type",
+          "unit": null,
+          "values": [
+            "Brake Caliper (1 piston)"
+          ]
+        },
+        {
+          "criteriaID": 468,
+          "name": "Material",
+          "unit": null,
+          "values": [
+            "Cast Iron"
+          ]
+        },
+        {
+          "criteriaID": 3788,
+          "name": "Piston Diameter [mm]",
+          "unit": "mm",
+          "values": [
+            "57"
+          ]
+        },
+        {
+          "criteriaID": 1564,
+          "name": "paired article number",
+          "unit": null,
+          "values": [
+            "BHX222E"
+          ]
+        },
+        {
+          "criteriaID": 591,
+          "name": "Exchange Part",
+          "unit": null,
+          "values": [
+            null
+          ]
+        },
+        {
+          "criteriaID": 585,
+          "name": "Observe technical data",
+          "unit": null,
+          "values": [
+            null
+          ]
+        }
+      ],
+      "articleShortInfo": {
+        "criterias": [
+          {
+            "criteriaID": 100,
+            "name": "Fitting Position",
+            "unit": null,
+            "values": [
+              "Front Axle Right"
+            ]
+          }
+        ],
+        "marketingTexts": [],
+        "medias": []
+      },
+      "articleCountryExcludes": [],
+      "articleMarketingTexts": [],
+      "articleParts": [],
+      "articleInParts": [],
+      "articleImageMedias": [],
+      "articleSupersessions": [],
+      "articleReplaceSupersessions": []
+    },
+    {
+      "articleID": "DF4527",
+      "name": "Brake Disc",
+      "brandID": 161,
+      "brandName": "TRW",
+      "articleStatus": {
+        "status": 9,
+        "packingUnit": "2"
+      },
+      "articleCriterias": [
+        {
+          "criteriaID": 501,
+          "name": "Centering Diameter [mm]",
+          "unit": "mm",
+          "values": [
+            "64,1"
+          ]
+        },
+        {
+          "criteriaID": 274,
+          "name": "Brake Disc Thickness [mm]",
+          "unit": "mm",
+          "values": [
+            "19"
+          ]
+        },
+        {
+          "criteriaID": 497,
+          "name": "Outer Diameter [mm]",
+          "unit": "mm",
+          "values": [
+            "276"
+          ]
+        },
+        {
+          "criteriaID": 289,
+          "name": "Thread Size",
+          "unit": null,
+          "values": [
+            "15"
+          ]
+        },
+        {
+          "criteriaID": 209,
+          "name": "Height [mm]",
+          "unit": "mm",
+          "values": [
+            "62"
+          ]
+        },
+        {
+          "criteriaID": 560,
+          "name": "Bolt Hole Circle Ø [mm]",
+          "unit": "mm",
+          "values": [
+            "100"
+          ]
+        },
+        {
+          "criteriaID": 500,
+          "name": "Number of Holes",
+          "unit": null,
+          "values": [
+            "5"
+          ]
+        },
+        {
+          "criteriaID": 328,
+          "name": "Minimum thickness [mm]",
+          "unit": "mm",
+          "values": [
+            "16,4"
+          ]
+        },
+        {
+          "criteriaID": 272,
+          "name": "Drum diameter [mm]",
+          "unit": "mm",
+          "values": [
+            "160"
+          ]
+        },
+        {
+          "criteriaID": 232,
+          "name": "Brake Disc Type",
+          "unit": null,
+          "values": [
+            "Vented"
+          ]
+        },
+        {
+          "criteriaID": 436,
+          "name": "Colour",
+          "unit": null,
+          "values": [
+            "black"
+          ]
+        },
+        {
+          "criteriaID": 599,
+          "name": "Surface",
+          "unit": null,
+          "values": [
+            "painted"
+          ]
+        }
+      ],
+      "articleShortInfo": {
+        "criterias": [
+          {
+            "criteriaID": 100,
+            "name": "Fitting Position",
+            "unit": null,
+            "values": [
+              "Rear Axle"
+            ]
+          }
+        ],
+        "marketingTexts": [],
+        "medias": []
+      },
+      "articleCountryExcludes": [],
+      "articleMarketingTexts": [],
+      "articleParts": [],
+      "articleInParts": [],
+      "articleImageMedias": [
+        {
+          "mediaID": 16107516,
+          "mediaTypeID": 5,
+          "fileName": "0161DF4527",
+          "url": "https://aftermarket.zf.com/app/controller/opc/getMedia?fileName=0161DF4527&typeID=5",
+          "thumbnailUrl": "https://aftermarket.zf.com/app/controller/opc/getMedia?fileName=0161DF4527&typeID=5&thumbnail=true",
+          "documentTypeId": 1,
+          "size": null
+        }
+      ],
+      "articleSupersessions": [],
+      "articleReplaceSupersessions": []
+    },
+    {
+      "articleID": "DF4527",
+      "name": "Brake Disc",
+      "brandID": 161,
+      "brandName": "TRW",
+      "articleStatus": {
+        "status": 9,
+        "packingUnit": "2"
+      },
+      "articleCriterias": [
+        {
+          "criteriaID": 501,
+          "name": "Centering Diameter [mm]",
+          "unit": "mm",
+          "values": [
+            "64,1"
+          ]
+        },
+        {
+          "criteriaID": 274,
+          "name": "Brake Disc Thickness [mm]",
+          "unit": "mm",
+          "values": [
+            "19"
+          ]
+        },
+        {
+          "criteriaID": 497,
+          "name": "Outer Diameter [mm]",
+          "unit": "mm",
+          "values": [
+            "276"
+          ]
+        },
+        {
+          "criteriaID": 289,
+          "name": "Thread Size",
+          "unit": null,
+          "values": [
+            "15"
+          ]
+        },
+        {
+          "criteriaID": 209,
+          "name": "Height [mm]",
+          "unit": "mm",
+          "values": [
+            "62"
+          ]
+        },
+        {
+          "criteriaID": 560,
+          "name": "Bolt Hole Circle Ø [mm]",
+          "unit": "mm",
+          "values": [
+            "100"
+          ]
+        },
+        {
+          "criteriaID": 500,
+          "name": "Number of Holes",
+          "unit": null,
+          "values": [
+            "5"
+          ]
+        },
+        {
+          "criteriaID": 328,
+          "name": "Minimum thickness [mm]",
+          "unit": "mm",
+          "values": [
+            "16,4"
+          ]
+        },
+        {
+          "criteriaID": 272,
+          "name": "Drum diameter [mm]",
+          "unit": "mm",
+          "values": [
+            "160"
+          ]
+        },
+        {
+          "criteriaID": 232,
+          "name": "Brake Disc Type",
+          "unit": null,
+          "values": [
+            "Vented"
+          ]
+        },
+        {
+          "criteriaID": 436,
+          "name": "Colour",
+          "unit": null,
+          "values": [
+            "black"
+          ]
+        },
+        {
+          "criteriaID": 599,
+          "name": "Surface",
+          "unit": null,
+          "values": [
+            "painted"
+          ]
+        }
+      ],
+      "articleShortInfo": {
+        "criterias": [
+          {
+            "criteriaID": 100,
+            "name": "Fitting Position",
+            "unit": null,
+            "values": [
+              "Rear Axle"
+            ]
+          }
+        ],
+        "marketingTexts": [],
+        "medias": []
+      },
+      "articleCountryExcludes": [],
+      "articleMarketingTexts": [],
+      "articleParts": [],
+      "articleInParts": [],
+      "articleImageMedias": [
+        {
+          "mediaID": 16107516,
+          "mediaTypeID": 5,
+          "fileName": "0161DF4527",
+          "url": "https://aftermarket.zf.com/app/controller/opc/getMedia?fileName=0161DF4527&typeID=5",
+          "thumbnailUrl": "https://aftermarket.zf.com/app/controller/opc/getMedia?fileName=0161DF4527&typeID=5&thumbnail=true",
+          "documentTypeId": 1,
+          "size": null
+        }
+      ],
+      "articleSupersessions": [],
+      "articleReplaceSupersessions": []
+    }
+  ],
+  "articlesCriterias": [
+    {
+      "criteriaID": 122,
+      "name": "Manufacturer Restriction",
+      "values": [
+        "ATE",
+        "TRW"
+      ],
+      "unit": null
+    },
+    {
+      "criteriaID": 100,
+      "name": "Fitting Position",
+      "values": [
+        "Front Axle",
+        "Front Axle Left",
+        "Front Axle Right",
+        "Rear Axle",
+        "both sides"
+      ],
+      "unit": null
+    }
+  ],
+  "articlesPartCriterias": null,
+  "brands": {
+    "content": [
+      {
+        "brandID": 161,
+        "name": "TRW"
+      }
+    ]
+  },
+  "pictureAssemblyGroup": [
+    {
+      "pictureAssemblyGroupID": "PictoBremse",
+      "assemblyGroups": [
+        {
+          "assemblyGroupID": 78,
+          "name": "Brake Caliper"
+        },
+        {
+          "assemblyGroupID": 82,
+          "name": "Brake Disc"
+        },
+        {
+          "assemblyGroupID": 402,
+          "name": "Brake Pad Set, disc brake"
+        },
+        {
+          "assemblyGroupID": 4932,
+          "name": "Control Element, parking brake caliper"
+        }
+      ],
+      "sortNumber": 8
+    }
+  ],
+  "totalElements": 8,
+  "totalPages": 1,
+  "number": 0,
+  "numberOfElements": 8,
+  "oneIDAuth": null
+}

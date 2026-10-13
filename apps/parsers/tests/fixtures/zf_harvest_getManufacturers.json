@@ -1,0 +1,919 @@
+{
+  "content": [
+    {
+      "manufacturerID": 3854,
+      "countryID": "NULL",
+      "name": "ABARTH"
+    },
+    {
+      "manufacturerID": 609,
+      "countryID": "NULL",
+      "name": "AC"
+    },
+    {
+      "manufacturerID": 1505,
+      "countryID": "NULL",
+      "name": "ACURA"
+    },
+    {
+      "manufacturerID": 1480,
+      "countryID": "NULL",
+      "name": "AIXAM"
+    },
+    {
+      "manufacturerID": 2,
+      "countryID": "NULL",
+      "name": "ALFA ROMEO"
+    },
+    {
+      "manufacturerID": 866,
+      "countryID": "NULL",
+      "name": "ALPINA"
+    },
+    {
+      "manufacturerID": 810,
+      "countryID": "NULL",
+      "name": "ALPINE"
+    },
+    {
+      "manufacturerID": 2246,
+      "countryID": "NULL",
+      "name": "AMC"
+    },
+    {
+      "manufacturerID": 2524,
+      "countryID": "NULL",
+      "name": "APRILIA"
+    },
+    {
+      "manufacturerID": 1360,
+      "countryID": "NULL",
+      "name": "ARO"
+    },
+    {
+      "manufacturerID": 879,
+      "countryID": "NULL",
+      "name": "ASIA MOTORS"
+    },
+    {
+      "manufacturerID": 881,
+      "countryID": "NULL",
+      "name": "ASTON MARTIN"
+    },
+    {
+      "manufacturerID": 5,
+      "countryID": "NULL",
+      "name": "AUDI"
+    },
+    {
+      "manufacturerID": 6,
+      "countryID": "NULL",
+      "name": "AUSTIN"
+    },
+    {
+      "manufacturerID": 1538,
+      "countryID": "NULL",
+      "name": "AUSTIN-HEALEY"
+    },
+    {
+      "manufacturerID": 3,
+      "countryID": "NULL",
+      "name": "AUTO UNION"
+    },
+    {
+      "manufacturerID": 799,
+      "countryID": "NULL",
+      "name": "AUTOBIANCHI"
+    },
+    {
+      "manufacturerID": 3071,
+      "countryID": "NULL",
+      "name": "BAW"
+    },
+    {
+      "manufacturerID": 10,
+      "countryID": "NULL",
+      "name": "BEDFORD"
+    },
+    {
+      "manufacturerID": 815,
+      "countryID": "NULL",
+      "name": "BENTLEY"
+    },
+    {
+      "manufacturerID": 1485,
+      "countryID": "NULL",
+      "name": "BERTONE"
+    },
+    {
+      "manufacturerID": 3762,
+      "countryID": "NULL",
+      "name": "BESTURN (FAW)"
+    },
+    {
+      "manufacturerID": 4368,
+      "countryID": "NULL",
+      "name": "BIMOTA"
+    },
+    {
+      "manufacturerID": 1486,
+      "countryID": "NULL",
+      "name": "BITTER"
+    },
+    {
+      "manufacturerID": 16,
+      "countryID": "NULL",
+      "name": "BMW"
+    },
+    {
+      "manufacturerID": 3124,
+      "countryID": "NULL",
+      "name": "BMW - BRILLIANCE BMW"
+    },
+    {
+      "manufacturerID": 4439,
+      "countryID": "NULL",
+      "name": "BOGDAN"
+    },
+    {
+      "manufacturerID": 136,
+      "countryID": "NULL",
+      "name": "BORGWARD"
+    },
+    {
+      "manufacturerID": 1487,
+      "countryID": "NULL",
+      "name": "BRISTOL"
+    },
+    {
+      "manufacturerID": 816,
+      "countryID": "NULL",
+      "name": "BUICK"
+    },
+    {
+      "manufacturerID": 3122,
+      "countryID": "NULL",
+      "name": "BYD"
+    },
+    {
+      "manufacturerID": 819,
+      "countryID": "NULL",
+      "name": "CADILLAC"
+    },
+    {
+      "manufacturerID": 1489,
+      "countryID": "NULL",
+      "name": "CARBODIES"
+    },
+    {
+      "manufacturerID": 2852,
+      "countryID": "NULL",
+      "name": "CHANGAN"
+    },
+    {
+      "manufacturerID": 2887,
+      "countryID": "NULL",
+      "name": "CHERY"
+    },
+    {
+      "manufacturerID": 138,
+      "countryID": "NULL",
+      "name": "CHEVROLET"
+    },
+    {
+      "manufacturerID": 3527,
+      "countryID": "NULL",
+      "name": "CHEVROLET (SGM)"
+    },
+    {
+      "manufacturerID": 20,
+      "countryID": "NULL",
+      "name": "CHRYSLER"
+    },
+    {
+      "manufacturerID": 5596,
+      "countryID": "NULL",
+      "name": "CIIMO"
+    },
+    {
+      "manufacturerID": 21,
+      "countryID": "NULL",
+      "name": "CITROEN"
+    },
+    {
+      "manufacturerID": 4896,
+      "countryID": "NULL",
+      "name": "CUPRA"
+    },
+    {
+      "manufacturerID": 139,
+      "countryID": "NULL",
+      "name": "DACIA"
+    },
+    {
+      "manufacturerID": 185,
+      "countryID": "NULL",
+      "name": "DAEWOO"
+    },
+    {
+      "manufacturerID": 24,
+      "countryID": "NULL",
+      "name": "DAF"
+    },
+    {
+      "manufacturerID": 25,
+      "countryID": "NULL",
+      "name": "DAIHATSU"
+    },
+    {
+      "manufacturerID": 26,
+      "countryID": "NULL",
+      "name": "DAIMLER"
+    },
+    {
+      "manufacturerID": 1493,
+      "countryID": "NULL",
+      "name": "DALLAS"
+    },
+    {
+      "manufacturerID": 807,
+      "countryID": "NULL",
+      "name": "DATSUN"
+    },
+    {
+      "manufacturerID": 1495,
+      "countryID": "NULL",
+      "name": "DE TOMASO"
+    },
+    {
+      "manufacturerID": 29,
+      "countryID": "NULL",
+      "name": "DODGE"
+    },
+    {
+      "manufacturerID": 4468,
+      "countryID": "NULL",
+      "name": "DS"
+    },
+    {
+      "manufacturerID": 11080,
+      "countryID": "NULL",
+      "name": "E-Ton"
+    },
+    {
+      "manufacturerID": 4491,
+      "countryID": "NULL",
+      "name": "EMCO"
+    },
+    {
+      "manufacturerID": 3332,
+      "countryID": "NULL",
+      "name": "EMGRAND"
+    },
+    {
+      "manufacturerID": 4072,
+      "countryID": "NULL",
+      "name": "FANTIC"
+    },
+    {
+      "manufacturerID": 700,
+      "countryID": "NULL",
+      "name": "FERRARI"
+    },
+    {
+      "manufacturerID": 35,
+      "countryID": "NULL",
+      "name": "FIAT"
+    },
+    {
+      "manufacturerID": 36,
+      "countryID": "NULL",
+      "name": "FORD"
+    },
+    {
+      "manufacturerID": 2864,
+      "countryID": "NULL",
+      "name": "FORD ASIA & OCEANIA"
+    },
+    {
+      "manufacturerID": 1496,
+      "countryID": "NULL",
+      "name": "FORD AUSTRALIA"
+    },
+    {
+      "manufacturerID": 808,
+      "countryID": "NULL",
+      "name": "FORD OTOSAN"
+    },
+    {
+      "manufacturerID": 776,
+      "countryID": "NULL",
+      "name": "FORD USA"
+    },
+    {
+      "manufacturerID": 2867,
+      "countryID": "NULL",
+      "name": "FOTON"
+    },
+    {
+      "manufacturerID": 775,
+      "countryID": "NULL",
+      "name": "FSO"
+    },
+    {
+      "manufacturerID": 4289,
+      "countryID": "NULL",
+      "name": "GASGAS"
+    },
+    {
+      "manufacturerID": 148,
+      "countryID": "NULL",
+      "name": "GAZ"
+    },
+    {
+      "manufacturerID": 2590,
+      "countryID": "NULL",
+      "name": "GEELY"
+    },
+    {
+      "manufacturerID": 4473,
+      "countryID": "NULL",
+      "name": "GENESIS"
+    },
+    {
+      "manufacturerID": 831,
+      "countryID": "NULL",
+      "name": "GEO"
+    },
+    {
+      "manufacturerID": 1498,
+      "countryID": "NULL",
+      "name": "GINETTA"
+    },
+    {
+      "manufacturerID": 3697,
+      "countryID": "NULL",
+      "name": "GLEAGLE"
+    },
+    {
+      "manufacturerID": 39,
+      "countryID": "NULL",
+      "name": "GMC"
+    },
+    {
+      "manufacturerID": 2903,
+      "countryID": "NULL",
+      "name": "GREAT WALL"
+    },
+    {
+      "manufacturerID": 2866,
+      "countryID": "NULL",
+      "name": "HAFEI"
+    },
+    {
+      "manufacturerID": 3968,
+      "countryID": "NULL",
+      "name": "HAVAL"
+    },
+    {
+      "manufacturerID": 45,
+      "countryID": "NULL",
+      "name": "HONDA"
+    },
+    {
+      "manufacturerID": 3129,
+      "countryID": "NULL",
+      "name": "HONDA - GUANGZHOU HONDA"
+    },
+    {
+      "manufacturerID": 1506,
+      "countryID": "NULL",
+      "name": "HUMMER"
+    },
+    {
+      "manufacturerID": 4241,
+      "countryID": "NULL",
+      "name": "HUSQVARNA"
+    },
+    {
+      "manufacturerID": 183,
+      "countryID": "NULL",
+      "name": "HYUNDAI"
+    },
+    {
+      "manufacturerID": 3128,
+      "countryID": "NULL",
+      "name": "HYUNDAI (HUATAI)"
+    },
+    {
+      "manufacturerID": 1526,
+      "countryID": "NULL",
+      "name": "INFINITI"
+    },
+    {
+      "manufacturerID": 52,
+      "countryID": "NULL",
+      "name": "INNOCENTI"
+    },
+    {
+      "manufacturerID": 1508,
+      "countryID": "NULL",
+      "name": "IRMSCHER"
+    },
+    {
+      "manufacturerID": 54,
+      "countryID": "NULL",
+      "name": "ISUZU"
+    },
+    {
+      "manufacturerID": 55,
+      "countryID": "NULL",
+      "name": "IVECO"
+    },
+    {
+      "manufacturerID": 2873,
+      "countryID": "NULL",
+      "name": "JAC"
+    },
+    {
+      "manufacturerID": 56,
+      "countryID": "NULL",
+      "name": "JAGUAR"
+    },
+    {
+      "manufacturerID": 882,
+      "countryID": "NULL",
+      "name": "JEEP"
+    },
+    {
+      "manufacturerID": 1511,
+      "countryID": "NULL",
+      "name": "JENSEN"
+    },
+    {
+      "manufacturerID": 184,
+      "countryID": "NULL",
+      "name": "KIA"
+    },
+    {
+      "manufacturerID": 2760,
+      "countryID": "NULL",
+      "name": "KTM"
+    },
+    {
+      "manufacturerID": 63,
+      "countryID": "NULL",
+      "name": "LADA"
+    },
+    {
+      "manufacturerID": 701,
+      "countryID": "NULL",
+      "name": "LAMBORGHINI"
+    },
+    {
+      "manufacturerID": 64,
+      "countryID": "NULL",
+      "name": "LANCIA"
+    },
+    {
+      "manufacturerID": 1820,
+      "countryID": "NULL",
+      "name": "LAND ROVER"
+    },
+    {
+      "manufacturerID": 1380,
+      "countryID": "NULL",
+      "name": "LDV"
+    },
+    {
+      "manufacturerID": 842,
+      "countryID": "NULL",
+      "name": "LEXUS"
+    },
+    {
+      "manufacturerID": 3086,
+      "countryID": "NULL",
+      "name": "LIFAN"
+    },
+    {
+      "manufacturerID": 1513,
+      "countryID": "NULL",
+      "name": "LIGIER"
+    },
+    {
+      "manufacturerID": 1200,
+      "countryID": "NULL",
+      "name": "LINCOLN"
+    },
+    {
+      "manufacturerID": 802,
+      "countryID": "NULL",
+      "name": "LOTUS"
+    },
+    {
+      "manufacturerID": 3047,
+      "countryID": "NULL",
+      "name": "LTI"
+    },
+    {
+      "manufacturerID": 1280,
+      "countryID": "NULL",
+      "name": "MAHINDRA"
+    },
+    {
+      "manufacturerID": 69,
+      "countryID": "NULL",
+      "name": "MAN"
+    },
+    {
+      "manufacturerID": 771,
+      "countryID": "NULL",
+      "name": "MASERATI"
+    },
+    {
+      "manufacturerID": 4492,
+      "countryID": "NULL",
+      "name": "MASH"
+    },
+    {
+      "manufacturerID": 3300,
+      "countryID": "NULL",
+      "name": "MAXUS"
+    },
+    {
+      "manufacturerID": 2164,
+      "countryID": "NULL",
+      "name": "MAYBACH"
+    },
+    {
+      "manufacturerID": 72,
+      "countryID": "NULL",
+      "name": "MAZDA"
+    },
+    {
+      "manufacturerID": 845,
+      "countryID": "NULL",
+      "name": "MEGA"
+    },
+    {
+      "manufacturerID": 74,
+      "countryID": "NULL",
+      "name": "MERCEDES-BENZ"
+    },
+    {
+      "manufacturerID": 161,
+      "countryID": "NULL",
+      "name": "MERCURY"
+    },
+    {
+      "manufacturerID": 1520,
+      "countryID": "NULL",
+      "name": "METROCAB"
+    },
+    {
+      "manufacturerID": 75,
+      "countryID": "NULL",
+      "name": "MG"
+    },
+    {
+      "manufacturerID": 1523,
+      "countryID": "NULL",
+      "name": "MINI"
+    },
+    {
+      "manufacturerID": 77,
+      "countryID": "NULL",
+      "name": "MITSUBISHI"
+    },
+    {
+      "manufacturerID": 803,
+      "countryID": "NULL",
+      "name": "MORGAN"
+    },
+    {
+      "manufacturerID": 78,
+      "countryID": "NULL",
+      "name": "MORRIS"
+    },
+    {
+      "manufacturerID": 813,
+      "countryID": "NULL",
+      "name": "MOSKVICH"
+    },
+    {
+      "manufacturerID": 4780,
+      "countryID": "NULL",
+      "name": "NIO"
+    },
+    {
+      "manufacturerID": 80,
+      "countryID": "NULL",
+      "name": "NISSAN"
+    },
+    {
+      "manufacturerID": 3141,
+      "countryID": "NULL",
+      "name": "NISSAN (DFAC)"
+    },
+    {
+      "manufacturerID": 81,
+      "countryID": "NULL",
+      "name": "NSU"
+    },
+    {
+      "manufacturerID": 1141,
+      "countryID": "NULL",
+      "name": "OLDSMOBILE"
+    },
+    {
+      "manufacturerID": 84,
+      "countryID": "NULL",
+      "name": "OPEL"
+    },
+    {
+      "manufacturerID": 1531,
+      "countryID": "NULL",
+      "name": "PANTHER"
+    },
+    {
+      "manufacturerID": 88,
+      "countryID": "NULL",
+      "name": "PEUGEOT"
+    },
+    {
+      "manufacturerID": 181,
+      "countryID": "NULL",
+      "name": "PIAGGIO"
+    },
+    {
+      "manufacturerID": 3046,
+      "countryID": "NULL",
+      "name": "PININFARINA"
+    },
+    {
+      "manufacturerID": 850,
+      "countryID": "NULL",
+      "name": "PLYMOUTH"
+    },
+    {
+      "manufacturerID": 5152,
+      "countryID": "NULL",
+      "name": "POLARIS"
+    },
+    {
+      "manufacturerID": 4817,
+      "countryID": "NULL",
+      "name": "POLESTAR"
+    },
+    {
+      "manufacturerID": 774,
+      "countryID": "NULL",
+      "name": "PONTIAC"
+    },
+    {
+      "manufacturerID": 92,
+      "countryID": "NULL",
+      "name": "PORSCHE"
+    },
+    {
+      "manufacturerID": 851,
+      "countryID": "NULL",
+      "name": "PREMIER"
+    },
+    {
+      "manufacturerID": 778,
+      "countryID": "NULL",
+      "name": "PROTON"
+    },
+    {
+      "manufacturerID": 1580,
+      "countryID": "NULL",
+      "name": "PUCH"
+    },
+    {
+      "manufacturerID": 3689,
+      "countryID": "NULL",
+      "name": "RAM"
+    },
+    {
+      "manufacturerID": 1534,
+      "countryID": "NULL",
+      "name": "RANGER"
+    },
+    {
+      "manufacturerID": 773,
+      "countryID": "NULL",
+      "name": "RELIANT"
+    },
+    {
+      "manufacturerID": 93,
+      "countryID": "NULL",
+      "name": "RENAULT"
+    },
+    {
+      "manufacturerID": 1539,
+      "countryID": "NULL",
+      "name": "RILEY"
+    },
+    {
+      "manufacturerID": 705,
+      "countryID": "NULL",
+      "name": "ROLLS-ROYCE"
+    },
+    {
+      "manufacturerID": 95,
+      "countryID": "NULL",
+      "name": "ROVER"
+    },
+    {
+      "manufacturerID": 99,
+      "countryID": "NULL",
+      "name": "SAAB"
+    },
+    {
+      "manufacturerID": 171,
+      "countryID": "NULL",
+      "name": "SANTANA"
+    },
+    {
+      "manufacturerID": 104,
+      "countryID": "NULL",
+      "name": "SEAT"
+    },
+    {
+      "manufacturerID": 106,
+      "countryID": "NULL",
+      "name": "SKODA"
+    },
+    {
+      "manufacturerID": 1138,
+      "countryID": "NULL",
+      "name": "SMART"
+    },
+    {
+      "manufacturerID": 3657,
+      "countryID": "NULL",
+      "name": "SOUEAST"
+    },
+    {
+      "manufacturerID": 175,
+      "countryID": "NULL",
+      "name": "SSANGYONG"
+    },
+    {
+      "manufacturerID": 107,
+      "countryID": "NULL",
+      "name": "SUBARU"
+    },
+    {
+      "manufacturerID": 109,
+      "countryID": "NULL",
+      "name": "SUZUKI"
+    },
+    {
+      "manufacturerID": 110,
+      "countryID": "NULL",
+      "name": "TALBOT"
+    },
+    {
+      "manufacturerID": 178,
+      "countryID": "NULL",
+      "name": "TATA"
+    },
+    {
+      "manufacturerID": 3328,
+      "countryID": "NULL",
+      "name": "TESLA"
+    },
+    {
+      "manufacturerID": 1551,
+      "countryID": "NULL",
+      "name": "TOFAS"
+    },
+    {
+      "manufacturerID": 111,
+      "countryID": "NULL",
+      "name": "TOYOTA"
+    },
+    {
+      "manufacturerID": 3137,
+      "countryID": "NULL",
+      "name": "TOYOTA - FAW TOYOTA"
+    },
+    {
+      "manufacturerID": 3130,
+      "countryID": "NULL",
+      "name": "TOYOTA - GUANGZHOU TOYOTA"
+    },
+    {
+      "manufacturerID": 187,
+      "countryID": "NULL",
+      "name": "TRABANT"
+    },
+    {
+      "manufacturerID": 112,
+      "countryID": "NULL",
+      "name": "TRIUMPH"
+    },
+    {
+      "manufacturerID": 861,
+      "countryID": "NULL",
+      "name": "TVR"
+    },
+    {
+      "manufacturerID": 1553,
+      "countryID": "NULL",
+      "name": "UAZ"
+    },
+    {
+      "manufacturerID": 1554,
+      "countryID": "NULL",
+      "name": "UMM"
+    },
+    {
+      "manufacturerID": 4762,
+      "countryID": "NULL",
+      "name": "UZ-DAEWOO"
+    },
+    {
+      "manufacturerID": 117,
+      "countryID": "NULL",
+      "name": "VAUXHALL"
+    },
+    {
+      "manufacturerID": 121,
+      "countryID": "NULL",
+      "name": "VOLKSWAGEN"
+    },
+    {
+      "manufacturerID": 2859,
+      "countryID": "NULL",
+      "name": "VOLKSWAGEN - FAW-VW"
+    },
+    {
+      "manufacturerID": 120,
+      "countryID": "NULL",
+      "name": "VOLVO"
+    },
+    {
+      "manufacturerID": 8223,
+      "countryID": "NULL",
+      "name": "VW (ANHUI)"
+    },
+    {
+      "manufacturerID": 186,
+      "countryID": "NULL",
+      "name": "WARTBURG"
+    },
+    {
+      "manufacturerID": 1558,
+      "countryID": "NULL",
+      "name": "WIESMANN"
+    },
+    {
+      "manufacturerID": 1541,
+      "countryID": "NULL",
+      "name": "WOLSELEY"
+    },
+    {
+      "manufacturerID": 5184,
+      "countryID": "NULL",
+      "name": "XPENG"
+    },
+    {
+      "manufacturerID": 1021,
+      "countryID": "NULL",
+      "name": "YAMAHA"
+    },
+    {
+      "manufacturerID": 2816,
+      "countryID": "NULL",
+      "name": "YUGO"
+    },
+    {
+      "manufacturerID": 1559,
+      "countryID": "NULL",
+      "name": "YULON"
+    },
+    {
+      "manufacturerID": 124,
+      "countryID": "NULL",
+      "name": "ZASTAVA"
+    },
+    {
+      "manufacturerID": 1139,
+      "countryID": "NULL",
+      "name": "ZAZ"
+    },
+    {
+      "manufacturerID": 2736,
+      "countryID": "NULL",
+      "name": "ZHONGHUA (BRILLIANCE)"
+    },
+    {
+      "manufacturerID": 3160,
+      "countryID": "NULL",
+      "name": "ZOTYE"
+    }
+  ]
+}

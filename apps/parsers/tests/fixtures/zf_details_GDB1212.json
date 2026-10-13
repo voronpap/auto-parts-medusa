@@ -1,0 +1,398 @@
+{
+  "details": {
+    "number": "GDB1212",
+    "name": "Brake Pad Set, disc brake | COTEC",
+    "brandName": "TRW",
+    "textModules": {
+      "additionalTextShowMoreLabel": "Show more",
+      "additionalTextShowLessLabel": "Show less",
+      "values": []
+    },
+    "status": {
+      "key": 1,
+      "value": "Normal"
+    },
+    "replacedBy": null,
+    "mainStage": {
+      "ean": {
+        "label": "EAN",
+        "value": "3322937140503"
+      },
+      "weight": {
+        "label": "Gross Weight (kg)",
+        "value": "1,78"
+      }
+    },
+    "distributorFinder": {
+      "text": "Find a Distributor",
+      "href": "https://aftermarket.zf.com/en/partner-finder/#/result?countryIso=UA&services=2&brands=161"
+    },
+    "productTypes": [
+      {
+        "productTypeId": "00",
+        "productTypeLabel": null,
+        "netWeight": "1,78",
+        "grossWeight": "1,78",
+        "weightUnit": "kg"
+      }
+    ],
+    "pagePrinter": {
+      "label": "Print this page",
+      "icon": "navigationIcons/print"
+    }
+  },
+  "specifications": {
+    "label": "Specifications",
+    "type": "tab",
+    "content": {
+      "generalSpecifications": {
+        "label": "General Specifications",
+        "specifications": [
+          {
+            "id": 0,
+            "label": "Brand",
+            "meta": null,
+            "values": [
+              {
+                "text": "TRW",
+                "href": null
+              }
+            ]
+          },
+          {
+            "id": 1,
+            "label": "Wear Warning Contact",
+            "meta": null,
+            "values": [
+              {
+                "text": "incl. wear warning contact",
+                "href": null
+              }
+            ]
+          },
+          {
+            "id": 2,
+            "label": "Manufacturer Restriction",
+            "meta": null,
+            "values": [
+              {
+                "text": "ATE",
+                "href": null
+              }
+            ]
+          },
+          {
+            "id": 3,
+            "label": "Thickness [mm]",
+            "meta": null,
+            "values": [
+              {
+                "text": "19",
+                "href": null
+              }
+            ]
+          },
+          {
+            "id": 4,
+            "label": "Article Number of recommended accessories",
+            "meta": null,
+            "values": [
+              {
+                "text": "PFK302",
+                "href": null
+              }
+            ]
+          },
+          {
+            "id": 5,
+            "label": "Test Mark",
+            "meta": null,
+            "values": [
+              {
+                "text": "E1 90R 01024/026",
+                "href": null
+              }
+            ]
+          },
+          {
+            "id": 6,
+            "label": "Number of wear indicators [per axle]",
+            "meta": null,
+            "values": [
+              {
+                "text": "2",
+                "href": null
+              }
+            ]
+          },
+          {
+            "id": 7,
+            "label": "Height 1 [mm]",
+            "meta": null,
+            "values": [
+              {
+                "text": "61.6",
+                "href": null
+              }
+            ]
+          },
+          {
+            "id": 8,
+            "label": "Height 2 [mm]",
+            "meta": null,
+            "values": [
+              {
+                "text": "58.9",
+                "href": null
+              }
+            ]
+          },
+          {
+            "id": 9,
+            "label": "Warning Contact Length [mm]",
+            "meta": null,
+            "values": [
+              {
+                "text": "200",
+                "href": null
+              }
+            ]
+          },
+          {
+            "id": 10,
+            "label": "Width 1 [mm]",
+            "meta": null,
+            "values": [
+              {
+                "text": "156.4",
+                "href": null
+              }
+            ]
+          },
+          {
+            "id": 11,
+            "label": "Width 2 [mm]",
+            "meta": null,
+            "values": [
+              {
+                "text": "155.1",
+                "href": null
+              }
+            ]
+          },
+          {
+            "id": 12,
+            "label": "Net Weight (kg)",
+            "isNetWeight": true,
+            "meta": null,
+            "values": [
+              {
+                "text": "1,78"
+              }
+            ]
+          }
+        ]
+      },
+      "additionalInformation": null,
+      "partsList": null,
+      "inPartsList": null,
+      "referenceNumbers": {
+        "label": "Comparable OE Numbers",
+        "referenceNumbers": [
+          {
+            "id": 0,
+            "label": "ALFA ROMEO",
+            "values": [
+              {
+                "text": "9947156"
+              },
+              {
+                "text": "0000009947935"
+              },
+              {
+                "text": "9947936"
+              },
+              {
+                "text": "0000009947955"
+              },
+              {
+                "text": "9948095"
+              },
+              {
+                "text": "0000009948334"
+              },
+              {
+                "text": "9948476"
+              },
+              {
+                "text": "9949134"
+              },
+              {
+                "text": "0009950637"
+              },
+              {
+                "text": "9950637"
+              },
+              {
+                "text": "9951030"
+              },
+              {
+                "text": "71713143"
+              },
+              {
+                "text": "71752995"
+              },
+              {
+                "text": "77362193"
+              },
+              {
+                "text": "77362222"
+              },
+              {
+                "text": "0000077362331"
+              }
+            ]
+          },
+          {
+            "id": 1,
+            "label": "FIAT",
+            "values": [
+              {
+                "text": "9947156"
+              },
+              {
+                "text": "9948095"
+              },
+              {
+                "text": "9948476"
+              },
+              {
+                "text": "9950637"
+              },
+              {
+                "text": "9951030"
+              },
+              {
+                "text": "71713143"
+              },
+              {
+                "text": "71748388"
+              },
+              {
+                "text": "71752995"
+              },
+              {
+                "text": "77362193"
+              },
+              {
+                "text": "77366659"
+              }
+            ]
+          },
+          {
+            "id": 2,
+            "label": "LANCIA",
+            "values": [
+              {
+                "text": "9947156"
+              },
+              {
+                "text": "9947936"
+              },
+              {
+                "text": "9948095"
+              },
+              {
+                "text": "9948476"
+              },
+              {
+                "text": "9950637"
+              },
+              {
+                "text": "9951030"
+              },
+              {
+                "text": "71713143"
+              },
+              {
+                "text": "71752995"
+              },
+              {
+                "text": "77362193"
+              }
+            ]
+          }
+        ]
+      },
+      "competitorReferences": null,
+      "alternatives": {
+        "label": "Alternatives",
+        "alternatives": [
+          {
+            "id": 1,
+            "label": "LEMFÖRDER",
+            "values": [
+              {
+                "text": "26221",
+                "href": null,
+                "info": null
+              },
+              {
+                "text": "26258",
+                "href": null,
+                "info": null
+              },
+              {
+                "text": "26544",
+                "href": null,
+                "info": null
+              },
+              {
+                "text": "26549",
+                "href": null,
+                "info": null
+              }
+            ]
+          },
+          {
+            "id": 2,
+            "label": "TRW",
+            "values": [
+              {
+                "text": "GDB1212DTE",
+                "href": "/products/GDB1212DTE",
+                "info": null
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "serviceAndRepair": null,
+  "builtIn": null,
+  "technicalInformation": null,
+  "videos": null,
+  "meta": {
+    "locale": "en_US",
+    "country": "UA",
+    "group": "standard",
+    "fallbackLanguageUsage": [
+      "names"
+    ],
+    "isReman": false,
+    "datasource": {
+      "name": "IAMP"
+    }
+  },
+  "accessoriesAndRelatedProducts": null,
+  "serviceAvailability": {
+    "label": "Service Finder"
+  },
+  "productAvailability": {
+    "label": "Distributor Finder"
+  },
+  "navBackToSearch": "Back to search results",
+  "navBackToPrevious": "Back to previous page",
+  "requestTime": 1791909418246
+}

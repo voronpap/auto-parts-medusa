@@ -1,0 +1,8 @@
+Retrieved 2026-10-13 through PoliteSession, 5s per host, from the public
+regional CTR search/ru and search/detail/ru JSON routes used by the page.
+Detail excerpts retain all technical fields, own identities, OE and complete
+application rows, omitting editorial documentList, images and video links.
+The source's top-level oeNo differs from the displayed oeList; never treat it
+as an OE reference. Search fixtures retain complete finite result pages.
+Search_harvest is the first of multiple pages (37 results for HAVAL), not a
+complete catalogue. Runtime PoliteSession archives the unmodified responses.

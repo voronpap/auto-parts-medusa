@@ -1,0 +1,145 @@
+{
+  "content": [
+    {
+      "manufacturers": [
+        {
+          "manufacturer": {
+            "manufacturerID": 138,
+            "countryID": "NULL",
+            "name": "CHEVROLET"
+          },
+          "models": [
+            {
+              "model": {
+                "modelID": 9719,
+                "manufacturerID": 138,
+                "countryID": "NULL",
+                "name": "NIVA (2123)",
+                "saleName": "NIVA",
+                "generationName": null,
+                "yearOfConstructionFrom": "200209",
+                "yearOfConstructionTo": null
+              },
+              "vehicles": [
+                {
+                  "vehicle": {
+                    "vehicleID": 12073,
+                    "manufacturerID": 138,
+                    "modelID": 9719,
+                    "countryID": "NULL",
+                    "name": "1.7 4x4",
+                    "yearOfConstructionFrom": "200209",
+                    "yearOfConstructionTo": null,
+                    "kw": "59",
+                    "ps": "80",
+                    "ccm": "01690",
+                    "driveTypeName": "All-wheel Drive",
+                    "tonnage": null,
+                    "typeOfBody": null,
+                    "vehicleTypeIDs": [
+                      "P"
+                    ],
+                    "kbaNumbers": null,
+                    "concepts": null,
+                    "engineType": "Petrol Engine",
+                    "engineCodes": null,
+                    "modelName": null,
+                    "manufacturerName": null
+                  },
+                  "engine": null,
+                  "articleShortInfos": [
+                    {
+                      "criterias": [
+                        {
+                          "criteriaID": 33,
+                          "name": "Engine Code",
+                          "unit": null,
+                          "values": [
+                            "VAZ 2123"
+                          ]
+                        }
+                      ],
+                      "marketingTexts": [
+                        {
+                          "marketingTsID": "6634976-4-30010-1",
+                          "linkID": 6634976,
+                          "text": "vehicle can be mounted with different clutch sizes"
+                        }
+                      ],
+                      "medias": []
+                    }
+                  ],
+                  "assemblyGroups": [
+                    {
+                      "assemblyGroup": {
+                        "assemblyGroupID": 479,
+                        "name": "Clutch Kit"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "vehicle": {
+                    "vehicleID": 11533,
+                    "manufacturerID": 138,
+                    "modelID": 9719,
+                    "countryID": "NULL",
+                    "name": "1.7 4x4",
+                    "yearOfConstructionFrom": "201001",
+                    "yearOfConstructionTo": null,
+                    "kw": "61",
+                    "ps": "83",
+                    "ccm": "01690",
+                    "driveTypeName": "All-wheel Drive",
+                    "tonnage": null,
+                    "typeOfBody": null,
+                    "vehicleTypeIDs": [
+                      "P"
+                    ],
+                    "kbaNumbers": null,
+                    "concepts": null,
+                    "engineType": "Petrol Engine",
+                    "engineCodes": null,
+                    "modelName": null,
+                    "manufacturerName": null
+                  },
+                  "engine": null,
+                  "articleShortInfos": [
+                    {
+                      "criterias": [
+                        {
+                          "criteriaID": 33,
+                          "name": "Engine Code",
+                          "unit": null,
+                          "values": [
+                            "VAZ 2123"
+                          ]
+                        }
+                      ],
+                      "marketingTexts": [
+                        {
+                          "marketingTsID": "7116944-4-30010-1",
+                          "linkID": 7116944,
+                          "text": "vehicle can be mounted with different clutch sizes"
+                        }
+                      ],
+                      "medias": []
+                    }
+                  ],
+                  "assemblyGroups": [
+                    {
+                      "assemblyGroup": {
+                        "assemblyGroupID": 479,
+                        "name": "Clutch Kit"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

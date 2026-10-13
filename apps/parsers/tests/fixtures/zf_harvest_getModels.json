@@ -1,0 +1,234 @@
+{
+  "content": [
+    {
+      "modelID": 40440,
+      "manufacturerID": 75,
+      "countryID": "NULL",
+      "name": "HS (AS23)",
+      "saleName": "HS",
+      "generationName": null,
+      "yearOfConstructionFrom": "201809",
+      "yearOfConstructionTo": null
+    },
+    {
+      "modelID": 4456,
+      "manufacturerID": 75,
+      "countryID": "NULL",
+      "name": "MAESTRO",
+      "saleName": "MAESTRO",
+      "generationName": null,
+      "yearOfConstructionFrom": "198303",
+      "yearOfConstructionTo": "199009"
+    },
+    {
+      "modelID": 4454,
+      "manufacturerID": 75,
+      "countryID": "NULL",
+      "name": "METRO",
+      "saleName": "METRO",
+      "generationName": null,
+      "yearOfConstructionFrom": "198205",
+      "yearOfConstructionTo": "199009"
+    },
+    {
+      "modelID": 10961,
+      "manufacturerID": 75,
+      "countryID": "NULL",
+      "name": "MG 3",
+      "saleName": "MG 3",
+      "generationName": null,
+      "yearOfConstructionFrom": "201104",
+      "yearOfConstructionTo": null
+    },
+    {
+      "modelID": 39015,
+      "manufacturerID": 75,
+      "countryID": "NULL",
+      "name": "MG 350 (AP11)",
+      "saleName": "MG 350",
+      "generationName": null,
+      "yearOfConstructionFrom": "201101",
+      "yearOfConstructionTo": null
+    },
+    {
+      "modelID": 40059,
+      "manufacturerID": 75,
+      "countryID": "NULL",
+      "name": "MG 5 Hatchback",
+      "saleName": "MG 5",
+      "generationName": null,
+      "yearOfConstructionFrom": "201203",
+      "yearOfConstructionTo": null
+    },
+    {
+      "modelID": 9580,
+      "manufacturerID": 75,
+      "countryID": "NULL",
+      "name": "MG 6 Hatchback",
+      "saleName": "MG 6",
+      "generationName": null,
+      "yearOfConstructionFrom": "201011",
+      "yearOfConstructionTo": null
+    },
+    {
+      "modelID": 9740,
+      "manufacturerID": 75,
+      "countryID": "NULL",
+      "name": "MG 6 Saloon",
+      "saleName": "MG 6",
+      "generationName": null,
+      "yearOfConstructionFrom": "201011",
+      "yearOfConstructionTo": null
+    },
+    {
+      "modelID": 1399,
+      "manufacturerID": 75,
+      "countryID": "NULL",
+      "name": "MGB Convertible",
+      "saleName": "MGB",
+      "generationName": null,
+      "yearOfConstructionFrom": "196205",
+      "yearOfConstructionTo": "198112"
+    },
+    {
+      "modelID": 1400,
+      "manufacturerID": 75,
+      "countryID": "NULL",
+      "name": "MGB GT",
+      "saleName": "MGB GT",
+      "generationName": null,
+      "yearOfConstructionFrom": "196507",
+      "yearOfConstructionTo": "198011"
+    },
+    {
+      "modelID": 4459,
+      "manufacturerID": 75,
+      "countryID": "NULL",
+      "name": "MGC",
+      "saleName": "MGC",
+      "generationName": null,
+      "yearOfConstructionFrom": "196701",
+      "yearOfConstructionTo": "196909"
+    },
+    {
+      "modelID": 4461,
+      "manufacturerID": 75,
+      "countryID": "NULL",
+      "name": "MGC GT",
+      "saleName": "MGC GT",
+      "generationName": null,
+      "yearOfConstructionFrom": "196701",
+      "yearOfConstructionTo": "196909"
+    },
+    {
+      "modelID": 4463,
+      "manufacturerID": 75,
+      "countryID": "NULL",
+      "name": "MGF (RD)",
+      "saleName": "MGF",
+      "generationName": null,
+      "yearOfConstructionFrom": "199503",
+      "yearOfConstructionTo": "200203"
+    },
+    {
+      "modelID": 1401,
+      "manufacturerID": 75,
+      "countryID": "NULL",
+      "name": "MGR V8",
+      "saleName": "MGR V8",
+      "generationName": null,
+      "yearOfConstructionFrom": "199209",
+      "yearOfConstructionTo": "199512"
+    },
+    {
+      "modelID": 1418,
+      "manufacturerID": 75,
+      "countryID": "NULL",
+      "name": "MIDGET",
+      "saleName": "MIDGET",
+      "generationName": null,
+      "yearOfConstructionFrom": "196401",
+      "yearOfConstructionTo": "197912"
+    },
+    {
+      "modelID": 4458,
+      "manufacturerID": 75,
+      "countryID": "NULL",
+      "name": "MONTEGO",
+      "saleName": "MONTEGO",
+      "generationName": null,
+      "yearOfConstructionFrom": "198404",
+      "yearOfConstructionTo": "199009"
+    },
+    {
+      "modelID": 5049,
+      "manufacturerID": 75,
+      "countryID": "NULL",
+      "name": "TF",
+      "saleName": "TF",
+      "generationName": null,
+      "yearOfConstructionFrom": "200203",
+      "yearOfConstructionTo": "200912"
+    },
+    {
+      "modelID": 5050,
+      "manufacturerID": 75,
+      "countryID": "NULL",
+      "name": "ZR",
+      "saleName": "ZR",
+      "generationName": null,
+      "yearOfConstructionFrom": "200106",
+      "yearOfConstructionTo": "200504"
+    },
+    {
+      "modelID": 5051,
+      "manufacturerID": 75,
+      "countryID": "NULL",
+      "name": "ZS",
+      "saleName": "ZS",
+      "generationName": null,
+      "yearOfConstructionFrom": "200107",
+      "yearOfConstructionTo": "200504"
+    },
+    {
+      "modelID": 5052,
+      "manufacturerID": 75,
+      "countryID": "NULL",
+      "name": "ZS Hatchback",
+      "saleName": "ZS",
+      "generationName": null,
+      "yearOfConstructionFrom": "200107",
+      "yearOfConstructionTo": "200510"
+    },
+    {
+      "modelID": 38594,
+      "manufacturerID": 75,
+      "countryID": "NULL",
+      "name": "ZS SUV (AZS1)",
+      "saleName": "ZS",
+      "generationName": null,
+      "yearOfConstructionFrom": "201710",
+      "yearOfConstructionTo": null
+    },
+    {
+      "modelID": 5053,
+      "manufacturerID": 75,
+      "countryID": "NULL",
+      "name": "ZT",
+      "saleName": "ZT",
+      "generationName": null,
+      "yearOfConstructionFrom": "200106",
+      "yearOfConstructionTo": "200510"
+    },
+    {
+      "modelID": 5054,
+      "manufacturerID": 75,
+      "countryID": "NULL",
+      "name": "ZT- T",
+      "saleName": "ZT-",
+      "generationName": null,
+      "yearOfConstructionFrom": "200110",
+      "yearOfConstructionTo": "200510"
+    }
+  ]
+}

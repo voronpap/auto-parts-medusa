@@ -1,0 +1,33 @@
+{
+  "term": "ZZZNOCODE900",
+  "products": {
+    "searchedFor": {
+      "label": "You searched for",
+      "applyButtonLabel": "Apply",
+      "error": "Please type in at least 3 characters to start searching..."
+    },
+    "searchBanner": {
+      "alt": "Hero Banner",
+      "src": " https://media-aftermarket.zf.com/dam/org/SearchResultsBannerDark.jpg"
+    }
+  },
+  "filterSections": [
+    {
+      "value": "Filter",
+      "isDisabled": true
+    },
+    {
+      "value": "Filter by Vehicle",
+      "isDisabled": true
+    }
+  ],
+  "marketSelection": {
+    "text": "Selected country: ",
+    "actionText": "Change"
+  },
+  "noResults": {
+    "title": "No Results",
+    "text": "We were not able to find results that match with your search. Please try to modify your search criteria or check if you have selected the correct market.",
+    "buttonLabel": "New Search"
+  }
+}

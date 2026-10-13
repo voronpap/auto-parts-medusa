@@ -1,0 +1,28 @@
+Captured anonymously from the official ZF catalogue on 2026-10-13.
+All source requests used PoliteSession with a five-second host interval.
+
+Search: GET https://aftermarket.zf.com/api/search
+term=<fixture term>, country=UA, expand=extended,special, ipp=12,
+offset=0, sort=relevance, language=en, isValidUser=false.
+Article: GET https://aftermarket.zf.com/api/articles/<source product route>
+expand=specifications,extended, country=UA, language=en, companyConfigId=.
+Spaces in API product routes use the source's literal plus signs.
+Fitment: GET https://aftermarket.zf.com/functions/controller/opc/getArticleDetailBuildIn
+articleID=<source number>, languageID=4, brandIDs=161 (TRW) or 32 (SACHS), countryID=UA.
+Legacy endpoints use the catalogue's X-Requested-With: XMLHttpRequest header.
+
+These are labelled JSON excerpts, not full responses: images and distributor
+links are omitted in search fixtures; article images and partner/login link
+metadata are omitted in detail fixtures. Grease's Included In list (3307
+rows) keeps its first two rows. Fitment keeps the first manufacturer's first
+model and first two vehicles, plus MG entries for GDB1330, if present.
+Numbers, maker labels, conditions and retained field values are unchanged.
+Full responses remain in the separate workspace research cache; production
+lookups archive every raw response through PoliteSession's recorder.
+
+Harvest fixtures are complete responses for TRW, country=UA, languageID=4,
+vehicleTypeIDs=P: getManufacturers; getModels (manufacturerID=75/MG);
+getGroupedVehicles (modelID=9580/MG 6 Hatchback); getArticlesForFilter
+(source vehicleIDs, limitToBrandIDs=161, sort=asc, sortField=status, count=15,
+page=0, empty assemblyGroupIDs/criteriaIDAndValue/status/articlePartIDs,
+oneMainAssemblyGroupSelected=false). All four use the legacy AJAX header.

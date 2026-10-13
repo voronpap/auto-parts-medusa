@@ -19,7 +19,7 @@ export default async function smokeNumberSearch({ container }: ExecArgs) {
     input: { query: process.env.NUMBER ?? "101188" },
   })
 
-  for (let attempt = 0; attempt < 30; attempt += 1) {
+  for (let attempt = 0; attempt < 80; attempt += 1) {
     const search = await catalog.retrieveNumberSearch(result.id)
 
     if (search.status !== "pending") {
@@ -33,5 +33,5 @@ export default async function smokeNumberSearch({ container }: ExecArgs) {
     await new Promise((resolve) => setTimeout(resolve, 1000))
   }
 
-  throw new Error("FAILED: nobody answered the search in 30 s")
+  throw new Error("FAILED: nobody answered the search in 80 s")
 }

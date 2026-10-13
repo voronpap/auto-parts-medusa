@@ -11,8 +11,8 @@ import {
   toast,
 } from "@medusajs/ui"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { FormEvent, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { FormEvent, useEffect, useState } from "react"
+import { useLocation, useNavigate } from "react-router-dom"
 import { sdk } from "../lib/client"
 import { errorMessage, NUMBER_TYPE_LABELS } from "../lib/parts-catalog"
 
@@ -40,6 +40,7 @@ const decimal = (value: string) =>
 
 const ProductByNumberWidget = () => {
   const navigate = useNavigate()
+  const location = useLocation()
   const queryClient = useQueryClient()
   const [open, setOpen] = useState(false)
   const [number, setNumber] = useState("")
@@ -49,6 +50,18 @@ const ProductByNumberWidget = () => {
   const [title, setTitle] = useState("")
   const [price, setPrice] = useState("")
   const [quantity, setQuantity] = useState("")
+
+  // The standard "Create" button of the page opens this window instead of
+  // the blank form; the blank form stays reachable from inside the window.
+  useEffect(() => {
+    if (
+      location.pathname.endsWith("/products/create") &&
+      !(location.state as { manual?: boolean } | null)?.manual
+    ) {
+      navigate("/products", { replace: true })
+      setOpen(true)
+    }
+  }, [location.pathname, location.state, navigate])
 
   const reset = () => {
     setNumber("")
@@ -305,6 +318,17 @@ const ProductByNumberWidget = () => {
             </div>
           </FocusModal.Body>
           <FocusModal.Footer>
+            <Button
+              size="small"
+              variant="transparent"
+              onClick={() => {
+                setOpen(false)
+                reset()
+                navigate("/products/create", { state: { manual: true } })
+              }}
+            >
+              Заповнити вручну
+            </Button>
             <FocusModal.Close asChild>
               <Button size="small" variant="secondary">
                 Скасувати

@@ -56,7 +56,13 @@ export default async function smokeProductByNumber({ container }: ExecArgs) {
       filters: { id: result.product_id },
     })
     const product = products[0]
-    const variant = product.variants[0]
+    const variant = product.variants[0] as unknown as {
+      metadata?: Record<string, unknown> | null
+      prices?: { amount: number }[]
+      inventory_items?: {
+        inventory?: { location_levels?: { stocked_quantity: number }[] }
+      }[]
+    }
 
     check(result.price === expected, `price ${result.price}, expected ${expected}`)
     check(Number(variant.prices?.[0]?.amount) === expected, "variant price")

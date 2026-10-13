@@ -35,18 +35,22 @@ export default async function Catalog({
   sortBy = "created_at",
   q,
 }: Props) {
+  const filters = {
+    limit: PAGE_SIZE,
+    ...(categoryId ? { category_id: [categoryId] } : {}),
+    ...(q ? { q } : {}),
+  }
   const [categories, { response }] = await Promise.all([
     listCategories().catch(() => []),
-    listProductsWithSort({
-      page,
-      sortBy,
-      countryCode,
-      queryParams: {
-        limit: PAGE_SIZE,
-        ...(categoryId ? { category_id: [categoryId] } : {}),
-        ...(q ? { q } : {}),
-      },
-    }),
+    // By date the store pages the list itself, however long it is. By price
+    // the helper sorts in memory and sees the first hundred matches only.
+    sortBy === "created_at"
+      ? listProducts({
+          pageParam: page,
+          countryCode,
+          queryParams: { ...filters, order: "-created_at" },
+        })
+      : listProductsWithSort({ page, sortBy, countryCode, queryParams: filters }),
   ])
   // A typed part number also finds products through the parts catalog:
   // the product with that number and the confirmed crosses of that number.

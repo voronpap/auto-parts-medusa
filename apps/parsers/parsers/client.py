@@ -104,3 +104,40 @@ class CatalogClient:
         flush()
 
         return sent
+
+    # ---- Suppliers ---------------------------------------------------------
+
+    def suppliers(self) -> list[dict[str, Any]]:
+        try:
+            response = self._session.get(f"{self._base_url}/admin/supply/suppliers", timeout=self._timeout)
+        except requests.RequestException as error:
+            raise CatalogError(f"{type(error).__name__}: {error}") from error
+
+        if response.status_code >= 400:
+            raise CatalogError(f"HTTP {response.status_code}: {response.text[:500]}")
+
+        return response.json()["suppliers"]
+
+    def create_supplier(self, payload: dict[str, Any]) -> dict[str, Any]:
+        return self._post("/admin/supply/suppliers", payload)["supplier"]
+
+    def open_run(self, supplier_id: str, file_name: str | None) -> dict[str, Any]:
+        return self._post(f"/admin/supply/suppliers/{supplier_id}/import-runs", {"file_name": file_name})[
+            "import_run"
+        ]
+
+    def post_rows(self, run_id: str, rows: list[dict[str, Any]]) -> dict[str, Any]:
+        for attempt in range(4):
+            try:
+                return self._post(f"/admin/supply/import-runs/{run_id}/rows", {"rows": rows})
+            except CatalogError as error:
+                # The store limits admin writes per minute; wait the window out.
+                if "HTTP 429" not in str(error) or attempt == 3:
+                    raise
+
+                time.sleep(65)
+
+        raise CatalogError("unreachable")
+
+    def finish_run(self, run_id: str) -> dict[str, Any]:
+        return self._post(f"/admin/supply/import-runs/{run_id}/finish", {})["import_run"]

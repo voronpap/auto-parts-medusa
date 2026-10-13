@@ -95,3 +95,46 @@ export const lookupVin = async (vin: string): Promise<VinLookup | null> =>
       next: { revalidate: 900, tags: ["parts-catalog"] },
     })
     .catch(() => null)
+
+export type VehicleMake = { id: string; name: string; products: number }
+
+export type VehicleFamily = {
+  key: string
+  label: string
+  year_from: number | null
+  year_to: number | null
+}
+
+export type VehicleMakeDetail = {
+  make: { id: string; name: string }
+  families: VehicleFamily[]
+  family: (VehicleFamily & { names: string[] }) | null
+  product_ids: string[]
+}
+
+/** Makes the store has at least one fitting product for. */
+export const listVehicleMakes = async (): Promise<VehicleMake[]> =>
+  sdk.client
+    .fetch<{ makes: VehicleMake[] }>("/store/parts-catalog/vehicles", {
+      method: "GET",
+      next: { revalidate: 900, tags: ["parts-catalog"] },
+    })
+    .then(({ makes }) => makes)
+    .catch(() => [])
+
+/** Model families of a make and, for a chosen family, the fitting products. */
+export const retrieveVehicleMake = async (
+  makeId: string,
+  family?: string,
+  year?: number
+): Promise<VehicleMakeDetail | null> =>
+  sdk.client
+    .fetch<VehicleMakeDetail>(
+      `/store/parts-catalog/vehicles/${encodeURIComponent(makeId)}`,
+      {
+        method: "GET",
+        query: { ...(family ? { family } : {}), ...(year ? { year } : {}) },
+        next: { revalidate: 900, tags: ["parts-catalog"] },
+      }
+    )
+    .catch(() => null)

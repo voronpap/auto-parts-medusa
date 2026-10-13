@@ -63,6 +63,13 @@ def main(argv: list[str] | None = None) -> int:
     bulk.add_argument("--number-type", default="aftermarket")
     bulk.add_argument("--adapter", help="use only this adapter (skips the search in other sources)")
 
+    supplier = commands.add_parser(
+        "supplier-sync", help="load a supplier's price list into the store"
+    )
+    supplier.add_argument(
+        "config", nargs="+", help="price file description(s), e.g. suppliers.d/supplier-a.json"
+    )
+
     args = parser.parse_args(argv)
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
     adapters = build_adapters(Path(args.cache) if args.cache else None)
@@ -97,6 +104,22 @@ def main(argv: list[str] | None = None) -> int:
         return 2
 
     client = CatalogClient(base_url, api_key)
+
+    if args.command == "supplier-sync":
+        from .suppliers.price_file import PriceFileAdapter
+        from .suppliers.sync import sync_supplier
+
+        failed = 0
+
+        for path in args.config:
+            try:
+                adapter = PriceFileAdapter.from_file(Path(path))
+                print(adapter.supplier.name, json.dumps(sync_supplier(client, adapter, Path(path).name), ensure_ascii=False))
+            except Exception as error:  # one supplier failing must not stop the rest
+                failed += 1
+                print(f"{path}: {type(error).__name__}: {error}", file=sys.stderr)
+
+        return 1 if failed else 0
 
     if args.command == "import-numbers":
         from .bulk import import_numbers

@@ -325,3 +325,18 @@ body { background: #eef1f4; }
 .ap-vin-models { margin: 0; padding: 8px 22px 0; color: var(--ap-muted); font-size: 12px; }
 .ap-vin-models:last-child { padding-bottom: 18px; }
 @media (max-width: 800px) { .ap-vin { grid-template-columns: 1fr; padding: 20px; } }
+
+/* Vehicle picker */
+.ap-pick { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 8px; padding: 4px 22px 22px; }
+.ap-pick a { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; padding: 11px 13px; border: 1px solid var(--ap-line); border-radius: 9px; background: var(--ap-surface-2); }
+.ap-pick a:hover { border-color: var(--ap-brand); background: var(--ap-brand-soft); }
+.ap-pick strong { font-weight: 700; }
+.ap-pick small { color: var(--ap-muted); font-size: 11px; white-space: nowrap; }
+.ap-pick-big { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); padding-bottom: 8px; }
+.ap-pick-big a { flex-direction: column; gap: 2px; padding: 16px 14px; background: var(--ap-surface); box-shadow: var(--ap-shadow); }
+.ap-pick-big strong { font-size: 17px; font-weight: 800; letter-spacing: -0.02em; }
+.ap-years { display: flex; flex-wrap: wrap; gap: 6px; padding: 16px 22px 6px; }
+.ap-years a { padding: 5px 11px; border: 1px solid var(--ap-line); border-radius: 999px; color: var(--ap-muted); background: var(--ap-surface-2); font-size: 13px; }
+.ap-years a:hover { border-color: var(--ap-brand); color: var(--ap-ink); }
+.ap-years a.ap-on { border-color: var(--ap-brand); color: var(--ap-brand-2); background: var(--ap-brand); font-weight: 800; }
+@media (max-width: 800px) { .ap-pick, .ap-years { padding-left: 16px; padding-right: 16px; } }

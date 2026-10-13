@@ -1,0 +1,73 @@
+import {
+  MiddlewareRoute,
+  validateAndTransformBody,
+  validateAndTransformQuery,
+} from "@medusajs/framework/http"
+import { z } from "@medusajs/framework/zod"
+
+const toInt = (value: unknown) =>
+  typeof value === "string" ? Number.parseInt(value, 10) : value
+
+export const CreateSupplierSchema = z.object({
+  name: z.string().trim().min(1).max(200),
+  currency_code: z.string().trim().length(3).optional(),
+  lead_days: z.number().int().min(0).max(365).nullish(),
+  note: z.string().max(2000).nullish(),
+})
+
+export const OpenImportRunSchema = z.object({
+  file_name: z.string().max(300).nullish(),
+})
+
+export const ImportRowsSchema = z.object({
+  rows: z
+    .array(
+      z.object({
+        brand: z.string().max(200),
+        number: z.string().max(100),
+        title: z.string().max(1000).nullish(),
+        price: z.union([z.string().max(40), z.number()]),
+        stock: z.union([z.string().max(100), z.number()]).nullish(),
+        lead_days: z.number().int().min(0).max(365).nullish(),
+      })
+    )
+    .min(1)
+    .max(1000),
+})
+
+export const ListOffersSchema = z.object({
+  limit: z.preprocess(toInt, z.number().int().min(1).max(200).default(50)),
+  offset: z.preprocess(toInt, z.number().int().min(0).default(0)),
+  part_number_id: z.string().min(1).optional(),
+  supplier_id: z.string().min(1).optional(),
+  q: z.string().trim().min(1).max(100).optional(),
+})
+
+export type CreateSupplierBody = z.infer<typeof CreateSupplierSchema>
+export type OpenImportRunBody = z.infer<typeof OpenImportRunSchema>
+export type ImportRowsBody = z.infer<typeof ImportRowsSchema>
+export type ListOffersQuery = z.infer<typeof ListOffersSchema>
+
+export const supplyMiddlewares: MiddlewareRoute[] = [
+  {
+    matcher: "/admin/supply/suppliers",
+    method: "POST",
+    middlewares: [validateAndTransformBody(CreateSupplierSchema)],
+  },
+  {
+    matcher: "/admin/supply/suppliers/:id/import-runs",
+    method: "POST",
+    middlewares: [validateAndTransformBody(OpenImportRunSchema)],
+  },
+  {
+    matcher: "/admin/supply/import-runs/:id/rows",
+    method: "POST",
+    bodyParser: { sizeLimit: "2mb" },
+    middlewares: [validateAndTransformBody(ImportRowsSchema)],
+  },
+  {
+    matcher: "/admin/supply/offers",
+    method: "GET",
+    middlewares: [validateAndTransformQuery(ListOffersSchema, { isList: true })],
+  },
+]

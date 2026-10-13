@@ -44,7 +44,12 @@ export const startNumberSearchStep = createStep(
 
     if (
       latest &&
-      ((latest.status === "done" && age < ANSWER_TTL_MS) ||
+      // An empty answer is not kept: the sources are asked again, since a
+      // parser added since then may know the number.
+      ((latest.status === "done" &&
+        age < ANSWER_TTL_MS &&
+        Array.isArray(latest.candidates) &&
+        latest.candidates.length > 0) ||
         (latest.status === "pending" && age < PENDING_TTL_MS))
     ) {
       // Nothing was created, so there is nothing to undo.

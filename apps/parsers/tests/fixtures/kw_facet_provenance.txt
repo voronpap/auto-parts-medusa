@@ -1,0 +1,10 @@
+Retrieved 2026-10-13 from KW (Facet)'s native public catalogue through
+PoliteSession, at least 5 seconds between network requests. Metadata JSON
+is unmodified. HTML excerpts retain all reference rows for 470 127 / 457 001,
+two Audi application rows and all three MG / MG (SAIC) rows respectively.
+Search retains the actual native KW card for MG NSC90019C. Bootstrap is a
+synthetic minimal wrapper with actual control names and fake state. Runtime
+archives full raw responses and form bodies. No FACET/EPS code conversion,
+photo-code guessing, source-script execution or packed .NET deserialization.
+No captcha/PDF-by-email/account/history/analytics endpoint was used.
+This source is KW's electrical catalogue, not KW Suspensions.

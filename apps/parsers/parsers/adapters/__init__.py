@@ -13,7 +13,9 @@ from .metelli import MetelliAdapter
 from .ctr import CtrAdapter
 from .nibk import NibkAdapter
 from .nissens import NissensAdapter
+from .nrf import NrfAdapter
 from .zf import ZfAdapter
+from .spareto import SparetoAdapter
 
 # Adapter classes in the order they are tried.
 ADAPTERS: list[type[Adapter]] = [
@@ -24,11 +26,14 @@ ADAPTERS: list[type[Adapter]] = [
     FebestAdapter,
     NibkAdapter,
     NissensAdapter,
+    NrfAdapter,
     ZfAdapter,
     GeelyKsaAdapter,
     MetelliAdapter,
     CtrAdapter,
     FacetAdapter,
+    # A shop: asked last, and what it says stays a candidate.
+    SparetoAdapter,
 ]
 
 __all__ = ["ADAPTERS", "Adapter", "LookupRequest", "canonical_brand", "label_has_brand", "normalize_brand"]

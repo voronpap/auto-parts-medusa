@@ -4,6 +4,7 @@ import {
   validateAndTransformQuery,
 } from "@medusajs/framework/http"
 import { z } from "@medusajs/framework/zod"
+import { NUMBER_TYPES } from "../../../modules/parts-catalog/constants"
 
 const toInt = (value: unknown) =>
   typeof value === "string" ? Number.parseInt(value, 10) : value
@@ -56,6 +57,21 @@ export const CreatePricingRuleSchema = z.object({
   markup_percent: z.number().min(0).max(1000),
 })
 
+export const ProductDraftSchema = z.object({
+  q: z.string().trim().min(1).max(100),
+})
+
+export const CreateProductDraftSchema = z.object({
+  brand: z.string().trim().min(1).max(200),
+  number: z.string().trim().min(1).max(100),
+  number_type: z.enum(NUMBER_TYPES).default("aftermarket"),
+  title: z.string().trim().min(1).max(300),
+  purchase_price: z.number().positive().max(10_000_000),
+  quantity: z.number().int().min(0).max(100_000).default(0),
+})
+
+export type ProductDraftQuery = z.infer<typeof ProductDraftSchema>
+export type CreateProductDraftBody = z.infer<typeof CreateProductDraftSchema>
 export type UpdatePricingBody = z.infer<typeof UpdatePricingSchema>
 export type CreatePricingRuleBody = z.infer<typeof CreatePricingRuleSchema>
 export type CreateSupplierBody = z.infer<typeof CreateSupplierSchema>
@@ -89,6 +105,16 @@ export const supplyMiddlewares: MiddlewareRoute[] = [
     matcher: "/admin/supply/pricing/rules",
     method: "POST",
     middlewares: [validateAndTransformBody(CreatePricingRuleSchema)],
+  },
+  {
+    matcher: "/admin/supply/product-draft",
+    method: "GET",
+    middlewares: [validateAndTransformQuery(ProductDraftSchema, {})],
+  },
+  {
+    matcher: "/admin/supply/product-draft",
+    method: "POST",
+    middlewares: [validateAndTransformBody(CreateProductDraftSchema)],
   },
   {
     matcher: "/admin/supply/offers",

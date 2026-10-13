@@ -1,0 +1,58 @@
+{
+  "items": [
+    {
+      "id": 434604,
+      "attribute_set_id": 9,
+      "store_id": 1,
+      "created_at": "2025-02-21 22:29:44",
+      "updated_at": "2026-10-12 01:16:19",
+      "custom_attributes": [
+        {"attribute_code": "v_fuel_value", "value": {"text": "Petrol", "arguments": []}},
+        {"attribute_code": "v_brand_value", "value": "AUDI"},
+        {"attribute_code": "v_size", "value": "1.8 | 110 KW | 150 HP"},
+        {"attribute_code": "v_range", "value": "A4"},
+        {"attribute_code": "v_model", "value": "A4"},
+        {"attribute_code": "v_cc", "value": "1781"},
+        {"attribute_code": "v_generatie", "value": "2001 | B6"},
+        {"attribute_code": "v_modelcode", "value": "A4"},
+        {"attribute_code": "v_motorcode", "value": "AVJ"},
+        {"attribute_code": "v_month_from", "value": "9"},
+        {"attribute_code": "v_year_from", "value": "2001"},
+        {"attribute_code": "v_month_to", "value": "6"},
+        {"attribute_code": "v_year_to", "value": "2002"},
+        {"attribute_code": "v_kw", "value": "110"},
+        {"attribute_code": "v_hp", "value": "150"},
+        {"attribute_code": "v_drive", "value": "FW"},
+        {"attribute_code": "v_series", "value": "B6"},
+        {"attribute_code": "v_body", "value": "CM"}
+      ]
+    },
+    {
+      "id": 972300,
+      "attribute_set_id": 9,
+      "store_id": 1,
+      "created_at": "2026-01-28 00:24:16",
+      "updated_at": "2026-10-12 01:38:01",
+      "custom_attributes": [
+        {"attribute_code": "v_fuel_value", "value": {"text": "Petrol", "arguments": []}},
+        {"attribute_code": "v_brand_value", "value": "SEAT"},
+        {"attribute_code": "v_size", "value": "1.8 | 110 KW | 150 HP"},
+        {"attribute_code": "v_range", "value": "Exeo"},
+        {"attribute_code": "v_model", "value": "Exeo"},
+        {"attribute_code": "v_cc", "value": "1781"},
+        {"attribute_code": "v_generatie", "value": "2009"},
+        {"attribute_code": "v_modelcode", "value": "Exeo"},
+        {"attribute_code": "v_motorcode", "value": "CFMA"},
+        {"attribute_code": "v_month_from", "value": "12"},
+        {"attribute_code": "v_year_from", "value": "2008"},
+        {"attribute_code": "v_month_to", "value": "5"},
+        {"attribute_code": "v_year_to", "value": "2010"},
+        {"attribute_code": "v_kw", "value": "110"},
+        {"attribute_code": "v_hp", "value": "150"},
+        {"attribute_code": "v_drive", "value": "FW"},
+        {"attribute_code": "v_body", "value": "SD"}
+      ]
+    }
+  ],
+  "total_count": 2
+}

@@ -61,6 +61,7 @@ def main(argv: list[str] | None = None) -> int:
     bulk.add_argument("--brand", required=True)
     bulk.add_argument("--file", required=True, help="one part number per line")
     bulk.add_argument("--number-type", default="aftermarket")
+    bulk.add_argument("--adapter", help="use only this adapter (skips the search in other sources)")
 
     args = parser.parse_args(argv)
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
@@ -104,7 +105,7 @@ def main(argv: list[str] | None = None) -> int:
         numbers = [line.strip() for line in source.read_text(encoding="utf-8").splitlines() if line.strip()]
         totals = import_numbers(
             client,
-            adapters,
+            [a for a in adapters if not args.adapter or a.name == args.adapter],
             args.brand,
             numbers,
             worker,

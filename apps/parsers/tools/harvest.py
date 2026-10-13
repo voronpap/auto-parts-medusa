@@ -5,7 +5,8 @@
 One queue per site, so a site is never asked by two processes at once. A
 queue first lists the catalogue's numbers for Chinese makes through its
 vehicle tree, then goes through the catalogue's numbers found in suppliers'
-price lists (files price-<name>.txt with brands.json, prepared on the store's
+price lists, and with --all-makes then lists the whole catalogue through the
+vehicle tree of every make (lists all-<name>.txt; this takes days). Price lists (files price-<name>.txt with brands.json, prepared on the store's
 server). Crosses and specifications are taken first; fitment is a second pass.
 
 The queue "spareto" covers the brands that have no catalogue of their own:
@@ -159,10 +160,24 @@ def queue(name: str, steps: list[tuple], work: Path, env: dict[str, str], brands
                 command = [sys.executable, f"tools/{tool}", "--cache", str(work / f"cache-{adapter}.sqlite")]
 
                 if extra is not None:
-                    command += [*extra, "--brands", *MAKES]
+                    command += [*extra, "--brands", *(step[7] if len(step) > 7 else MAKES)]
 
                 partial = work / f"{step_name}.tmp"
-                code = run(command, env, partial, work / f"{step_name}.list.log")
+                code = 1
+
+                # A catalogue that drops a connection is asked again; what it
+                # already answered comes from the cache.
+                for attempt in range(40):
+                    if stopping.is_set():
+                        break
+
+                    code = run(command, env, partial, work / f"{step_name}.list.log")
+
+                    if code == 0:
+                        break
+
+                    note(f"{step_name}: listing failed, attempt {attempt + 1}")
+                    time.sleep(60)
 
                 if code == 0 and not stopping.is_set():
                     partial.replace(numbers)
@@ -211,6 +226,7 @@ def main() -> int:
         help="keep results in <dir>/spool instead of sending them; load them later with --upload",
     )
     parser.add_argument("--upload", action="store_true", help="load what --spool kept into the store, then exit")
+    parser.add_argument("--all-makes", action="store_true", help="after the rest, list each catalogue for every make")
     parser.add_argument("--with-fitment", action="store_true", help="second pass: read fitment too")
     args = parser.parse_args()
     work = (ROOT / args.dir).resolve()
@@ -239,6 +255,18 @@ def main() -> int:
 
     if args.normal_priority:
         PRIORITY.clear()
+
+    if args.all_makes:
+        makes_file = work / "makes.txt"
+        every = [m.strip() for m in makes_file.read_text(encoding="utf-8").splitlines() if m.strip()] if makes_file.exists() else []
+
+        for steps in QUEUES.values():
+            for step in [s for s in steps if s[0] == "tree" and s[6] is not None]:
+                # CTR is searched by the name of a make; the others walk their own list.
+                makes = every if step[5] == "ctr_make_numbers.py" else ["*"]
+
+                if makes:
+                    steps.append((*step[:1], step[1].replace("china-", "all-"), *step[2:], makes))
     threads = [
         threading.Thread(target=queue, args=(name, steps, work, env, brands), name=name)
         for name, steps in QUEUES.items()

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import logging
+import os
 import time
 from concurrent.futures import ThreadPoolExecutor, wait
 from pathlib import Path
@@ -97,7 +98,9 @@ def run_lookup(
 def archive_documents(client: CatalogClient, request: LookupRequest, documents: list[dict[str, Any]]) -> int:
     """Sends raw responses to the catalog's archive. A failure here is logged
     and never loses the result that was read from them."""
-    if not documents:
+    # A bulk run through a shop reads hundreds of thousands of large pages;
+    # they stay in the run's own response cache instead of the store's database.
+    if not documents or os.environ.get("PARSERS_NO_ARCHIVE") == "1":
         return 0
 
     try:

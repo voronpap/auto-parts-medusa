@@ -40,6 +40,10 @@ def canonical_brand(value: str) -> str:
 def label_has_brand(label: str, brand: str) -> bool:
     """Whether a catalogue's maker label, such as "VW (VOLKSWAGEN)" or
     "VW GROUP (AUDI/SEAT/SKODA/VW)", names the given maker."""
+    # Listing tools pass "*" to walk every make of a catalogue.
+    if brand.strip() == "*":
+        return bool(label.strip())
+
     wanted = canonical_brand(brand)
 
     return bool(wanted) and any(canonical_brand(part) == wanted for part in re.split(r"[()/,]", label))

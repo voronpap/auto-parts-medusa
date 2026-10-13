@@ -46,6 +46,13 @@ def _number(value: Any, kind: type[int] | type[float]) -> int | float | None:
 
 
 def _value(value: Any) -> str:
+    if isinstance(value, list):
+        # A code with its label, as for gas engines:
+        # ["G", {"text": "CNG (with or without Petrol)"}]. The label is the value.
+        value = next((item for item in value if isinstance(item, dict)), None) or next(
+            (item for item in value if item not in (None, "")), None
+        )
+
     if isinstance(value, dict):
         value = value.get("text")
 
@@ -224,7 +231,7 @@ def parse_applications(
 
 
 class NrfAdapter(Adapter):
-    version = "1.1.0"
+    version = "1.1.1"
     min_interval = 5.0
     cross_search = True
 

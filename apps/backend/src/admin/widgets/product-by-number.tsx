@@ -180,7 +180,6 @@ const ProductByNumberWidget = () => {
     if (picked == null && !sourcesBusy && free.length === 1) {
       pick(free[0])
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sourcesBusy, candidates.length])
 
   const purchase = decimal(price)

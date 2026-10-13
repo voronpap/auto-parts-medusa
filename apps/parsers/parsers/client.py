@@ -47,6 +47,24 @@ class CatalogClient:
 
         return response.json()
 
+    def _get(self, path: str) -> dict[str, Any]:
+        try:
+            response = self._session.get(f"{self._base_url}{path}", timeout=self._timeout)
+        except requests.RequestException as error:
+            raise CatalogError(f"{type(error).__name__}: {error}") from error
+
+        if response.status_code >= 400:
+            raise CatalogError(f"HTTP {response.status_code}: {response.text[:500]}")
+
+        return response.json()
+
+    def pending_searches(self) -> list[dict[str, Any]]:
+        """Numbers the owner typed and is waiting to have identified."""
+        return self._get("/admin/parts-catalog/number-searches")["searches"]
+
+    def post_search_result(self, search_id: str, payload: dict[str, Any]) -> dict[str, Any]:
+        return self._post(f"/admin/parts-catalog/number-searches/{search_id}/result", payload)
+
     def claim(self, worker: str, limit: int = 5) -> list[dict[str, Any]]:
         return self._post(
             "/admin/parts-catalog/lookup-tasks/claim",

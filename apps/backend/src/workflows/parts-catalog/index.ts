@@ -60,6 +60,12 @@ import {
   DeleteRecordInput,
 } from "./steps/delete-records"
 
+import {
+  completeNumberSearchStep,
+  CompleteNumberSearchInput,
+  startNumberSearchStep,
+} from "./steps/number-searches"
+
 export const createPartsBrandWorkflow = createWorkflow(
   "create-parts-brand",
   function (input: CreateBrandInput) {
@@ -219,5 +225,19 @@ export const archiveSourceDocumentsWorkflow = createWorkflow(
   "archive-source-documents",
   function (input: ArchiveDocumentsInput) {
     return new WorkflowResponse(archiveSourceDocumentsStep(input))
+  }
+)
+
+export const startNumberSearchWorkflow = createWorkflow(
+  "start-number-search",
+  function (input: { query: string }) {
+    return new WorkflowResponse(startNumberSearchStep(input))
+  }
+)
+
+export const completeNumberSearchWorkflow = createWorkflow(
+  "complete-number-search",
+  function (input: CompleteNumberSearchInput) {
+    return new WorkflowResponse(completeNumberSearchStep(input))
   }
 )

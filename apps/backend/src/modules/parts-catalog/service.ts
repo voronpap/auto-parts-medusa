@@ -2,6 +2,7 @@ import { MedusaService } from "@medusajs/framework/utils"
 import Brand from "./models/brand"
 import BrandAlias from "./models/brand-alias"
 import LookupTask from "./models/lookup-task"
+import NumberSearch from "./models/number-search"
 import Observation from "./models/observation"
 import PartApplication from "./models/part-application"
 import PartAttribute from "./models/part-attribute"
@@ -32,6 +33,7 @@ class PartsCatalogModuleService extends MedusaService({
   PartApplication,
   PartAttribute,
   LookupTask,
+  NumberSearch,
   VehicleMake,
   VehicleMakeAliasRecord: VehicleMakeAlias,
   VehicleModel,

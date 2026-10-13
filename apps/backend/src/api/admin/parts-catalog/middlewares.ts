@@ -56,6 +56,30 @@ export const UpdatePartRelationshipSchema = z.object({
   reason: z.string().max(2000).nullish(),
 })
 
+export const NumberSearchResultSchema = z.object({
+  worker: z.string().max(200).nullish(),
+  candidates: z
+    .array(
+      z.object({
+        brand: z.string().trim().min(1).max(200),
+        number: z.string().trim().min(1).max(100),
+        title: z.string().max(300).nullish(),
+        source: z.string().trim().min(1).max(100),
+      })
+    )
+    .max(100),
+  errors: z
+    .array(
+      z.object({
+        source: z.string().max(100).nullish(),
+        message: z.string().max(2000),
+      })
+    )
+    .max(50)
+    .default([]),
+})
+
+export type NumberSearchResultBody = z.infer<typeof NumberSearchResultSchema>
 export type UpdateBrandBody = z.infer<typeof UpdateBrandSchema>
 export type MergeBrandsBody = z.infer<typeof MergeBrandsSchema>
 export type UpdatePartRelationshipBody = z.infer<
@@ -260,6 +284,11 @@ export const partsCatalogMiddlewares: MiddlewareRoute[] = [
     matcher: "/admin/parts-catalog/lookup-tasks",
     method: "POST",
     middlewares: [validateAndTransformBody(CreateLookupTaskSchema)],
+  },
+  {
+    matcher: "/admin/parts-catalog/number-searches/:id/result",
+    method: "POST",
+    middlewares: [validateAndTransformBody(NumberSearchResultSchema)],
   },
   {
     matcher: "/admin/parts-catalog/lookup-tasks/claim",

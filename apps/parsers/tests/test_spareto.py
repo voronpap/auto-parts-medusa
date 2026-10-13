@@ -128,3 +128,29 @@ def test_page_without_reference_blocks_gives_only_what_it_has():
 
     assert (brand, number) == (None, "X 1")
     assert result.relationships == [] and result.applications == []
+
+
+def test_bare_number_is_identified_by_its_own_cards_only():
+    adapter = SparetoAdapter(FakeHttp())  # type: ignore[arg-type]
+
+    # The search page also lists analogs (Blue Print, febi…); they are not this number.
+    assert adapter.identify("0451103314") == [
+        {"brand": "BOSCH", "number": "0 451 103 314", "title": "Oil filter"}
+    ]
+    assert adapter.identify("22550") == [{"brand": "febi", "number": "22550", "title": "Oil filter"}]
+    assert adapter.identify("99") == []
+
+
+def test_identification_survives_a_failing_source():
+    from parsers.http import SourceError
+    from parsers.worker import identify_number
+
+    class Broken(SparetoAdapter):
+        def identify(self, number):
+            raise SourceError("down")
+
+    result = identify_number([Broken(FakeHttp()), SparetoAdapter(FakeHttp())], "0451103314", "w")  # type: ignore[arg-type]
+
+    assert [c["brand"] for c in result["candidates"]] == ["BOSCH"]
+    assert result["candidates"][0]["source"] == "spareto"
+    assert result["errors"] == [{"source": "spareto", "message": "down"}]

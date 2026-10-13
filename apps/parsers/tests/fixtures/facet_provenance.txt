@@ -1,0 +1,16 @@
+Retrieved 2026-10-13 from https://catalogo.facet.eu/EN using PoliteSession
+with at least 5 seconds between network requests to the source host.
+Metadata JSON is the actual anonymous DettaglioFinale response. References
+retain all visible grouped rows for 9.6027, 9.6070 and 9.3001. Applications
+retain the first four Audi rows for 9.6027, and all three MG / MG (SAIC)
+rows for 9.3001. Search retains actual own-code cards for Audi 811905115.
+Harvest retains the source's MG maker links, MG (SAIC) 550 model row,
+returned public engine-group ID, numeric vehicle IDs and three product IDs.
+HTML is reduced with BeautifulSoup; presentation/scripts/other makes are
+omitted where stated. The bootstrap fixture is a synthetic minimal wrapper
+with actual control names and a fake, non-sensitive callback state. Tests
+construct callback wrappers around the real HTML excerpts; no live server
+signature or packed binary state is committed or deserialized. Runtime
+PoliteSession records unmodified complete responses, including form bodies.
+Raw probe cache is outside apps/parsers/.cache. Only catalogue read actions
+were called: no PDF-by-email, captcha, marketing, history or account action.

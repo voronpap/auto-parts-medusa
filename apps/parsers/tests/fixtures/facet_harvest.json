@@ -1,0 +1,16 @@
+{
+  "makers_html": "<div><a href=\"#\" onclick='OnBeginCallbackImageGallery(\"MG\", \"68\", \"000075\", \"~/Content/Images/loghi/MG_000075.png\");' style=\"text-decoration: none; color:black;\"><table class=\"hoverTable\" height=\"100%\" style=\"border: 0px solid white;\" width=\"95%\"><tr><td align=\"center\"><img alt=\"\" src=\"/EN/Content/Images/loghi/large/MG_000075.png\"/><span><font color=\"Black\">MG</font></span></td></tr></table></a><a href=\"#\" onclick='OnBeginCallbackImageGallery(\"MG (SAIC)\", \"69\", \"003838\", \"~/Content/Images/loghi/MG(SAIC)_003838.png\");' style=\"text-decoration: none; color:black;\"><table class=\"hoverTable\" height=\"100%\" style=\"border: 0px solid white;\" width=\"95%\"><tr><td align=\"center\"><img alt=\"\" src=\"/EN/Content/Images/loghi/large/MG(SAIC)_003838.png\"/><span><font color=\"Black\">MG (SAIC)</font></span></td></tr></table></a></div>",
+  "models_html": "<table><tr id=\"GVModelliDaCostruttore_DXHeadersRow0\">\n<td class=\"dxgvHeader_FacetBlu\" id=\"GVModelliDaCostruttore_col0\" onmousedown=\"ASPx.GHeaderMouseDown('GVModelliDaCostruttore', this, event);\" style=\"border-top-width:0px;border-left-width:0px;\"><table width=\"100%\">\n<tr>\n<td>Model description</td><td style=\"text-align:right;\" width=\"1\"><span class=\"dx-vam\"> </span><img alt=\"[Filter]\" class=\"dxGridView_gvHeaderFilter_FacetBlu dxgv__hfb dx-vam\" src=\"/EN/DXR.axd?r=1_37-M7MKp\" style=\"cursor:default;\"/></td>\n</tr>\n</table></td><td class=\"dxgvHeader_FacetBlu\" id=\"GVModelliDaCostruttore_col1\" onmousedown=\"ASPx.GHeaderMouseDown('GVModelliDaCostruttore', this, event);\" style=\"border-top-width:0px;border-left-width:0px;border-right-width:0px;\"><table width=\"100%\">\n<tr>\n<td>Production year</td><td style=\"text-align:right;\" width=\"1\"><span class=\"dx-vam\"> </span><img alt=\"[Filter]\" class=\"dxGridView_gvHeaderFilter_FacetBlu dxgv__hfb dx-vam\" src=\"/EN/DXR.axd?r=1_37-M7MKp\" style=\"cursor:default;\"/></td>\n</tr>\n</table></td>\n</tr><tr class=\"dxgvDataRow_FacetBlu\" id=\"GVModelliDaCostruttore_DXDataRow0\">\n<td class=\"dxgv\">550</td><td class=\"dxgv\" style=\"border-right-width:0px;\">10/2008-</td>\n</tr></table>",
+  "engine_groups": [
+    "1.8#003838#550"
+  ],
+  "engines": [
+    "21239",
+    "64045"
+  ],
+  "products": [
+    "9.3001",
+    "7.3272",
+    "7.0071"
+  ]
+}

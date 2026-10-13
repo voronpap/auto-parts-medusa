@@ -8,3 +8,5 @@ archives full raw responses and form bodies. No FACET/EPS code conversion,
 photo-code guessing, source-script execution or packed .NET deserialization.
 No captcha/PDF-by-email/account/history/analytics endpoint was used.
 This source is KW's electrical catalogue, not KW Suspensions.
+Own-search fixture is the actual native card returned for compact 470127;
+the exact printed code 470 127 is then confirmed through product JSON.

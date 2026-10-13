@@ -46,6 +46,8 @@ class FakeHttp:
             return reply(self.references or fixture("references_9.6027.html"))
         if control == "GVguidaApplicazioniBig":
             return reply(fixture("applications_9.6027.html"))
+        if control == "GVArticoliFacet2":
+            return reply(fixture("search_GVArticoliOE2.html"))
         assert control in ("GVArticoliOE2", "GVArticoliCR2")
         return reply(fixture("search_" + control + ".html"))
 
@@ -327,3 +329,15 @@ def test_page_limit_is_explicit_not_silently_complete():
     notices = []
     assert len(list(adapter._view_pages({"C": {}}, "C", "route", "", max_pages=1, notices=notices))) == 1
     assert notices[0].value == "read 1 of 20 pages"
+
+
+def test_own_compact_number_is_resolved_only_by_exact_native_card():
+    class Exact(FakeHttp):
+        def fetch_json(self, url, **kwargs):
+            if kwargs["form_body"]["codfacetFinale"] == "96027":
+                self.calls.append((url, kwargs))
+                return {"Success": False}
+            return super().fetch_json(url, **kwargs)
+    result = FacetAdapter(Exact()).lookup(LookupRequest("FACET", "96027", "aftermarket"))
+    assert len(result.relationships) == 6
+    assert any(a.name == "Cod" and a.value == "9.6027" for a in result.attributes)

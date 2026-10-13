@@ -40,6 +40,8 @@ class FakeHttp:
         code = kwargs["form_body"]["SessionName"]
         if control in ("GVArticoliOE2", "GVArticoliCR2"):
             return reply(fixture("search_" + control + ".html"))
+        if control == "GVArticoliFacet2":
+            return reply(fixture("search_GVArticoliOE2.html"))
         name = "references" if control == "GVcrossReferenceBig" else "applications"
         return reply(fixture(name + "_" + code + ".html"))
 

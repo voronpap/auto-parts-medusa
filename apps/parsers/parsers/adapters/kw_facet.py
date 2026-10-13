@@ -6,7 +6,7 @@ BASE_URL = "https://catalogo.kw-automotive.com/EN"
 
 
 class KwFacetAdapter(FacetAdapter):
-    version = "1.0.0"
+    version = "1.1.0"
     base_url = BASE_URL
     catalog_title = "KW Catalog"
 

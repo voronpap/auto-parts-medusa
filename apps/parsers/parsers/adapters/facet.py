@@ -187,7 +187,7 @@ def parse_applications(html, record_url):
 
 
 class FacetAdapter(Adapter):
-    version = "1.1.0"
+    version = "1.2.0"
     min_interval = 5.0
     cross_search = True
     base_url = BASE_URL
@@ -288,6 +288,20 @@ class FacetAdapter(Adapter):
             return SourceResult()
         controls = self._bootstrap()
         data = self._metadata(request.number.strip())
+        if not data:
+            # The JSON action may require the catalogue's exact spacing /
+            # separators even though its public own-code search accepts a
+            # compact query. Resolve only an exact comparison-key match in
+            # that source's native cards, then confirm it through JSON.
+            wanted = compact(request.number)
+            for html in self._view_pages(controls, "GVArticoliFacet2", "ArticoliFacetGriglia", request.number.strip()):
+                for code in search_codes(html):
+                    if compact(code) == wanted:
+                        data = self._metadata(code)
+                        if data:
+                            break
+                if data:
+                    break
         if not data:
             return SourceResult()
         code = data["Cod"].strip()

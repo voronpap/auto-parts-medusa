@@ -40,6 +40,8 @@ class FakeHttp:
         code = kwargs["form_body"]["SessionName"]
         if control in ("GVArticoliOE2", "GVArticoliCR2"):
             return reply(fixture("search_" + control + ".html"))
+        if control == "GVArticoliFacet2":
+            return reply(fixture("search_own.html"))
         name = "references" if control == "GVcrossReferenceBig" else "applications"
         return reply(fixture(name + "_" + code.replace(" ", "_") + ".html"))
 
@@ -127,3 +129,17 @@ def test_refusal_is_propagated_without_other_host_or_challenge_calls():
     with pytest.raises(SourceBlocked):
         KwFacetAdapter(http).lookup(LookupRequest("KW", "457 001", "aftermarket"))
     assert len(http.calls) == 1 and http.calls[0][0] == BASE_URL
+
+
+def test_compact_kw_query_resolves_source_written_spaces_without_guessing():
+    class Exact(FakeHttp):
+        def fetch_json(self, url, **kwargs):
+            if kwargs["form_body"]["codfacetFinale"] == "470127":
+                self.calls.append((url, kwargs))
+                return {"Success": False}
+            return super().fetch_json(url, **kwargs)
+    http = Exact()
+    result = KwFacetAdapter(http).lookup(LookupRequest("KW", "470127", "aftermarket"))
+    assert len(result.relationships) == 6
+    assert any(a.name == "Cod" and a.value == "470 127" for a in result.attributes)
+    assert [kw["form_body"]["codfacetFinale"] for url, kw in http.calls if url.endswith("DettaglioFinale")] == ["470127", "470 127"]

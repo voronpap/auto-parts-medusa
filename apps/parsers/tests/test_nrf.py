@@ -179,3 +179,11 @@ def test_alternative_number_keeps_spaces_and_leading_zeroes():
     )
     _, _, result, _ = parse_product_page(html, "u")
     assert [r.to.number for r in result.relationships] == ["00 539-A"]
+
+
+def test_fuel_given_as_a_code_with_a_label_is_read_as_the_label():
+    from parsers.adapters.nrf import _value
+
+    assert _value(["G", {"text": "CNG (with or without Petrol)", "arguments": []}]) == "CNG (with or without Petrol)"
+    assert _value(["G"]) == "G"
+    assert _value([]) == ""

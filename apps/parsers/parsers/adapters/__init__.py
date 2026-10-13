@@ -8,6 +8,7 @@ from .bosch import BoschAdapter
 from .febest import FebestAdapter
 from .mann_hummel import FiltronAdapter, MannFilterAdapter
 from .nibk import NibkAdapter
+from .nissens import NissensAdapter
 
 # Adapter classes in the order they are tried.
 ADAPTERS: list[type[Adapter]] = [
@@ -17,6 +18,7 @@ ADAPTERS: list[type[Adapter]] = [
     FiltronAdapter,
     FebestAdapter,
     NibkAdapter,
+    NissensAdapter,
 ]
 
 __all__ = ["ADAPTERS", "Adapter", "LookupRequest", "canonical_brand", "label_has_brand", "normalize_brand"]

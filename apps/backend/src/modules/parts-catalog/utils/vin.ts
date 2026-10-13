@@ -66,8 +66,14 @@ const WMI: Record<string, string> = {
   "1C3": "Chrysler", "2C3": "Chrysler", "2C4": "Chrysler", "3C4": "Chrysler",
   "5YJ": "Tesla", "7SA": "Tesla", LRW: "Tesla", XP7: "Tesla",
   XTA: "Lada", Y6D: "ZAZ", XTT: "UAZ", X96: "GAZ", XTH: "GAZ",
-  L6T: "Geely", LB3: "Geely", LVV: "Chery", LVT: "Chery", LGX: "BYD",
-  LC0: "BYD", LGW: "Great Wall",
+  L6T: "Geely", LB3: "Geely", LB2: "Geely",
+  LVV: "Chery", LVT: "Chery", LVU: "Chery",
+  LGX: "BYD", LC0: "BYD",
+  LGW: "Great Wall",
+  LS5: "Changan", LS4: "Changan",
+  LSJ: "MG",
+  LJ1: "JAC",
+  LFP: "FAW",
 }
 
 // Makers known by a two-character prefix whatever the third character is.
@@ -123,7 +129,10 @@ export function decodeVin(value: string, now: Date = new Date()): DecodedVin | n
   const wmi = vin.slice(0, 3)
   const make = WMI[wmi] ?? WMI_PREFIX[wmi.slice(0, 2)] ?? null
   const northAmerican = /^[1-5]/.test(vin)
-  const encodesYear = northAmerican || (make !== null && YEAR_IN_VIN.has(make))
+  // The Chinese standard requires the model year in position ten as well.
+  const chinese = vin[0] === "L"
+  const encodesYear =
+    northAmerican || chinese || (make !== null && YEAR_IN_VIN.has(make))
   // VW-group VINs built outside North America carry the type code in
   // positions seven and eight, whether positions 4-6 are "ZZZ" or coded;
   // North American ones use these positions differently.

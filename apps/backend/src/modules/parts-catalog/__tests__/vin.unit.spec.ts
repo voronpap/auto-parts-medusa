@@ -55,6 +55,17 @@ describe("VIN decoding", () => {
     expect(decodeVin("1HGCM82633A004352", NOW)?.years).toEqual([2003])
   })
 
+  it("reads make and year of a Chinese VIN", () => {
+    const chery = decodeVin("LVVDB11B6MD123456", NOW)
+
+    expect(chery?.make).toBe("Chery")
+    expect(chery?.years).toEqual([2021, 1991])
+    expect(decodeVin("LZZAAAAA0P0123456", NOW)).toMatchObject({
+      make: null,
+      years: [2023, 1993],
+    })
+  })
+
   it("knows makers by a two-character prefix", () => {
     expect(decodeVin("JTDKB20U093123456", NOW)?.make).toBe("Toyota")
   })

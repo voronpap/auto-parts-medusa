@@ -19,7 +19,7 @@ export default async function Footer() {
         <nav aria-label="Категорії" data-testid="footer-categories">
           <strong>Категорії</strong>
           {categories
-            .filter((category) => !category.parent_category)
+            .filter((category) => !category.parent_category && category.product_count > 0)
             .slice(0, 6)
             .map((category) => (
               <LocalizedClientLink

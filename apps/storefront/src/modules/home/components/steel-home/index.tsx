@@ -1,3 +1,4 @@
+import { CategoryWithCount } from "@lib/data/categories"
 import { HttpTypes } from "@medusajs/types"
 import AddButton from "@modules/catalog/components/add-button"
 import { PartIcon, isAvailable, money } from "@modules/catalog/components/product-table"
@@ -7,51 +8,10 @@ type Props = {
   countryCode: string
   products: HttpTypes.StoreProduct[]
   count: number
-  categories: HttpTypes.StoreProductCategory[]
+  categories: CategoryWithCount[]
 }
 
-const POPULAR = 8
-const BRANDS = ["Bosch", "MANN-FILTER", "FILTRON", "febi", "KYB", "Monroe"]
-
-/** A few products from every category, so the showcase is not one shelf. */
-const pickPopular = (
-  products: HttpTypes.StoreProduct[],
-  categories: HttpTypes.StoreProductCategory[]
-) => {
-  const byId = new Map(products.map((product) => [product.id, product]))
-  const shelves = categories
-    .map((category) =>
-      (category.products ?? [])
-        .map((product) => byId.get(product.id))
-        .filter((product): product is HttpTypes.StoreProduct => Boolean(product))
-    )
-    .filter((shelf) => shelf.length)
-  const picked: HttpTypes.StoreProduct[] = []
-
-  for (let round = 0; picked.length < POPULAR; round++) {
-    const row = shelves
-      .map((shelf) => shelf[round])
-      .filter((product) => product && !picked.includes(product))
-
-    if (!row.length) {
-      break
-    }
-
-    picked.push(...row)
-  }
-
-  for (const product of products) {
-    if (picked.length >= POPULAR) {
-      break
-    }
-
-    if (!picked.includes(product)) {
-      picked.push(product)
-    }
-  }
-
-  return picked.slice(0, POPULAR)
-}
+const BRANDS = ["Bosch", "KYB", "Monroe", "SKF", "Sachs", "Gates", "MANN-FILTER", "FEBEST"]
 
 export default function SteelHome({
   countryCode,
@@ -60,9 +20,10 @@ export default function SteelHome({
   categories,
 }: Props) {
   const topCategories = categories.filter(
-    (category) => !category.parent_category
+    (category) => !category.parent_category && category.product_count > 0
   )
-  const popular = pickPopular(products, topCategories)
+  // One product from each of the largest categories, picked by the page.
+  const popular = products
 
   return (
     <div className="ap-scope ap-page">
@@ -140,7 +101,7 @@ export default function SteelHome({
               </LocalizedClientLink>
             </div>
             <div className="ap-tiles">
-              {topCategories.map((category) => (
+              {topCategories.slice(0, 12).map((category) => (
                 <LocalizedClientLink
                   key={category.id}
                   className="ap-tile"
@@ -151,7 +112,7 @@ export default function SteelHome({
                   </span>
                   <span>
                     <strong>{category.name}</strong>
-                    <small>Товарів: {category.products?.length ?? 0}</small>
+                    <small>Товарів: {category.product_count}</small>
                   </span>
                   <i aria-hidden="true">→</i>
                 </LocalizedClientLink>

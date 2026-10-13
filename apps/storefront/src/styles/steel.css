@@ -313,3 +313,15 @@ body { background: #eef1f4; }
 .ap-auth { max-width: 520px; margin: 0 auto; }
 .ap-page h1.text-2xl-semi, .ap-page .text-3xl-regular { font-weight: 800; letter-spacing: -0.035em; }
 @media (max-width: 800px) { .ap-top-checkout { grid-template-columns: 1fr auto; } .ap-checkout-title { display: none; } }
+
+/* VIN lookup */
+.ap-vin { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr); gap: 28px; align-items: center; padding: 28px; margin-bottom: 16px; }
+.ap-vin-form { display: flex; overflow: hidden; height: 54px; border: 2px solid var(--ap-brand-2); border-radius: 11px; background: #fff; }
+.ap-vin-form input { min-width: 0; flex: 1; padding: 0 16px; border: 0; color: var(--ap-ink); font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 16px; letter-spacing: 0.06em; text-transform: uppercase; outline: 0; }
+.ap-vin-form input::placeholder { letter-spacing: 0; text-transform: none; font-family: inherit; font-size: 14px; }
+.ap-vin-form button { padding: 0 22px; color: var(--ap-brand-2); background: var(--ap-brand); font-weight: 800; }
+.ap-vin-note { margin-bottom: 16px; padding: 16px 22px; border-left: 3px solid var(--ap-brand); }
+.ap-vin-facts { margin: 0; padding: 18px 22px 6px; }
+.ap-vin-models { margin: 0; padding: 8px 22px 0; color: var(--ap-muted); font-size: 12px; }
+.ap-vin-models:last-child { padding-bottom: 18px; }
+@media (max-width: 800px) { .ap-vin { grid-template-columns: 1fr; padding: 20px; } }

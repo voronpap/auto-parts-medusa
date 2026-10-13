@@ -6,6 +6,7 @@ import { useParams, usePathname } from "next/navigation"
 const ITEMS = [
   { href: "/", label: "Головна" },
   { href: "/store", label: "Каталог" },
+  { href: "/vin", label: "Підбір за VIN" },
   { href: "/account/orders", label: "Мої замовлення" },
   { href: "/cart", label: "Кошик" },
 ]

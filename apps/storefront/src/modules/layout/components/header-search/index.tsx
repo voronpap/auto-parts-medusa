@@ -22,7 +22,7 @@ export default function HeaderSearch() {
         type="search"
         name="q"
         defaultValue={current}
-        placeholder="Номер деталі, OE-номер або назва…"
+        placeholder="Номер деталі, OE-номер, VIN або назва…"
         aria-label="Пошук запчастин"
         data-testid="nav-search-input"
       />

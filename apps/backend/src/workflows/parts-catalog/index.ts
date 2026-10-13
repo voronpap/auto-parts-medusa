@@ -42,6 +42,7 @@ import {
 } from "./steps/lookup-tasks"
 import {
   mergePartsBrandsStep,
+  requeueProductNumbersStep,
   MergeBrandsInput,
   updatePartRelationshipStep,
   UpdatePartRelationshipInput,
@@ -200,5 +201,12 @@ export const updatePartRelationshipWorkflow = createWorkflow(
   "update-part-relationship",
   function (input: UpdatePartRelationshipInput) {
     return new WorkflowResponse(updatePartRelationshipStep(input))
+  }
+)
+
+export const requeueProductNumbersWorkflow = createWorkflow(
+  "requeue-product-numbers",
+  function () {
+    return new WorkflowResponse(requeueProductNumbersStep({}))
   }
 )

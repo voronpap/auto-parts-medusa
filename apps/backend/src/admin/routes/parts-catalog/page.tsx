@@ -8,8 +8,14 @@ import {
   Input,
   Table,
   Text,
+  toast,
 } from "@medusajs/ui"
-import { keepPreviousData, useQuery } from "@tanstack/react-query"
+import {
+  keepPreviousData,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query"
 import { ReactNode, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import {
@@ -24,6 +30,7 @@ import {
   Brand,
   BRAND_KIND_LABELS,
   CATALOG_QUERY_KEY,
+  errorMessage,
   NUMBER_TYPE_LABELS,
   PartNumber,
   Source,
@@ -82,6 +89,24 @@ const NumbersSection = () => {
     placeholderData: keepPreviousData,
   })
   const numbers = data?.part_numbers ?? []
+  const queryClient = useQueryClient()
+  const requeue = useMutation({
+    mutationFn: () =>
+      sdk.client.fetch<{ queued: number; already_waiting: number }>(
+        "/admin/parts-catalog/lookup-tasks/requeue",
+        { method: "POST" }
+      ),
+    onSuccess: (result) => {
+      queryClient.invalidateQueries({ queryKey: [CATALOG_QUERY_KEY] })
+      toast.success(
+        `У чергу поставлено номерів: ${result.queued}` +
+          (result.already_waiting
+            ? `; уже чекали: ${result.already_waiting}`
+            : "")
+      )
+    },
+    onError: (error) => toast.error(errorMessage(error)),
+  })
 
   return (
     <Container className="divide-y p-0">
@@ -94,9 +119,19 @@ const NumbersSection = () => {
               розкладка не мають значення.
             </Text>
           </div>
-          <Button size="small" onClick={() => setCreateOpen(true)}>
-            Додати номер
-          </Button>
+          <div className="flex shrink-0 gap-x-2">
+            <Button
+              size="small"
+              variant="secondary"
+              isLoading={requeue.isPending}
+              onClick={() => requeue.mutate()}
+            >
+              Перешукати номери товарів
+            </Button>
+            <Button size="small" onClick={() => setCreateOpen(true)}>
+              Додати номер
+            </Button>
+          </div>
         </div>
         <Input
           type="search"

@@ -72,3 +72,26 @@ export const searchByPartNumber = async (q: string): Promise<NumberMatch[]> =>
     })
     .then(({ matches }) => matches)
     .catch(() => [])
+
+export type VinLookup = {
+  vehicle: {
+    vin: string
+    make: string | null
+    years: number[]
+    type_code: string | null
+    model: string | null
+    engine: string | null
+    models: string[]
+  }
+  precision: "model" | "make" | "none"
+  products: { product_id: string; handle: string }[]
+}
+
+/** The vehicle a VIN names and the products the catalog lists for it. */
+export const lookupVin = async (vin: string): Promise<VinLookup | null> =>
+  sdk.client
+    .fetch<VinLookup>(`/store/parts-catalog/vin/${encodeURIComponent(vin)}`, {
+      method: "GET",
+      next: { revalidate: 900, tags: ["parts-catalog"] },
+    })
+    .catch(() => null)

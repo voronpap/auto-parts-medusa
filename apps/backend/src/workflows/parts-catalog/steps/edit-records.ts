@@ -618,3 +618,52 @@ async function undoBrandMerge(
     }
   }
 }
+
+// ---- Looking product numbers up again --------------------------------------
+
+/**
+ * Queues every part number that a product variant carries for the parser
+ * service, unless it is already waiting. New sources and new kinds of search
+ * only reach numbers that are looked up after they appear.
+ */
+export const requeueProductNumbersStep = createStep(
+  "requeue-product-numbers",
+  async (_: Record<string, never>, { container }) => {
+    const catalog = resolveCatalog(container)
+    const query = container.resolve(ContainerRegistrationKeys.QUERY)
+    const { data: links } = await query.graph({
+      entity: productVariantPartNumber.entryPoint,
+      fields: ["part_number_id"],
+    })
+    const numberIds = [...new Set(links.map((row) => row.part_number_id))]
+    const waiting = new Set<string>()
+
+    for (const batch of chunks(numberIds)) {
+      const tasks = await catalog.listLookupTasks(
+        { part_number_id: batch, status: ["pending", "claimed"] },
+        { select: ["part_number_id"], take: null }
+      )
+
+      for (const task of tasks) {
+        waiting.add(task.part_number_id)
+      }
+    }
+
+    const toQueue = numberIds.filter((id) => !waiting.has(id))
+    const created = toQueue.length
+      ? await catalog.createLookupTasks(
+          toQueue.map((id) => ({ part_number_id: id, status: "pending" as const }))
+        )
+      : []
+
+    return new StepResponse(
+      { queued: created.length, already_waiting: waiting.size },
+      created.map((task) => task.id)
+    )
+  },
+  async (taskIds: string[] | undefined, { container }) => {
+    if (taskIds?.length) {
+      await resolveCatalog(container).deleteLookupTasks(taskIds)
+    }
+  }
+)

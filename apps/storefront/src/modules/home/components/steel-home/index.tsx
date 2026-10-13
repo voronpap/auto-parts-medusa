@@ -84,7 +84,7 @@ export default function SteelHome({
               <input
                 type="search"
                 name="q"
-                placeholder="Номер деталі або назва, наприклад W 712/95"
+                placeholder="Номер деталі, VIN або назва, наприклад W 712/95"
                 aria-label="Пошук запчастини"
               />
               <button type="submit">Знайти</button>
@@ -100,6 +100,7 @@ export default function SteelHome({
               <LocalizedClientLink href="/store?q=амортизатор">
                 амортизатор
               </LocalizedClientLink>
+              <LocalizedClientLink href="/vin">підбір за VIN →</LocalizedClientLink>
             </div>
           </div>
           <div className="ap-hero-visual" aria-hidden="true">
@@ -124,8 +125,8 @@ export default function SteelHome({
             <span>Нова пошта, Укрпошта, самовивіз</span>
           </div>
           <div className="ap-perk">
-            <strong>Для СТО та магазинів</strong>
-            <span>кабінет з історією замовлень</span>
+            <strong>Підбір за VIN</strong>
+            <span>деталі саме для вашого авто</span>
           </div>
         </section>
 

@@ -1,5 +1,5 @@
 import { Metadata } from "next"
-import { notFound } from "next/navigation"
+import { notFound, redirect } from "next/navigation"
 
 import { getRegion } from "@lib/data/regions"
 import Catalog from "@modules/catalog/templates/catalog"
@@ -16,6 +16,12 @@ export default async function StorePage(props: {
 }) {
   const { countryCode } = await props.params
   const { q, page, sortBy } = await props.searchParams
+  const asVin = (q ?? "").replace(/[\s-]+/g, "").toUpperCase()
+
+  if (/^[A-HJ-NPR-Z0-9]{17}$/.test(asVin) && /\d/.test(asVin) && /[A-Z]/.test(asVin)) {
+    redirect(`/${countryCode}/vin?vin=${asVin}`)
+  }
+
   const region = await getRegion(countryCode)
 
   if (!region) {

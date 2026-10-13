@@ -13,6 +13,9 @@ import { SUPPLY_MODULE } from "../../../modules/supply"
 import SupplyModuleService from "../../../modules/supply/service"
 import { markupFor, shopPriceMinor } from "../../../modules/supply/utils/markup"
 
+// Variants read and written in one go during a recalculation.
+const PAGE = 500
+
 const resolveSupply = (container: { resolve: <T>(key: string) => T }) =>
   container.resolve<SupplyModuleService>(SUPPLY_MODULE)
 
@@ -175,74 +178,11 @@ export const applyOffersToProductsStep = createStep(
       )
     }
 
-    const { data: links } = await query.graph({
-      entity: productVariantPartNumber.entryPoint,
-      fields: ["product_variant_id", "part_number_id"],
-    })
-    const numberIds = [...new Set(links.map((link) => link.part_number_id))]
-    const offers = numberIds.length
-      ? await supply.listSupplierOffers(
-          { part_number_id: numberIds, is_listed: true },
-          {
-            select: [
-              "id",
-              "part_number_id",
-              "normalized_brand",
-              "price_minor",
-              "currency_code",
-              "stock_quantity",
-            ],
-            take: null,
-          }
-        )
-      : []
-    // The cheapest offer in stock; failing that, the cheapest offer.
-    const best = new Map<string, (typeof offers)[number]>()
-
-    for (const offer of offers) {
-      const known = best.get(offer.part_number_id!)
-      const inStock = (offer.stock_quantity ?? 0) > 0
-      const knownInStock = known ? (known.stock_quantity ?? 0) > 0 : false
-
-      if (
-        !known ||
-        (inStock && !knownInStock) ||
-        (inStock === knownInStock && offer.price_minor < known.price_minor)
-      ) {
-        best.set(offer.part_number_id!, offer)
-      }
-    }
-
-    const variantIds = [...new Set(links.map((link) => link.product_variant_id))]
-    const { data: variants } = variantIds.length
-      ? await query.graph({
-          entity: "product_variant",
-          fields: [
-            "id",
-            "manage_inventory",
-            "prices.amount",
-            "prices.currency_code",
-            "inventory_items.inventory_item_id",
-            "inventory_items.inventory.location_levels.location_id",
-            "inventory_items.inventory.location_levels.stocked_quantity",
-          ],
-          filters: { id: variantIds },
-        })
-      : { data: [] }
     const { data: locations } = await query.graph({
       entity: "stock_location",
       fields: ["id"],
     })
     const locationId = locations[0]?.id as string | undefined
-    const numbersOf = new Map<string, string[]>()
-
-    for (const link of links) {
-      numbersOf.set(link.product_variant_id, [
-        ...(numbersOf.get(link.product_variant_id) ?? []),
-        link.part_number_id,
-      ])
-    }
-
     const undo: AppliedUndo = {
       prices: [],
       levels: [],
@@ -253,9 +193,6 @@ export const applyOffersToProductsStep = createStep(
         last_result: settings.last_result,
       },
     }
-    const priceUpdates: { id: string; prices: { amount: number; currency_code: string }[] }[] = []
-    const levelCreates: { inventory_item_id: string; location_id: string; stocked_quantity: number }[] = []
-    const levelUpdates: { inventory_item_id: string; location_id: string; stocked_quantity: number }[] = []
     const result = {
       products_with_offer: 0,
       prices_changed: 0,
@@ -264,101 +201,185 @@ export const applyOffersToProductsStep = createStep(
       without_markup: 0,
     }
 
-    for (const variant of variants as VariantRow[]) {
-      const offer = (numbersOf.get(variant.id) ?? [])
-        .map((numberId) => best.get(numberId))
-        .filter((item): item is (typeof offers)[number] => Boolean(item))
-        .sort((a, b) => a.price_minor - b.price_minor)[0]
-      let stock = 0
+    // Variants are read a page at a time: the shop may hold a whole price
+    // list, which does not fit in memory at once.
+    for (let skip = 0; ; skip += PAGE) {
+      const { data: variants } = await query.graph({
+        entity: "product_variant",
+        fields: [
+          "id",
+          "manage_inventory",
+          "prices.amount",
+          "prices.currency_code",
+          "inventory_items.inventory_item_id",
+          "inventory_items.inventory.location_levels.location_id",
+          "inventory_items.inventory.location_levels.stocked_quantity",
+        ],
+        pagination: { skip, take: PAGE, order: { id: "ASC" } },
+      })
 
-      if (offer) {
-        result.products_with_offer += 1
-        const markup = markupFor(
-          rules,
-          settings.default_markup_bp,
-          offer.normalized_brand,
-          offer.price_minor
-        )
+      if (!variants.length) {
+        break
+      }
 
-        if (markup == null) {
-          result.without_markup += 1
-        } else {
-          const amount =
-            shopPriceMinor(offer.price_minor, markup, settings.rounding_minor) / 100
-          const current = (variant.prices ?? []).find(
-            (price) => price.currency_code === offer.currency_code
+      const { data: links } = await query.graph({
+        entity: productVariantPartNumber.entryPoint,
+        fields: ["product_variant_id", "part_number_id"],
+        filters: { product_variant_id: variants.map((variant) => variant.id) },
+      })
+      const numbersOf = new Map<string, string[]>()
+
+      for (const link of links) {
+        numbersOf.set(link.product_variant_id, [
+          ...(numbersOf.get(link.product_variant_id) ?? []),
+          link.part_number_id,
+        ])
+      }
+
+      const numberIds = [...new Set(links.map((link) => link.part_number_id))]
+      const offers = numberIds.length
+        ? await supply.listSupplierOffers(
+            { part_number_id: numberIds, is_listed: true },
+            {
+              select: [
+                "id",
+                "part_number_id",
+                "normalized_brand",
+                "price_minor",
+                "currency_code",
+                "stock_quantity",
+              ],
+              take: null,
+            }
+          )
+        : []
+      // The cheapest offer in stock; failing that, the cheapest offer.
+      const best = new Map<string, (typeof offers)[number]>()
+
+      for (const offer of offers) {
+        const known = best.get(offer.part_number_id!)
+        const inStock = (offer.stock_quantity ?? 0) > 0
+        const knownInStock = known ? (known.stock_quantity ?? 0) > 0 : false
+
+        if (
+          !known ||
+          (inStock && !knownInStock) ||
+          (inStock === knownInStock && offer.price_minor < known.price_minor)
+        ) {
+          best.set(offer.part_number_id!, offer)
+        }
+      }
+
+      const priceUpdates: { id: string; prices: { amount: number; currency_code: string }[] }[] = []
+      const levelCreates: { inventory_item_id: string; location_id: string; stocked_quantity: number }[] = []
+      const levelUpdates: { inventory_item_id: string; location_id: string; stocked_quantity: number }[] = []
+
+      for (const variant of variants as VariantRow[]) {
+        // A variant the parts catalog does not know is priced by hand.
+        if (!numbersOf.has(variant.id)) {
+          continue
+        }
+
+        const offer = numbersOf
+          .get(variant.id)!
+          .map((numberId) => best.get(numberId))
+          .filter((item): item is (typeof offers)[number] => Boolean(item))
+          .sort((a, b) => a.price_minor - b.price_minor)[0]
+        let stock = 0
+
+        if (offer) {
+          result.products_with_offer += 1
+          const markup = markupFor(
+            rules,
+            settings.default_markup_bp,
+            offer.normalized_brand,
+            offer.price_minor
           )
 
-          if (!current || Number(current.amount) !== amount) {
-            if (current) {
-              undo.prices.push({
+          if (markup == null) {
+            result.without_markup += 1
+          } else {
+            const amount =
+              shopPriceMinor(offer.price_minor, markup, settings.rounding_minor) / 100
+            const current = (variant.prices ?? []).find(
+              (price) => price.currency_code === offer.currency_code
+            )
+
+            if (!current || Number(current.amount) !== amount) {
+              if (current) {
+                undo.prices.push({
+                  id: variant.id,
+                  amount: Number(current.amount),
+                  currency_code: current.currency_code,
+                })
+              }
+
+              priceUpdates.push({
                 id: variant.id,
-                amount: Number(current.amount),
-                currency_code: current.currency_code,
+                prices: [{ amount, currency_code: offer.currency_code }],
               })
+              result.prices_changed += 1
             }
 
-            priceUpdates.push({
-              id: variant.id,
-              prices: [{ amount, currency_code: offer.currency_code }],
-            })
-            result.prices_changed += 1
+            stock = offer.stock_quantity ?? 0
           }
-
-          stock = offer.stock_quantity ?? 0
+        } else {
+          result.without_offer += 1
         }
-      } else {
-        result.without_offer += 1
-      }
 
-      const item = variant.inventory_items?.[0]
+        const item = variant.inventory_items?.[0]
 
-      if (!settings.sync_stock || !variant.manage_inventory || !item || !locationId) {
-        continue
-      }
+        if (!settings.sync_stock || !variant.manage_inventory || !item || !locationId) {
+          continue
+        }
 
-      const level = item.inventory?.location_levels?.find(
-        (row) => row.location_id === locationId
-      )
+        const level = item.inventory?.location_levels?.find(
+          (row) => row.location_id === locationId
+        )
 
-      if (!level) {
-        if (stock > 0) {
-          levelCreates.push({
+        if (!level) {
+          if (stock > 0) {
+            levelCreates.push({
+              inventory_item_id: item.inventory_item_id,
+              location_id: locationId,
+              stocked_quantity: stock,
+            })
+            undo.created_levels.push({
+              inventory_item_id: item.inventory_item_id,
+              location_id: locationId,
+            })
+            result.stock_changed += 1
+          }
+        } else if (Number(level.stocked_quantity) !== stock) {
+          undo.levels.push({
+            inventory_item_id: item.inventory_item_id,
+            location_id: locationId,
+            stocked_quantity: Number(level.stocked_quantity),
+          })
+          levelUpdates.push({
             inventory_item_id: item.inventory_item_id,
             location_id: locationId,
             stocked_quantity: stock,
           })
-          undo.created_levels.push({
-            inventory_item_id: item.inventory_item_id,
-            location_id: locationId,
-          })
           result.stock_changed += 1
         }
-      } else if (Number(level.stocked_quantity) !== stock) {
-        undo.levels.push({
-          inventory_item_id: item.inventory_item_id,
-          location_id: locationId,
-          stocked_quantity: Number(level.stocked_quantity),
-        })
-        levelUpdates.push({
-          inventory_item_id: item.inventory_item_id,
-          location_id: locationId,
-          stocked_quantity: stock,
-        })
-        result.stock_changed += 1
       }
-    }
 
-    if (priceUpdates.length) {
-      await updateProductVariantsWorkflow(container).run({
-        input: { product_variants: priceUpdates },
-      })
-    }
+      if (priceUpdates.length) {
+        await updateProductVariantsWorkflow(container).run({
+          input: { product_variants: priceUpdates },
+        })
+      }
 
-    if (levelCreates.length || levelUpdates.length) {
-      await batchInventoryItemLevelsWorkflow(container).run({
-        input: { create: levelCreates, update: levelUpdates, delete: [] },
-      })
+      if (levelCreates.length || levelUpdates.length) {
+        await batchInventoryItemLevelsWorkflow(container).run({
+          input: { create: levelCreates, update: levelUpdates, delete: [] },
+        })
+      }
+
+      if (variants.length < PAGE) {
+        break
+      }
     }
 
     await supply.updatePricingSettings({

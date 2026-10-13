@@ -154,3 +154,33 @@ def test_identification_survives_a_failing_source():
     assert [c["brand"] for c in result["candidates"]] == ["BOSCH"]
     assert result["candidates"][0]["source"] == "spareto"
     assert result["errors"] == [{"source": "spareto", "message": "down"}]
+
+
+def test_catalogues_identify_a_number_no_shop_lists():
+    from parsers.adapters import Adapter
+    from parsers.models import Attribute, SourceMeta, SourceResult
+    from parsers.worker import identify_number
+
+    class Maker(Adapter):
+        def __init__(self, brand, knows):
+            self._brand, self._knows = brand, knows
+
+        @property
+        def source(self):
+            return SourceMeta(key=self._brand.lower(), name=self._brand, kind="manufacturer_catalog", license_class="OPEN", lineage=self._brand)
+
+        @property
+        def brands(self):
+            return (self._brand,)
+
+        def lookup(self, request):
+            result = SourceResult()
+
+            if self._knows:
+                result.attributes.append(Attribute(name="Назва", value="Термостат"))
+
+            return result
+
+    result = identify_number([Maker("AAA", False), Maker("KW", True)], " 457 001 ", "w")
+
+    assert result["candidates"] == [{"brand": "KW", "number": "457 001", "title": "Термостат", "source": "kw"}]

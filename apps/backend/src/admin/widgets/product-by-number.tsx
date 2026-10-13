@@ -57,7 +57,7 @@ type Progress = {
 }
 
 // How long the sources are waited for before the owner is let through.
-const SOURCES_TIMEOUT_SECONDS = 40
+const SOURCES_TIMEOUT_SECONDS = 75
 
 const decimal = (value: string) =>
   Number.parseFloat(value.replace(/\s/g, "").replace(",", "."))
@@ -346,7 +346,7 @@ const ProductByNumberWidget = () => {
                     ) : (
                       <Step state="busy">Каталог номерів і прайси постачальників…</Step>
                     )}
-                    {sourcesBusy && <Step state="busy">Зовнішні джерела — шукаю…</Step>}
+                    {sourcesBusy && <Step state="busy">Зовнішні джерела й каталоги виробників — шукаю (до хвилини)…</Step>}
                     {!sourcesBusy && !sourcesSilent && (
                       <Step state="ok">
                         Зовнішні джерела: {candidates.length - local > 0 ? `ще ${candidates.length - local}` : "нічого нового"}

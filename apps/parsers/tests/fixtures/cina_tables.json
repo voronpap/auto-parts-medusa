@@ -1,0 +1,27 @@
+{
+  "source_url": "https://www.cinaautoparts.com/wp-content/uploads/2016/12/geely-chery-lifan-great-wall-byd-parts-catalog-Cinaautoparts.pdf",
+  "sha256": "de55af71cb6a6673edee99c66307f8b23b5f561ac98c861df0de6cf95193d734",
+  "excerpts": [
+    {"page": 1, "table": [
+      ["Car brands", "Product Number", "Product Name"],
+      ["00003726", "", "BYD"],
+      ["BYD", "1205010", "Адсорбер flyer"]
+    ]},
+    {"page": 3, "table": [
+      ["CHERY", "A11-3502031", "Барабан тормозной Amulet"],
+      ["CHERY", "A11-3502031BB", "Барабан тормозной Amulet"]
+    ]},
+    {"page": 27, "table": [
+      ["FOTON", "E0493000021(13)", "Шатун поршня Фотон Исузу-1039/1049"],
+      ["00004728", "", "GEELY"],
+      ["GEELY", "1061001049", "Амортизатор задний"]
+    ]},
+    {"page": 42, "table": [
+      ["00005009", "", "Аксессуары"],
+      ["Аксессуары", "DS-MS/GW Hover", "Дефлектор стекол GW Hover H2,H3,H5 (MS)"],
+      ["00003539", "", "ФИЛЬТРА \"ADK\""],
+      ["ФИЛЬТРА \"ADK\"", "OF41", "Фильтр масляный"],
+      ["ФИЛЬТРА \"ADK\"", "OF36", "Фильтр масляный Амулет QQ6,Кимо, Свит 1.1, Indis"]
+    ]}
+  ]
+}

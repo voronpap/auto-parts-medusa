@@ -8,7 +8,9 @@ worked around.
 from __future__ import annotations
 
 import hashlib
+import base64
 import json
+import re
 import sqlite3
 import threading
 import time
@@ -252,3 +254,62 @@ class PoliteSession:
             return json.loads(body)
         except ValueError as error:
             raise SourceError("The source did not return JSON") from error
+
+    def fetch_bytes(
+        self,
+        url: str,
+        *,
+        params: dict[str, Any] | None = None,
+        headers: dict[str, str] | None = None,
+        use_cache: bool = True,
+        max_bytes: int = 4_000_000,
+    ) -> bytes:
+        """Read a public binary file, preserving every byte in the raw archive.
+
+        Existing document bodies are UTF-8 strings. A standard data URI
+        records the response reversibly without adding backend fields:
+        data:<content-type>;base64,<original bytes>. Its cache key is distinct
+        from text fetches. The default limit also fits the archive body cap.
+        Authentication, challenge and TLS checks are unchanged, not bypassed.
+        """
+        if not 1 <= max_bytes <= 4_000_000:
+            raise ValueError("max_bytes must be between 1 and the safe archive cap of 4000000")
+        key = ResponseCache.key("GET", url, [params, None, {"headers": headers, "response": "binary-data-uri"}])
+        if use_cache:
+            entry = self._cache.get_entry(key)
+            if entry is not None:
+                match = re.fullmatch(r"data:([A-Za-z0-9.+-]+/[A-Za-z0-9.+-]+);base64,([A-Za-z0-9+/=]*)", entry[2])
+                if not match:
+                    raise SourceError("The cached binary response is invalid")
+                try:
+                    content = base64.b64decode(match.group(2), validate=True)
+                except ValueError as error:
+                    raise SourceError("The cached binary response is invalid") from error
+                if len(content) > max_bytes:
+                    raise SourceError("The binary response exceeds the safe archive size limit")
+                self._record(key, "GET", url, params, None, None, entry[1], entry[2], entry[0])
+                return content
+
+        self.limiter.wait(urlsplit(url).netloc)
+        try:
+            response = self._session.request("GET", url, params=params, headers=headers, timeout=self._timeout)
+        except requests.RequestException as error:
+            raise SourceError(f"{type(error).__name__}: {error}") from error
+        content = response.content
+        prefix = content[:4000].decode("utf-8", errors="replace")
+        if response.status_code in BLOCKED_STATUSES or (
+            prefix.lstrip().startswith("<") and any(m in prefix.lower() for m in BLOCK_MARKERS)
+        ):
+            raise SourceBlocked(f"HTTP {response.status_code}: the source refuses automated access")
+        if response.status_code >= 400:
+            raise SourceError(f"HTTP {response.status_code}")
+        if len(content) > max_bytes:
+            raise SourceError("The binary response exceeds the safe archive size limit")
+        mime = response.headers.get("Content-Type", "application/octet-stream").split(";", 1)[0].strip().lower()
+        if not re.fullmatch(r"[A-Za-z0-9.+-]+/[A-Za-z0-9.+-]+", mime):
+            mime = "application/octet-stream"
+        body = "data:" + mime + ";base64," + base64.b64encode(content).decode("ascii")
+        if use_cache:
+            self._cache.put(key, response.status_code, body)
+        self._record(key, "GET", url, params, None, None, response.status_code, body, time.time())
+        return content

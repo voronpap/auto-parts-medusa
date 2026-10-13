@@ -177,3 +177,18 @@ def test_chinese_makers_are_vehicle_makers_too():
         ("CHERY", "oem", "OEM_REFERENCE"),
         ("GREAT WALL", "oem", "OEM_REFERENCE"),
     ]
+
+
+def test_oe_list_of_a_product_gives_oe_references_first():
+    data = {"data": {"products": {"items": [{"sku": "X", "oe_numbers": [
+        {"label": "CHERY", "value": ["480-1012010"]},
+        {"label": "LINDE", "value": ["0009831600"]},
+    ], "comparison_numbers": [{"label": "HENGST", "value": ["H1"]}]}]}}}
+    found = parse_comparison_numbers(data, "u")
+
+    assert [(r.to.brand, r.to.number_type, r.relation_type, r.raw_relation_text) for r in found] == [
+        ("CHERY", "oem", "OEM_REFERENCE", "OE number: CHERY 480-1012010"),
+        # Listed as OE by the catalogue, though not a car maker.
+        ("LINDE", "oem", "OEM_REFERENCE", "OE number: LINDE 0009831600"),
+        ("HENGST", "aftermarket", "AFTERMARKET_CROSS", "comparison number: HENGST H1"),
+    ]

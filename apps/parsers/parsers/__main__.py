@@ -55,6 +55,13 @@ def main(argv: list[str] | None = None) -> int:
     load.add_argument("--index", help="parsed catalogue, default .cache/index/<catalogue>.json")
     load.add_argument("--limit", type=int)
 
+    bulk = commands.add_parser(
+        "import-numbers", help="look a list of numbers up and load the results into the catalog"
+    )
+    bulk.add_argument("--brand", required=True)
+    bulk.add_argument("--file", required=True, help="one part number per line")
+    bulk.add_argument("--number-type", default="aftermarket")
+
     args = parser.parse_args(argv)
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
     adapters = build_adapters(Path(args.cache) if args.cache else None)
@@ -89,6 +96,24 @@ def main(argv: list[str] | None = None) -> int:
         return 2
 
     client = CatalogClient(base_url, api_key)
+
+    if args.command == "import-numbers":
+        from .bulk import import_numbers
+
+        source = Path(args.file)
+        numbers = [line.strip() for line in source.read_text(encoding="utf-8").splitlines() if line.strip()]
+        totals = import_numbers(
+            client,
+            adapters,
+            args.brand,
+            numbers,
+            worker,
+            number_type=args.number_type,
+            schema=schema,
+            progress_path=source.with_suffix(".imported.json"),
+        )
+        print(json.dumps(totals))
+        return 0 if not totals["failed"] else 1
 
     if args.command == "import-pdf":
         from .pdf.loader import load_catalogue

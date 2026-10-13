@@ -6,9 +6,9 @@ used in. The page address is derived from the part number, and a number the
 catalogue does not have is a plain 404.
 
 Crosses are not on the page; they come from the catalogue's own API, asked
-once per lookup: a product's comparison numbers (other makers' equivalents),
-and, for a number of another maker, the products the catalogue lists it for.
-OE numbers are only reachable the second way.
+once per lookup: a product's OE numbers and comparison numbers (other
+makers' equivalents), and, for a number of another maker, the products the
+catalogue lists it for.
 """
 
 from __future__ import annotations
@@ -29,7 +29,7 @@ SPEC_HEADINGS = re.compile(r"Розміри|технічні характери�
 
 COMPARISON_QUERY = (
     "query($sku:String!){products(filter:{sku:{eq:$sku}})"
-    "{items{sku sales_designation comparison_numbers{label value}}}}"
+    "{items{sku sales_designation oe_numbers{label value}comparison_numbers{label value}}}}"
 )
 CROSS_QUERY = (
     'query($search:String!){smart_search(search:$search pageSize:50 currentPage:1 applicationSegmentId:"")'
@@ -82,14 +82,21 @@ def parse_comparison_numbers(data: dict[str, Any], record_url: str) -> list[Rela
     found: list[Relationship] = []
     seen: set[tuple[str, str]] = set()
 
-    for group in (items[0].get("comparison_numbers") or []) if items else []:
+    product = items[0] if items else {}
+    groups = [(group, True) for group in product.get("oe_numbers") or []] + [
+        (group, False) for group in product.get("comparison_numbers") or []
+    ]
+
+    for group, listed_as_oe in groups:
         label = str(group.get("label") or "").strip()
         brands = _label_brands(label)
 
         if not brands:
             continue
 
-        oem = _is_vehicle_maker(label)
+        # The catalogue's OE list is OE whatever the maker; in the comparison
+        # list a vehicle maker's number is an OE number as well.
+        oem = listed_as_oe or _is_vehicle_maker(label)
 
         for value in group.get("value") or []:
             number = str(value).strip()
@@ -103,8 +110,8 @@ def parse_comparison_numbers(data: dict[str, Any], record_url: str) -> list[Rela
                 Relationship(
                     to=NumberRef(brands[0], "oem" if oem else "aftermarket", number),
                     relation_type="OEM_REFERENCE" if oem else "AFTERMARKET_CROSS",
-                    raw_relation_text=f"comparison number: {label} {number}",
-                    record_ref=f"product {items[0].get('sku')}",
+                    raw_relation_text=f"{'OE number' if listed_as_oe else 'comparison number'}: {label} {number}",
+                    record_ref=f"product {product.get('sku')}",
                     record_url=record_url,
                 )
             )
@@ -244,7 +251,7 @@ def parse_product_page(html: str, record_url: str) -> tuple[str | None, SourceRe
 class _MannHummelAdapter(Adapter):
     """Reads one brand's product pages. Subclasses name the brand and site."""
 
-    version = "1.1.1"
+    version = "1.2.0"
     min_interval = 5.0
     cross_search = True
     base_url: str

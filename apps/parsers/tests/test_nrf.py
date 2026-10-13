@@ -139,6 +139,7 @@ def test_foreign_number_requires_the_requested_vehicle_make():
     assert [(r.to.brand, r.to.number, r.direction) for r in found.relationships] == [
         ("NRF", "50539", "incoming")
     ]
+    assert found.relationships[0].ambiguous
     assert adapter.lookup_foreign(LookupRequest("Toyota", "8E0 121 251", "oem")).is_empty
     assert adapter.lookup_foreign(LookupRequest("Audi", "8E0", "oem")).is_empty
 
@@ -156,3 +157,25 @@ def test_result_matches_schema_and_adapter_is_registered():
     assert result.sources[0]["name"] == "NRF (каталог виробника)"
     assert result.errors == []
     assert NrfAdapter in ADAPTERS
+
+
+def test_missing_vehicles_never_infers_an_oe_maker_from_product_title():
+    class NoVehicles(FakeHttp):
+        def fetch_json(self, url, params=None, **kwargs):
+            return {"items": [], "total_count": 0}
+
+    adapter = NrfAdapter(NoVehicles())
+    own = adapter.lookup(LookupRequest("NRF", "50539", "aftermarket"))
+    assert not any(r.relation_type == "OEM_REFERENCE" for r in own.relationships)
+    assert {a.value for a in own.attributes if a.name == "OE numbers"} == {
+        "8E0121251", "8E0121251A", "8E0121251AF"
+    }
+    assert adapter.lookup_foreign(LookupRequest("Audi", "8E0121251", "oem")).is_empty
+
+
+def test_alternative_number_keeps_spaces_and_leading_zeroes():
+    html = page("nrf_product_50539.html").replace(
+        '>50539A</div>', '>00 539-A</div>'
+    )
+    _, _, result, _ = parse_product_page(html, "u")
+    assert [r.to.number for r in result.relationships] == ["00 539-A"]

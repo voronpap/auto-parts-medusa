@@ -27,20 +27,6 @@ MAX_APPLICATIONS = 5000
 MAX_FOREIGN_PRODUCTS = 5
 MAX_RELATIONSHIPS = 450
 
-# Product names start with the vehicle make. Keep known multi-word makes
-# together when a new product has no vehicle rows yet.
-MULTI_WORD_MAKES = (
-    "ALFA ROMEO",
-    "ASTON MARTIN",
-    "GREAT WALL",
-    "LAND ROVER",
-    "MERCEDES BENZ",
-    "MERCEDES-BENZ",
-    "ROLLS ROYCE",
-    "SSANG YONG",
-)
-
-
 def _compact(number: str) -> str:
     """Comparison key only; output always keeps the catalogue spelling."""
     return re.sub(r"[^0-9A-Za-z]", "", number).upper()
@@ -64,18 +50,6 @@ def _value(value: Any) -> str:
         value = value.get("text")
 
     return str(value).strip() if value not in (None, "") else ""
-
-
-def _make_from_product_name(name: str) -> str | None:
-    upper = re.sub(r"\s+", " ", name).strip().upper()
-
-    for make in MULTI_WORD_MAKES:
-        if upper == make or upper.startswith(make + " "):
-            return name[: len(make)].strip()
-
-    make, _, _ = name.strip().partition(" ")
-
-    return make or None
 
 
 def parse_search(html: str) -> list[tuple[str, str]]:
@@ -142,11 +116,11 @@ def parse_product_page(
             continue
 
         if label == "Alternative Product":
-            alternatives.extend(
-                number
-                for number in re.split(r"[,;\s]+", value)
-                if number and _compact(number) != _compact(code or "")
-            )
+            # A displayed part number may contain spaces. Only actual item
+            # nodes, never whitespace inside a number, separate alternatives.
+            nodes = value_node.select(".product-info-ref, a")
+            numbers = [node.get_text(" ", strip=True) for node in nodes] or [value]
+            alternatives.extend(n for n in numbers if _compact(n) != _compact(code or ""))
 
         attribute = (label, value)
 
@@ -250,7 +224,7 @@ def parse_applications(
 
 
 class NrfAdapter(Adapter):
-    version = "1.0.0"
+    version = "1.1.0"
     min_interval = 5.0
     cross_search = True
 
@@ -328,7 +302,7 @@ class NrfAdapter(Adapter):
             return SourceResult()
 
         searched_code, record_url = match
-        code, title, result, oe_numbers = parse_product_page(self.http.fetch(record_url), record_url)
+        code, _, result, oe_numbers = parse_product_page(self.http.fetch(record_url), record_url)
 
         if not code or _compact(code) != _compact(searched_code) or _compact(code) != wanted:
             return SourceResult()
@@ -336,9 +310,12 @@ class NrfAdapter(Adapter):
         applications, makes, total = self._applications(code, record_url)
         result.applications.extend(applications)
 
-        if not makes and title:
-            fallback = _make_from_product_name(title)
-            makes = [fallback] if fallback else []
+        if not makes and oe_numbers:
+            # A product title is not an OE-maker label. Preserve the source's
+            # unassigned references instead of inventing a maker from it.
+            for number in oe_numbers:
+                result.attributes.append(Attribute(name="OE numbers", value=number,
+                                                   raw_text=f"OE numbers: {number}"))
 
         self._add_oe_relationships(result, code, record_url, oe_numbers, makes)
 
@@ -362,7 +339,7 @@ class NrfAdapter(Adapter):
             return result
 
         for searched_code, record_url in self._search("p_oen", request.number)[:MAX_FOREIGN_PRODUCTS]:
-            code, title, _, oe_numbers = parse_product_page(self.http.fetch(record_url), record_url)
+            code, _, _, oe_numbers = parse_product_page(self.http.fetch(record_url), record_url)
 
             if not code or _compact(code) != _compact(searched_code):
                 continue
@@ -374,10 +351,6 @@ class NrfAdapter(Adapter):
 
             _, makes, _ = self._applications(code, record_url)
 
-            if not makes and title:
-                fallback = _make_from_product_name(title)
-                makes = [fallback] if fallback else []
-
             if not any(label_has_brand(make, request.brand) for make in makes):
                 continue
 
@@ -387,6 +360,12 @@ class NrfAdapter(Adapter):
                     relation_type="OEM_REFERENCE",
                     direction="incoming",
                     raw_relation_text=f"OE numbers: {stated}",
+                    ambiguous=len(makes) > 1,
+                    reason=(
+                        "The catalogue gives this OE number without a maker; "
+                        f"the product fits {', '.join(makes)}."
+                        if len(makes) > 1 else None
+                    ),
                     record_ref=f"product {code}",
                     record_url=record_url,
                 )

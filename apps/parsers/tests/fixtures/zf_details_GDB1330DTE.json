@@ -1,0 +1,1048 @@
+{
+  "details": {
+    "number": "GDB1330DTE",
+    "name": "Brake Pad Set, disc brake | DTEC COTEC",
+    "brandName": "TRW",
+    "textModules": {
+      "additionalTextShowMoreLabel": "Show more",
+      "additionalTextShowLessLabel": "Show less",
+      "values": []
+    },
+    "status": {
+      "key": 1,
+      "value": "Normal"
+    },
+    "replacedBy": null,
+    "mainStage": {
+      "ean": {
+        "label": "EAN",
+        "value": "3322938206567"
+      },
+      "weight": {
+        "label": "Gross Weight (kg)",
+        "value": "0,96"
+      }
+    },
+    "distributorFinder": {
+      "text": "Find a Distributor",
+      "href": "https://aftermarket.zf.com/en/partner-finder/#/result?countryIso=UA&services=2&brands=161"
+    },
+    "productTypes": [
+      {
+        "productTypeId": "00",
+        "productTypeLabel": null,
+        "netWeight": "0,96",
+        "grossWeight": "0,96",
+        "weightUnit": "kg"
+      }
+    ],
+    "pagePrinter": {
+      "label": "Print this page",
+      "icon": "navigationIcons/print"
+    }
+  },
+  "specifications": {
+    "label": "Specifications",
+    "type": "tab",
+    "content": {
+      "generalSpecifications": {
+        "label": "General Specifications",
+        "specifications": [
+          {
+            "id": 0,
+            "label": "Brand",
+            "meta": null,
+            "values": [
+              {
+                "text": "TRW",
+                "href": null
+              }
+            ]
+          },
+          {
+            "id": 1,
+            "label": "Brake Lining",
+            "meta": null,
+            "values": [
+              {
+                "text": "with bevelled edges",
+                "href": null
+              }
+            ]
+          },
+          {
+            "id": 2,
+            "label": "Braking System",
+            "meta": null,
+            "values": [
+              {
+                "text": "Low dust brake pads; not for carbon-ceramic brake discs; only in connection with steel brake discs; also for perforated brake discs",
+                "href": null
+              }
+            ]
+          },
+          {
+            "id": 3,
+            "label": "Wear Warning Contact",
+            "meta": null,
+            "values": [
+              {
+                "text": "not prepared for wear warning indicator",
+                "href": null
+              }
+            ]
+          },
+          {
+            "id": 4,
+            "label": "Supplementary Article/Supplementary Info 2",
+            "meta": null,
+            "values": [
+              {
+                "text": "with brake caliper screws",
+                "href": null
+              }
+            ]
+          },
+          {
+            "id": 5,
+            "label": "Supplementary Article/Supplementary Info",
+            "meta": null,
+            "values": [
+              {
+                "text": "with accessories",
+                "href": null
+              }
+            ]
+          },
+          {
+            "id": 6,
+            "label": "Manufacturer Restriction",
+            "meta": null,
+            "values": [
+              {
+                "text": "TRW",
+                "href": null
+              }
+            ]
+          },
+          {
+            "id": 7,
+            "label": "Thickness [mm]",
+            "meta": null,
+            "values": [
+              {
+                "text": "17.0",
+                "href": null
+              }
+            ]
+          },
+          {
+            "id": 8,
+            "label": "Test Mark",
+            "meta": null,
+            "values": [
+              {
+                "text": "E9 90R-02A1148/0457",
+                "href": null
+              }
+            ]
+          },
+          {
+            "id": 9,
+            "label": "Width [mm]",
+            "meta": null,
+            "values": [
+              {
+                "text": "87.0",
+                "href": null
+              }
+            ]
+          },
+          {
+            "id": 10,
+            "label": "Height [mm]",
+            "meta": null,
+            "values": [
+              {
+                "text": "52.9",
+                "href": null
+              }
+            ]
+          },
+          {
+            "id": 11,
+            "label": "Net Weight (kg)",
+            "isNetWeight": true,
+            "meta": null,
+            "values": [
+              {
+                "text": "0,96"
+              }
+            ]
+          }
+        ]
+      },
+      "additionalInformation": {
+        "label": "Additional Information",
+        "additionalInformation": [
+          {
+            "id": 0,
+            "label": "Observe technical data"
+          }
+        ]
+      },
+      "partsList": null,
+      "inPartsList": null,
+      "referenceNumbers": {
+        "label": "Comparable OE Numbers",
+        "referenceNumbers": [
+          {
+            "id": 0,
+            "label": "AUDI",
+            "values": [
+              {
+                "text": "1H0 698 451 D"
+              },
+              {
+                "text": "1J0 698 451"
+              },
+              {
+                "text": "1J0 698 451 B"
+              },
+              {
+                "text": "1J0 698 451 D"
+              },
+              {
+                "text": "1J0 698 451 E"
+              },
+              {
+                "text": "1J0 698 451 F"
+              },
+              {
+                "text": "1J0 698 451 H"
+              },
+              {
+                "text": "1J0 698 451 J"
+              },
+              {
+                "text": "1J0 698 451 K"
+              },
+              {
+                "text": "1J0 698 451 L"
+              },
+              {
+                "text": "1J0 698 451 M"
+              },
+              {
+                "text": "1J0 698 451 N"
+              },
+              {
+                "text": "1J0 698 451 P"
+              },
+              {
+                "text": "1J0 698 451 Q"
+              },
+              {
+                "text": "1J0 698 451 R"
+              },
+              {
+                "text": "1JD 698 451"
+              },
+              {
+                "text": "1K0 698 451 C"
+              },
+              {
+                "text": "1K0 698 451 J"
+              },
+              {
+                "text": "3B0 698 451"
+              },
+              {
+                "text": "3B0 698 451 A"
+              },
+              {
+                "text": "4B0 698 451"
+              },
+              {
+                "text": "4B0 698 451 A"
+              },
+              {
+                "text": "4B0 698 451 B"
+              },
+              {
+                "text": "4B0 698 451 E"
+              },
+              {
+                "text": "4D0 698 451 D"
+              },
+              {
+                "text": "4D0 698 451 E"
+              },
+              {
+                "text": "5K0 698 451 B"
+              },
+              {
+                "text": "5K0 698 451 E"
+              },
+              {
+                "text": "5Q0 698 451 A"
+              },
+              {
+                "text": "6X0 698 451 A"
+              },
+              {
+                "text": "8D0 615 405 S"
+              },
+              {
+                "text": "8D0 615 406 S"
+              },
+              {
+                "text": "8E0 698 451"
+              },
+              {
+                "text": "8E0 698 451 A"
+              },
+              {
+                "text": "8E0 698 451 D"
+              },
+              {
+                "text": "8E0 698 451 E"
+              },
+              {
+                "text": "8E0 698 451 K"
+              },
+              {
+                "text": "JZW 698 451 B"
+              }
+            ]
+          },
+          {
+            "id": 1,
+            "label": "BRILLIANCE",
+            "values": [
+              {
+                "text": "3420001"
+              }
+            ]
+          },
+          {
+            "id": 2,
+            "label": "CITROËN",
+            "values": [
+              {
+                "text": "16 085 203 80"
+              },
+              {
+                "text": "16 086 815 80"
+              },
+              {
+                "text": "16 231 805 80"
+              },
+              {
+                "text": "16 478 940 80"
+              },
+              {
+                "text": "16 682 476 80"
+              },
+              {
+                "text": "16 962 582 80"
+              },
+              {
+                "text": "4252 23"
+              },
+              {
+                "text": "4252 41"
+              },
+              {
+                "text": "4253 96"
+              },
+              {
+                "text": "4254 28"
+              },
+              {
+                "text": "4254 67"
+              },
+              {
+                "text": "4254 C1"
+              },
+              {
+                "text": "E 172 204"
+              }
+            ]
+          },
+          {
+            "id": 3,
+            "label": "DS",
+            "values": [
+              {
+                "text": "16 086 815 80"
+              },
+              {
+                "text": "4254 C1"
+              }
+            ]
+          },
+          {
+            "id": 4,
+            "label": "FORD",
+            "values": [
+              {
+                "text": "1027640"
+              },
+              {
+                "text": "1115107"
+              },
+              {
+                "text": "1205557"
+              },
+              {
+                "text": "7354162"
+              },
+              {
+                "text": "YM212M008CA"
+              }
+            ]
+          },
+          {
+            "id": 5,
+            "label": "MG",
+            "values": [
+              {
+                "text": "10030811"
+              }
+            ]
+          },
+          {
+            "id": 6,
+            "label": "MG (SAIC)",
+            "values": [
+              {
+                "text": "10030811"
+              }
+            ]
+          },
+          {
+            "id": 7,
+            "label": "PEUGEOT",
+            "values": [
+              {
+                "text": "16 085 203 80"
+              },
+              {
+                "text": "16 231 805 80"
+              },
+              {
+                "text": "16 478 940 80"
+              },
+              {
+                "text": "16 682 476 80"
+              },
+              {
+                "text": "16 962 582 80"
+              },
+              {
+                "text": "4252 23"
+              },
+              {
+                "text": "4252 41"
+              },
+              {
+                "text": "4253 96"
+              },
+              {
+                "text": "4254 28"
+              },
+              {
+                "text": "4254 67"
+              },
+              {
+                "text": "4254 C1"
+              },
+              {
+                "text": "E 172 204"
+              }
+            ]
+          },
+          {
+            "id": 8,
+            "label": "RENAULT",
+            "values": [
+              {
+                "text": "41 06 066 78R"
+              },
+              {
+                "text": "44 06 002 95R"
+              },
+              {
+                "text": "44 06 003 64R"
+              },
+              {
+                "text": "44 06 024 66R"
+              },
+              {
+                "text": "44 06 035 11R"
+              },
+              {
+                "text": "44 06 035 30R"
+              },
+              {
+                "text": "44 06 057 13R"
+              },
+              {
+                "text": "44 06 058 39R"
+              },
+              {
+                "text": "44 06 079 60R"
+              },
+              {
+                "text": "44 06 613 32R"
+              },
+              {
+                "text": "60 25 371 650"
+              },
+              {
+                "text": "77 01 206 343"
+              },
+              {
+                "text": "77 01 206 784"
+              },
+              {
+                "text": "77 01 207 484"
+              },
+              {
+                "text": "77 01 207 695"
+              },
+              {
+                "text": "77 01 208 213"
+              },
+              {
+                "text": "77 01 208 416"
+              },
+              {
+                "text": "77 01 208 421"
+              },
+              {
+                "text": "77 01 209 735"
+              },
+              {
+                "text": "77 01 209 841"
+              },
+              {
+                "text": "86 71 016 582"
+              }
+            ]
+          },
+          {
+            "id": 9,
+            "label": "SEAT",
+            "values": [
+              {
+                "text": "1H0 698 451 D"
+              },
+              {
+                "text": "1J0 615 231 A"
+              },
+              {
+                "text": "1J0 698 451"
+              },
+              {
+                "text": "1J0 698 451 F"
+              },
+              {
+                "text": "1J0 698 451 J"
+              },
+              {
+                "text": "1J0 698 451 K"
+              },
+              {
+                "text": "1J0 698 451 L"
+              },
+              {
+                "text": "1J0 698 451 M"
+              },
+              {
+                "text": "1J0 698 451 N"
+              },
+              {
+                "text": "1J0 698 451 P"
+              },
+              {
+                "text": "1J0 698 451 Q"
+              },
+              {
+                "text": "1J0 698 451 S"
+              },
+              {
+                "text": "1JD 698 451"
+              },
+              {
+                "text": "1K0 698 451 C"
+              },
+              {
+                "text": "1K0 698 451 J"
+              },
+              {
+                "text": "4B0 698 451"
+              },
+              {
+                "text": "4B0 698 451 A"
+              },
+              {
+                "text": "4B0 698 451 B"
+              },
+              {
+                "text": "4D0 698 451 D"
+              },
+              {
+                "text": "4D0 698 451 E"
+              },
+              {
+                "text": "5K0 698 451 B"
+              },
+              {
+                "text": "5K0 698 451 E"
+              },
+              {
+                "text": "5Q0 698 451 A"
+              },
+              {
+                "text": "6X0 698 451"
+              },
+              {
+                "text": "6X0 698 451 A"
+              },
+              {
+                "text": "8D0 615 405 S"
+              },
+              {
+                "text": "8D0 615 406 S"
+              },
+              {
+                "text": "8E0 698 451 AA"
+              },
+              {
+                "text": "JZW 698 451"
+              },
+              {
+                "text": "JZW 698 451 A"
+              },
+              {
+                "text": "JZW 698 451 B"
+              },
+              {
+                "text": "JZW 698 451 C"
+              }
+            ]
+          },
+          {
+            "id": 10,
+            "label": "SKODA",
+            "values": [
+              {
+                "text": "1J0 615 231 A"
+              },
+              {
+                "text": "1J0 698 451"
+              },
+              {
+                "text": "1J0 698 451 F"
+              },
+              {
+                "text": "1J0 698 451 J"
+              },
+              {
+                "text": "1J0 698 451 K"
+              },
+              {
+                "text": "1J0 698 451 M"
+              },
+              {
+                "text": "1J0 698 451 N"
+              },
+              {
+                "text": "1J0 698 451 P"
+              },
+              {
+                "text": "1J0 698 451 Q"
+              },
+              {
+                "text": "1J0 698 451 S"
+              },
+              {
+                "text": "1JD 698 451"
+              },
+              {
+                "text": "1K0 698 451 C"
+              },
+              {
+                "text": "1K0 698 451 J"
+              },
+              {
+                "text": "3B0 698 451 A"
+              },
+              {
+                "text": "4B0 698 451"
+              },
+              {
+                "text": "4B0 698 451 A"
+              },
+              {
+                "text": "4B0 698 451 B"
+              },
+              {
+                "text": "4D0 698 451 D"
+              },
+              {
+                "text": "4D0 698 451 E"
+              },
+              {
+                "text": "5K0 698 451 B"
+              },
+              {
+                "text": "5K0 698 451 E"
+              },
+              {
+                "text": "5Q0 698 451 A"
+              },
+              {
+                "text": "8D0 615 405 S"
+              },
+              {
+                "text": "8D0 615 406 S"
+              },
+              {
+                "text": "8E0 698 451 A"
+              },
+              {
+                "text": "8E0 698 451 D"
+              },
+              {
+                "text": "8E0 698 451 E"
+              },
+              {
+                "text": "8E0 698 451 K"
+              },
+              {
+                "text": "JZW 698 451"
+              },
+              {
+                "text": "JZW 698 451 A"
+              },
+              {
+                "text": "JZW 698 451 C"
+              }
+            ]
+          },
+          {
+            "id": 11,
+            "label": "SKODA (SVW)",
+            "values": [
+              {
+                "text": "1JD 698 451 A"
+              }
+            ]
+          },
+          {
+            "id": 12,
+            "label": "SKODA - SVW",
+            "values": [
+              {
+                "text": "1JD 698 451 A"
+              }
+            ]
+          },
+          {
+            "id": 13,
+            "label": "VOLKSWAGEN - SVW",
+            "values": [
+              {
+                "text": "1J0 698 451 E"
+              },
+              {
+                "text": "1JD 698 451 A"
+              }
+            ]
+          },
+          {
+            "id": 14,
+            "label": "VW",
+            "values": [
+              {
+                "text": "1H0 698 451 D"
+              },
+              {
+                "text": "1J0 615 231 A"
+              },
+              {
+                "text": "1J0 698 451"
+              },
+              {
+                "text": "1J0 698 451 B"
+              },
+              {
+                "text": "1J0 698 451 D"
+              },
+              {
+                "text": "1J0 698 451 E"
+              },
+              {
+                "text": "1J0 698 451 F"
+              },
+              {
+                "text": "1J0 698 451 H"
+              },
+              {
+                "text": "1J0 698 451 J"
+              },
+              {
+                "text": "1J0 698 451 K"
+              },
+              {
+                "text": "1J0 698 451 L"
+              },
+              {
+                "text": "1J0 698 451 N"
+              },
+              {
+                "text": "1J0 698 451 P"
+              },
+              {
+                "text": "1J0 698 451 Q"
+              },
+              {
+                "text": "1J0 698 451 R"
+              },
+              {
+                "text": "1J0 698 451 S"
+              },
+              {
+                "text": "1JD 698 451"
+              },
+              {
+                "text": "1K0 698 451 C"
+              },
+              {
+                "text": "1K0 698 451 J"
+              },
+              {
+                "text": "1K0 698 451 M"
+              },
+              {
+                "text": "3B0 698 451"
+              },
+              {
+                "text": "3B0 698 451 A"
+              },
+              {
+                "text": "3B0 698 451 E"
+              },
+              {
+                "text": "4B0 698 451"
+              },
+              {
+                "text": "4B0 698 451 A"
+              },
+              {
+                "text": "4B0 698 451 B"
+              },
+              {
+                "text": "4B0 698 451 E"
+              },
+              {
+                "text": "4D0 698 451 D"
+              },
+              {
+                "text": "5C0 698 451"
+              },
+              {
+                "text": "5C0 698 451 A"
+              },
+              {
+                "text": "5C0 698 451 B"
+              },
+              {
+                "text": "5K0 698 451 B"
+              },
+              {
+                "text": "5K0 698 451 E"
+              },
+              {
+                "text": "5Q0 698 451 A"
+              },
+              {
+                "text": "5Q0 698 451 E"
+              },
+              {
+                "text": "6C0 698 451"
+              },
+              {
+                "text": "6R0 698 451"
+              },
+              {
+                "text": "6X0 698 451"
+              },
+              {
+                "text": "6X0 698 451 A"
+              },
+              {
+                "text": "8D0 615 405 S"
+              },
+              {
+                "text": "8D0 615 406 S"
+              },
+              {
+                "text": "8E0 698 451"
+              },
+              {
+                "text": "8E0 698 451 A"
+              },
+              {
+                "text": "8E0 698 451 E"
+              },
+              {
+                "text": "8E0 698 451 K"
+              },
+              {
+                "text": "JZW 698 451"
+              },
+              {
+                "text": "JZW 698 451 A"
+              },
+              {
+                "text": "JZW 698 451 B"
+              },
+              {
+                "text": "JZW 698 451 C"
+              }
+            ]
+          },
+          {
+            "id": 15,
+            "label": "VW (SVW)",
+            "values": [
+              {
+                "text": "1J0 698 451 E"
+              },
+              {
+                "text": "1JD 698 451 A"
+              },
+              {
+                "text": "1K0 698 451 J"
+              }
+            ]
+          },
+          {
+            "id": 16,
+            "label": "ZHONGHUA (BRILLIANCE)",
+            "values": [
+              {
+                "text": "3420001"
+              },
+              {
+                "text": "SHZ-3501023"
+              }
+            ]
+          }
+        ]
+      },
+      "competitorReferences": null,
+      "alternatives": {
+        "label": "Alternatives",
+        "alternatives": [
+          {
+            "id": 1,
+            "label": "LEMFÖRDER",
+            "values": [
+              {
+                "text": "20553 04",
+                "href": null,
+                "info": null
+              },
+              {
+                "text": "20615 04",
+                "href": null,
+                "info": null
+              }
+            ]
+          },
+          {
+            "id": 2,
+            "label": "TRW",
+            "values": [
+              {
+                "text": "GDB1330",
+                "href": "/products/GDB1330",
+                "info": null
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "serviceAndRepair": null,
+  "builtIn": null,
+  "technicalInformation": {
+    "label": "Technical Information",
+    "type": "tab",
+    "content": [
+      {
+        "title": null,
+        "titleDescription": null,
+        "category": "DOC009",
+        "iconForCategory": null,
+        "documentId": null,
+        "publishOn": null,
+        "languageDropdown": [
+          "de_DE",
+          "en_US",
+          "es_ES",
+          "fr_FR",
+          "it_IT",
+          "pl_PL",
+          "pt_PT",
+          "ru_RU",
+          "tr_TR"
+        ],
+        "viewPdf": {
+          "icon": "#",
+          "text": "pdf",
+          "href": {
+            "de_DE": "https://media-aftermarket.zf.com/public/documents/1/0161XZS158DE.pdf",
+            "en_US": "https://media-aftermarket.zf.com/public/documents/1/0161XZS158NL.pdf",
+            "es_ES": "https://media-aftermarket.zf.com/public/documents/1/0161XZS158ES.pdf",
+            "fr_FR": "https://media-aftermarket.zf.com/public/documents/1/0161XZS158FR.pdf",
+            "it_IT": "https://media-aftermarket.zf.com/public/documents/1/0161XZS158IT.pdf",
+            "pl_PL": "https://media-aftermarket.zf.com/public/documents/1/0161XZS158PL.pdf",
+            "pt_PT": "https://media-aftermarket.zf.com/public/documents/1/0161XZS158PT.pdf",
+            "ru_RU": "https://media-aftermarket.zf.com/public/documents/1/0161XZS158RU.pdf",
+            "tr_TR": "https://media-aftermarket.zf.com/public/documents/1/0161XZS158TR.pdf"
+          }
+        }
+      }
+    ]
+  },
+  "videos": null,
+  "meta": {
+    "locale": "en_US",
+    "country": "UA",
+    "group": "standard",
+    "fallbackLanguageUsage": [
+      "names"
+    ],
+    "isReman": false,
+    "datasource": {
+      "name": "IAMP"
+    }
+  },
+  "accessoriesAndRelatedProducts": null,
+  "serviceAvailability": {
+    "label": "Service Finder"
+  },
+  "productAvailability": {
+    "label": "Distributor Finder"
+  },
+  "navBackToSearch": "Back to search results",
+  "navBackToPrevious": "Back to previous page",
+  "requestTime": 1791909423176
+}

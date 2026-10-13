@@ -1,0 +1,219 @@
+{
+  "content": [
+    {
+      "manufacturers": [
+        {
+          "manufacturer": {
+            "manufacturerID": 5,
+            "countryID": "NULL",
+            "name": "AUDI"
+          },
+          "models": [
+            {
+              "model": {
+                "modelID": 8604,
+                "manufacturerID": 5,
+                "countryID": "NULL",
+                "name": "A1 (8X1, 8XK)",
+                "saleName": "A1",
+                "generationName": null,
+                "yearOfConstructionFrom": "201005",
+                "yearOfConstructionTo": "201909"
+              },
+              "vehicles": [
+                {
+                  "vehicle": {
+                    "vehicleID": 118024,
+                    "manufacturerID": 5,
+                    "modelID": 8604,
+                    "countryID": "NULL",
+                    "name": "1.0 TFSI",
+                    "yearOfConstructionFrom": "201601",
+                    "yearOfConstructionTo": "201810",
+                    "kw": "60",
+                    "ps": "82",
+                    "ccm": "00999",
+                    "driveTypeName": "Front-Wheel Drive",
+                    "tonnage": null,
+                    "typeOfBody": null,
+                    "vehicleTypeIDs": [
+                      "P"
+                    ],
+                    "kbaNumbers": [
+                      "0588BHL"
+                    ],
+                    "concepts": [
+                      "PROT",
+                      "SOS"
+                    ],
+                    "engineType": "Petrol Engine",
+                    "engineCodes": null,
+                    "modelName": null,
+                    "manufacturerName": null
+                  },
+                  "engine": null,
+                  "articleShortInfos": [
+                    {
+                      "criterias": [
+                        {
+                          "criteriaID": 100,
+                          "name": "Fitting Position",
+                          "unit": null,
+                          "values": [
+                            "Rear Axle"
+                          ]
+                        }
+                      ],
+                      "marketingTexts": [],
+                      "medias": []
+                    }
+                  ],
+                  "assemblyGroups": [
+                    {
+                      "assemblyGroup": {
+                        "assemblyGroupID": 402,
+                        "name": "Brake Pad Set, disc brake"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "vehicle": {
+                    "vehicleID": 112018,
+                    "manufacturerID": 5,
+                    "modelID": 8604,
+                    "countryID": "NULL",
+                    "name": "1.0 TFSI",
+                    "yearOfConstructionFrom": "201503",
+                    "yearOfConstructionTo": "201810",
+                    "kw": "70",
+                    "ps": "95",
+                    "ccm": "00999",
+                    "driveTypeName": "Front-Wheel Drive",
+                    "tonnage": null,
+                    "typeOfBody": null,
+                    "vehicleTypeIDs": [
+                      "P"
+                    ],
+                    "kbaNumbers": [
+                      "0588BCV"
+                    ],
+                    "concepts": [
+                      "PROT",
+                      "SOS"
+                    ],
+                    "engineType": "Petrol Engine",
+                    "engineCodes": null,
+                    "modelName": null,
+                    "manufacturerName": null
+                  },
+                  "engine": null,
+                  "articleShortInfos": [
+                    {
+                      "criterias": [
+                        {
+                          "criteriaID": 100,
+                          "name": "Fitting Position",
+                          "unit": null,
+                          "values": [
+                            "Rear Axle"
+                          ]
+                        }
+                      ],
+                      "marketingTexts": [],
+                      "medias": []
+                    }
+                  ],
+                  "assemblyGroups": [
+                    {
+                      "assemblyGroup": {
+                        "assemblyGroupID": 402,
+                        "name": "Brake Pad Set, disc brake"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "manufacturer": {
+            "manufacturerID": 75,
+            "countryID": "NULL",
+            "name": "MG"
+          },
+          "models": [
+            {
+              "model": {
+                "modelID": 40059,
+                "manufacturerID": 75,
+                "countryID": "NULL",
+                "name": "MG 5 Hatchback",
+                "saleName": "MG 5",
+                "generationName": null,
+                "yearOfConstructionFrom": "201203",
+                "yearOfConstructionTo": null
+              },
+              "vehicles": [
+                {
+                  "vehicle": {
+                    "vehicleID": 138205,
+                    "manufacturerID": 75,
+                    "modelID": 40059,
+                    "countryID": "NULL",
+                    "name": "1.5",
+                    "yearOfConstructionFrom": "201203",
+                    "yearOfConstructionTo": null,
+                    "kw": "78",
+                    "ps": "106",
+                    "ccm": "01498",
+                    "driveTypeName": "Front-Wheel Drive",
+                    "tonnage": null,
+                    "typeOfBody": null,
+                    "vehicleTypeIDs": [
+                      "P"
+                    ],
+                    "kbaNumbers": null,
+                    "concepts": [
+                      "PROT"
+                    ],
+                    "engineType": "Petrol Engine",
+                    "engineCodes": null,
+                    "modelName": null,
+                    "manufacturerName": null
+                  },
+                  "engine": null,
+                  "articleShortInfos": [
+                    {
+                      "criterias": [
+                        {
+                          "criteriaID": 100,
+                          "name": "Fitting Position",
+                          "unit": null,
+                          "values": [
+                            "Rear Axle"
+                          ]
+                        }
+                      ],
+                      "marketingTexts": [],
+                      "medias": []
+                    }
+                  ],
+                  "assemblyGroups": [
+                    {
+                      "assemblyGroup": {
+                        "assemblyGroupID": 402,
+                        "name": "Brake Pad Set, disc brake"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

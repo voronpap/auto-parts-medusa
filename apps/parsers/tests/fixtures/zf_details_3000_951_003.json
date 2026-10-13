@@ -1,0 +1,205 @@
+{
+  "details": {
+    "number": "3000 951 003",
+    "name": "Clutch Kit",
+    "brandName": "SACHS",
+    "textModules": {
+      "additionalTextShowMoreLabel": "Show more",
+      "additionalTextShowLessLabel": "Show less",
+      "values": []
+    },
+    "status": {
+      "key": 9,
+      "value": "No longer deliverable by the manufacturer"
+    },
+    "replacedBy": {
+      "label": "Replaced by",
+      "values": [
+        {
+          "text": "3000 951 603",
+          "href": "/products/3000+951+603",
+          "datasource": {
+            "name": "IAMP"
+          },
+          "id": 1
+        }
+      ]
+    },
+    "mainStage": {
+      "ean": {
+        "label": "EAN",
+        "value": "4013872468164"
+      },
+      "weight": {
+        "label": "Gross Weight (kg)",
+        "value": "5,40"
+      }
+    },
+    "distributorFinder": {
+      "text": "Find a Distributor",
+      "href": "https://aftermarket.zf.com/en/partner-finder/#/result?countryIso=UA&services=2&brands=32"
+    },
+    "productTypes": [
+      {
+        "productTypeId": "00",
+        "productTypeLabel": null,
+        "netWeight": "5,22",
+        "grossWeight": "5,40",
+        "weightUnit": "kg"
+      }
+    ],
+    "pagePrinter": {
+      "label": "Print this page",
+      "icon": "navigationIcons/print"
+    }
+  },
+  "specifications": {
+    "label": "Specifications",
+    "type": "tab",
+    "content": {
+      "generalSpecifications": {
+        "label": "General Specifications",
+        "specifications": [
+          {
+            "id": 0,
+            "label": "Brand",
+            "meta": null,
+            "values": [
+              {
+                "text": "SACHS",
+                "href": null
+              }
+            ]
+          },
+          {
+            "id": 1,
+            "label": "Warranty",
+            "meta": null,
+            "values": [
+              {
+                "text": "3 years warranty",
+                "href": null
+              }
+            ]
+          },
+          {
+            "id": 2,
+            "label": "Diameter [mm]",
+            "meta": null,
+            "values": [
+              {
+                "text": "215",
+                "href": null
+              }
+            ]
+          },
+          {
+            "id": 3,
+            "label": "Number of Teeth",
+            "meta": null,
+            "values": [
+              {
+                "text": "20",
+                "href": null
+              }
+            ]
+          },
+          {
+            "id": 4,
+            "label": "Net Weight (kg)",
+            "isNetWeight": true,
+            "meta": null,
+            "values": [
+              {
+                "text": "5,22"
+              }
+            ]
+          }
+        ]
+      },
+      "additionalInformation": {
+        "label": "Additional Information",
+        "additionalInformation": [
+          {
+            "id": 0,
+            "label": "for components see parts list"
+          }
+        ]
+      },
+      "partsList": {
+        "label": "Parts List",
+        "isLimitedCount": false,
+        "parts": [
+          {
+            "id": 0,
+            "label": "Clutch Pressure Plate",
+            "values": [
+              {
+                "text": "3082 000 403",
+                "href": "/products/3082+000+403"
+              }
+            ]
+          },
+          {
+            "id": 1,
+            "label": "Clutch Disc",
+            "values": [
+              {
+                "text": "1878 002 205",
+                "href": "/products/1878+002+205"
+              }
+            ]
+          },
+          {
+            "id": 2,
+            "label": "Clutch Release Bearing",
+            "values": [
+              {
+                "text": "3151 600 743",
+                "href": "/products/3151+600+743"
+              }
+            ]
+          },
+          {
+            "id": 3,
+            "label": "Grease | high-performance lubricant",
+            "values": [
+              {
+                "text": "4200 080 060",
+                "href": "/products/4200+080+060"
+              }
+            ]
+          }
+        ]
+      },
+      "inPartsList": null,
+      "referenceNumbers": null,
+      "competitorReferences": null,
+      "alternatives": null
+    }
+  },
+  "serviceAndRepair": null,
+  "builtIn": null,
+  "technicalInformation": null,
+  "videos": null,
+  "meta": {
+    "locale": "en_US",
+    "country": "UA",
+    "group": "standard",
+    "fallbackLanguageUsage": [],
+    "isReman": false,
+    "datasource": {
+      "name": "IAMP"
+    }
+  },
+  "accessoriesAndRelatedProducts": null,
+  "serviceAvailability": {
+    "label": "Service Finder"
+  },
+  "productAvailability": {
+    "label": "Distributor Finder"
+  },
+  "navBackToSearch": "Back to search results",
+  "navBackToPrevious": "Back to previous page",
+  "requestTime": 1791909575163
+}

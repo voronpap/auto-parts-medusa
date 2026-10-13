@@ -1,0 +1,456 @@
+{
+  "term": "3000951003",
+  "products": {
+    "label": "Products",
+    "sorts": {
+      "title": "Sort by:",
+      "options": [
+        {
+          "id": "relevance",
+          "label": "Relevance",
+          "active": true
+        },
+        {
+          "id": "article-number-desc",
+          "label": "Article Number (Desc)",
+          "active": false
+        },
+        {
+          "id": "article-number-asc",
+          "label": "Article Number (Asc)",
+          "active": false
+        },
+        {
+          "id": "product-name-asc",
+          "label": "Product Name (Asc)",
+          "active": false
+        },
+        {
+          "id": "product-name-desc",
+          "label": "Product Name (Desc)",
+          "active": false
+        }
+      ]
+    },
+    "pagination": {
+      "totalItems": 5,
+      "firstItemIndex": 0,
+      "itemsPerPage": 12,
+      "label": "Page:"
+    },
+    "items": [
+      {
+        "number": "<span class=\"highlighted\">3000 951 003</span>",
+        "productNumber": "3000 951 003",
+        "name": "Clutch Kit",
+        "brandName": "SACHS",
+        "productDetailsPageHref": "/products/3000+951+003",
+        "productTypes": [],
+        "group": "standard",
+        "datasource": "IAMP",
+        "moreDetails": {
+          "text": "More details",
+          "href": "/products/3000+951+003"
+        },
+        "technicalInfo": null,
+        "replacedBy": {
+          "label": "Replaced by",
+          "values": [
+            {
+              "text": "3000 951 603",
+              "href": "/products/3000+951+603",
+              "datasource": {
+                "name": "IAMP"
+              }
+            }
+          ]
+        },
+        "status": {
+          "key": 9,
+          "value": "No longer deliverable by the manufacturer"
+        },
+        "partsList": {
+          "label": "Parts List",
+          "isLimitedCount": false,
+          "parts": [
+            {
+              "id": 0,
+              "label": "Clutch Pressure Plate",
+              "values": [
+                {
+                  "text": "3082 000 403",
+                  "href": "/products/3082+000+403"
+                }
+              ]
+            },
+            {
+              "id": 1,
+              "label": "Clutch Disc",
+              "values": [
+                {
+                  "text": "1878 002 205",
+                  "href": "/products/1878+002+205"
+                }
+              ]
+            },
+            {
+              "id": 2,
+              "label": "Clutch Release Bearing",
+              "values": [
+                {
+                  "text": "3151 600 743",
+                  "href": "/products/3151+600+743"
+                }
+              ]
+            },
+            {
+              "id": 3,
+              "label": "Grease | high-performance lubricant",
+              "values": [
+                {
+                  "text": "4200 080 060",
+                  "href": "/products/4200+080+060"
+                }
+              ]
+            }
+          ]
+        },
+        "inPartsList": null,
+        "foundVia": null
+      },
+      {
+        "number": "1878 002 205",
+        "productNumber": "1878 002 205",
+        "name": "Clutch Disc",
+        "brandName": "SACHS",
+        "productDetailsPageHref": "/products/1878+002+205",
+        "productTypes": [],
+        "group": "standard",
+        "datasource": "IAMP",
+        "moreDetails": {
+          "text": "More details",
+          "href": "/products/1878+002+205"
+        },
+        "technicalInfo": null,
+        "replacedBy": {
+          "label": "Replaced by",
+          "values": [
+            {
+              "text": "1878 634 205",
+              "href": "/products/1878+634+205",
+              "datasource": {
+                "name": "IAMP"
+              }
+            }
+          ]
+        },
+        "status": {
+          "key": 9,
+          "value": "No longer deliverable by the manufacturer"
+        },
+        "partsList": null,
+        "inPartsList": {
+          "label": "Included In",
+          "isLimitedCount": false,
+          "parts": [
+            {
+              "id": 0,
+              "label": "Clutch Kit",
+              "values": [
+                {
+                  "text": "3000 951 003",
+                  "href": "/products/3000+951+003"
+                }
+              ]
+            }
+          ]
+        },
+        "foundVia": {
+          "label": "Found via",
+          "value": "<span class=\"highlighted\">3000 951 003</span>"
+        }
+      },
+      {
+        "number": "3082 000 403",
+        "productNumber": "3082 000 403",
+        "name": "Clutch Pressure Plate",
+        "brandName": "SACHS",
+        "productDetailsPageHref": "/products/3082+000+403",
+        "productTypes": [],
+        "group": "standard",
+        "datasource": "IAMP",
+        "moreDetails": {
+          "text": "More details",
+          "href": "/products/3082+000+403"
+        },
+        "technicalInfo": null,
+        "replacedBy": {
+          "label": "Replaced by",
+          "values": [
+            {
+              "text": "3082 634 043",
+              "href": "/products/3082+634+043",
+              "datasource": {
+                "name": "IAMP"
+              }
+            }
+          ]
+        },
+        "status": {
+          "key": 9,
+          "value": "No longer deliverable by the manufacturer"
+        },
+        "partsList": null,
+        "inPartsList": {
+          "label": "Included In",
+          "isLimitedCount": false,
+          "parts": [
+            {
+              "id": 0,
+              "label": "Clutch Kit",
+              "values": [
+                {
+                  "text": "3000 951 003",
+                  "href": "/products/3000+951+003"
+                }
+              ]
+            }
+          ]
+        },
+        "foundVia": {
+          "label": "Found via",
+          "value": "<span class=\"highlighted\">3000 951 003</span>"
+        }
+      },
+      {
+        "number": "3151 600 743",
+        "productNumber": "3151 600 743",
+        "name": "Clutch Release Bearing",
+        "brandName": "SACHS",
+        "productDetailsPageHref": "/products/3151+600+743",
+        "productTypes": [],
+        "group": "standard",
+        "datasource": "IAMP",
+        "moreDetails": {
+          "text": "More details",
+          "href": "/products/3151+600+743"
+        },
+        "technicalInfo": null,
+        "replacedBy": null,
+        "status": {
+          "key": 1,
+          "value": "Normal"
+        },
+        "partsList": null,
+        "inPartsList": {
+          "label": "Included In",
+          "isLimitedCount": false,
+          "parts": [
+            {
+              "id": 0,
+              "label": "Clutch Kit",
+              "values": [
+                {
+                  "text": "3000 951 603",
+                  "href": "/products/3000+951+603"
+                }
+              ]
+            },
+            {
+              "id": 1,
+              "label": "Clutch Kit",
+              "values": [
+                {
+                  "text": "3000 951 003",
+                  "href": "/products/3000+951+003"
+                }
+              ]
+            }
+          ]
+        },
+        "foundVia": {
+          "label": "Found via",
+          "value": "<span class=\"highlighted\">3000 951 003</span>"
+        }
+      },
+      {
+        "number": "4200 080 060",
+        "productNumber": "4200 080 060",
+        "name": "Grease | high-performance lubricant",
+        "brandName": "SACHS",
+        "productDetailsPageHref": "/products/4200+080+060",
+        "productTypes": [],
+        "group": "standard",
+        "datasource": "IAMP",
+        "moreDetails": {
+          "text": "More details",
+          "href": "/products/4200+080+060"
+        },
+        "technicalInfo": null,
+        "replacedBy": null,
+        "status": {
+          "key": 1,
+          "value": "Normal"
+        },
+        "partsList": null,
+        "inPartsList": {
+          "label": "Included In",
+          "isLimitedCount": true,
+          "parts": [
+            {
+              "id": 0,
+              "label": "Clutch Kit",
+              "values": [
+                {
+                  "text": "3000 951 603",
+                  "href": "/products/3000+951+603"
+                }
+              ]
+            },
+            {
+              "id": 1,
+              "label": "Clutch Kit",
+              "values": [
+                {
+                  "text": "3000 951 003",
+                  "href": "/products/3000+951+003"
+                }
+              ]
+            },
+            {
+              "id": 2,
+              "label": "Clutch Kit",
+              "values": [
+                {
+                  "text": "3000 481 002",
+                  "href": "/products/3000+481+002"
+                }
+              ]
+            },
+            {
+              "id": 3,
+              "label": "Clutch Kit",
+              "values": [
+                {
+                  "text": "3000 484 001",
+                  "href": "/products/3000+484+001"
+                }
+              ]
+            },
+            {
+              "id": 4,
+              "label": "Clutch Kit",
+              "values": [
+                {
+                  "text": "3000 828 601",
+                  "href": "/products/3000+828+601"
+                }
+              ]
+            }
+          ],
+          "seeAllLabel": "See All"
+        },
+        "foundVia": {
+          "label": "Found via",
+          "value": "<span class=\"highlighted\">3000 951 003</span>"
+        }
+      }
+    ],
+    "mainFilters": [
+      {
+        "id": "brandname",
+        "label": "Brand",
+        "type": "single-select",
+        "values": [
+          {
+            "id": "SACHS",
+            "count": 5,
+            "active": true
+          }
+        ]
+      }
+    ],
+    "subFilters": [
+      {
+        "id": "iamp_2_410",
+        "label": "Parameter",
+        "type": "multi-select",
+        "values": [
+          {
+            "id": "215VTB",
+            "count": 1,
+            "active": false
+          },
+          {
+            "id": "KZIS-0",
+            "count": 1,
+            "active": false
+          },
+          {
+            "id": "MF215",
+            "count": 1,
+            "active": false
+          }
+        ]
+      }
+    ],
+    "specialFilters": [
+      {
+        "id": "available_countries",
+        "label": "Display Available Products Only",
+        "type": "single-select",
+        "values": [
+          {
+            "id": null,
+            "count": null,
+            "active": false
+          }
+        ]
+      }
+    ],
+    "mobileFilters": {
+      "buttonLabelClose": "Close Filters",
+      "buttonLabelFilter": "Filter",
+      "buttonLabelApplyParts": [
+        "Show",
+        "Result"
+      ],
+      "numberOfResults": 5,
+      "marketSelection": {
+        "text": "Selected country: ",
+        "actionText": "Change"
+      },
+      "highlightCheckboxLabel": "Highlight Criteria"
+    },
+    "marketSelection": {
+      "text": "Selected country: ",
+      "actionText": "Change"
+    },
+    "filterTags": {
+      "removeAll": "Remove All"
+    },
+    "counterTextParts": [
+      "Displaying",
+      "of",
+      "results"
+    ],
+    "filterDropdown": {
+      "title": "Filter",
+      "hint": "Select a Brand for more detailed filtering",
+      "allBrandsLabel": "All Brands",
+      "availableProductsCheckbox": {
+        "label": "Hide Discontinued Products",
+        "someDiscontinued": false
+      }
+    },
+    "searchedFor": {
+      "label": "You searched for",
+      "applyButtonLabel": "Apply",
+      "error": "Please type in at least 3 characters to start searching..."
+    },
+    "searchBanner": {
+      "alt": "Hero Banner",
+      "src": " https://media-aftermarket.zf.com/dam/org/SearchResultsBannerDark.jpg"
+    }
+  }
+}

@@ -226,6 +226,7 @@ def main() -> int:
         help="keep results in <dir>/spool instead of sending them; load them later with --upload",
     )
     parser.add_argument("--upload", action="store_true", help="load what --spool kept into the store, then exit")
+    parser.add_argument("--catalog-url", help="load into this store instead of the one in .env, e.g. a local copy")
     parser.add_argument("--all-makes", action="store_true", help="after the rest, list each catalogue for every make")
     parser.add_argument("--with-fitment", action="store_true", help="second pass: read fitment too")
     args = parser.parse_args()
@@ -239,6 +240,9 @@ def main() -> int:
     if not env.get("CATALOG_URL") or not env.get("CATALOG_API_KEY"):
         print("CATALOG_URL and CATALOG_API_KEY must be set in .env", file=sys.stderr)
         return 2
+
+    if args.catalog_url:
+        env["CATALOG_URL"] = args.catalog_url
 
     if args.spool:
         env["PARSERS_SPOOL_DIR"] = str(work / "spool")

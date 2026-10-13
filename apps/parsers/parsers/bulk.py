@@ -12,6 +12,8 @@ import time
 from pathlib import Path
 from typing import Any
 
+import jsonschema
+
 from .adapters import Adapter, LookupRequest
 from .client import CatalogClient, CatalogError
 from .worker import archive_documents, run_lookup
@@ -65,7 +67,14 @@ def import_numbers(
             continue
 
         request = LookupRequest(brand, number, number_type)
-        looked_up = run_lookup(adapters, request, worker, schema)
+
+        try:
+            looked_up = run_lookup(adapters, request, worker, schema)
+        except jsonschema.ValidationError as error:
+            # One number the catalog would refuse must not stop the list.
+            totals["failed"] += 1
+            log.error("%s %s: result does not match the schema: %s", brand, number, error.message[:200])
+            continue
         result = looked_up.to_payload()
         relationships = result["relationships"]
         applications = result["applications"]

@@ -128,3 +128,14 @@ def test_result_matches_the_catalog_schema():
 
     assert result.sources[0]["name"] == "FEBEST (каталог виробника)"
     assert result.errors == []
+
+
+def test_fitment_of_a_universal_part_is_cut_and_the_cut_is_stated():
+    options = "".join(f"<option>TOYOTA MODEL{index} 2000-2001</option>" for index in range(5003))
+    html = f'<h2 class="detPartCode">Code: 0198-028</h2><select id="model_list">{options}</select>'
+    _, result, _ = parse_product_page(html, "u")
+
+    assert len(result.applications) == 5000
+    assert [(a.name, a.value) for a in result.attributes] == [
+        ("Застосовність у каталозі", "показано 5000 з 5003 автомобілів")
+    ]

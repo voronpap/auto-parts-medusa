@@ -36,8 +36,9 @@ TWO_WORD_MAKES = (
 VEHICLE_RE = re.compile(
     r"^(?P<vehicle>.+?)\s+(?P<from>\d{4})(?:\.\d{2})?\s*-\s*(?:(?P<to>\d{4})(?:\.\d{2})?)?\s*(?:\[(?P<market>[^\]]+)\])?$"
 )
-# The catalog accepts at most this many crosses in one result.
+# The catalog accepts at most this many crosses and fitment rows in one result.
 MAX_RELATIONSHIPS = 450
+MAX_APPLICATIONS = 5000
 # A search by OE number is confirmed product by product, each costing a request.
 MAX_FOREIGN_PRODUCTS = 5
 
@@ -123,6 +124,17 @@ def parse_product_page(html: str, record_url: str) -> tuple[str | None, SourceRe
             )
         )
 
+    # A universal part (a wheel nut, say) fits more vehicles than a result
+    # may carry; the list is cut and the cut is stated.
+    if len(result.applications) > MAX_APPLICATIONS:
+        result.attributes.append(
+            Attribute(
+                name="Застосовність у каталозі",
+                value=f"показано {MAX_APPLICATIONS} з {len(result.applications)} автомобілів",
+            )
+        )
+        del result.applications[MAX_APPLICATIONS:]
+
     numbers: list[tuple[str, bool]] = []
     listed = ", ".join(makes)
 
@@ -165,7 +177,7 @@ def parse_product_page(html: str, record_url: str) -> tuple[str | None, SourceRe
 
 
 class FebestAdapter(Adapter):
-    version = "1.0.0"
+    version = "1.0.1"
     min_interval = 5.0
     cross_search = True
 

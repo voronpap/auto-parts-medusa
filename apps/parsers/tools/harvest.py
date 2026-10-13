@@ -8,6 +8,10 @@ vehicle tree, then goes through the catalogue's numbers found in suppliers'
 price lists (files price-<name>.txt with brands.json, prepared on the store's
 server). Crosses and specifications are taken first; fitment is a second pass.
 
+The queue "spareto" covers the brands that have no catalogue of their own:
+numbers from spareto.tsv (brand key, brand, number) are looked up in the shop,
+brand by brand. Its pages are kept in the local cache, not sent to the archive.
+
 Sources whose robots.txt closes the API (MANN-FILTER, bilstein group) are not
 here: they are asked one number at a time, on demand.
 
@@ -69,6 +73,38 @@ QUEUES: dict[str, list[tuple]] = {
         ("tree", "china-mg", "mg-egypt", "MG", "oem", "mg_egypt_model_numbers.py", None),
     ],
 }
+
+def spareto_steps(work: Path, brands: dict[str, str]) -> list[tuple]:
+    """Splits spareto.tsv into one list per brand, biggest brands first."""
+    source = work / "spareto.tsv"
+
+    if not source.exists():
+        return []
+
+    by_brand: dict[str, list[str]] = {}
+    names: dict[str, str] = {}
+
+    for line in source.read_text(encoding="utf-8").splitlines():
+        key, _, rest = line.partition("\t")
+        brand, _, number = rest.partition("\t")
+        key = "".join(c for c in key if c.isalnum())
+
+        if key and brand and number.strip():
+            by_brand.setdefault(key, []).append(number.strip())
+            names[key] = brand
+
+    folder = work / "spareto"
+    folder.mkdir(exist_ok=True)
+    steps = []
+
+    for key, numbers in sorted(by_brand.items(), key=lambda item: -len(item[1])):
+        name = f"spareto/{key}"
+        (work / f"{name}.txt").write_text("\n".join(numbers) + "\n", encoding="utf-8")
+        brands[name] = names[key]
+        steps.append(("price", name, "spareto"))
+
+    return steps
+
 
 stopping = threading.Event()
 running: set[subprocess.Popen] = set()
@@ -151,7 +187,11 @@ def queue(name: str, steps: list[tuple], work: Path, env: dict[str, str], brands
                 "import-numbers", "--brand", brand, "--adapter", adapter,
                 "--number-type", number_type, "--file", str(numbers),
             ],
-            {**env, "PARSERS_WORKER": f"harvest-{step_name}"},
+            {
+                **env,
+                "PARSERS_WORKER": f"harvest-{step_name}".replace("/", "-"),
+                **({"PARSERS_NO_ARCHIVE": "1"} if adapter == "spareto" else {}),
+            },
             log,
             None,
         )
@@ -164,7 +204,8 @@ def queue(name: str, steps: list[tuple], work: Path, env: dict[str, str], brands
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--dir", default="harvest", help="lists, caches and logs are kept here")
-    parser.add_argument("--only", nargs="+", choices=sorted(QUEUES), help="run only these queues")
+    parser.add_argument("--only", nargs="+", choices=sorted([*QUEUES, "spareto"]), help="run only these queues")
+    parser.add_argument("--normal-priority", action="store_true", help="do not lower the priority of the work")
     parser.add_argument("--with-fitment", action="store_true", help="second pass: read fitment too")
     args = parser.parse_args()
     work = (ROOT / args.dir).resolve()
@@ -180,10 +221,14 @@ def main() -> int:
 
     brands_file = work / "brands.json"
     brands = json.loads(brands_file.read_text(encoding="utf-8")) if brands_file.exists() else {}
+    QUEUES["spareto"] = spareto_steps(work, brands) if not args.only or "spareto" in args.only else []
+
+    if args.normal_priority:
+        PRIORITY.clear()
     threads = [
         threading.Thread(target=queue, args=(name, steps, work, env, brands), name=name)
         for name, steps in QUEUES.items()
-        if not args.only or name in args.only
+        if steps and (not args.only or name in args.only)
     ]
     print(f"{len(threads)} queues started; progress: {work / 'progress.log'}  (Ctrl+C stops)")
 

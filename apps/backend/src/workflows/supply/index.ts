@@ -15,6 +15,10 @@ import {
   CreateProductsFromOffersInput,
 } from "./steps/offer-products"
 import {
+  createProductByNumberStep,
+  CreateProductByNumberInput,
+} from "./steps/product-by-number"
+import {
   applyOffersToProductsStep,
   createPricingRuleStep,
   CreatePricingRuleInput,
@@ -95,5 +99,12 @@ export const createProductsFromSupplyOffersWorkflow = createWorkflow(
   "create-products-from-supply-offers",
   function (input: CreateProductsFromOffersInput) {
     return new WorkflowResponse(createProductsFromOffersStep(input))
+  }
+)
+
+export const createProductByNumberWorkflow = createWorkflow(
+  "create-product-by-number",
+  function (input: CreateProductByNumberInput) {
+    return new WorkflowResponse(createProductByNumberStep(input))
   }
 )

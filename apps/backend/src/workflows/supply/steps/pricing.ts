@@ -143,6 +143,7 @@ type AppliedUndo = {
 
 type VariantRow = {
   id: string
+  metadata?: Record<string, unknown> | null
   manage_inventory?: boolean | null
   prices?: { amount: number; currency_code: string }[] | null
   inventory_items?:
@@ -208,6 +209,7 @@ export const applyOffersToProductsStep = createStep(
         entity: "product_variant",
         fields: [
           "id",
+          "metadata",
           "manage_inventory",
           "prices.amount",
           "prices.currency_code",
@@ -275,6 +277,47 @@ export const applyOffersToProductsStep = createStep(
       const levelUpdates: { inventory_item_id: string; location_id: string; stocked_quantity: number }[] = []
 
       for (const variant of variants as VariantRow[]) {
+        const purchase = Number(variant.metadata?.purchase_price_minor)
+
+        // The owner typed the purchase price of this product: it is priced
+        // from that, and neither price nor stock follows a supplier.
+        if (Number.isFinite(purchase) && purchase > 0) {
+          const markup = markupFor(
+            rules,
+            settings.default_markup_bp,
+            String(variant.metadata?.purchase_brand ?? ""),
+            purchase
+          )
+
+          if (markup == null) {
+            result.without_markup += 1
+            continue
+          }
+
+          const amount = shopPriceMinor(purchase, markup, settings.rounding_minor) / 100
+          const current = (variant.prices ?? []).find(
+            (price) => price.currency_code === "uah"
+          )
+
+          if (!current || Number(current.amount) !== amount) {
+            if (current) {
+              undo.prices.push({
+                id: variant.id,
+                amount: Number(current.amount),
+                currency_code: current.currency_code,
+              })
+            }
+
+            priceUpdates.push({
+              id: variant.id,
+              prices: [{ amount, currency_code: "uah" }],
+            })
+            result.prices_changed += 1
+          }
+
+          continue
+        }
+
         // A variant the parts catalog does not know is priced by hand.
         if (!numbersOf.has(variant.id)) {
           continue

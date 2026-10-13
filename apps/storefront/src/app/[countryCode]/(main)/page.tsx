@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     "Auto Parts — автозапчастини для СТО, магазинів та автомобілістів. Пошук за артикулом і назвою.",
 }
 
-const HOME_PRODUCTS = 60
+const HOME_PRODUCTS = 8
 
 export default async function Home(props: {
   params: Promise<{ countryCode: string }>
@@ -24,14 +24,28 @@ export default async function Home(props: {
   }
 
   const [{ response }, categories] = await Promise.all([
-    listProducts({ countryCode, queryParams: { limit: HOME_PRODUCTS } }),
+    listProducts({ countryCode, queryParams: { limit: 1 } }),
     listCategories().catch(() => []),
   ])
+  // The showcase: one product from each of the largest categories.
+  const shelves = await Promise.all(
+    categories
+      .filter((category) => !category.parent_category && category.product_count > 0)
+      .slice(0, HOME_PRODUCTS)
+      .map((category) =>
+        listProducts({
+          countryCode,
+          queryParams: { limit: 1, category_id: [category.id] },
+        })
+          .then(({ response }) => response.products[0])
+          .catch(() => undefined)
+      )
+  )
 
   return (
     <SteelHome
       countryCode={countryCode}
-      products={response.products}
+      products={shelves.filter((product) => product !== undefined)}
       count={response.count}
       categories={categories}
     />

@@ -11,6 +11,10 @@ import {
   OpenImportRunInput,
 } from "./steps/import-offers"
 import {
+  createProductsFromOffersStep,
+  CreateProductsFromOffersInput,
+} from "./steps/offer-products"
+import {
   applyOffersToProductsStep,
   createPricingRuleStep,
   CreatePricingRuleInput,
@@ -84,5 +88,12 @@ export const applySupplyOffersToProductsWorkflow = createWorkflow(
   "apply-supply-offers-to-products",
   function () {
     return new WorkflowResponse(applyOffersToProductsStep({}))
+  }
+)
+
+export const createProductsFromSupplyOffersWorkflow = createWorkflow(
+  "create-products-from-supply-offers",
+  function (input: CreateProductsFromOffersInput) {
+    return new WorkflowResponse(createProductsFromOffersStep(input))
   }
 )

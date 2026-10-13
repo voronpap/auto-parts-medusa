@@ -81,7 +81,7 @@ export default async function Catalog({
   const pages = Math.max(1, Math.ceil(response.count / PAGE_SIZE))
   const total = categories.reduce(
     (sum, category) =>
-      category.parent_category ? sum : sum + (category.products?.length ?? 0),
+      category.parent_category ? sum : sum + category.product_count,
     0
   )
 
@@ -113,7 +113,7 @@ export default async function Catalog({
                 Усі товари <b>{total}</b>
               </LocalizedClientLink>
               {categories
-                .filter((category) => !category.parent_category)
+                .filter((category) => !category.parent_category && category.product_count > 0)
                 .map((category) => (
                   <LocalizedClientLink
                     key={category.id}
@@ -122,7 +122,7 @@ export default async function Catalog({
                     }
                     href={`/categories/${category.handle}`}
                   >
-                    {category.name} <b>{category.products?.length ?? 0}</b>
+                    {category.name} <b>{category.product_count}</b>
                   </LocalizedClientLink>
                 ))}
             </nav>

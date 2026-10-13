@@ -254,6 +254,11 @@ export const importOfferRowsStep = createStep(
     )
 
     try {
+      // New offers and offers nothing changed in are written in bulk; only
+      // offers whose price or stock changed are written one by one.
+      const toCreate: Record<string, unknown>[] = []
+      const unchangedIds: string[] = []
+
       for (const row of list) {
         const key = `${row.normalized_brand}|${row.normalized_number}`
         const brandId = brandIdByKey.get(row.normalized_brand)
@@ -268,7 +273,7 @@ export const importOfferRowsStep = createStep(
         const offer = existingByKey.get(key)
 
         if (!offer) {
-          const created = await supply.createSupplierOffers({
+          toCreate.push({
             supplier_id: run.supplier.id,
             brand: row.brand,
             number: row.number,
@@ -285,22 +290,18 @@ export const importOfferRowsStep = createStep(
             last_run_id: run.id,
             last_seen_at: now,
           })
-          undo.created_offer_ids.push(created.id)
-          const observation = await supply.createOfferObservations({
-            offer_id: created.id,
-            price_minor: row.price_minor,
-            currency_code: currency,
-            stock_quantity: row.stock_quantity,
-            is_listed: true,
-            run_id: run.id,
-            observed_at: now,
-          })
-          undo.observation_ids.push(observation.id)
-          counters.offers_created += 1
           continue
         }
 
         const changed =
+          offer.price_minor !== row.price_minor ||
+          offer.currency_code !== currency ||
+          offer.stock_quantity !== row.stock_quantity ||
+          offer.stock_text !== row.stock_text ||
+          offer.lead_days !== row.lead_days ||
+          (matched !== null && offer.part_number_id !== matched) ||
+          !offer.is_listed
+        const priceChanged =
           offer.price_minor !== row.price_minor ||
           offer.currency_code !== currency ||
           offer.stock_quantity !== row.stock_quantity ||
@@ -319,6 +320,13 @@ export const importOfferRowsStep = createStep(
           last_run_id: offer.last_run_id,
           last_seen_at: offer.last_seen_at,
         })
+
+        if (!changed) {
+          unchangedIds.push(offer.id)
+          counters.offers_unchanged += 1
+          continue
+        }
+
         await supply.updateSupplierOffers({
           id: offer.id,
           title: row.title ?? offer.title,
@@ -333,7 +341,7 @@ export const importOfferRowsStep = createStep(
           last_seen_at: now,
         })
 
-        if (changed) {
+        if (priceChanged) {
           const observation = await supply.createOfferObservations({
             offer_id: offer.id,
             price_minor: row.price_minor,
@@ -348,6 +356,38 @@ export const importOfferRowsStep = createStep(
         } else {
           counters.offers_unchanged += 1
         }
+      }
+
+      if (unchangedIds.length) {
+        await supply.updateSupplierOffers({
+          selector: { id: unchangedIds },
+          data: { last_run_id: run.id, last_seen_at: now },
+        })
+      }
+
+      if (toCreate.length) {
+        const created = (await supply.createSupplierOffers(
+          toCreate as never
+        )) as unknown as {
+          id: string
+          price_minor: number
+          currency_code: string
+          stock_quantity: number | null
+        }[]
+        undo.created_offer_ids.push(...created.map((offer) => offer.id))
+        const observations = (await supply.createOfferObservations(
+          created.map((offer) => ({
+            offer_id: offer.id,
+            price_minor: offer.price_minor,
+            currency_code: offer.currency_code,
+            stock_quantity: offer.stock_quantity,
+            is_listed: true,
+            run_id: run.id,
+            observed_at: now,
+          }))
+        )) as unknown as { id: string }[]
+        undo.observation_ids.push(...observations.map((row) => row.id))
+        counters.offers_created += created.length
       }
 
       await supply.updateImportRuns({

@@ -34,10 +34,10 @@ class CatalogClient:
         # A Medusa secret API key is the Basic-auth user name with no password.
         self._session.auth = (api_key, "")
 
-    def _post(self, path: str, payload: dict[str, Any]) -> dict[str, Any]:
+    def _post(self, path: str, payload: dict[str, Any], timeout: float | None = None) -> dict[str, Any]:
         try:
             response = self._session.post(
-                f"{self._base_url}{path}", json=payload, timeout=self._timeout
+                f"{self._base_url}{path}", json=payload, timeout=timeout or self._timeout
             )
         except requests.RequestException as error:
             raise CatalogError(f"{type(error).__name__}: {error}") from error
@@ -129,7 +129,8 @@ class CatalogClient:
     def post_rows(self, run_id: str, rows: list[dict[str, Any]]) -> dict[str, Any]:
         for attempt in range(4):
             try:
-                return self._post(f"/admin/supply/import-runs/{run_id}/rows", {"rows": rows})
+                # Hundreds of offers are written in one request.
+                return self._post(f"/admin/supply/import-runs/{run_id}/rows", {"rows": rows}, timeout=600)
             except CatalogError as error:
                 # The store limits admin writes per minute; wait the window out.
                 if "HTTP 429" not in str(error) or attempt == 3:
@@ -140,4 +141,4 @@ class CatalogClient:
         raise CatalogError("unreachable")
 
     def finish_run(self, run_id: str) -> dict[str, Any]:
-        return self._post(f"/admin/supply/import-runs/{run_id}/finish", {})["import_run"]
+        return self._post(f"/admin/supply/import-runs/{run_id}/finish", {}, timeout=1800)["import_run"]

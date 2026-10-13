@@ -11,7 +11,7 @@ from .base import SupplierAdapter
 log = logging.getLogger("parsers")
 
 # What one request to the store may carry.
-CHUNK = 1000
+CHUNK = 500
 
 
 def sync_supplier(client: CatalogClient, adapter: SupplierAdapter, file_name: str | None = None) -> dict[str, Any]:

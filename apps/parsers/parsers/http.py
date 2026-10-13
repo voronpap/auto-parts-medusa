@@ -92,6 +92,12 @@ class ResponseCache:
         return hashlib.sha256(raw.encode("utf-8")).hexdigest()
 
     def get(self, key: str, now: float | None = None) -> tuple[int, str] | None:
+        entry = self.get_entry(key, now)
+
+        return (entry[1], entry[2]) if entry else None
+
+    def get_entry(self, key: str, now: float | None = None) -> tuple[float, int, str] | None:
+        """Like `get`, with the time the response was stored."""
         if self._db is None:
             return None
 
@@ -103,7 +109,7 @@ class ResponseCache:
         if row is None or (now or time.time()) - row[0] > self._ttl:
             return None
 
-        return row[1], row[2]
+        return row[0], row[1], row[2]
 
     def put(self, key: str, status: int, body: str, now: float | None = None) -> None:
         if self._db is None:
@@ -134,6 +140,40 @@ class PoliteSession:
         self._session.headers.update(
             {"User-Agent": USER_AGENT, "Accept-Language": "en,uk;q=0.8"}
         )
+        #: When set, every response that is returned is appended here, so
+        #: the raw data behind a lookup can be archived with its result.
+        self.recorder: list[dict[str, Any]] | None = None
+
+    def _record(
+        self,
+        key: str,
+        method: str,
+        url: str,
+        params: dict[str, Any] | None,
+        json_body: Any,
+        status: int,
+        body: str,
+        fetched_at: float,
+    ) -> None:
+        if self.recorder is None:
+            return
+
+        request: dict[str, Any] = dict(params or {})
+
+        if json_body is not None:
+            request["json"] = json_body
+
+        self.recorder.append(
+            {
+                "request_key": key,
+                "method": method,
+                "url": url,
+                "params": request or None,
+                "http_status": status,
+                "body": body,
+                "fetched_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime(fetched_at)),
+            }
+        )
 
     def fetch(
         self,
@@ -149,10 +189,12 @@ class PoliteSession:
         key = ResponseCache.key(method, url, [params, json_body])
 
         if use_cache:
-            cached = self._cache.get(key)
+            cached = self._cache.get_entry(key)
 
             if cached is not None:
-                return cached[1]
+                self._record(key, method, url, params, json_body, cached[1], cached[2], cached[0])
+
+                return cached[2]
 
         self.limiter.wait(urlsplit(url).netloc)
 
@@ -185,6 +227,8 @@ class PoliteSession:
 
         if use_cache:
             self._cache.put(key, response.status_code, body)
+
+        self._record(key, method, url, params, json_body, response.status_code, body, time.time())
 
         return body
 

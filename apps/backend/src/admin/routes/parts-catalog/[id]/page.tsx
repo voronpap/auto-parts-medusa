@@ -30,6 +30,7 @@ import {
   PartNumberDetail,
   Relationship,
   RELATION_TYPE_LABELS,
+  SourceDocumentSummary,
   STATE_LABELS,
   VERDICT_LABELS,
 } from "../../../lib/parts-catalog"
@@ -155,6 +156,83 @@ const RelationshipsTable = ({
     </Table.Body>
   </Table>
 )
+
+const size = (bytes: number) =>
+  bytes >= 1024 * 1024
+    ? `${(bytes / 1024 / 1024).toFixed(1)} МБ`
+    : `${Math.max(1, Math.round(bytes / 1024))} КБ`
+
+/** Raw responses of sources kept for this number. */
+const DocumentsSection = ({ partNumberId }: { partNumberId: string }) => {
+  const { data } = useQuery({
+    queryFn: () =>
+      sdk.client.fetch<{ documents: SourceDocumentSummary[]; count: number }>(
+        "/admin/parts-catalog/documents",
+        { query: { part_number_id: partNumberId, limit: 100 } }
+      ),
+    queryKey: [CATALOG_QUERY_KEY, "documents", partNumberId],
+  })
+  const documents = data?.documents ?? []
+
+  return (
+    <Container className="divide-y p-0">
+      <div className="flex flex-col gap-y-1 px-6 py-4">
+        <Heading level="h2">Архів відповідей джерел</Heading>
+        <Text size="small" leading="compact" className="text-ui-fg-subtle">
+          Сторінки й відповіді джерел у тому вигляді, в якому їх отримали
+          парсери. Зберігаються назавжди; нова версія записується, лише коли
+          джерело змінило вміст. Усього: {data?.count ?? 0}.
+        </Text>
+      </div>
+      {documents.length ? (
+        <Table>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell>Джерело</Table.HeaderCell>
+              <Table.HeaderCell>Адреса</Table.HeaderCell>
+              <Table.HeaderCell>Отримано</Table.HeaderCell>
+              <Table.HeaderCell>Розмір</Table.HeaderCell>
+              <Table.HeaderCell />
+            </Table.Row>
+          </Table.Header>
+          <Table.Body>
+            {documents.map((item) => (
+              <Table.Row key={item.id}>
+                <Table.Cell>{item.source_name ?? item.source_key}</Table.Cell>
+                <Table.Cell>
+                  <Text size="xsmall" className="max-w-[420px] truncate">
+                    {item.url}
+                  </Text>
+                </Table.Cell>
+                <Table.Cell>
+                  {new Date(item.fetched_at).toLocaleString("uk-UA")}
+                </Table.Cell>
+                <Table.Cell>{size(item.body_bytes)}</Table.Cell>
+                <Table.Cell>
+                  <a
+                    className="text-ui-fg-interactive"
+                    href={`/admin/parts-catalog/documents/${item.id}?raw=1`}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Відкрити
+                  </a>
+                </Table.Cell>
+              </Table.Row>
+            ))}
+          </Table.Body>
+        </Table>
+      ) : (
+        <div className="px-6 py-4">
+          <Text size="small" leading="compact" className="text-ui-fg-subtle">
+            Для цього номера ще нічого не збережено. Архів поповнюється під
+            час кожного пошуку.
+          </Text>
+        </div>
+      )}
+    </Container>
+  )
+}
 
 const years = (item: Application) =>
   item.year_from || item.year_to
@@ -523,6 +601,7 @@ const PartNumberPage = () => {
         </Container>
       )}
 
+      <DocumentsSection partNumberId={id!} />
       {editingRelationship && (
         <EditRelationshipModal
           key={editingRelationship.id}

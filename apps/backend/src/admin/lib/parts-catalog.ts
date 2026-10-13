@@ -224,3 +224,15 @@ export const LOOKUP_STATUS_LABELS: Record<
   done: { label: "Виконано", color: "green" },
   failed: { label: "Помилка джерел", color: "red" },
 }
+
+export type SourceDocumentSummary = {
+  id: string
+  source_key: string
+  source_name: string | null
+  parser_version: string | null
+  url: string
+  http_status: number | null
+  body_bytes: number
+  fetched_at: string
+  last_seen_at: string
+}

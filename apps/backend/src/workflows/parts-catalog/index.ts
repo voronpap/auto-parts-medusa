@@ -41,6 +41,10 @@ import {
   PrepareImportInput,
 } from "./steps/lookup-tasks"
 import {
+  archiveSourceDocumentsStep,
+  ArchiveDocumentsInput,
+} from "./steps/archive-documents"
+import {
   mergePartsBrandsStep,
   requeueProductNumbersStep,
   MergeBrandsInput,
@@ -208,5 +212,12 @@ export const requeueProductNumbersWorkflow = createWorkflow(
   "requeue-product-numbers",
   function () {
     return new WorkflowResponse(requeueProductNumbersStep({}))
+  }
+)
+
+export const archiveSourceDocumentsWorkflow = createWorkflow(
+  "archive-source-documents",
+  function (input: ArchiveDocumentsInput) {
+    return new WorkflowResponse(archiveSourceDocumentsStep(input))
   }
 )

@@ -2,7 +2,16 @@
 
 from __future__ import annotations
 
+import logging
+import time
 from typing import Any
+
+log = logging.getLogger("parsers")
+
+# What one archive request may carry: the route accepts 8 MB.
+ARCHIVE_BATCH_BYTES = 3_500_000
+ARCHIVE_BATCH_DOCUMENTS = 20
+ARCHIVE_MAX_BODY = 5_500_000
 
 import requests
 
@@ -52,3 +61,46 @@ class CatalogClient:
     def import_result(self, payload: dict[str, Any]) -> dict[str, Any]:
         """Loads bulk-read data for one part number, bypassing the queue."""
         return self._post("/admin/parts-catalog/import", payload)
+
+    def archive(self, number: dict[str, Any] | None, documents: list[dict[str, Any]]) -> int:
+        """Stores raw source responses in the catalog; returns how many were sent."""
+        batch: list[dict[str, Any]] = []
+        size = 0
+        sent = 0
+
+        def flush() -> None:
+            nonlocal batch, size, sent
+
+            if not batch:
+                return
+
+            for attempt in range(4):
+                try:
+                    self._post("/admin/parts-catalog/documents", {"number": number, "documents": batch})
+                    break
+                except CatalogError as error:
+                    # The store limits admin writes per minute; wait the window out.
+                    if "HTTP 429" not in str(error) or attempt == 3:
+                        raise
+
+                    time.sleep(65)
+
+            sent += len(batch)
+            batch, size = [], 0
+
+        for document in documents:
+            body_size = len(document["body"].encode("utf-8"))
+
+            if body_size > ARCHIVE_MAX_BODY:
+                log.warning("Response of %s is too large to archive (%d bytes)", document["url"], body_size)
+                continue
+
+            if batch and (size + body_size > ARCHIVE_BATCH_BYTES or len(batch) >= ARCHIVE_BATCH_DOCUMENTS):
+                flush()
+
+            batch.append(document)
+            size += body_size
+
+        flush()
+
+        return sent

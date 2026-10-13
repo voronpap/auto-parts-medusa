@@ -14,7 +14,7 @@ from typing import Any
 
 from .adapters import Adapter, LookupRequest
 from .client import CatalogClient, CatalogError
-from .worker import run_lookup
+from .worker import archive_documents, run_lookup
 
 log = logging.getLogger("parsers")
 
@@ -64,7 +64,9 @@ def import_numbers(
         if number in done:
             continue
 
-        result = run_lookup(adapters, LookupRequest(brand, number, number_type), worker, schema).to_payload()
+        request = LookupRequest(brand, number, number_type)
+        looked_up = run_lookup(adapters, request, worker, schema)
+        result = looked_up.to_payload()
         relationships = result["relationships"]
         applications = result["applications"]
 
@@ -113,6 +115,8 @@ def import_numbers(
                 "%s %s: %d crosses, %d fitment rows found", brand, number, len(relationships), len(applications)
             )
 
+        # After the import, so the responses are filed under the new number.
+        archive_documents(client, request, looked_up.documents)
         done.add(number)
 
         if progress_path:

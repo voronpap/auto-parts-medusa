@@ -104,6 +104,9 @@ class LookupResult:
     applications: list[dict[str, Any]] = field(default_factory=list)
     attributes: list[dict[str, Any]] = field(default_factory=list)
     errors: list[dict[str, Any]] = field(default_factory=list)
+    #: Raw responses the result was read from. They go to the catalog's
+    #: archive separately and are not part of the result itself.
+    documents: list[dict[str, Any]] = field(default_factory=list)
 
     def add(
         self,
@@ -147,4 +150,7 @@ class LookupResult:
         self.errors.append({"source": source_key, "message": message[:2000]})
 
     def to_payload(self) -> dict[str, Any]:
-        return asdict(self)
+        payload = asdict(self)
+        payload.pop("documents")
+
+        return payload

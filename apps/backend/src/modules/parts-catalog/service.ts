@@ -10,6 +10,7 @@ import PartNumberSearchKey from "./models/part-number-search-key"
 import PartRelationship from "./models/part-relationship"
 import RelationshipEvidence from "./models/relationship-evidence"
 import Source from "./models/source"
+import SourceDocument from "./models/source-document"
 import VehicleMake from "./models/vehicle-make"
 import VehicleMakeAlias from "./models/vehicle-make-alias"
 import VehicleModel from "./models/vehicle-model"
@@ -26,6 +27,7 @@ class PartsCatalogModuleService extends MedusaService({
   PartRelationship,
   RelationshipEvidence,
   Source,
+  SourceDocument,
   Observation,
   PartApplication,
   PartAttribute,

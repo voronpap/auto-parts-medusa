@@ -62,6 +62,45 @@ export type UpdatePartRelationshipBody = z.infer<
   typeof UpdatePartRelationshipSchema
 >
 
+// A page of a catalogue can be large; what one request may carry is
+// bounded by the body limit of the route.
+export const ArchiveDocumentsSchema = z.object({
+  number: z
+    .object({
+      brand: z.string().trim().min(1).max(200),
+      number_type: z.enum(NUMBER_TYPES),
+      number: z.string().trim().min(1).max(100),
+    })
+    .nullish(),
+  documents: z
+    .array(
+      z.object({
+        source_key: z.string().trim().min(1).max(100),
+        source_name: z.string().max(200).nullish(),
+        parser_name: z.string().max(100).nullish(),
+        parser_version: z.string().max(100).nullish(),
+        request_key: z.string().min(8).max(128),
+        method: z.string().max(10).nullish(),
+        url: z.string().min(1).max(4000),
+        params: z.record(z.string(), z.unknown()).nullish(),
+        http_status: z.number().int().nullish(),
+        body: z.string().max(6_000_000),
+        fetched_at: z.string().max(40).nullish(),
+      })
+    )
+    .min(1)
+    .max(50),
+})
+
+export const ListDocumentsSchema = z.object({
+  ...pagination,
+  part_number_id: z.string().min(1).optional(),
+  source_key: z.string().min(1).optional(),
+})
+
+export type ArchiveDocumentsBody = z.infer<typeof ArchiveDocumentsSchema>
+export type ListDocumentsQuery = z.infer<typeof ListDocumentsSchema>
+
 export const CreateSourceSchema = z.object({
   name: z.string().trim().min(1).max(200),
   kind: z.enum(SOURCE_KINDS),
@@ -154,6 +193,17 @@ export const partsCatalogMiddlewares: MiddlewareRoute[] = [
     matcher: "/admin/parts-catalog/relationships/:id",
     method: "POST",
     middlewares: [validateAndTransformBody(UpdatePartRelationshipSchema)],
+  },
+  {
+    matcher: "/admin/parts-catalog/documents",
+    method: "GET",
+    middlewares: [validateAndTransformQuery(ListDocumentsSchema, { isList: true })],
+  },
+  {
+    matcher: "/admin/parts-catalog/documents",
+    method: "POST",
+    bodyParser: { sizeLimit: "8mb" },
+    middlewares: [validateAndTransformBody(ArchiveDocumentsSchema)],
   },
   {
     matcher: "/admin/parts-catalog/sources",

@@ -1,0 +1,13 @@
+Retrieved 2026-10-13 from the official MG Egypt spare-parts catalogue using
+PoliteSession with a 5-second host interval. Actual public count is 150;
+the cumulative native filter page 7 at size 24 returned 150 unique IDs,
+143 part rows / 28 own codes and 7 merchandise cards without part numbers.
+Parts fixture retains all rows for MG10767908 (HS brake pad), MG10343249
+(ZS brake pad), MG10427930 (spark plugs), MGLPW100180 (oil filter), and
+one unnumbered merchandise card. BeautifulSoup excerpts omit prices,
+images, navigation and scripts; original product IDs and visible text
+are retained. Bootstrap retains the actual page title and list metadata.
+Tests use the excerpt card count, explicitly not the live count of 150.
+Runtime archives complete unmodified HTTP bodies/form requests. Probes
+are cached outside apps/parsers/.cache. No cart, login, contact, account
+or captcha actions are called. Printed MG prefix is never removed.

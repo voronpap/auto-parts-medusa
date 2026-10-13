@@ -6,6 +6,7 @@ from .base import Adapter, LookupRequest, canonical_brand, label_has_brand, norm
 from .bilstein_group import BilsteinGroupAdapter
 from .bosch import BoschAdapter
 from .febest import FebestAdapter
+from .geely_ksa import GeelyKsaAdapter
 from .mann_hummel import FiltronAdapter, MannFilterAdapter
 from .nibk import NibkAdapter
 from .nissens import NissensAdapter
@@ -21,6 +22,7 @@ ADAPTERS: list[type[Adapter]] = [
     NibkAdapter,
     NissensAdapter,
     ZfAdapter,
+    GeelyKsaAdapter,
 ]
 
 __all__ = ["ADAPTERS", "Adapter", "LookupRequest", "canonical_brand", "label_has_brand", "normalize_brand"]

@@ -5,8 +5,14 @@ from __future__ import annotations
 from .base import Adapter, LookupRequest, normalize_brand
 from .bilstein_group import BilsteinGroupAdapter
 from .bosch import BoschAdapter
+from .mann_hummel import FiltronAdapter, MannFilterAdapter
 
 # Adapter classes in the order they are tried.
-ADAPTERS: list[type[Adapter]] = [BilsteinGroupAdapter, BoschAdapter]
+ADAPTERS: list[type[Adapter]] = [
+    BilsteinGroupAdapter,
+    BoschAdapter,
+    MannFilterAdapter,
+    FiltronAdapter,
+]
 
 __all__ = ["ADAPTERS", "Adapter", "LookupRequest", "normalize_brand"]

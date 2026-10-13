@@ -1,0 +1,15 @@
+{
+  "name": "Назва постачальника",
+  "currency": "uah",
+  "lead_days": 2,
+  "file": "/home/vrn/prices/supplier.xlsx",
+  "sheet": 0,
+  "header_row": 1,
+  "columns": {
+    "brand": "Бренд",
+    "number": "Артикул",
+    "title": "Назва",
+    "price": "Ціна",
+    "stock": "Залишок"
+  }
+}

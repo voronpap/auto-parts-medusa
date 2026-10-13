@@ -81,6 +81,10 @@ def main(argv: list[str] | None = None) -> int:
     bulk.add_argument("--number-type", default="aftermarket")
     bulk.add_argument("--adapter", help="use only this adapter (skips the search in other sources)")
 
+    upload = commands.add_parser("upload-spool", help="load what a bulk run kept in files into the store")
+    upload.add_argument("--dir", required=True)
+    upload.add_argument("--with-archive", action="store_true", help="send the raw responses too")
+
     supplier = commands.add_parser(
         "supplier-sync", help="load a supplier's price list into the store"
     )
@@ -143,8 +147,20 @@ def main(argv: list[str] | None = None) -> int:
 
         return 1 if failed else 0
 
+    if args.command == "upload-spool":
+        from .spool import upload_spool
+
+        print(json.dumps(upload_spool(client, Path(args.dir), with_archive=args.with_archive)))
+        return 0
+
     if args.command == "import-numbers":
         from .bulk import import_numbers
+
+        # Collect now, load later: results go to files instead of the store.
+        if os.environ.get("PARSERS_SPOOL_DIR"):
+            from .spool import SpoolClient
+
+            client = SpoolClient(Path(os.environ["PARSERS_SPOOL_DIR"]), worker)  # type: ignore[assignment]
 
         source = Path(args.file)
         numbers = [line.strip() for line in source.read_text(encoding="utf-8").splitlines() if line.strip()]

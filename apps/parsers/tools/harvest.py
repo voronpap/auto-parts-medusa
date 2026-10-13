@@ -206,6 +206,11 @@ def main() -> int:
     parser.add_argument("--dir", default="harvest", help="lists, caches and logs are kept here")
     parser.add_argument("--only", nargs="+", choices=sorted([*QUEUES, "spareto"]), help="run only these queues")
     parser.add_argument("--normal-priority", action="store_true", help="do not lower the priority of the work")
+    parser.add_argument(
+        "--spool", action="store_true",
+        help="keep results in <dir>/spool instead of sending them; load them later with --upload",
+    )
+    parser.add_argument("--upload", action="store_true", help="load what --spool kept into the store, then exit")
     parser.add_argument("--with-fitment", action="store_true", help="second pass: read fitment too")
     args = parser.parse_args()
     work = (ROOT / args.dir).resolve()
@@ -218,6 +223,15 @@ def main() -> int:
     if not env.get("CATALOG_URL") or not env.get("CATALOG_API_KEY"):
         print("CATALOG_URL and CATALOG_API_KEY must be set in .env", file=sys.stderr)
         return 2
+
+    if args.spool:
+        env["PARSERS_SPOOL_DIR"] = str(work / "spool")
+
+    if args.upload:
+        return run(
+            [sys.executable, "-m", "parsers", "upload-spool", "--dir", str(work / "spool")],
+            env, work / "upload.log", None,
+        )
 
     brands_file = work / "brands.json"
     brands = json.loads(brands_file.read_text(encoding="utf-8")) if brands_file.exists() else {}

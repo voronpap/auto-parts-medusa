@@ -122,6 +122,9 @@ class FakeClient:
 
         return {"offers_delisted": 4, "errors": None}
 
+    def apply_pricing(self):
+        return {"prices_changed": 2}
+
 
 def rows(count):
     return [OfferRow(brand="B", number=f"N{index}", price="10") for index in range(count)]

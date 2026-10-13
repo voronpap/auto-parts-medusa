@@ -11,6 +11,14 @@ import {
   OpenImportRunInput,
 } from "./steps/import-offers"
 import {
+  applyOffersToProductsStep,
+  createPricingRuleStep,
+  CreatePricingRuleInput,
+  deletePricingRuleStep,
+  updatePricingSettingsStep,
+  UpdatePricingSettingsInput,
+} from "./steps/pricing"
+import {
   createSupplierStep,
   CreateSupplierInput,
   deleteSupplierStep,
@@ -48,5 +56,33 @@ export const finishSupplyImportRunWorkflow = createWorkflow(
   "finish-supply-import-run",
   function (input: FinishImportRunInput) {
     return new WorkflowResponse(finishImportRunStep(input))
+  }
+)
+
+export const updateSupplyPricingSettingsWorkflow = createWorkflow(
+  "update-supply-pricing-settings",
+  function (input: UpdatePricingSettingsInput) {
+    return new WorkflowResponse(updatePricingSettingsStep(input))
+  }
+)
+
+export const createSupplyPricingRuleWorkflow = createWorkflow(
+  "create-supply-pricing-rule",
+  function (input: CreatePricingRuleInput) {
+    return new WorkflowResponse(createPricingRuleStep(input))
+  }
+)
+
+export const deleteSupplyPricingRuleWorkflow = createWorkflow(
+  "delete-supply-pricing-rule",
+  function (input: { id: string }) {
+    return new WorkflowResponse(deletePricingRuleStep(input))
+  }
+)
+
+export const applySupplyOffersToProductsWorkflow = createWorkflow(
+  "apply-supply-offers-to-products",
+  function () {
+    return new WorkflowResponse(applyOffersToProductsStep({}))
   }
 )

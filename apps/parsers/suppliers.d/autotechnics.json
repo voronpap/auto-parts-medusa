@@ -1,0 +1,14 @@
+{
+  "name": "Автотехнікс",
+  "currency": "uah",
+  "file": "/home/vrn/prices/autotechnics/price.csv",
+  "header_row": 1,
+  "columns": {
+    "brand": "Brand",
+    "number": "ItemNo2",
+    "title": "Description",
+    "price": "Price",
+    "stock": ["КЛМ2", "ИВФР2", "КИЕВ1", "ЦЕНТР", "КИЕВ_Л", "ХМЛ1", "ТРН1"]
+  },
+  "exclude": {"ItemNo": "_УЦН$"}
+}

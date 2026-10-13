@@ -134,8 +134,10 @@ def test_price_list_is_loaded_in_parts_and_then_finished():
     assert client.calls == [
         ("create", "Постачальник А"),
         ("open", "sup_1", "a.json"),
-        ("rows", "run_1", 1000),
-        ("rows", "run_1", 1000),
+        ("rows", "run_1", 500),
+        ("rows", "run_1", 500),
+        ("rows", "run_1", 500),
+        ("rows", "run_1", 500),
         ("rows", "run_1", 300),
         ("finish", "run_1"),
     ]
@@ -170,3 +172,35 @@ def test_failure_while_reading_leaves_the_shelf_untouched():
         sync_supplier(client, Broken([]))  # type: ignore[arg-type]
 
     assert not any(call[0] == "finish" for call in client.calls)
+
+
+def test_warehouse_columns_are_added_up_and_marked_down_rows_left_out(tmp_path):
+    text = """Brand;ItemNo;Description;Price;КИЕВ1;ЦЕНТР;ХМЛ1;ItemNo2
+BOSCH;BO 0092LA0090;Акумулятор;8701.68;4;>9;;0 092 LA0 090
+BOSCH;BO 0092LA0100;Акумулятор;9914.64;;;;0 092 LA0 100
+BOSCH;BO 0092LA0100_УЦІ;Акумулятор;7975.79;1;;;0 092 LA0 100
+AS;AS A5207;Генератор;6159.17;1;3;1;A5207
+"""
+    path = tmp_path / "price.csv"
+    path.write_text(text, encoding="utf-8")
+    adapter = PriceFileAdapter(
+        {
+            "name": "Постачальник В",
+            "file": str(path),
+            "columns": {
+                "brand": "Brand",
+                "number": "ItemNo2",
+                "title": "Description",
+                "price": "Price",
+                "stock": ["КИЕВ1", "ЦЕНТР", "ХМЛ1"],
+            },
+            "exclude": {"ItemNo": "_УЦІ$"},
+        }
+    )
+
+    assert [(r.number, r.price, r.stock) for r in adapter.price_list()] == [
+        ("0 092 LA0 090", "8701.68", ">13"),
+        # No warehouse states a quantity: stock is unknown, not zero.
+        ("0 092 LA0 100", "9914.64", None),
+        ("A5207", "6159.17", "5"),
+    ]

@@ -16,6 +16,13 @@ Described by a small JSON file instead of code:
 `file` is a path or an http(s) address. A column is named by its header text
 or by its letter ("A", "B", ...). `brand` may be replaced by `"brand_value"`
 when the whole list is one brand.
+
+`stock` may be a list of columns when the supplier shows each warehouse
+separately; the quantities are added up, and ">9" in any of them makes the
+total "at least". `exclude` leaves rows out by a pattern on a column, e.g.
+marked-down items that repeat a number at another price:
+
+    "exclude": {"ItemNo": "_УЦІ$"}
 """
 
 from __future__ import annotations
@@ -56,8 +63,30 @@ def _cell(value: Any) -> str:
     return str(value).strip()
 
 
+def _total_stock(cells: list[str]) -> str | None:
+    """Adds up warehouse columns: ["4", "", ">9"] -> ">13", ["2", "1"] -> "3"."""
+    total = 0
+    at_least = False
+    stated = False
+
+    for cell in cells:
+        match = re.fullmatch(r"\s*(>|>=)?\s*(\d+)\s*(\+)?\s*", cell)
+
+        if not match:
+            continue
+
+        stated = True
+        total += int(match.group(2))
+        at_least = at_least or bool(match.group(1) or match.group(3))
+
+    if not stated:
+        return None
+
+    return f">{total}" if at_least else str(total)
+
+
 class PriceFileAdapter(SupplierAdapter):
-    version = "1.0.0"
+    version = "1.1.0"
 
     def __init__(self, config: dict[str, Any]) -> None:
         self._config = config
@@ -77,7 +106,14 @@ class PriceFileAdapter(SupplierAdapter):
                 + ", ".join(sorted({*missing, *([] if config.get("name") else ["name"])})  or ["?"])
             )
 
-        self._columns: dict[str, str] = {key: str(value) for key, value in columns.items() if key in FIELDS}
+        self._columns: dict[str, str] = {
+            key: str(value) for key, value in columns.items() if key in FIELDS and not isinstance(value, list)
+        }
+        stock = columns.get("stock")
+        self._stock_columns: list[str] = [str(item) for item in stock] if isinstance(stock, list) else []
+        self._exclude: dict[str, re.Pattern[str]] = {
+            str(column): re.compile(str(pattern)) for column, pattern in (config.get("exclude") or {}).items()
+        }
 
     @classmethod
     def from_file(cls, path: Path) -> "PriceFileAdapter":
@@ -149,7 +185,21 @@ class PriceFileAdapter(SupplierAdapter):
     def price_list(self) -> Iterator[OfferRow]:
         header_row = int(self._config.get("header_row", 1))
         positions: dict[str, int] = {}
+        stock_positions: list[int] = []
+        exclude: list[tuple[int, re.Pattern[str]]] = []
         brand_value = self._config.get("brand_value")
+
+        def locate(column: str, headers: list[str], purpose: str) -> int:
+            if column.lower() in headers:
+                return headers.index(column.lower())
+
+            if re.fullmatch(r"[A-Za-z]{1,2}", column):
+                return _column_index(column)
+
+            raise SourceError(
+                f"Column \"{column}\" for {purpose} is not in the price file; "
+                f"its headers are: {', '.join(h for h in headers if h)}"
+            )
 
         for number, row in enumerate(self._table(), 1):
             if number < header_row:
@@ -159,16 +209,14 @@ class PriceFileAdapter(SupplierAdapter):
                 headers = [_cell(value).lower() for value in row]
 
                 for field, column in self._columns.items():
-                    if column.lower() in headers:
-                        positions[field] = headers.index(column.lower())
-                    elif re.fullmatch(r"[A-Za-z]{1,2}", column):
-                        positions[field] = _column_index(column)
-                    else:
-                        raise SourceError(
-                            f"Column \"{column}\" for {field} is not in the price file; "
-                            f"its headers are: {', '.join(h for h in headers if h)}"
-                        )
+                    positions[field] = locate(column, headers, field)
 
+                stock_positions = [locate(column, headers, "stock") for column in self._stock_columns]
+                exclude = [(locate(column, headers, "exclude"), pattern) for column, pattern in self._exclude.items()]
+
+                continue
+
+            if any(index < len(row) and pattern.search(_cell(row[index])) for index, pattern in exclude):
                 continue
 
             def value(field: str) -> str:
@@ -188,7 +236,11 @@ class PriceFileAdapter(SupplierAdapter):
                 number=article,
                 price=value("price"),
                 title=value("title") or None,
-                stock=value("stock") or None,
+                stock=(
+                    _total_stock([_cell(row[index]) for index in stock_positions if index < len(row)])
+                    if stock_positions
+                    else value("stock") or None
+                ),
                 lead_days=int(lead) if lead.isdigit() else None,
             )
 

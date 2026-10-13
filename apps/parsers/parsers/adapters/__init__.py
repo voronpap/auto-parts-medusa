@@ -12,6 +12,7 @@ from .metelli import MetelliAdapter
 from .ctr import CtrAdapter
 from .nibk import NibkAdapter
 from .nissens import NissensAdapter
+from .nrf import NrfAdapter
 from .zf import ZfAdapter
 from .spareto import SparetoAdapter
 
@@ -24,6 +25,7 @@ ADAPTERS: list[type[Adapter]] = [
     FebestAdapter,
     NibkAdapter,
     NissensAdapter,
+    NrfAdapter,
     ZfAdapter,
     GeelyKsaAdapter,
     MetelliAdapter,

@@ -35,12 +35,20 @@ class CatalogClient:
         self._session.auth = (api_key, "")
 
     def _post(self, path: str, payload: dict[str, Any], timeout: float | None = None) -> dict[str, Any]:
-        try:
-            response = self._session.post(
-                f"{self._base_url}{path}", json=payload, timeout=timeout or self._timeout
-            )
-        except requests.RequestException as error:
-            raise CatalogError(f"{type(error).__name__}: {error}") from error
+        # The store limits admin writes per minute; several bulk queues can
+        # reach the limit together, so a refused write waits and is sent again.
+        for _ in range(8):
+            try:
+                response = self._session.post(
+                    f"{self._base_url}{path}", json=payload, timeout=timeout or self._timeout
+                )
+            except requests.RequestException as error:
+                raise CatalogError(f"{type(error).__name__}: {error}") from error
+
+            if response.status_code != 429:
+                break
+
+            time.sleep(20)
 
         if response.status_code >= 400:
             raise CatalogError(f"HTTP {response.status_code}: {response.text[:500]}")

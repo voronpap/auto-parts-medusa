@@ -25,10 +25,9 @@
 .ap-brand-mark { width: 38px; height: 38px; display: grid; place-items: center; border-radius: 9px; color: var(--ap-brand-2); background: var(--ap-brand); font-weight: 900; font-style: italic; }
 .ap-brand em { color: var(--ap-brand); font-style: normal; }
 .ap-search { display: flex; overflow: hidden; min-width: 0; height: 44px; border-radius: 9px; background: #fff; box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15); }
-.ap-search > button { flex: 1; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 0 0 0 15px; color: #68737d; font-size: 14px; text-align: left; }
-.ap-search > button:hover { color: #17212b; }
-.ap-search > button::before { content: "Номер деталі або назва…"; }
-.ap-search > button svg { box-sizing: content-box; width: 19px; height: 19px; padding: 12.5px 17.5px; color: var(--ap-brand-2); background: var(--ap-brand); }
+.ap-search input { min-width: 0; flex: 1; padding: 0 15px; border: 0; color: #17212b; background: #fff; font-size: 14px; outline: 0; }
+.ap-search button { width: 54px; display: grid; place-items: center; color: var(--ap-brand-2); background: var(--ap-brand); }
+.ap-search button:hover { filter: brightness(1.06); }
 .ap-account { display: flex; align-items: center; gap: 18px; white-space: nowrap; }
 .ap-account > a { color: #c3ced5; font-size: 13px; }
 .ap-account > a:hover { color: #fff; }
@@ -52,7 +51,7 @@
 @media (max-width: 800px) { .ap-footer-in { grid-template-columns: 1fr; gap: 22px; } }
 
 /* Home */
-.ap-page { background: var(--ap-bg); padding: 1px 0; }
+.ap-page { min-height: 62vh; background: var(--ap-bg); padding: 1px 0; }
 .ap-shell { width: min(var(--ap-max), calc(100% - 40px)); margin: 27px auto 70px; }
 .ap-intro { position: relative; overflow: hidden; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(300px, 0.75fr); min-height: 262px; margin-bottom: 18px; border: 1px solid var(--ap-line); border-radius: var(--ap-radius); background: var(--ap-surface); box-shadow: var(--ap-shadow); }
 .ap-intro-copy { position: relative; z-index: 2; padding: 35px 38px; }
@@ -304,3 +303,13 @@
 .ap-result-head { padding: 10px 21px; border-top: 1px solid var(--ap-line); color: var(--ap-brand); background: var(--ap-brand-soft); font-size: 11px; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; }
 .ap-catalog-head + .ap-result-head { border-top: 0; }
 .ap-why { display: block; margin-top: 3px; color: var(--ap-good); font-size: 11px; font-style: normal; font-weight: 700; }
+
+/* Cart, checkout, account */
+body { background: #eef1f4; }
+.ap-top-checkout { grid-template-columns: 230px 1fr auto; }
+.ap-checkout-title { font-size: 15px; letter-spacing: -0.01em; }
+.ap-back { color: #c3ced5; font-size: 13px; white-space: nowrap; }
+.ap-back:hover { color: #fff; }
+.ap-auth { max-width: 520px; margin: 0 auto; }
+.ap-page h1.text-2xl-semi, .ap-page .text-3xl-regular { font-weight: 800; letter-spacing: -0.035em; }
+@media (max-width: 800px) { .ap-top-checkout { grid-template-columns: 1fr auto; } .ap-checkout-title { display: none; } }

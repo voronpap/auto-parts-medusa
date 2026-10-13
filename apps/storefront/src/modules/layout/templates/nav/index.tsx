@@ -2,7 +2,7 @@ import { Suspense } from "react"
 
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import CartButton from "@modules/layout/components/cart-button"
-import Search from "@modules/layout/components/search"
+import HeaderSearch from "@modules/layout/components/header-search"
 import SubNav from "@modules/layout/components/sub-nav"
 
 export default async function Nav() {
@@ -21,9 +21,9 @@ export default async function Nav() {
           </span>
         </LocalizedClientLink>
 
-        <div className="ap-search">
-          <Search />
-        </div>
+        <Suspense fallback={<div className="ap-search" />}>
+          <HeaderSearch />
+        </Suspense>
 
         <div className="ap-account">
           <LocalizedClientLink href="/account" data-testid="nav-account-link">

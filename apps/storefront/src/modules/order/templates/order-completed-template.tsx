@@ -22,11 +22,11 @@ export default async function OrderCompletedTemplate({
   const isOnboarding = cookies.get("_medusa_onboarding")?.value === "true"
 
   return (
-    <div className="py-6 min-h-[calc(100vh-64px)]">
-      <div className="content-container flex flex-col justify-center items-center gap-y-10 max-w-4xl h-full w-full">
+    <div className="ap-scope ap-page min-h-[calc(100vh-64px)]">
+      <div className="ap-shell flex flex-col justify-center items-center gap-y-10 max-w-4xl h-full">
         {isOnboarding && <OnboardingCta orderId={order.id} />}
         <div
-          className="flex flex-col gap-4 max-w-4xl h-full bg-white w-full py-10"
+          className="ap-card flex flex-col gap-4 max-w-4xl h-full w-full p-8 small:p-10"
           data-testid="order-complete-container"
         >
           <Heading

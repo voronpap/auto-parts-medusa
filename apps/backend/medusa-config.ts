@@ -8,6 +8,27 @@ const emailEnabled = Boolean(
   process.env.RESEND_API_KEY && process.env.RESEND_FROM_EMAIL
 )
 
+const ADMIN_MOBILE_CSS = `
+@media (max-width: 767px) {
+  main .flex.items-center.justify-between.px-6.py-4 {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  main .flex.items-center.justify-between.px-6.py-4 > div {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    row-gap: 0.5rem;
+    min-width: 0;
+  }
+  main, main > div {
+    min-width: 0;
+    max-width: 100vw;
+  }
+}
+`
+
 module.exports = defineConfig({
   featureFlags: {
     translation: true,
@@ -40,6 +61,23 @@ module.exports = defineConfig({
     disable: process.env.DISABLE_MEDUSA_ADMIN === "true",
     backendUrl: process.env.MEDUSA_BACKEND_URL,
     storefrontUrl: process.env.STOREFRONT_URL,
+    // The dashboard's page headers keep the title and the buttons on one
+    // line. With Ukrainian labels that line is wider than a phone, and the
+    // whole page scrolls sideways. On narrow screens the header wraps.
+    vite: () => ({
+      plugins: [
+        {
+          name: "auto-parts-admin-mobile",
+          transformIndexHtml: () => [
+            {
+              tag: "style",
+              injectTo: "head" as const,
+              children: ADMIN_MOBILE_CSS,
+            },
+          ],
+        },
+      ],
+    }),
   },
   modules: [
     {

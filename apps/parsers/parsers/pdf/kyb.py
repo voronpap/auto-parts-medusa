@@ -280,7 +280,8 @@ def parse_page(lines: list[Line], page: int, carried_model: str | None = None) -
                             generation=chassis or None,
                             year_from=year_from,
                             year_to=year_to,
-                            engine=engines or None,
+                            # The catalog caps the field; the full text stays in raw_text.
+                            engine=engines[:200] or None,
                             position=position,
                             side=side,
                             constraints={"raw": "; ".join(notes)} if notes else None,

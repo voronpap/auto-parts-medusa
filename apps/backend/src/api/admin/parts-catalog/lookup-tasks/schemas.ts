@@ -97,7 +97,7 @@ export const LookupResultSchema = z.object({
         record_url: optionalText(2000),
       })
     )
-    .max(1000)
+    .max(5000)
     .default([]),
   attributes: z
     .array(

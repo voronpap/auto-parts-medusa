@@ -318,7 +318,7 @@
     },
     "applications": {
       "default": [],
-      "maxItems": 1000,
+      "maxItems": 5000,
       "type": "array",
       "items": {
         "type": "object",

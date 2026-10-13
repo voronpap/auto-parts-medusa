@@ -26,7 +26,7 @@ CATALOG_PARAMS = {
     "pimLanguage": "uk_ua",
 }
 # The catalog accepts at most this many fitment rows in one result.
-MAX_APPLICATIONS = 1000
+MAX_APPLICATIONS = 5000
 
 # Specification rows that are not characteristics of the part.
 ARTICLE_ROW = "Артикул"

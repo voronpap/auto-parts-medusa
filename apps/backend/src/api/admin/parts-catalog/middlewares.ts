@@ -165,7 +165,7 @@ export const partsCatalogMiddlewares: MiddlewareRoute[] = [
   {
     matcher: "/admin/parts-catalog/import",
     method: "POST",
-    bodyParser: { sizeLimit: "2mb" },
+    bodyParser: { sizeLimit: "8mb" },
     middlewares: [validateAndTransformBody(ImportResultSchema)],
   },
   {
@@ -181,8 +181,8 @@ export const partsCatalogMiddlewares: MiddlewareRoute[] = [
   {
     matcher: "/admin/parts-catalog/lookup-tasks/:id/result",
     method: "POST",
-    // A result can carry hundreds of fitment rows.
-    bodyParser: { sizeLimit: "2mb" },
+    // A result can carry thousands of fitment rows.
+    bodyParser: { sizeLimit: "8mb" },
     middlewares: [validateAndTransformBody(LookupResultSchema)],
   },
 ]

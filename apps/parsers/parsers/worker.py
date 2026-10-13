@@ -34,18 +34,21 @@ def run_lookup(
     worker: str,
     schema: dict[str, Any] | None = None,
 ) -> LookupResult:
-    """Asks every adapter that covers the brand; one failing does not stop the rest."""
+    """Asks every adapter that covers the brand, and every source that can be
+    searched for another maker's number; one failing does not stop the rest."""
     result = LookupResult(worker=worker)
     covered = False
 
     for adapter in adapters:
-        if not adapter.supports(request):
+        own = adapter.supports(request)
+
+        if not own and not adapter.cross_search:
             continue
 
-        covered = True
+        covered = covered or own
 
         try:
-            found = adapter.lookup(request)
+            found = adapter.lookup(request) if own else adapter.lookup_foreign(request)
         except SourceError as error:
             log.warning("%s failed for %s %s: %s", adapter.name, request.brand, request.number, error)
             result.add_error(adapter.name, str(error))

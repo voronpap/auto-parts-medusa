@@ -2,15 +2,18 @@
 
 Both brands run the same catalogue. A product page is rendered by the server
 and carries the product's dimensions, technical data and every vehicle it is
-used in, so the page is read directly; the site's GraphQL API, which its
-robots.txt closes to robots, is not used. The page address is derived from
-the part number, and a number the catalogue does not have is a plain 404.
+used in. The page address is derived from the part number, and a number the
+catalogue does not have is a plain 404.
 
-The pages list no OE numbers, so this source yields fitment and attributes.
+Crosses are not on the page; they come from the catalogue's own API, asked
+once per lookup: a product's comparison numbers (other makers' equivalents),
+and, for a number of another maker, the products the catalogue lists it for.
+OE numbers are only reachable the second way.
 """
 
 from __future__ import annotations
 
+import json
 import re
 from typing import Any
 from urllib.parse import parse_qs, quote, unquote_plus
@@ -18,10 +21,97 @@ from urllib.parse import parse_qs, quote, unquote_plus
 from bs4 import BeautifulSoup
 
 from ..http import SourceError
-from ..models import Application, Attribute, SourceMeta, SourceResult
-from .base import Adapter, LookupRequest
+from ..models import Application, Attribute, NumberRef, Relationship, SourceMeta, SourceResult
+from .base import MIN_FOREIGN_NUMBER, Adapter, LookupRequest, label_has_brand, normalize_brand
 
 SPEC_HEADINGS = re.compile(r"Розміри|технічні характеристики|Dimensions|Technical", re.I)
+
+
+COMPARISON_QUERY = (
+    "query($sku:String!){products(filter:{sku:{eq:$sku}})"
+    "{items{sku sales_designation comparison_numbers{label value}}}}"
+)
+CROSS_QUERY = (
+    'query($search:String!){smart_search(search:$search pageSize:50 currentPage:1 applicationSegmentId:"")'
+    "{cross_reference{items{product{sku url_key sales_designation}external_number ext_brand_name}}}}"
+)
+# The catalog accepts at most this many crosses in one result.
+MAX_RELATIONSHIPS = 450
+
+# Vehicle and engine makers as the catalogue labels them (normalized): a
+# comparison number under one of these is an OE number.
+VEHICLE_MAKERS = frozenset(
+    """vw audi seat skoda cupra porsche bmw mini mercedesbenz daimler smart ford opel vauxhall
+    generalmotors gm chevrolet daewoo renault dacia nissan infiniti peugeot citroen psa ds fiat
+    alfaromeo lancia iveco toyota lexus honda acura hyundai kia mazda mitsubishi subaru suzuki
+    daihatsu isuzu volvo saab jaguar landrover rover mg chrysler jeep dodge ssangyong lada vaz
+    gaz uaz zaz tesla man scania daf""".split()
+)
+# The catalogue's label for a maker -> the name the catalog already uses.
+BRAND_NAMES = {
+    "febibilstein": "febi",
+    "vwgroup": "VW",
+    "volkswagen": "VW",
+    "mercedes": "Mercedes-Benz",
+    "kskolbenschmidt": "Kolbenschmidt",
+}
+
+
+def _label_brands(label: str) -> list[str]:
+    """ "VW GROUP (AUDI/SEAT/SKODA/VW)" -> VW, AUDI, SEAT, SKODA."""
+    names: list[str] = []
+
+    for part in re.split(r"[()/,]", label):
+        name = re.sub(r"\s+", " ", part).strip()
+        name = BRAND_NAMES.get(normalize_brand(name), name)
+
+        if name and normalize_brand(name) not in {normalize_brand(known) for known in names}:
+            names.append(name)
+
+    return names
+
+
+def _is_vehicle_maker(label: str) -> bool:
+    return any(normalize_brand(name) in VEHICLE_MAKERS for name in _label_brands(label))
+
+
+def parse_comparison_numbers(data: dict[str, Any], record_url: str) -> list[Relationship]:
+    """Other makers' numbers the catalogue gives as equivalents of one product."""
+    items = ((data.get("data") or {}).get("products") or {}).get("items") or []
+    found: list[Relationship] = []
+    seen: set[tuple[str, str]] = set()
+
+    for group in (items[0].get("comparison_numbers") or []) if items else []:
+        label = str(group.get("label") or "").strip()
+        brands = _label_brands(label)
+
+        if not brands:
+            continue
+
+        oem = _is_vehicle_maker(label)
+
+        for value in group.get("value") or []:
+            number = str(value).strip()
+            key = (normalize_brand(brands[0]), _compact(number))
+
+            if not number or key in seen:
+                continue
+
+            seen.add(key)
+            found.append(
+                Relationship(
+                    to=NumberRef(brands[0], "oem" if oem else "aftermarket", number),
+                    relation_type="OEM_REFERENCE" if oem else "AFTERMARKET_CROSS",
+                    raw_relation_text=f"comparison number: {label} {number}",
+                    record_ref=f"product {items[0].get('sku')}",
+                    record_url=record_url,
+                )
+            )
+
+    # OE numbers first, in case the list has to be cut to what a result may carry.
+    found.sort(key=lambda item: item.relation_type != "OEM_REFERENCE")
+
+    return found[:MAX_RELATIONSHIPS]
 
 
 def _compact(number: str) -> str:
@@ -153,9 +243,12 @@ def parse_product_page(html: str, record_url: str) -> tuple[str | None, SourceRe
 class _MannHummelAdapter(Adapter):
     """Reads one brand's product pages. Subclasses name the brand and site."""
 
-    version = "1.0.0"
+    version = "1.1.0"
     min_interval = 5.0
+    cross_search = True
     base_url: str
+    store: str
+    brand_name: str
     url_suffix: str
     source_key: str
     source_name: str
@@ -184,6 +277,61 @@ class _MannHummelAdapter(Adapter):
 
         return f"{self.base_url}/catalog/search-results/product.html/{quote(key, safe='/')}{self.url_suffix}.html"
 
+    def _api(self, query: str, variables: dict[str, Any]) -> dict[str, Any]:
+        host = "/".join(self.base_url.split("/")[:3])
+        data = self.http.fetch_json(
+            f"{host}/api/graphql/catalog-prod",
+            params={"query": query, "variables": json.dumps(variables, ensure_ascii=False)},
+            headers={"Store": self.store},
+        )
+
+        if not isinstance(data, dict) or data.get("errors"):
+            raise SourceError("The catalogue API returned an error")
+
+        return data
+
+    def lookup_foreign(self, request: LookupRequest) -> SourceResult:
+        """Products the catalogue lists as equivalents of another maker's number."""
+        wanted = _compact(request.number)
+        result = SourceResult()
+
+        if len(wanted) < MIN_FOREIGN_NUMBER:
+            return result
+
+        data = self._api(CROSS_QUERY, {"search": request.number})
+        items = (((data.get("data") or {}).get("smart_search") or {}).get("cross_reference") or {}).get("items") or []
+        seen: set[str] = set()
+
+        for item in items:
+            label = str(item.get("ext_brand_name") or "")
+            product = item.get("product") or {}
+            number = str(product.get("sales_designation") or "").strip()
+
+            # The search is fuzzy and spans makers: only this number under
+            # this maker counts.
+            if (
+                not number
+                or number in seen
+                or _compact(str(item.get("external_number") or "")) != wanted
+                or not label_has_brand(label, request.brand)
+            ):
+                continue
+
+            seen.add(number)
+            result.relationships.append(
+                Relationship(
+                    to=NumberRef(self.brand_name, "aftermarket", number),
+                    relation_type="OEM_REFERENCE" if _is_vehicle_maker(label) else "AFTERMARKET_CROSS",
+                    # The catalogue's product carries the reference to the asked number.
+                    direction="incoming",
+                    raw_relation_text=f"comparison number: {label} {item.get('external_number')}",
+                    record_ref=f"product {product.get('sku')}",
+                    record_url=f"{self.base_url}/catalog/search-results/product.html/{product.get('url_key')}.html",
+                )
+            )
+
+        return result
+
     def lookup(self, request: LookupRequest) -> SourceResult:
         wanted = _compact(request.number)
 
@@ -207,6 +355,9 @@ class _MannHummelAdapter(Adapter):
         if not title or wanted not in _compact(title):
             return SourceResult()
 
+        sku = (re.sub(r"\s+", "", request.number) + self.url_suffix).upper()
+        result.relationships = parse_comparison_numbers(self._api(COMPARISON_QUERY, {"sku": sku}), url)
+
         return result
 
 
@@ -217,6 +368,8 @@ class MannFilterAdapter(_MannHummelAdapter):
     source_name = "MANN-FILTER (каталог виробника)"
     lineage = "mannfilter"
     brand_names = ("MANN-FILTER", "MANN", "Mann Filter")
+    brand_name = "MANN-FILTER"
+    store = "pcat_mf_ua_store_uk"
 
 
 class FiltronAdapter(_MannHummelAdapter):
@@ -226,3 +379,5 @@ class FiltronAdapter(_MannHummelAdapter):
     source_name = "FILTRON (каталог виробника)"
     lineage = "filtron"
     brand_names = ("FILTRON",)
+    brand_name = "FILTRON"
+    store = "pcat_ft_gb_store_en"

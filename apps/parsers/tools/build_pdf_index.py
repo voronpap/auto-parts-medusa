@@ -9,9 +9,9 @@ import time
 from pathlib import Path
 
 sys.path.insert(0, ".")
-from parsers.pdf import kyb, monroe  # noqa: E402
+from parsers.pdf import kyb, kyb_kits, monroe  # noqa: E402
 
-PARSERS = {"monroe": monroe, "kyb": kyb}
+PARSERS = {"monroe": monroe, "kyb": kyb, "kyb-kits": kyb_kits}
 name, pdf = sys.argv[1], Path(sys.argv[2])
 parser = PARSERS[name]
 target = Path(f".cache/index/{name}.json")
@@ -22,6 +22,15 @@ def progress(page, _):
     if page % 50 == 0:
         print(f"page {page} read, {time.time() - started:.0f}s", flush=True)
 
+
+if hasattr(parser, "build_index"):
+    # A section of crosses rather than fitment builds its own index.
+    index = parser.build_index(pdf, progress, lines_cache=target.with_suffix(".lines.json"))
+    target.parent.mkdir(parents=True, exist_ok=True)
+    json.dump(index, open(target, "w", encoding="utf-8"), ensure_ascii=False)
+    total = sum(len(items) for items in index["relationships"].values())
+    print(f"done: {len(index['relationships'])} part numbers, {total} crosses, {time.time() - started:.0f}s", flush=True)
+    raise SystemExit(0)
 
 fitments = parser.build(pdf, progress, lines_cache=target.with_suffix(".lines.json"))
 target.parent.mkdir(parents=True, exist_ok=True)

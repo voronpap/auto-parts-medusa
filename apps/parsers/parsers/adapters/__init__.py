@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from .base import Adapter, LookupRequest, normalize_brand
+from .base import Adapter, LookupRequest, canonical_brand, label_has_brand, normalize_brand
 from .bilstein_group import BilsteinGroupAdapter
 from .bosch import BoschAdapter
 from .mann_hummel import FiltronAdapter, MannFilterAdapter
@@ -15,4 +15,4 @@ ADAPTERS: list[type[Adapter]] = [
     FiltronAdapter,
 ]
 
-__all__ = ["ADAPTERS", "Adapter", "LookupRequest", "normalize_brand"]
+__all__ = ["ADAPTERS", "Adapter", "LookupRequest", "canonical_brand", "label_has_brand", "normalize_brand"]

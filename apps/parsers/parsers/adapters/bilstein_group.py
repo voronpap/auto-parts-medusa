@@ -15,7 +15,7 @@ from urllib.parse import quote
 
 from ..http import SourceBlocked
 from ..models import Attribute, NumberRef, Relationship, SourceMeta, SourceResult
-from .base import Adapter, LookupRequest, normalize_brand
+from .base import MIN_FOREIGN_NUMBER, Adapter, LookupRequest, label_has_brand, normalize_brand
 
 BASE_URL = "https://partsfinder.bilsteingroup.com"
 API_URL = f"{BASE_URL}/api/articles"
@@ -46,9 +46,10 @@ def _make_name(make: str) -> str:
 
 
 class BilsteinGroupAdapter(Adapter):
-    version = "1.0.0"
+    version = "1.1.0"
     # The site's robots.txt asks for five seconds between requests.
     min_interval = 5.0
+    cross_search = True
 
     def __init__(self, http) -> None:
         super().__init__(http)
@@ -82,24 +83,76 @@ class BilsteinGroupAdapter(Adapter):
             self.http.fetch(INIT_URL, use_cache=False)
             return self.http.fetch_json(url, params=params, headers=HEADERS)
 
+    def _search(self, phrase: str, vehicle_type: str) -> Any:
+        return self._get(
+            API_URL,
+            {
+                "filter[phrase]": phrase,
+                "filter[country]": "UA",
+                # All brands, as the page asks: filtering to one brand
+                # hides the article's links to its sister-brand twins.
+                "filter[brands]": ",".join(BRAND_NAMES),
+                "filter[vehicleType]": vehicle_type,
+                "page[number]": 0,
+                "page[size]": 24,
+                "sort": "rel",
+            },
+        )
+
+    def lookup_foreign(self, request: LookupRequest) -> SourceResult:
+        """The group's articles that list the maker's number among their OE numbers."""
+        wanted = _compact(request.number)
+        result = SourceResult()
+        seen: set[tuple[str, str]] = set()
+
+        if len(wanted) < MIN_FOREIGN_NUMBER:
+            return result
+
+        for vehicle_type in VEHICLE_TYPES:
+            for article in self._search(request.number, vehicle_type).get("data") or []:
+                attributes = article.get("attributes") or {}
+                brand = BRAND_NAMES.get(attributes.get("bgBrand"))
+                article_id = str(article.get("id") or "").strip()
+
+                if not brand or not article_id or (brand, article_id) in seen:
+                    continue
+
+                # The search is by phrase: the article counts only if it
+                # states this number under this maker.
+                stated = next(
+                    (
+                        (str(group.get("make")), str(number))
+                        for group in attributes.get("oeNumbers") or []
+                        if label_has_brand(str(group.get("make") or ""), request.brand)
+                        for number in group.get("numbers") or []
+                        if _compact(str(number)) == wanted
+                    ),
+                    None,
+                )
+
+                if stated is None:
+                    continue
+
+                seen.add((brand, article_id))
+                result.relationships.append(
+                    Relationship(
+                        to=NumberRef(brand, "aftermarket", article_id),
+                        relation_type="OEM_REFERENCE",
+                        # The group's article carries the reference to the asked number.
+                        direction="incoming",
+                        raw_relation_text=f"OE number: {stated[0]} {stated[1]}",
+                        record_ref=f"article {article_id}",
+                        record_url=f"{BASE_URL}/uk/search?q={quote(article_id)}",
+                    )
+                )
+
+        return result
+
     def _find(self, request: LookupRequest, brand_code: str) -> tuple[dict, str] | None:
         wanted = _compact(request.number)
 
         for vehicle_type in VEHICLE_TYPES:
-            found = self._get(
-                API_URL,
-                {
-                    "filter[phrase]": request.number,
-                    "filter[country]": "UA",
-                    # All brands, as the page asks: filtering to one brand
-                    # hides the article's links to its sister-brand twins.
-                    "filter[brands]": ",".join(BRAND_NAMES),
-                    "filter[vehicleType]": vehicle_type,
-                    "page[number]": 0,
-                    "page[size]": 24,
-                    "sort": "rel",
-                },
-            )
+            found = self._search(request.number, vehicle_type)
 
             for article in found.get("data") or []:
                 attributes = article.get("attributes") or {}

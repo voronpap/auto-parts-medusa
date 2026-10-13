@@ -13,7 +13,7 @@ from typing import Any
 from urllib.parse import quote
 
 from ..models import Application, Attribute, NumberRef, Relationship, SourceMeta, SourceResult
-from .base import Adapter, LookupRequest
+from .base import MIN_FOREIGN_NUMBER, Adapter, LookupRequest, label_has_brand
 
 log = logging.getLogger("parsers")
 
@@ -27,6 +27,10 @@ CATALOG_PARAMS = {
 }
 # The catalog accepts at most this many fitment rows in one result.
 MAX_APPLICATIONS = 5000
+
+# A search by another maker's number is confirmed product by product, each
+# costing a request, so only the first few products found are checked.
+MAX_FOREIGN_PRODUCTS = 5
 
 # Specification rows that are not characteristics of the part.
 ARTICLE_ROW = "Артикул"
@@ -60,8 +64,9 @@ def _month_year(period: dict[str, Any] | None, edge: str) -> str:
 
 
 class BoschAdapter(Adapter):
-    version = "1.0.0"
+    version = "1.1.0"
     min_interval = 3.0
+    cross_search = True
 
     @property
     def source(self) -> SourceMeta:
@@ -80,6 +85,52 @@ class BoschAdapter(Adapter):
 
     def _get(self, path: str, params: dict[str, Any] | None = None) -> Any:
         return self.http.fetch_json(f"{API_URL}{path}", params=params)
+
+    def lookup_foreign(self, request: LookupRequest) -> SourceResult:
+        """Bosch products whose cross-reference table lists the maker's number."""
+        wanted = _compact(request.number)
+        result = SourceResult()
+
+        if len(wanted) < MIN_FOREIGN_NUMBER:
+            return result
+
+        found = self._get(
+            f"/search/{quote(wanted, safe='')}",
+            {"pageNumber": 1, "pageSize": 10, **CATALOG_PARAMS},
+        )
+
+        for product in (found.get("products") or [])[:MAX_FOREIGN_PRODUCTS]:
+            number = str(product.get("productNumber") or "").strip()
+
+            if not number:
+                continue
+
+            details = self._get(f"/search-details/{quote(_compact(number), safe='')}", CATALOG_PARAMS)
+
+            for row in details.get("oeNumbers") or []:
+                columns = [str(column).strip() for column in row.get("columnData") or []]
+
+                # The search is fuzzy: the product counts only if its own
+                # table states this number under this maker.
+                if (
+                    len(columns) >= 2
+                    and _compact(columns[1]) == wanted
+                    and label_has_brand(columns[0], request.brand)
+                ):
+                    result.relationships.append(
+                        Relationship(
+                            to=NumberRef("Bosch", "aftermarket", number),
+                            relation_type="OEM_REFERENCE",
+                            # The Bosch product carries the reference to the asked number.
+                            direction="incoming",
+                            raw_relation_text=f"cross reference (OE number): {columns[0]} {columns[1]}",
+                            record_ref=f"product {_compact(number)}",
+                            record_url=f"{PAGE_URL}?query={quote(_compact(number))}",
+                        )
+                    )
+                    break
+
+        return result
 
     def lookup(self, request: LookupRequest) -> SourceResult:
         wanted = _compact(request.number)

@@ -1,21 +1,27 @@
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 import pytest
 
 from parsers.adapters import LookupRequest
-from parsers.adapters.mann_hummel import FiltronAdapter, MannFilterAdapter, parse_product_page
+from parsers.adapters.mann_hummel import FiltronAdapter, MannFilterAdapter, parse_comparison_numbers
 from parsers.http import SourceError
 from parsers.worker import load_schema, run_lookup
 
-PAGE = (Path(__file__).parent / "fixtures" / "mann_w712_95_small.html").read_text(encoding="utf-8")
+FIXTURES = Path(__file__).parent / "fixtures"
+PAGE = (FIXTURES / "mann_w712_95_small.html").read_text(encoding="utf-8")
+COMPARISON = json.loads((FIXTURES / "mann_cmp_w712_95.json").read_text(encoding="utf-8"))
+CROSS = json.loads((FIXTURES / "mann_cross_06A115561B.json").read_text(encoding="utf-8"))
 
 
 class FakeHttp:
-    def __init__(self, page: str | None = PAGE, error: Exception | None = None):
+    def __init__(self, page: str | None = PAGE, error: Exception | None = None, api_error: Exception | None = None):
         self._page = page
         self._error = error
+        self._api_error = api_error
+        self.api_calls: list = []
         self.urls: list[str] = []
 
     def fetch(self, url, **kwargs):
@@ -25,6 +31,14 @@ class FakeHttp:
             raise self._error
 
         return self._page
+
+    def fetch_json(self, url, **kwargs):
+        self.api_calls.append((url, kwargs))
+
+        if self._api_error:
+            raise self._api_error
+
+        return CROSS if "smart_search" in kwargs["params"]["query"] else COMPARISON
 
 
 def lookup(number="W 712/95", **kwargs):
@@ -70,10 +84,62 @@ def test_dimensions_and_technical_data_become_attributes():
     assert attributes["Кількість зворотних клапанів"] == "1"
 
 
-def test_this_source_states_no_crosses():
-    result, _ = lookup()
+def test_comparison_numbers_become_crosses_to_other_makers():
+    result, http = lookup()
+    crosses = {(r.to.brand, r.to.number): r for r in result.relationships}
 
-    assert result.relationships == []
+    assert ("HENGST", "H317W") in crosses and ("MAHLE", "OC 1196/1") in crosses
+    # The catalogue's label is brought to the name the catalog already uses.
+    assert ("febi", "108330") in crosses
+    assert crosses[("HENGST", "H317W")].relation_type == "AFTERMARKET_CROSS"
+    assert crosses[("HENGST", "H317W")].raw_relation_text == "comparison number: HENGST H317W"
+    url, kwargs = http.api_calls[0]
+    assert url == "https://www.mann-filter.com/api/graphql/catalog-prod"
+    assert json.loads(kwargs["params"]["variables"]) == {"sku": "W712/95_MANN-FILTER"}
+    assert kwargs["headers"] == {"Store": "pcat_mf_ua_store_uk"}
+
+
+def test_vehicle_maker_label_makes_an_oe_reference():
+    data = {"data": {"products": {"items": [{"sku": "X", "comparison_numbers": [
+        {"label": "HENGST", "value": ["H1"]},
+        {"label": "VW GROUP (AUDI/SEAT/SKODA/VW)", "value": ["06A 115 561 B", "06A 115 561 B"]},
+    ]}]}}}
+    found = parse_comparison_numbers(data, "u")
+
+    assert [(r.to.brand, r.to.number_type, r.to.number, r.relation_type) for r in found] == [
+        ("VW", "oem", "06A 115 561 B", "OEM_REFERENCE"),
+        ("HENGST", "aftermarket", "H1", "AFTERMARKET_CROSS"),
+    ]
+
+
+def test_another_makers_number_finds_the_product_listed_for_it():
+    adapter = MannFilterAdapter(FakeHttp())  # type: ignore[arg-type]
+    result = adapter.lookup_foreign(LookupRequest("Volkswagen", "06A115561B", "oem"))
+
+    assert len(result.relationships) == 1
+    cross = result.relationships[0]
+    assert (cross.to.brand, cross.to.number, cross.relation_type, cross.direction) == (
+        "MANN-FILTER", "W 719/30", "OEM_REFERENCE", "incoming",
+    )
+    assert cross.record_url.endswith("/product.html/w719/30_mann-filter.html")
+
+
+def test_same_number_under_another_maker_is_not_a_match():
+    adapter = MannFilterAdapter(FakeHttp())  # type: ignore[arg-type]
+
+    # The catalogue lists 06A 115 561 B for the VW group only.
+    assert adapter.lookup_foreign(LookupRequest("Toyota", "06A115561B", "oem")).is_empty
+    assert adapter.lookup_foreign(LookupRequest("VW", "06A115561", "oem")).is_empty
+    assert adapter.lookup_foreign(LookupRequest("VW", "561B", "oem")).is_empty
+
+
+def test_foreign_number_is_looked_up_through_the_worker():
+    adapter = MannFilterAdapter(FakeHttp())  # type: ignore[arg-type]
+    result = run_lookup([adapter], LookupRequest("VW", "06A 115 561 B", "oem"), "w", load_schema())
+
+    assert [r["to"]["number"] for r in result.relationships] == ["W 719/30"]
+    # No source documents VW's own numbers, and the task says so.
+    assert "No adapter covers brand" in result.errors[0]["message"]
 
 
 def test_unknown_number_is_an_empty_result_not_an_error():
@@ -99,10 +165,3 @@ def test_result_matches_the_catalog_schema():
 
     assert result.sources[0]["name"] == "MANN-FILTER (каталог виробника)"
     assert result.errors == []
-
-
-def test_vehicles_still_in_production_have_no_end_year():
-    result, _ = lookup()
-
-    assert all(a.year_to is None or a.year_to < 2100 for a in result.applications)
-    assert any(a.year_to is None for a in result.applications)

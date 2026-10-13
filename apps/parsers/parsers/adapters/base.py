@@ -17,6 +17,34 @@ def normalize_brand(value: str) -> str:
     return re.sub(r"[^\w]+", "", folded, flags=re.UNICODE).replace("_", "")
 
 
+# Names one maker goes by in catalogues (normalized) -> one key for comparing.
+BRAND_SYNONYMS = {
+    "volkswagen": "vw",
+    "vwgroup": "vw",
+    "vag": "vw",
+    "mercedes": "mercedesbenz",
+    "febibilstein": "febi",
+    "mannfilter": "mann",
+}
+# Shorter numbers match too many unrelated products to be asked about.
+MIN_FOREIGN_NUMBER = 5
+
+
+def canonical_brand(value: str) -> str:
+    """Comparison key for a maker's name; never shown or stored."""
+    key = normalize_brand(value)
+
+    return BRAND_SYNONYMS.get(key, key)
+
+
+def label_has_brand(label: str, brand: str) -> bool:
+    """Whether a catalogue's maker label, such as "VW (VOLKSWAGEN)" or
+    "VW GROUP (AUDI/SEAT/SKODA/VW)", names the given maker."""
+    wanted = canonical_brand(brand)
+
+    return bool(wanted) and any(canonical_brand(part) == wanted for part in re.split(r"[()/,]", label))
+
+
 @dataclass(frozen=True)
 class LookupRequest:
     brand: str
@@ -37,6 +65,10 @@ class Adapter(ABC):
     version: str = "1.0.0"
     #: Seconds between requests to this source's host.
     min_interval: float = 5.0
+
+    #: Whether the source can also be asked which of its products are listed
+    #: for a number of another maker (see `lookup_foreign`).
+    cross_search: bool = False
 
     def __init__(self, http: PoliteSession) -> None:
         self.http = http
@@ -67,3 +99,12 @@ class Adapter(ABC):
         Raises SourceError when the source cannot be read; returns an empty
         result when the source simply does not know the number.
         """
+
+    def lookup_foreign(self, request: LookupRequest) -> SourceResult:
+        """Returns the source's own products it lists for another maker's number.
+
+        Only for sources with `cross_search`. The same rules hold: the source
+        must state the number under the requested maker; a look-alike number
+        or the same number under another maker is not a match.
+        """
+        return SourceResult()

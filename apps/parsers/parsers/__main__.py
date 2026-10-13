@@ -51,7 +51,7 @@ def main(argv: list[str] | None = None) -> int:
     commands.add_parser("run", help="claim tasks from the catalog and post results")
 
     load = commands.add_parser("import-pdf", help="load a parsed PDF catalogue into the catalog")
-    load.add_argument("catalogue", choices=["monroe", "kyb"])
+    load.add_argument("catalogue", choices=["monroe", "kyb", "kyb-kits"])
     load.add_argument("--index", help="parsed catalogue, default .cache/index/<catalogue>.json")
     load.add_argument("--limit", type=int)
 
@@ -71,7 +71,7 @@ def main(argv: list[str] | None = None) -> int:
         chosen = [a for a in adapters if not args.adapter or a.name == args.adapter]
         request = LookupRequest(args.brand, args.number, args.number_type)
 
-        if not any(adapter.supports(request) for adapter in chosen):
+        if not any(adapter.supports(request) or adapter.cross_search for adapter in chosen):
             print(f"No adapter covers brand {args.brand!r}", file=sys.stderr)
             return 2
 

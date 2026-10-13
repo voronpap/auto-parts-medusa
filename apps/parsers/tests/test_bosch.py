@@ -120,3 +120,28 @@ def test_result_matches_the_catalog_schema():
 
     assert result.sources[0]["name"] == "Bosch (каталог виробника)"
     assert result.errors == []
+
+
+def test_another_makers_number_finds_the_bosch_products_that_reference_it():
+    class OeSearch(FakeHttp):
+        def fetch_json(self, url, params=None, **kwargs):
+            path = url.split("/ps/api/uk/ua", 1)[1]
+
+            if path.startswith("/search/"):
+                self.paths.append(path)
+                return {"products": [{"productNumber": NUMBER}, {"productNumber": ""}]}
+
+            return super().fetch_json(url, params=params, **kwargs)
+
+    http = OeSearch()
+    adapter = BoschAdapter(http)  # type: ignore[arg-type]
+    result = adapter.lookup_foreign(LookupRequest("Audi", "1K0698151C", "oem"))
+
+    assert [(r.to.brand, r.to.number, r.relation_type, r.direction) for r in result.relationships] == [
+        ("Bosch", NUMBER, "OEM_REFERENCE", "incoming")
+    ]
+    assert result.relationships[0].raw_relation_text.endswith("1K0 698 151 C")
+    assert http.paths == ["/search/1K0698151C", f"/search-details/{NUMBER}"]
+    # The same number under a maker the table does not name is not a match.
+    assert adapter.lookup_foreign(LookupRequest("Toyota", "1K0698151C", "oem")).is_empty
+    assert adapter.lookup_foreign(LookupRequest("Audi", "1K0", "oem")).is_empty

@@ -10,7 +10,7 @@ from pathlib import Path
 from typing import Any
 
 from ..client import CatalogClient, CatalogError
-from . import kyb, monroe
+from . import kyb, kyb_kits, monroe
 
 log = logging.getLogger("parsers")
 
@@ -41,10 +41,16 @@ KYB_SOURCE = {
     "parser": {"name": "kyb-pdf", "version": kyb.PARSER_VERSION},
 }
 
+KYB_KITS_SOURCE = {**KYB_SOURCE, "parser": {"name": "kyb-pdf-crosses", "version": kyb_kits.PARSER_VERSION}}
+
+# The catalog accepts at most this many crosses in one result.
+MAX_RELATIONSHIPS = 500
+
 # Catalogues that can be loaded: brand of the part numbers and their source.
 CATALOGUES = {
     "monroe": ("Monroe", MONROE_SOURCE),
     "kyb": ("KYB", KYB_SOURCE),
+    "kyb-kits": ("KYB", KYB_KITS_SOURCE),
 }
 
 
@@ -81,17 +87,27 @@ def load_catalogue(
     done_path = index_path.with_suffix(".imported.json")
     done: set[str] = set(json.loads(done_path.read_text(encoding="utf-8"))) if done_path.exists() else set()
     retrieved_at = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime(index_path.stat().st_mtime))
-    totals = {"parts": 0, "applications": 0, "failed": 0}
-    pending = [number for number in index["parts"] if number not in done]
+    totals = {"parts": 0, "applications": 0, "relationships": 0, "failed": 0}
+    crosses: dict[str, list[dict[str, Any]]] = index.get("relationships") or {}
+    pending = [number for number in sorted({*index["parts"], *crosses}) if number not in done]
 
     for number in pending[:limit] if limit else pending:
         rows = [
             {"source": source["key"], **{k: v for k, v in row.items() if k != "page"}}
-            for row in index["parts"][number]
+            for row in index["parts"].get(number, [])
+        ]
+        stated = [{"source": source["key"], **record} for record in crosses.get(number, [])]
+        # Fitment and crosses go in chunks of what one result may carry.
+        chunks = [
+            (rows[start : start + MAX_APPLICATIONS], [])
+            for start in range(0, len(rows), MAX_APPLICATIONS)
+        ] + [
+            ([], stated[start : start + MAX_RELATIONSHIPS])
+            for start in range(0, len(stated), MAX_RELATIONSHIPS)
         ]
 
         try:
-            for start in range(0, len(rows), MAX_APPLICATIONS):
+            for applications, relationships in chunks:
                 summary = _post_paced(
                     client,
                     {
@@ -100,14 +116,17 @@ def load_catalogue(
                         "result": {
                             "worker": worker,
                             "sources": [{**source, "retrieved_at": retrieved_at}],
-                            "relationships": [],
-                            "applications": rows[start : start + MAX_APPLICATIONS],
+                            "relationships": relationships,
+                            "applications": applications,
                             "attributes": [],
                             "errors": [],
                         },
                     },
                 ).get("summary", {})
                 totals["applications"] += summary.get("applications_added", 0)
+                totals["relationships"] += summary.get("relationships_added", 0) + summary.get(
+                    "relationships_confirmed", 0
+                )
         except CatalogError as error:
             totals["failed"] += 1
             log.error("%s %s was not imported: %s", brand, number, error)
@@ -118,7 +137,13 @@ def load_catalogue(
 
         if totals["parts"] % 25 == 0:
             done_path.write_text(json.dumps(sorted(done)), encoding="utf-8")
-            log.info("%s import: %d parts, %d fitment rows", brand, totals["parts"], totals["applications"])
+            log.info(
+                "%s import: %d parts, %d fitment rows, %d crosses",
+                brand,
+                totals["parts"],
+                totals["applications"],
+                totals["relationships"],
+            )
 
         if pause:
             time.sleep(pause)

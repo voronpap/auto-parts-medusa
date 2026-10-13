@@ -144,3 +144,16 @@ def test_result_matches_the_catalog_schema():
 
     assert result.sources[0]["name"].startswith("bilstein group")
     assert result.errors == []
+
+
+def test_another_makers_number_finds_the_articles_that_list_it():
+    source = BilsteinGroupAdapter(FakeHttp({"0009931176": "bilstein_search_99110444"}))  # type: ignore[arg-type]
+    result = source.lookup_foreign(LookupRequest("Mercedes", "0009931176", "oem"))
+    found = {(r.to.brand, r.to.number) for r in result.relationships}
+
+    assert ("SWAG", "99 11 0444") in found
+    assert all(r.relation_type == "OEM_REFERENCE" and r.direction == "incoming" for r in result.relationships)
+    # An article that only mentions the number elsewhere, or lists it for
+    # another maker, is not a match.
+    assert ("febi", "44968") not in found
+    assert source.lookup_foreign(LookupRequest("BMW", "0009931176", "oem")).is_empty

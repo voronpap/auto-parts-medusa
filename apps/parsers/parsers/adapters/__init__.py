@@ -10,6 +10,7 @@ from .facet import FacetAdapter
 from .eps import EpsAdapter
 from .kw_facet import KwFacetAdapter
 from .mg_egypt import MgEgyptAdapter
+from .gmb import GmbAdapter
 from .geely_ksa import GeelyKsaAdapter
 from .mann_hummel import FiltronAdapter, MannFilterAdapter
 from .metelli import MetelliAdapter
@@ -38,6 +39,7 @@ ADAPTERS: list[type[Adapter]] = [
     EpsAdapter,
     KwFacetAdapter,
     MgEgyptAdapter,
+    GmbAdapter,
     # A shop: asked last, and what it says stays a candidate.
     SparetoAdapter,
 ]

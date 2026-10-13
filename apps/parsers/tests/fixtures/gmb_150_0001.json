@@ -1,0 +1,731 @@
+{
+  "_source": "Literal relevant excerpts of anonymous GMB HTML/PIES/ACES responses; retrieved 2026-10-14. Full responses are recorded through PoliteSession.",
+  "page": "<html><head><title>Engine Water Pump with Fan Clutch 150-0001 - GMB North America, Inc.</title></head><body><h1 class=\"product_title entry-title\">Engine Water Pump with Fan Clutch 150-0001</h1><div class=\"product_meta\">\n<span class=\"sku_wrapper\">SKU: <span class=\"sku\">150-0001</span></span>\n<span class=\"posted_in\">Category: <a href=\"https://gmb.net/product-category/water-pump/\" rel=\"tag\">Water Pump</a></span>\n<span class=\"tagged_as\">Tag: <a href=\"https://gmb.net/product-tag/with-fan-clutch/\" rel=\"tag\">With Fan Clutch</a></span>\n</div><script>\n        var tab_target_attributes = document.querySelector('#tab-title-part_applications_attributes_tab a');\n        tab_target_attributes.onclick = function() {\n            tab_target_attributes.onclick = opticat_build_apps_attribute_ul();\n        };\n\n        function opticat_build_apps_attribute_ul() {\n\n\n            // var part_number = '150-0001';\n            var part_number = '150-0001-';\n            var brand_code = 'BFBQ';\n            var php = 1; // value 1 for append code on php file\n            jQuery('.spinner').css('display', 'flex');\n            jQuery.ajax({\n\n                type: 'GET',\n                async: true,\n                url: 'https://gmb.net/wp-admin/admin-ajax.php',\n                data: {\n                    action: 'opticat_ajax_lookup',\n                    part_number: part_number,\n                    brand_code: brand_code,\n                    lookup: 'part_details',\n                    php: php,\n                },\n                dataType: 'json',\n                beforeSend: function() {},\n                success: function(response) {\n\n                    if (php == 1) {\n                        // console.log(response.data.html);\n                        jQuery('#tab-part_applications_attributes_tab ul#opticat-apps').html(response.data.html);\n                        jQuery('.opt-guide-table-product').dataTable({\n                            \"searching\": false, // Dont want the search\n                            \"bInfo\": false, //Dont display info e.g. \"Showing 1 to 4 of 4 entries\"\n                            \"paging\": false, //Dont want paging\n                            \"bPaginate\": false, //Dont want paging,\n                            \"deferRender\": true\n                        });\n\n                        jQuery('.spinner').hide();\n                        return true;\n                    }\n                },\n                error: function(response) {\n                    if (php == 1) {\n                        jQuery('#tab-part_applications_attributes_tab ul#opticat-apps').html(response.responseText);\n                        jQuery('.spinner').hide();\n                        return true;\n                    }\n                    // console.log(response.responseText);\n                }\n            });\n        }\n    </script></body></html>",
+  "search": "<html><head><title>You searched for 1500001 - GMB North America, Inc.</title></head><body><h1 class=\"fl-heading\">\n<span class=\"fl-heading-text\">Search Results: 1500001</span>\n</h1><h2 class=\"fl-post-feed-title\" itemprop=\"headline\">\n<a href=\"https://gmb.net/product/150-0001/\" rel=\"bookmark\" title=\"Engine Water Pump with Fan Clutch 150-0001\">Engine Water Pump with Fan Clutch 150-0001</a>\n</h2></body></html>",
+  "details": {
+    "status": 200,
+    "piesItem": {
+      "partNumber": "150-0001",
+      "brandCode": "BFBQ",
+      "brandName": "GMB",
+      "hasACESApplications": true,
+      "partTypeName": "Engine Water Pump with Fan Clutch",
+      "categoryName": "Belts and Cooling",
+      "subCategoryName": "Water Pump and Related Components",
+      "itemLevelGTIN": {
+        "gtin": "00083286846630",
+        "qualifierCode": "UP",
+        "qualifierName": "UPC"
+      },
+      "itemQuantitySize": {
+        "value": 1,
+        "uomCode": "EA",
+        "uomName": "Each"
+      },
+      "quantityPerApplication": {
+        "value": 1,
+        "uomCode": "EA",
+        "uomName": "Each"
+      },
+      "productAttributes": [],
+      "extendedInformation": [
+        {
+          "value": "Y",
+          "formattedValue": "Yes",
+          "expiCode": "TAX",
+          "expiName": "Taxable"
+        },
+        {
+          "value": "1",
+          "formattedValue": "CARB Eligible",
+          "expiCode": "EMS",
+          "expiName": "Emission Code"
+        },
+        {
+          "value": "N",
+          "formattedValue": "No",
+          "expiCode": "MSR",
+          "expiName": "SDR Required Flag"
+        },
+        {
+          "value": "5",
+          "formattedValue": "5",
+          "expiCode": "PLM",
+          "expiName": "Pallet Layer Maximum"
+        },
+        {
+          "value": "2",
+          "formattedValue": "Available to Order",
+          "expiCode": "LIF",
+          "expiName": "Life Cycle Status Code"
+        },
+        {
+          "value": "W",
+          "formattedValue": "(W) Non-Stock Item",
+          "expiCode": "NPC",
+          "expiName": "National Popularity Code"
+        },
+        {
+          "value": "CN",
+          "formattedValue": "China",
+          "expiCode": "CTO",
+          "expiName": "Country of Origin (Primary)"
+        },
+        {
+          "value": "8413309090",
+          "formattedValue": "8413309090",
+          "expiCode": "HTS",
+          "expiName": "Harmonized Tariff Code (HTS)"
+        },
+        {
+          "value": "20",
+          "formattedValue": "20",
+          "expiCode": "PLC",
+          "expiName": "Maximum Cases per Pallet Layer"
+        },
+        {
+          "value": "8413309090",
+          "formattedValue": "8413309090",
+          "expiCode": "HSB",
+          "expiName": "Harmonized Tariff Code (Schedule B)"
+        }
+      ],
+      "packages": [
+        {
+          "packageLevelGTINNumber": "00083286846630",
+          "packageBarCodeCharacters": "083286846630",
+          "packageUOMCode": "EA",
+          "packageUOMName": "Smallest Pack (Consumer Level)",
+          "quantityOfEaches": 1,
+          "innerQuantity": {
+            "value": 1,
+            "uomCode": "EA",
+            "uomName": "Each"
+          },
+          "orderable": true,
+          "dimensions": {
+            "height": 7.5,
+            "width": 7.8,
+            "length": 11.5,
+            "shippingHeight": 7.5,
+            "shippingWidth": 7.8,
+            "shippingLength": 11.5,
+            "uomCode": "IN",
+            "uomName": "Inch"
+          },
+          "weights": {
+            "weight": 5.5,
+            "uomCode": "PG",
+            "uomName": "Pounds Gross"
+          },
+          "hazardousMaterials": []
+        },
+        {
+          "packageLevelGTINNumber": "00083286846630",
+          "packageBarCodeCharacters": "083286846630",
+          "packageUOMCode": "EA",
+          "packageUOMName": "Smallest Pack (Consumer Level)",
+          "quantityOfEaches": 1,
+          "innerQuantity": {
+            "value": 1,
+            "uomCode": "EA",
+            "uomName": "Each"
+          },
+          "orderable": true,
+          "dimensions": {
+            "height": 19.05,
+            "width": 19.812,
+            "length": 29.21,
+            "shippingHeight": 19.05,
+            "shippingWidth": 19.812,
+            "shippingLength": 29.21,
+            "uomCode": "CM",
+            "uomName": "Centimeter"
+          },
+          "weights": {
+            "weight": 2.4948,
+            "uomCode": "KG",
+            "uomName": "Kilogram"
+          },
+          "hazardousMaterials": []
+        }
+      ],
+      "kits": [],
+      "partInterchanges": [
+        {
+          "interchangeTypeCode": "S",
+          "brandCode": "BKMK",
+          "brandName": "US Motor Works",
+          "partNumber": "MCK1066",
+          "qualityGradeLevelCode": "S"
+        }
+      ],
+      "descriptions": [
+        {
+          "value": "Engine Water Pump with Fan Clutch",
+          "descriptionTypeCode": "DES",
+          "descriptionTypeName": "Product Description - Long",
+          "languageCode": "EN"
+        },
+        {
+          "value": "Water Pump w/ FC",
+          "descriptionTypeCode": "SHO",
+          "descriptionTypeName": "Product Description - Short",
+          "languageCode": "EN"
+        },
+        {
+          "value": "100% factory tested for leakage and dimensional precision.",
+          "descriptionTypeCode": "FAB",
+          "descriptionTypeName": "Features and Benefits",
+          "languageCode": "EN",
+          "sequence": 1
+        },
+        {
+          "value": "Bearing noise and durability-tested.",
+          "descriptionTypeCode": "FAB",
+          "descriptionTypeName": "Features and Benefits",
+          "languageCode": "EN",
+          "sequence": 2
+        },
+        {
+          "value": "Designed to match OE coolant flow rate and pressure.",
+          "descriptionTypeCode": "FAB",
+          "descriptionTypeName": "Features and Benefits",
+          "languageCode": "EN",
+          "sequence": 3
+        },
+        {
+          "value": "All required hardware included for easy installation.",
+          "descriptionTypeCode": "FAB",
+          "descriptionTypeName": "Features and Benefits",
+          "languageCode": "EN",
+          "sequence": 4
+        },
+        {
+          "value": "100% Performance and Durability tested.",
+          "descriptionTypeCode": "FAB",
+          "descriptionTypeName": "Features and Benefits",
+          "languageCode": "EN",
+          "sequence": 5
+        },
+        {
+          "value": "Designed with OE manufacturing technology.",
+          "descriptionTypeCode": "FAB",
+          "descriptionTypeName": "Features and Benefits",
+          "languageCode": "EN",
+          "sequence": 6
+        },
+        {
+          "value": "Reduced warm up time and optimized engine performance.",
+          "descriptionTypeCode": "FAB",
+          "descriptionTypeName": "Features and Benefits",
+          "languageCode": "EN",
+          "sequence": 7
+        },
+        {
+          "value": "Enhanced fin design for maximum heat dissipation, as well as, reduced fan noise and vibration during acceleration or cruising.",
+          "descriptionTypeCode": "FAB",
+          "descriptionTypeName": "Features and Benefits",
+          "languageCode": "EN",
+          "sequence": 8
+        },
+        {
+          "value": "Thermal (viscous), Non-Thermal, Electric, Standard, Heavy Duty, and Severe Duty versions available.",
+          "descriptionTypeCode": "FAB",
+          "descriptionTypeName": "Features and Benefits",
+          "languageCode": "EN",
+          "sequence": 9
+        },
+        {
+          "value": "Manufactured to meet or exceed OEM specifications.",
+          "descriptionTypeCode": "MKT",
+          "descriptionTypeName": "Marketing Description",
+          "languageCode": "EN"
+        }
+      ]
+    }
+  },
+  "applications": [
+    {
+      "acesApp": {
+        "partNumber": "150-0001",
+        "brandCode": "BFBQ",
+        "brandName": "GMB",
+        "notes": [],
+        "quals": [],
+        "qty": "1",
+        "partTypeId": 56846,
+        "partTypeName": "Engine Water Pump with Fan Clutch",
+        "years": [],
+        "baseVehicleId": 18397,
+        "baseVehicleName": "2005 Nissan Frontier",
+        "attributes": [
+          {
+            "attributeType": "EngineBaseId",
+            "attributeTypeName": "Engine Base",
+            "attributeValueId": 2564,
+            "attributeValueName": "L4 2.5L 2488cc"
+          }
+        ],
+        "digitalAssets": []
+      },
+      "matchingBaseVehicles": []
+    },
+    {
+      "acesApp": {
+        "partNumber": "150-0001",
+        "brandCode": "BFBQ",
+        "brandName": "GMB",
+        "notes": [],
+        "quals": [],
+        "qty": "1",
+        "partTypeId": 56846,
+        "partTypeName": "Engine Water Pump with Fan Clutch",
+        "years": [],
+        "baseVehicleId": 96895,
+        "baseVehicleName": "2011 Suzuki Equator",
+        "attributes": [
+          {
+            "attributeType": "EngineBaseId",
+            "attributeTypeName": "Engine Base",
+            "attributeValueId": 2564,
+            "attributeValueName": "L4 2.5L 2488cc"
+          }
+        ],
+        "digitalAssets": []
+      },
+      "matchingBaseVehicles": []
+    },
+    {
+      "acesApp": {
+        "partNumber": "150-0001",
+        "brandCode": "BFBQ",
+        "brandName": "GMB",
+        "notes": [],
+        "quals": [],
+        "qty": "1",
+        "partTypeId": 56846,
+        "partTypeName": "Engine Water Pump with Fan Clutch",
+        "years": [],
+        "baseVehicleId": 96077,
+        "baseVehicleName": "2010 Suzuki Equator",
+        "attributes": [
+          {
+            "attributeType": "EngineBaseId",
+            "attributeTypeName": "Engine Base",
+            "attributeValueId": 2564,
+            "attributeValueName": "L4 2.5L 2488cc"
+          }
+        ],
+        "digitalAssets": []
+      },
+      "matchingBaseVehicles": []
+    },
+    {
+      "acesApp": {
+        "partNumber": "150-0001",
+        "brandCode": "BFBQ",
+        "brandName": "GMB",
+        "notes": [],
+        "quals": [],
+        "qty": "1",
+        "partTypeId": 56846,
+        "partTypeName": "Engine Water Pump with Fan Clutch",
+        "years": [],
+        "baseVehicleId": 118559,
+        "baseVehicleName": "2012 Nissan Frontier",
+        "attributes": [
+          {
+            "attributeType": "EngineBaseId",
+            "attributeTypeName": "Engine Base",
+            "attributeValueId": 2564,
+            "attributeValueName": "L4 2.5L 2488cc"
+          }
+        ],
+        "digitalAssets": []
+      },
+      "matchingBaseVehicles": []
+    },
+    {
+      "acesApp": {
+        "partNumber": "150-0001",
+        "brandCode": "BFBQ",
+        "brandName": "GMB",
+        "notes": [],
+        "quals": [],
+        "qty": "1",
+        "partTypeId": 56846,
+        "partTypeName": "Engine Water Pump with Fan Clutch",
+        "years": [],
+        "baseVehicleId": 29969,
+        "baseVehicleName": "2009 Nissan Frontier",
+        "attributes": [
+          {
+            "attributeType": "EngineBaseId",
+            "attributeTypeName": "Engine Base",
+            "attributeValueId": 2564,
+            "attributeValueName": "L4 2.5L 2488cc"
+          }
+        ],
+        "digitalAssets": []
+      },
+      "matchingBaseVehicles": []
+    },
+    {
+      "acesApp": {
+        "partNumber": "150-0001",
+        "brandCode": "BFBQ",
+        "brandName": "GMB",
+        "notes": [],
+        "quals": [],
+        "qty": "1",
+        "partTypeId": 56846,
+        "partTypeName": "Engine Water Pump with Fan Clutch",
+        "years": [],
+        "baseVehicleId": 122938,
+        "baseVehicleName": "2013 Nissan Frontier",
+        "attributes": [
+          {
+            "attributeType": "EngineBaseId",
+            "attributeTypeName": "Engine Base",
+            "attributeValueId": 2564,
+            "attributeValueName": "L4 2.5L 2488cc"
+          }
+        ],
+        "digitalAssets": []
+      },
+      "matchingBaseVehicles": []
+    },
+    {
+      "acesApp": {
+        "partNumber": "150-0001",
+        "brandCode": "BFBQ",
+        "brandName": "GMB",
+        "notes": [],
+        "quals": [],
+        "qty": "1",
+        "partTypeId": 56846,
+        "partTypeName": "Engine Water Pump with Fan Clutch",
+        "years": [],
+        "baseVehicleId": 140912,
+        "baseVehicleName": "2017 Nissan Frontier",
+        "attributes": [
+          {
+            "attributeType": "EngineBaseId",
+            "attributeTypeName": "Engine Base",
+            "attributeValueId": 2564,
+            "attributeValueName": "L4 2.5L 2488cc"
+          }
+        ],
+        "digitalAssets": []
+      },
+      "matchingBaseVehicles": []
+    },
+    {
+      "acesApp": {
+        "partNumber": "150-0001",
+        "brandCode": "BFBQ",
+        "brandName": "GMB",
+        "notes": [],
+        "quals": [],
+        "qty": "1",
+        "partTypeId": 56846,
+        "partTypeName": "Engine Water Pump with Fan Clutch",
+        "years": [],
+        "baseVehicleId": 147896,
+        "baseVehicleName": "2019 Nissan Frontier",
+        "attributes": [
+          {
+            "attributeType": "EngineBaseId",
+            "attributeTypeName": "Engine Base",
+            "attributeValueId": 2564,
+            "attributeValueName": "L4 2.5L 2488cc"
+          }
+        ],
+        "digitalAssets": []
+      },
+      "matchingBaseVehicles": []
+    },
+    {
+      "acesApp": {
+        "partNumber": "150-0001",
+        "brandCode": "BFBQ",
+        "brandName": "GMB",
+        "notes": [],
+        "quals": [],
+        "qty": "1",
+        "partTypeId": 56846,
+        "partTypeName": "Engine Water Pump with Fan Clutch",
+        "years": [],
+        "baseVehicleId": 130961,
+        "baseVehicleName": "2015 Nissan Frontier",
+        "attributes": [
+          {
+            "attributeType": "EngineBaseId",
+            "attributeTypeName": "Engine Base",
+            "attributeValueId": 2564,
+            "attributeValueName": "L4 2.5L 2488cc"
+          }
+        ],
+        "digitalAssets": []
+      },
+      "matchingBaseVehicles": []
+    },
+    {
+      "acesApp": {
+        "partNumber": "150-0001",
+        "brandCode": "BFBQ",
+        "brandName": "GMB",
+        "notes": [],
+        "quals": [],
+        "qty": "1",
+        "partTypeId": 56846,
+        "partTypeName": "Engine Water Pump with Fan Clutch",
+        "years": [],
+        "baseVehicleId": 143523,
+        "baseVehicleName": "2018 Nissan Frontier",
+        "attributes": [
+          {
+            "attributeType": "EngineBaseId",
+            "attributeTypeName": "Engine Base",
+            "attributeValueId": 2564,
+            "attributeValueName": "L4 2.5L 2488cc"
+          }
+        ],
+        "digitalAssets": []
+      },
+      "matchingBaseVehicles": []
+    },
+    {
+      "acesApp": {
+        "partNumber": "150-0001",
+        "brandCode": "BFBQ",
+        "brandName": "GMB",
+        "notes": [],
+        "quals": [],
+        "qty": "1",
+        "partTypeId": 56846,
+        "partTypeName": "Engine Water Pump with Fan Clutch",
+        "years": [],
+        "baseVehicleId": 127859,
+        "baseVehicleName": "2014 Nissan Frontier",
+        "attributes": [
+          {
+            "attributeType": "EngineBaseId",
+            "attributeTypeName": "Engine Base",
+            "attributeValueId": 2564,
+            "attributeValueName": "L4 2.5L 2488cc"
+          }
+        ],
+        "digitalAssets": []
+      },
+      "matchingBaseVehicles": []
+    },
+    {
+      "acesApp": {
+        "partNumber": "150-0001",
+        "brandCode": "BFBQ",
+        "brandName": "GMB",
+        "notes": [],
+        "quals": [],
+        "qty": "1",
+        "partTypeId": 56846,
+        "partTypeName": "Engine Water Pump with Fan Clutch",
+        "years": [],
+        "baseVehicleId": 29076,
+        "baseVehicleName": "2008 Nissan Frontier",
+        "attributes": [
+          {
+            "attributeType": "EngineBaseId",
+            "attributeTypeName": "Engine Base",
+            "attributeValueId": 2564,
+            "attributeValueName": "L4 2.5L 2488cc"
+          }
+        ],
+        "digitalAssets": []
+      },
+      "matchingBaseVehicles": []
+    },
+    {
+      "acesApp": {
+        "partNumber": "150-0001",
+        "brandCode": "BFBQ",
+        "brandName": "GMB",
+        "notes": [],
+        "quals": [],
+        "qty": "1",
+        "partTypeId": 56846,
+        "partTypeName": "Engine Water Pump with Fan Clutch",
+        "years": [],
+        "baseVehicleId": 30303,
+        "baseVehicleName": "2009 Suzuki Equator",
+        "attributes": [
+          {
+            "attributeType": "EngineBaseId",
+            "attributeTypeName": "Engine Base",
+            "attributeValueId": 2564,
+            "attributeValueName": "L4 2.5L 2488cc"
+          }
+        ],
+        "digitalAssets": []
+      },
+      "matchingBaseVehicles": []
+    },
+    {
+      "acesApp": {
+        "partNumber": "150-0001",
+        "brandCode": "BFBQ",
+        "brandName": "GMB",
+        "notes": [],
+        "quals": [],
+        "qty": "1",
+        "partTypeId": 56846,
+        "partTypeName": "Engine Water Pump with Fan Clutch",
+        "years": [],
+        "baseVehicleId": 18918,
+        "baseVehicleName": "2006 Nissan Frontier",
+        "attributes": [
+          {
+            "attributeType": "EngineBaseId",
+            "attributeTypeName": "Engine Base",
+            "attributeValueId": 2564,
+            "attributeValueName": "L4 2.5L 2488cc"
+          }
+        ],
+        "digitalAssets": []
+      },
+      "matchingBaseVehicles": []
+    },
+    {
+      "acesApp": {
+        "partNumber": "150-0001",
+        "brandCode": "BFBQ",
+        "brandName": "GMB",
+        "notes": [],
+        "quals": [],
+        "qty": "1",
+        "partTypeId": 56846,
+        "partTypeName": "Engine Water Pump with Fan Clutch",
+        "years": [],
+        "baseVehicleId": 137381,
+        "baseVehicleName": "2016 Nissan Frontier",
+        "attributes": [
+          {
+            "attributeType": "EngineBaseId",
+            "attributeTypeName": "Engine Base",
+            "attributeValueId": 2564,
+            "attributeValueName": "L4 2.5L 2488cc"
+          }
+        ],
+        "digitalAssets": []
+      },
+      "matchingBaseVehicles": []
+    },
+    {
+      "acesApp": {
+        "partNumber": "150-0001",
+        "brandCode": "BFBQ",
+        "brandName": "GMB",
+        "notes": [],
+        "quals": [],
+        "qty": "1",
+        "partTypeId": 56846,
+        "partTypeName": "Engine Water Pump with Fan Clutch",
+        "years": [],
+        "baseVehicleId": 92765,
+        "baseVehicleName": "2010 Nissan Frontier",
+        "attributes": [
+          {
+            "attributeType": "EngineBaseId",
+            "attributeTypeName": "Engine Base",
+            "attributeValueId": 2564,
+            "attributeValueName": "L4 2.5L 2488cc"
+          }
+        ],
+        "digitalAssets": []
+      },
+      "matchingBaseVehicles": []
+    },
+    {
+      "acesApp": {
+        "partNumber": "150-0001",
+        "brandCode": "BFBQ",
+        "brandName": "GMB",
+        "notes": [],
+        "quals": [],
+        "qty": "1",
+        "partTypeId": 56846,
+        "partTypeName": "Engine Water Pump with Fan Clutch",
+        "years": [],
+        "baseVehicleId": 24061,
+        "baseVehicleName": "2007 Nissan Frontier",
+        "attributes": [
+          {
+            "attributeType": "EngineBaseId",
+            "attributeTypeName": "Engine Base",
+            "attributeValueId": 2564,
+            "attributeValueName": "L4 2.5L 2488cc"
+          }
+        ],
+        "digitalAssets": []
+      },
+      "matchingBaseVehicles": []
+    },
+    {
+      "acesApp": {
+        "partNumber": "150-0001",
+        "brandCode": "BFBQ",
+        "brandName": "GMB",
+        "notes": [],
+        "quals": [],
+        "qty": "1",
+        "partTypeId": 56846,
+        "partTypeName": "Engine Water Pump with Fan Clutch",
+        "years": [],
+        "baseVehicleId": 119553,
+        "baseVehicleName": "2012 Suzuki Equator",
+        "attributes": [
+          {
+            "attributeType": "EngineBaseId",
+            "attributeTypeName": "Engine Base",
+            "attributeValueId": 2564,
+            "attributeValueName": "L4 2.5L 2488cc"
+          }
+        ],
+        "digitalAssets": []
+      },
+      "matchingBaseVehicles": []
+    },
+    {
+      "acesApp": {
+        "partNumber": "150-0001",
+        "brandCode": "BFBQ",
+        "brandName": "GMB",
+        "notes": [],
+        "quals": [],
+        "qty": "1",
+        "partTypeId": 56846,
+        "partTypeName": "Engine Water Pump with Fan Clutch",
+        "years": [],
+        "baseVehicleId": 96791,
+        "baseVehicleName": "2011 Nissan Frontier",
+        "attributes": [
+          {
+            "attributeType": "EngineBaseId",
+            "attributeTypeName": "Engine Base",
+            "attributeValueId": 2564,
+            "attributeValueName": "L4 2.5L 2488cc"
+          }
+        ],
+        "digitalAssets": []
+      },
+      "matchingBaseVehicles": []
+    }
+  ],
+  "application_table": {
+    "success": true,
+    "data": {
+      "html": "<table id=\"opt-guide-lb-content\" class=\"opt-guide-table\"><thead><tr>\n                            <th class=\"year\">Year</th>\n                            <th class=\"make\">Make</th>\n                            <th class=\"model\">Model</th>\n                            <th class=\"engine\">Engine</th>\n                            <th class=\"position\">Position</th>\n                            <th class=\"note\">Note</th>\n                        </tr></thead><tbody><tr><td class=\"year\">2005 - 2019</td><td class=\"make\">Nissan</td><td class=\"model\">Frontier</td><td class=\"engine\">L4 2.5L 2488cc</td><td class=\"Position\"></td><td class=\"note\"></td></tr><tr><td class=\"year\">2009 - 2012</td><td class=\"make\">Suzuki</td><td class=\"model\">Equator</td><td class=\"engine\">L4 2.5L 2488cc</td><td class=\"Position\"></td><td class=\"note\"></td></tr></tbody></table>"
+    }
+  }
+}

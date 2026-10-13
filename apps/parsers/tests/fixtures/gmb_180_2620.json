@@ -1,0 +1,1022 @@
+{
+  "_source": "Literal relevant excerpts of anonymous GMB HTML/PIES/ACES responses; retrieved 2026-10-14. Full responses are recorded through PoliteSession.",
+  "page": "<html><head><title>Engine Water Pump 180-2620 - GMB North America, Inc.</title></head><body><h1 class=\"product_title entry-title\">Engine Water Pump 180-2620</h1><div class=\"product_meta\">\n<span class=\"sku_wrapper\">SKU: <span class=\"sku\">180-2620</span></span>\n<span class=\"posted_in\">Category: <a href=\"https://gmb.net/product-category/water-pump/\" rel=\"tag\">Water Pump</a></span>\n</div><script>\n        var tab_target_attributes = document.querySelector('#tab-title-part_applications_attributes_tab a');\n        tab_target_attributes.onclick = function() {\n            tab_target_attributes.onclick = opticat_build_apps_attribute_ul();\n        };\n\n        function opticat_build_apps_attribute_ul() {\n\n\n            // var part_number = '180-2620';\n            var part_number = '180-2620-';\n            var brand_code = 'BFBQ';\n            var php = 1; // value 1 for append code on php file\n            jQuery('.spinner').css('display', 'flex');\n            jQuery.ajax({\n\n                type: 'GET',\n                async: true,\n                url: 'https://gmb.net/wp-admin/admin-ajax.php',\n                data: {\n                    action: 'opticat_ajax_lookup',\n                    part_number: part_number,\n                    brand_code: brand_code,\n                    lookup: 'part_details',\n                    php: php,\n                },\n                dataType: 'json',\n                beforeSend: function() {},\n                success: function(response) {\n\n                    if (php == 1) {\n                        // console.log(response.data.html);\n                        jQuery('#tab-part_applications_attributes_tab ul#opticat-apps').html(response.data.html);\n                        jQuery('.opt-guide-table-product').dataTable({\n                            \"searching\": false, // Dont want the search\n                            \"bInfo\": false, //Dont display info e.g. \"Showing 1 to 4 of 4 entries\"\n                            \"paging\": false, //Dont want paging\n                            \"bPaginate\": false, //Dont want paging,\n                            \"deferRender\": true\n                        });\n\n                        jQuery('.spinner').hide();\n                        return true;\n                    }\n                },\n                error: function(response) {\n                    if (php == 1) {\n                        jQuery('#tab-part_applications_attributes_tab ul#opticat-apps').html(response.responseText);\n                        jQuery('.spinner').hide();\n                        return true;\n                    }\n                    // console.log(response.responseText);\n                }\n            });\n        }\n    </script></body></html>",
+  "search": "<html><head><title>You searched for 1802620 - GMB North America, Inc.</title></head><body><h1 class=\"fl-heading\">\n<span class=\"fl-heading-text\">Search Results: 1802620</span>\n</h1><h2 class=\"fl-post-feed-title\" itemprop=\"headline\">\n<a href=\"https://gmb.net/product/180-2620/\" rel=\"bookmark\" title=\"Engine Water Pump 180-2620\">Engine Water Pump 180-2620</a>\n</h2></body></html>",
+  "details": {
+    "status": 200,
+    "piesItem": {
+      "partNumber": "180-2620",
+      "brandCode": "BFBQ",
+      "brandName": "GMB",
+      "hasACESApplications": true,
+      "partTypeName": "Engine Water Pump",
+      "categoryName": "Belts and Cooling",
+      "subCategoryName": "Water Pump and Related Components",
+      "itemLevelGTIN": {
+        "gtin": "00083286948921",
+        "qualifierCode": "UP",
+        "qualifierName": "UPC"
+      },
+      "itemQuantitySize": {
+        "value": 1,
+        "uomCode": "EA",
+        "uomName": "Each"
+      },
+      "quantityPerApplication": {
+        "value": 1,
+        "uomCode": "EA",
+        "uomName": "Each"
+      },
+      "productAttributes": [
+        {
+          "value": "Serpentine Belt",
+          "attributeId": "374",
+          "isPAdbAttribute": true,
+          "padbAttributeId": 374,
+          "padbAttributeName": "Water Pump Drive Type",
+          "padbAttributeDescription": "Describes Drive Type"
+        },
+        {
+          "value": "Aluminum",
+          "languageCode": "EN",
+          "attributeId": "Casting Material",
+          "isPAdbAttribute": false,
+          "customAttributeName": "Casting Material"
+        },
+        {
+          "value": "Reverse",
+          "languageCode": "EN",
+          "attributeId": "365",
+          "isPAdbAttribute": true,
+          "padbAttributeId": 365,
+          "padbAttributeName": "Impeller Rotation",
+          "padbAttributeDescription": "Describes Direction"
+        },
+        {
+          "value": "Plastic",
+          "languageCode": "EN",
+          "attributeId": "362",
+          "isPAdbAttribute": true,
+          "padbAttributeId": 362,
+          "padbAttributeName": "Impeller Material",
+          "padbAttributeDescription": "Describes the Impeller Material"
+        },
+        {
+          "value": "No",
+          "languageCode": "EN",
+          "attributeId": "372",
+          "isPAdbAttribute": true,
+          "padbAttributeId": 372,
+          "padbAttributeName": "Includes Back Housing",
+          "padbAttributeDescription": "Describes If Includes Back Housing"
+        },
+        {
+          "value": "No",
+          "languageCode": "EN",
+          "attributeId": "Bolts Inlcuded",
+          "isPAdbAttribute": false,
+          "customAttributeName": "Bolts Inlcuded"
+        },
+        {
+          "value": "No",
+          "languageCode": "EN",
+          "attributeId": "Bracket Included",
+          "isPAdbAttribute": false,
+          "customAttributeName": "Bracket Included"
+        },
+        {
+          "value": "No",
+          "languageCode": "EN",
+          "attributeId": "353",
+          "isPAdbAttribute": true,
+          "padbAttributeId": 353,
+          "padbAttributeName": "Gasket Or Seal Included",
+          "padbAttributeDescription": "Describes If Seal Or Gasket Is Included"
+        },
+        {
+          "value": "No",
+          "languageCode": "EN",
+          "attributeId": "30",
+          "isPAdbAttribute": true,
+          "padbAttributeId": 30,
+          "padbAttributeName": "Mounting Hardware Included",
+          "padbAttributeDescription": "Describes If Any Installation Hardware Is Included"
+        },
+        {
+          "value": "Yes",
+          "languageCode": "EN",
+          "attributeId": "Instructions Included",
+          "isPAdbAttribute": false,
+          "customAttributeName": "Instructions Included"
+        }
+      ],
+      "extendedInformation": [
+        {
+          "value": "Y",
+          "formattedValue": "Yes",
+          "expiCode": "TAX",
+          "expiName": "Taxable"
+        },
+        {
+          "value": "1",
+          "formattedValue": "CARB Eligible",
+          "expiCode": "EMS",
+          "expiName": "Emission Code"
+        },
+        {
+          "value": "N",
+          "formattedValue": "No",
+          "expiCode": "MSR",
+          "expiName": "SDR Required Flag"
+        },
+        {
+          "value": "7",
+          "formattedValue": "7",
+          "expiCode": "PLM",
+          "expiName": "Pallet Layer Maximum"
+        },
+        {
+          "value": "2",
+          "formattedValue": "Available to Order",
+          "expiCode": "LIF",
+          "expiName": "Life Cycle Status Code"
+        },
+        {
+          "value": "CN",
+          "formattedValue": "China",
+          "expiCode": "CTO",
+          "expiName": "Country of Origin (Primary)"
+        },
+        {
+          "value": "8413309090",
+          "formattedValue": "8413309090",
+          "expiCode": "HTS",
+          "expiName": "Harmonized Tariff Code (HTS)"
+        },
+        {
+          "value": "72",
+          "formattedValue": "72",
+          "expiCode": "PLC",
+          "expiName": "Maximum Cases per Pallet Layer"
+        },
+        {
+          "value": "8413309090",
+          "formattedValue": "8413309090",
+          "expiCode": "HSB",
+          "expiName": "Harmonized Tariff Code (Schedule B)"
+        }
+      ],
+      "packages": [
+        {
+          "packageLevelGTINNumber": "00083286948921",
+          "packageBarCodeCharacters": "083286948921",
+          "packageUOMCode": "EA",
+          "packageUOMName": "Smallest Pack (Consumer Level)",
+          "quantityOfEaches": 1,
+          "innerQuantity": {
+            "value": 1,
+            "uomCode": "EA",
+            "uomName": "Each"
+          },
+          "orderable": true,
+          "dimensions": {
+            "height": 5.3,
+            "width": 4.5,
+            "length": 5.5,
+            "shippingHeight": 5.3,
+            "shippingWidth": 4.5,
+            "shippingLength": 5.5,
+            "uomCode": "IN",
+            "uomName": "Inch"
+          },
+          "weights": {
+            "weight": 1.11,
+            "uomCode": "PG",
+            "uomName": "Pounds Gross"
+          },
+          "hazardousMaterials": []
+        },
+        {
+          "packageLevelGTINNumber": "00083286948921",
+          "packageBarCodeCharacters": "083286948921",
+          "packageUOMCode": "EA",
+          "packageUOMName": "Smallest Pack (Consumer Level)",
+          "quantityOfEaches": 1,
+          "innerQuantity": {
+            "value": 1,
+            "uomCode": "EA",
+            "uomName": "Each"
+          },
+          "orderable": true,
+          "dimensions": {
+            "height": 13.462,
+            "width": 11.43,
+            "length": 13.97,
+            "shippingHeight": 13.462,
+            "shippingWidth": 11.43,
+            "shippingLength": 13.97,
+            "uomCode": "CM",
+            "uomName": "Centimeter"
+          },
+          "weights": {
+            "weight": 0.5035,
+            "uomCode": "KG",
+            "uomName": "Kilogram"
+          },
+          "hazardousMaterials": []
+        }
+      ],
+      "kits": [],
+      "partInterchanges": [
+        {
+          "interchangeTypeCode": "O",
+          "brandCode": "CPCD",
+          "brandName": "Volkswagen",
+          "partNumber": "079121014M",
+          "qualityGradeLevelCode": "O"
+        }
+      ],
+      "descriptions": [
+        {
+          "value": "Engine Water Pump",
+          "descriptionTypeCode": "DES",
+          "descriptionTypeName": "Product Description - Long",
+          "languageCode": "EN"
+        },
+        {
+          "value": "Water Pump",
+          "descriptionTypeCode": "SHO",
+          "descriptionTypeName": "Product Description - Short",
+          "languageCode": "EN"
+        },
+        {
+          "value": "100% factory tested for leakage and dimensional precision.",
+          "descriptionTypeCode": "FAB",
+          "descriptionTypeName": "Features and Benefits",
+          "languageCode": "EN",
+          "sequence": 1
+        },
+        {
+          "value": "Bearing noise and durability-tested.",
+          "descriptionTypeCode": "FAB",
+          "descriptionTypeName": "Features and Benefits",
+          "languageCode": "EN",
+          "sequence": 2
+        },
+        {
+          "value": "Designed to match OE coolant flow rate and pressure.",
+          "descriptionTypeCode": "FAB",
+          "descriptionTypeName": "Features and Benefits",
+          "languageCode": "EN",
+          "sequence": 3
+        },
+        {
+          "value": "All required hardware included for easy installation.",
+          "descriptionTypeCode": "FAB",
+          "descriptionTypeName": "Features and Benefits",
+          "languageCode": "EN",
+          "sequence": 4
+        },
+        {
+          "value": "Manufactured to meet or exceed OEM specifications.",
+          "descriptionTypeCode": "MKT",
+          "descriptionTypeName": "Marketing Description",
+          "languageCode": "EN"
+        }
+      ]
+    }
+  },
+  "applications": [
+    {
+      "acesApp": {
+        "partNumber": "180-2620",
+        "brandCode": "BFBQ",
+        "brandName": "GMB",
+        "notes": [],
+        "quals": [],
+        "qty": "1",
+        "partTypeId": 2208,
+        "partTypeName": "Engine Water Pump",
+        "years": [],
+        "baseVehicleId": 134770,
+        "baseVehicleName": "2016 Audi S6",
+        "attributes": [
+          {
+            "attributeType": "EngineBaseId",
+            "attributeTypeName": "Engine Base",
+            "attributeValueId": 5522,
+            "attributeValueName": "V8 4.0L 3993cc"
+          }
+        ],
+        "digitalAssets": []
+      },
+      "matchingBaseVehicles": []
+    },
+    {
+      "acesApp": {
+        "partNumber": "180-2620",
+        "brandCode": "BFBQ",
+        "brandName": "GMB",
+        "notes": [],
+        "quals": [],
+        "qty": "1",
+        "partTypeId": 2208,
+        "partTypeName": "Engine Water Pump",
+        "years": [],
+        "baseVehicleId": 137021,
+        "baseVehicleName": "2016 Audi A8 Quattro",
+        "attributes": [
+          {
+            "attributeType": "EngineBaseId",
+            "attributeTypeName": "Engine Base",
+            "attributeValueId": 5522,
+            "attributeValueName": "V8 4.0L 3993cc"
+          }
+        ],
+        "digitalAssets": []
+      },
+      "matchingBaseVehicles": []
+    },
+    {
+      "acesApp": {
+        "partNumber": "180-2620",
+        "brandCode": "BFBQ",
+        "brandName": "GMB",
+        "notes": [],
+        "quals": [],
+        "qty": "1",
+        "partTypeId": 2208,
+        "partTypeName": "Engine Water Pump",
+        "years": [],
+        "baseVehicleId": 140980,
+        "baseVehicleName": "2017 Audi S6",
+        "attributes": [
+          {
+            "attributeType": "EngineBaseId",
+            "attributeTypeName": "Engine Base",
+            "attributeValueId": 5522,
+            "attributeValueName": "V8 4.0L 3993cc"
+          }
+        ],
+        "digitalAssets": []
+      },
+      "matchingBaseVehicles": []
+    },
+    {
+      "acesApp": {
+        "partNumber": "180-2620",
+        "brandCode": "BFBQ",
+        "brandName": "GMB",
+        "notes": [],
+        "quals": [],
+        "qty": "1",
+        "partTypeId": 2208,
+        "partTypeName": "Engine Water Pump",
+        "years": [],
+        "baseVehicleId": 127965,
+        "baseVehicleName": "2014 Audi S8",
+        "attributes": [
+          {
+            "attributeType": "EngineBaseId",
+            "attributeTypeName": "Engine Base",
+            "attributeValueId": 5522,
+            "attributeValueName": "V8 4.0L 3993cc"
+          }
+        ],
+        "digitalAssets": []
+      },
+      "matchingBaseVehicles": []
+    },
+    {
+      "acesApp": {
+        "partNumber": "180-2620",
+        "brandCode": "BFBQ",
+        "brandName": "GMB",
+        "notes": [],
+        "quals": [],
+        "qty": "1",
+        "partTypeId": 2208,
+        "partTypeName": "Engine Water Pump",
+        "years": [],
+        "baseVehicleId": 127032,
+        "baseVehicleName": "2014 Audi A8 Quattro",
+        "attributes": [
+          {
+            "attributeType": "EngineBaseId",
+            "attributeTypeName": "Engine Base",
+            "attributeValueId": 5522,
+            "attributeValueName": "V8 4.0L 3993cc"
+          }
+        ],
+        "digitalAssets": []
+      },
+      "matchingBaseVehicles": []
+    },
+    {
+      "acesApp": {
+        "partNumber": "180-2620",
+        "brandCode": "BFBQ",
+        "brandName": "GMB",
+        "notes": [],
+        "quals": [],
+        "qty": "1",
+        "partTypeId": 2208,
+        "partTypeName": "Engine Water Pump",
+        "years": [],
+        "baseVehicleId": 140983,
+        "baseVehicleName": "2017 Audi S8",
+        "attributes": [
+          {
+            "attributeType": "EngineBaseId",
+            "attributeTypeName": "Engine Base",
+            "attributeValueId": 5522,
+            "attributeValueName": "V8 4.0L 3993cc"
+          }
+        ],
+        "digitalAssets": []
+      },
+      "matchingBaseVehicles": []
+    },
+    {
+      "acesApp": {
+        "partNumber": "180-2620",
+        "brandCode": "BFBQ",
+        "brandName": "GMB",
+        "notes": [],
+        "quals": [],
+        "qty": "1",
+        "partTypeId": 2208,
+        "partTypeName": "Engine Water Pump",
+        "years": [],
+        "baseVehicleId": 127035,
+        "baseVehicleName": "2014 Audi RS7",
+        "attributes": [
+          {
+            "attributeType": "EngineBaseId",
+            "attributeTypeName": "Engine Base",
+            "attributeValueId": 5522,
+            "attributeValueName": "V8 4.0L 3993cc"
+          }
+        ],
+        "digitalAssets": []
+      },
+      "matchingBaseVehicles": []
+    },
+    {
+      "acesApp": {
+        "partNumber": "180-2620",
+        "brandCode": "BFBQ",
+        "brandName": "GMB",
+        "notes": [],
+        "quals": [],
+        "qty": "1",
+        "partTypeId": 2208,
+        "partTypeName": "Engine Water Pump",
+        "years": [],
+        "baseVehicleId": 145170,
+        "baseVehicleName": "2018 Audi A8 Quattro",
+        "attributes": [
+          {
+            "attributeType": "EngineBaseId",
+            "attributeTypeName": "Engine Base",
+            "attributeValueId": 5522,
+            "attributeValueName": "V8 4.0L 3993cc"
+          }
+        ],
+        "digitalAssets": []
+      },
+      "matchingBaseVehicles": []
+    },
+    {
+      "acesApp": {
+        "partNumber": "180-2620",
+        "brandCode": "BFBQ",
+        "brandName": "GMB",
+        "notes": [],
+        "quals": [],
+        "qty": "1",
+        "partTypeId": 2208,
+        "partTypeName": "Engine Water Pump",
+        "years": [],
+        "baseVehicleId": 134771,
+        "baseVehicleName": "2016 Audi S7",
+        "attributes": [
+          {
+            "attributeType": "EngineBaseId",
+            "attributeTypeName": "Engine Base",
+            "attributeValueId": 5522,
+            "attributeValueName": "V8 4.0L 3993cc"
+          }
+        ],
+        "digitalAssets": []
+      },
+      "matchingBaseVehicles": []
+    },
+    {
+      "acesApp": {
+        "partNumber": "180-2620",
+        "brandCode": "BFBQ",
+        "brandName": "GMB",
+        "notes": [],
+        "quals": [],
+        "qty": "1",
+        "partTypeId": 2208,
+        "partTypeName": "Engine Water Pump",
+        "years": [],
+        "baseVehicleId": 130084,
+        "baseVehicleName": "2015 Audi A8 Quattro",
+        "attributes": [
+          {
+            "attributeType": "EngineBaseId",
+            "attributeTypeName": "Engine Base",
+            "attributeValueId": 5522,
+            "attributeValueName": "V8 4.0L 3993cc"
+          }
+        ],
+        "digitalAssets": []
+      },
+      "matchingBaseVehicles": []
+    },
+    {
+      "acesApp": {
+        "partNumber": "180-2620",
+        "brandCode": "BFBQ",
+        "brandName": "GMB",
+        "notes": [],
+        "quals": [],
+        "qty": "1",
+        "partTypeId": 2208,
+        "partTypeName": "Engine Water Pump",
+        "years": [],
+        "baseVehicleId": 127963,
+        "baseVehicleName": "2014 Audi S6",
+        "attributes": [
+          {
+            "attributeType": "EngineBaseId",
+            "attributeTypeName": "Engine Base",
+            "attributeValueId": 5522,
+            "attributeValueName": "V8 4.0L 3993cc"
+          }
+        ],
+        "digitalAssets": []
+      },
+      "matchingBaseVehicles": []
+    },
+    {
+      "acesApp": {
+        "partNumber": "180-2620",
+        "brandCode": "BFBQ",
+        "brandName": "GMB",
+        "notes": [],
+        "quals": [],
+        "qty": "1",
+        "partTypeId": 2208,
+        "partTypeName": "Engine Water Pump",
+        "years": [],
+        "baseVehicleId": 127964,
+        "baseVehicleName": "2014 Audi S7",
+        "attributes": [
+          {
+            "attributeType": "EngineBaseId",
+            "attributeTypeName": "Engine Base",
+            "attributeValueId": 5522,
+            "attributeValueName": "V8 4.0L 3993cc"
+          }
+        ],
+        "digitalAssets": []
+      },
+      "matchingBaseVehicles": []
+    },
+    {
+      "acesApp": {
+        "partNumber": "180-2620",
+        "brandCode": "BFBQ",
+        "brandName": "GMB",
+        "notes": [],
+        "quals": [],
+        "qty": "1",
+        "partTypeId": 2208,
+        "partTypeName": "Engine Water Pump",
+        "years": [],
+        "baseVehicleId": 143953,
+        "baseVehicleName": "2018 Audi S7",
+        "attributes": [
+          {
+            "attributeType": "EngineBaseId",
+            "attributeTypeName": "Engine Base",
+            "attributeValueId": 5522,
+            "attributeValueName": "V8 4.0L 3993cc"
+          }
+        ],
+        "digitalAssets": []
+      },
+      "matchingBaseVehicles": []
+    },
+    {
+      "acesApp": {
+        "partNumber": "180-2620",
+        "brandCode": "BFBQ",
+        "brandName": "GMB",
+        "notes": [],
+        "quals": [],
+        "qty": "1",
+        "partTypeId": 2208,
+        "partTypeName": "Engine Water Pump",
+        "years": [],
+        "baseVehicleId": 130189,
+        "baseVehicleName": "2015 Audi S6",
+        "attributes": [
+          {
+            "attributeType": "EngineBaseId",
+            "attributeTypeName": "Engine Base",
+            "attributeValueId": 5522,
+            "attributeValueName": "V8 4.0L 3993cc"
+          }
+        ],
+        "digitalAssets": []
+      },
+      "matchingBaseVehicles": []
+    },
+    {
+      "acesApp": {
+        "partNumber": "180-2620",
+        "brandCode": "BFBQ",
+        "brandName": "GMB",
+        "notes": [],
+        "quals": [],
+        "qty": "1",
+        "partTypeId": 2208,
+        "partTypeName": "Engine Water Pump",
+        "years": [],
+        "baseVehicleId": 119676,
+        "baseVehicleName": "2013 Audi A8 Quattro",
+        "attributes": [
+          {
+            "attributeType": "EngineBaseId",
+            "attributeTypeName": "Engine Base",
+            "attributeValueId": 5522,
+            "attributeValueName": "V8 4.0L 3993cc"
+          }
+        ],
+        "digitalAssets": []
+      },
+      "matchingBaseVehicles": []
+    },
+    {
+      "acesApp": {
+        "partNumber": "180-2620",
+        "brandCode": "BFBQ",
+        "brandName": "GMB",
+        "notes": [],
+        "quals": [],
+        "qty": "1",
+        "partTypeId": 2208,
+        "partTypeName": "Engine Water Pump",
+        "years": [],
+        "baseVehicleId": 119679,
+        "baseVehicleName": "2013 Audi S7",
+        "attributes": [
+          {
+            "attributeType": "EngineBaseId",
+            "attributeTypeName": "Engine Base",
+            "attributeValueId": 5522,
+            "attributeValueName": "V8 4.0L 3993cc"
+          }
+        ],
+        "digitalAssets": []
+      },
+      "matchingBaseVehicles": []
+    },
+    {
+      "acesApp": {
+        "partNumber": "180-2620",
+        "brandCode": "BFBQ",
+        "brandName": "GMB",
+        "notes": [],
+        "quals": [],
+        "qty": "1",
+        "partTypeId": 2208,
+        "partTypeName": "Engine Water Pump",
+        "years": [],
+        "baseVehicleId": 134769,
+        "baseVehicleName": "2016 Audi RS7",
+        "attributes": [
+          {
+            "attributeType": "EngineBaseId",
+            "attributeTypeName": "Engine Base",
+            "attributeValueId": 5522,
+            "attributeValueName": "V8 4.0L 3993cc"
+          }
+        ],
+        "digitalAssets": []
+      },
+      "matchingBaseVehicles": []
+    },
+    {
+      "acesApp": {
+        "partNumber": "180-2620",
+        "brandCode": "BFBQ",
+        "brandName": "GMB",
+        "notes": [],
+        "quals": [],
+        "qty": "1",
+        "partTypeId": 2208,
+        "partTypeName": "Engine Water Pump",
+        "years": [],
+        "baseVehicleId": 140981,
+        "baseVehicleName": "2017 Audi S7",
+        "attributes": [
+          {
+            "attributeType": "EngineBaseId",
+            "attributeTypeName": "Engine Base",
+            "attributeValueId": 5522,
+            "attributeValueName": "V8 4.0L 3993cc"
+          }
+        ],
+        "digitalAssets": []
+      },
+      "matchingBaseVehicles": []
+    },
+    {
+      "acesApp": {
+        "partNumber": "180-2620",
+        "brandCode": "BFBQ",
+        "brandName": "GMB",
+        "notes": [],
+        "quals": [],
+        "qty": "1",
+        "partTypeId": 2208,
+        "partTypeName": "Engine Water Pump",
+        "years": [],
+        "baseVehicleId": 145150,
+        "baseVehicleName": "2018 Audi S6",
+        "attributes": [
+          {
+            "attributeType": "EngineBaseId",
+            "attributeTypeName": "Engine Base",
+            "attributeValueId": 5522,
+            "attributeValueName": "V8 4.0L 3993cc"
+          }
+        ],
+        "digitalAssets": []
+      },
+      "matchingBaseVehicles": []
+    },
+    {
+      "acesApp": {
+        "partNumber": "180-2620",
+        "brandCode": "BFBQ",
+        "brandName": "GMB",
+        "notes": [],
+        "quals": [],
+        "qty": "1",
+        "partTypeId": 2208,
+        "partTypeName": "Engine Water Pump",
+        "years": [],
+        "baseVehicleId": 143951,
+        "baseVehicleName": "2018 Audi RS7",
+        "attributes": [
+          {
+            "attributeType": "EngineBaseId",
+            "attributeTypeName": "Engine Base",
+            "attributeValueId": 5522,
+            "attributeValueName": "V8 4.0L 3993cc"
+          }
+        ],
+        "digitalAssets": []
+      },
+      "matchingBaseVehicles": []
+    },
+    {
+      "acesApp": {
+        "partNumber": "180-2620",
+        "brandCode": "BFBQ",
+        "brandName": "GMB",
+        "notes": [],
+        "quals": [],
+        "qty": "1",
+        "partTypeId": 2208,
+        "partTypeName": "Engine Water Pump",
+        "years": [],
+        "baseVehicleId": 140973,
+        "baseVehicleName": "2017 Audi A8 Quattro",
+        "attributes": [
+          {
+            "attributeType": "EngineBaseId",
+            "attributeTypeName": "Engine Base",
+            "attributeValueId": 5522,
+            "attributeValueName": "V8 4.0L 3993cc"
+          }
+        ],
+        "digitalAssets": []
+      },
+      "matchingBaseVehicles": []
+    },
+    {
+      "acesApp": {
+        "partNumber": "180-2620",
+        "brandCode": "BFBQ",
+        "brandName": "GMB",
+        "notes": [],
+        "quals": [],
+        "qty": "1",
+        "partTypeId": 2208,
+        "partTypeName": "Engine Water Pump",
+        "years": [],
+        "baseVehicleId": 143954,
+        "baseVehicleName": "2018 Audi S8",
+        "attributes": [
+          {
+            "attributeType": "EngineBaseId",
+            "attributeTypeName": "Engine Base",
+            "attributeValueId": 5522,
+            "attributeValueName": "V8 4.0L 3993cc"
+          }
+        ],
+        "digitalAssets": []
+      },
+      "matchingBaseVehicles": []
+    },
+    {
+      "acesApp": {
+        "partNumber": "180-2620",
+        "brandCode": "BFBQ",
+        "brandName": "GMB",
+        "notes": [],
+        "quals": [],
+        "qty": "1",
+        "partTypeId": 2208,
+        "partTypeName": "Engine Water Pump",
+        "years": [],
+        "baseVehicleId": 130086,
+        "baseVehicleName": "2015 Audi S7",
+        "attributes": [
+          {
+            "attributeType": "EngineBaseId",
+            "attributeTypeName": "Engine Base",
+            "attributeValueId": 5522,
+            "attributeValueName": "V8 4.0L 3993cc"
+          }
+        ],
+        "digitalAssets": []
+      },
+      "matchingBaseVehicles": []
+    },
+    {
+      "acesApp": {
+        "partNumber": "180-2620",
+        "brandCode": "BFBQ",
+        "brandName": "GMB",
+        "notes": [],
+        "quals": [],
+        "qty": "1",
+        "partTypeId": 2208,
+        "partTypeName": "Engine Water Pump",
+        "years": [],
+        "baseVehicleId": 119811,
+        "baseVehicleName": "2013 Audi S6",
+        "attributes": [
+          {
+            "attributeType": "EngineBaseId",
+            "attributeTypeName": "Engine Base",
+            "attributeValueId": 5522,
+            "attributeValueName": "V8 4.0L 3993cc"
+          }
+        ],
+        "digitalAssets": []
+      },
+      "matchingBaseVehicles": []
+    },
+    {
+      "acesApp": {
+        "partNumber": "180-2620",
+        "brandCode": "BFBQ",
+        "brandName": "GMB",
+        "notes": [],
+        "quals": [],
+        "qty": "1",
+        "partTypeId": 2208,
+        "partTypeName": "Engine Water Pump",
+        "years": [],
+        "baseVehicleId": 119680,
+        "baseVehicleName": "2013 Audi S8",
+        "attributes": [
+          {
+            "attributeType": "EngineBaseId",
+            "attributeTypeName": "Engine Base",
+            "attributeValueId": 5522,
+            "attributeValueName": "V8 4.0L 3993cc"
+          }
+        ],
+        "digitalAssets": []
+      },
+      "matchingBaseVehicles": []
+    },
+    {
+      "acesApp": {
+        "partNumber": "180-2620",
+        "brandCode": "BFBQ",
+        "brandName": "GMB",
+        "notes": [],
+        "quals": [],
+        "qty": "1",
+        "partTypeId": 2208,
+        "partTypeName": "Engine Water Pump",
+        "years": [],
+        "baseVehicleId": 140982,
+        "baseVehicleName": "2017 Audi RS7",
+        "attributes": [
+          {
+            "attributeType": "EngineBaseId",
+            "attributeTypeName": "Engine Base",
+            "attributeValueId": 5522,
+            "attributeValueName": "V8 4.0L 3993cc"
+          }
+        ],
+        "digitalAssets": []
+      },
+      "matchingBaseVehicles": []
+    },
+    {
+      "acesApp": {
+        "partNumber": "180-2620",
+        "brandCode": "BFBQ",
+        "brandName": "GMB",
+        "notes": [],
+        "quals": [],
+        "qty": "1",
+        "partTypeId": 2208,
+        "partTypeName": "Engine Water Pump",
+        "years": [],
+        "baseVehicleId": 137010,
+        "baseVehicleName": "2016 Audi S8",
+        "attributes": [
+          {
+            "attributeType": "EngineBaseId",
+            "attributeTypeName": "Engine Base",
+            "attributeValueId": 5522,
+            "attributeValueName": "V8 4.0L 3993cc"
+          }
+        ],
+        "digitalAssets": []
+      },
+      "matchingBaseVehicles": []
+    },
+    {
+      "acesApp": {
+        "partNumber": "180-2620",
+        "brandCode": "BFBQ",
+        "brandName": "GMB",
+        "notes": [],
+        "quals": [],
+        "qty": "1",
+        "partTypeId": 2208,
+        "partTypeName": "Engine Water Pump",
+        "years": [],
+        "baseVehicleId": 130085,
+        "baseVehicleName": "2015 Audi RS7",
+        "attributes": [
+          {
+            "attributeType": "EngineBaseId",
+            "attributeTypeName": "Engine Base",
+            "attributeValueId": 5522,
+            "attributeValueName": "V8 4.0L 3993cc"
+          }
+        ],
+        "digitalAssets": []
+      },
+      "matchingBaseVehicles": []
+    },
+    {
+      "acesApp": {
+        "partNumber": "180-2620",
+        "brandCode": "BFBQ",
+        "brandName": "GMB",
+        "notes": [],
+        "quals": [],
+        "qty": "1",
+        "partTypeId": 2208,
+        "partTypeName": "Engine Water Pump",
+        "years": [],
+        "baseVehicleId": 130088,
+        "baseVehicleName": "2015 Audi S8",
+        "attributes": [
+          {
+            "attributeType": "EngineBaseId",
+            "attributeTypeName": "Engine Base",
+            "attributeValueId": 5522,
+            "attributeValueName": "V8 4.0L 3993cc"
+          }
+        ],
+        "digitalAssets": []
+      },
+      "matchingBaseVehicles": []
+    }
+  ],
+  "application_table": {
+    "success": true,
+    "data": {
+      "html": "<table id=\"opt-guide-lb-content\" class=\"opt-guide-table\"><thead><tr>\n                            <th class=\"year\">Year</th>\n                            <th class=\"make\">Make</th>\n                            <th class=\"model\">Model</th>\n                            <th class=\"engine\">Engine</th>\n                            <th class=\"position\">Position</th>\n                            <th class=\"note\">Note</th>\n                        </tr></thead><tbody><tr><td class=\"year\">2013 - 2018</td><td class=\"make\">Audi</td><td class=\"model\">A8 Quattro</td><td class=\"engine\">V8 4.0L 3993cc</td><td class=\"Position\"></td><td class=\"note\"></td></tr><tr><td class=\"year\">2014 - 2018</td><td class=\"make\">Audi</td><td class=\"model\">RS7</td><td class=\"engine\">V8 4.0L 3993cc</td><td class=\"Position\"></td><td class=\"note\"></td></tr><tr><td class=\"year\">2013 - 2018</td><td class=\"make\">Audi</td><td class=\"model\">S6</td><td class=\"engine\">V8 4.0L 3993cc</td><td class=\"Position\"></td><td class=\"note\"></td></tr><tr><td class=\"year\">2013 - 2018</td><td class=\"make\">Audi</td><td class=\"model\">S7</td><td class=\"engine\">V8 4.0L 3993cc</td><td class=\"Position\"></td><td class=\"note\"></td></tr><tr><td class=\"year\">2013 - 2018</td><td class=\"make\">Audi</td><td class=\"model\">S8</td><td class=\"engine\">V8 4.0L 3993cc</td><td class=\"Position\"></td><td class=\"note\"></td></tr></tbody></table>"
+    }
+  }
+}

@@ -1,5 +1,6 @@
 import { Suspense } from "react"
 
+import { listCategories } from "@lib/data/categories"
 import { listLocales } from "@lib/data/locales"
 import { getLocale } from "@lib/data/locale-actions"
 import { listRegions } from "@lib/data/regions"
@@ -10,59 +11,82 @@ import Search from "@modules/layout/components/search"
 import SideMenu from "@modules/layout/components/side-menu"
 
 export default async function Nav() {
-  const [regions, locales, currentLocale] = await Promise.all([
+  const [regions, locales, currentLocale, categories] = await Promise.all([
     listRegions().then((regions: StoreRegion[]) => regions),
     listLocales(),
     getLocale(),
+    listCategories().catch(() => []),
   ])
 
   return (
-    <div className="sticky top-0 inset-x-0 z-50 group">
-      <header className="relative h-16 mx-auto border-b duration-200 bg-white border-ui-border-base">
-        <nav className="content-container txt-xsmall-plus text-ui-fg-subtle flex items-center justify-between w-full h-full text-small-regular">
-          <div className="flex-1 basis-0 h-full flex items-center">
-            <div className="h-full">
-              <SideMenu regions={regions} locales={locales} currentLocale={currentLocale} />
-            </div>
-          </div>
+    <header className="ap-scope ap-top relative z-50">
+      <div className="ap-top-in">
+        <LocalizedClientLink
+          href="/"
+          className="ap-brand"
+          aria-label="Auto Parts — головна"
+          data-testid="nav-store-link"
+        >
+          <span className="ap-brand-mark">AP</span>
+          <span>
+            AUTO <em>PARTS</em>
+          </span>
+        </LocalizedClientLink>
 
-          <div className="flex items-center h-full">
-            <LocalizedClientLink
-              href="/"
-              className="txt-compact-xlarge-plus hover:text-ui-fg-base uppercase"
-              data-testid="nav-store-link"
-            >
-              Medusa Store
-            </LocalizedClientLink>
-          </div>
+        <div className="ap-search">
+          <Search />
+        </div>
 
-          <div className="flex items-center gap-x-6 h-full flex-1 basis-0 justify-end">
-            <Search />
-            <div className="hidden small:flex items-center gap-x-6 h-full">
-              <LocalizedClientLink
-                className="hover:text-ui-fg-base"
-                href="/account"
-                data-testid="nav-account-link"
-              >
-                Account
-              </LocalizedClientLink>
-            </div>
+        <div className="ap-account">
+          <LocalizedClientLink href="/account" data-testid="nav-account-link">
+            Кабінет
+          </LocalizedClientLink>
+          <div className="ap-basket">
             <Suspense
               fallback={
                 <LocalizedClientLink
-                  className="hover:text-ui-fg-base flex gap-2"
+                  className="flex h-full items-center"
                   href="/cart"
                   data-testid="nav-cart-link"
                 >
-                  Cart (0)
+                  Кошик · 0
                 </LocalizedClientLink>
               }
             >
               <CartButton />
             </Suspense>
           </div>
-        </nav>
-      </header>
-    </div>
+        </div>
+      </div>
+
+      <nav className="ap-subnav">
+        <div className="ap-subnav-in">
+          <div className="h-[43px]">
+            <SideMenu
+              regions={regions}
+              locales={locales}
+              currentLocale={currentLocale}
+            />
+          </div>
+          <LocalizedClientLink className="ap-current" href="/store">
+            Каталог
+          </LocalizedClientLink>
+          {categories
+            .filter((category) => !category.parent_category)
+            .slice(0, 6)
+            .map((category) => (
+              <LocalizedClientLink
+                key={category.id}
+                href={`/categories/${category.handle}`}
+              >
+                {category.name}
+              </LocalizedClientLink>
+            ))}
+          <LocalizedClientLink href="/account/orders">
+            Мої замовлення
+          </LocalizedClientLink>
+        </div>
+      </nav>
+    </header>
   )
 }

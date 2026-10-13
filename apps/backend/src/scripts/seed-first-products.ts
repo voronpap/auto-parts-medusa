@@ -37,6 +37,13 @@ const OIL_FILTERS = "Масляні фільтри"
 const BRAKE_PADS = "Гальмівні колодки"
 const SHOCK_ABSORBERS = "Амортизатори"
 
+// Latin handles keep category addresses readable.
+const CATEGORY_HANDLES: Record<string, string> = {
+  [OIL_FILTERS]: "oil-filters",
+  [BRAKE_PADS]: "brake-pads",
+  [SHOCK_ABSORBERS]: "shock-absorbers",
+}
+
 const ITEMS: Item[] = [
   {
     brand: "Bosch",
@@ -216,6 +223,7 @@ export default async function seedFirstProducts({ container }: ExecArgs) {
       input: {
         product_categories: missing.map((name) => ({
           name,
+          handle: CATEGORY_HANDLES[name],
           is_active: true,
         })),
       },

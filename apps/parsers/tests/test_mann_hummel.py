@@ -165,3 +165,15 @@ def test_result_matches_the_catalog_schema():
 
     assert result.sources[0]["name"] == "MANN-FILTER (каталог виробника)"
     assert result.errors == []
+
+
+def test_chinese_makers_are_vehicle_makers_too():
+    data = {"data": {"products": {"items": [{"sku": "X", "comparison_numbers": [
+        {"label": "CHERY", "value": ["480-1012010"]},
+        {"label": "GREAT WALL", "value": ["1017100-ED01"]},
+    ]}]}}}
+
+    assert [(r.to.brand, r.to.number_type, r.relation_type) for r in parse_comparison_numbers(data, "u")] == [
+        ("CHERY", "oem", "OEM_REFERENCE"),
+        ("GREAT WALL", "oem", "OEM_REFERENCE"),
+    ]

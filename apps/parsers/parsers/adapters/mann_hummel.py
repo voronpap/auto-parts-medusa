@@ -45,7 +45,8 @@ VEHICLE_MAKERS = frozenset(
     generalmotors gm chevrolet daewoo renault dacia nissan infiniti peugeot citroen psa ds fiat
     alfaromeo lancia iveco toyota lexus honda acura hyundai kia mazda mitsubishi subaru suzuki
     daihatsu isuzu volvo saab jaguar landrover rover mg chrysler jeep dodge ssangyong lada vaz
-    gaz uaz zaz tesla man scania daf""".split()
+    gaz uaz zaz tesla man scania daf chery geely byd greatwall haval changan jac faw lifan
+    dongfeng""".split()
 )
 # The catalogue's label for a maker -> the name the catalog already uses.
 BRAND_NAMES = {
@@ -243,7 +244,7 @@ def parse_product_page(html: str, record_url: str) -> tuple[str | None, SourceRe
 class _MannHummelAdapter(Adapter):
     """Reads one brand's product pages. Subclasses name the brand and site."""
 
-    version = "1.1.0"
+    version = "1.1.1"
     min_interval = 5.0
     cross_search = True
     base_url: str

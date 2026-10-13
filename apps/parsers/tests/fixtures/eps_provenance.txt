@@ -1,0 +1,11 @@
+Retrieved 2026-10-13 from EPS's own anonymous catalogue through PoliteSession,
+at least 5 seconds between requests. Metadata JSON is unmodified; HTML
+fixtures are BeautifulSoup excerpts of actual EPS responses. References
+retain all rows for 1.970.127 and 1.957.001; application fixtures retain two
+Audi rows and all three MG / MG (SAIC) rows respectively. Search retains
+own-code cards for MG NSC90019C. Bootstrap is a synthetic minimal wrapper
+with actual EPS control names and fake state, not a live signature. Runtime
+records full raw responses and form bodies. Source scripts are not executed,
+packed .NET state is not deserialized; no captcha/PDF/account/analytics calls.
+The FACET photo code is not treated as an EPS own code. No number conversion
+formula is used: EPS metadata and native tree supply the actual visible code.

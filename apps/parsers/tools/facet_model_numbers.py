@@ -34,8 +34,8 @@ def model_names(html):
         yield cells[0].get_text("", strip=False).strip()
 
 
-def harvest(http, makes, models=None, max_models=None, max_engines=None, max_products=None, max_pages=None):
-    adapter = FacetAdapter(http)
+def harvest(http, makes, models=None, max_models=None, max_engines=None, max_products=None, max_pages=None, adapter_class=FacetAdapter):
+    adapter = adapter_class(http)
     controls = adapter._bootstrap()
     seen_makers, seen_numbers, products = set(), set(), 0
     # The full make list spans 13 ordinary pages; duplicates cannot supply
@@ -97,8 +97,8 @@ def positive(value):
     return value
 
 
-def main():
-    parser = argparse.ArgumentParser(description=__doc__)
+def main(adapter_class=FacetAdapter):
+    parser = argparse.ArgumentParser(description=f"Print native {adapter_class.catalog_title} numbers confirmed for selected makes.")
     parser.add_argument("--brands", nargs="+", required=True)
     parser.add_argument("--models", nargs="+")
     parser.add_argument("--max-models", type=positive, help="trial limit per catalogue make")
@@ -108,7 +108,7 @@ def main():
     parser.add_argument("--cache", type=Path, required=True)
     args = parser.parse_args()
     http = PoliteSession(cache=ResponseCache(args.cache), limiter=RateLimiter(5))
-    for number in harvest(http, args.brands, args.models, args.max_models, args.max_engines, args.max_products, args.max_pages):
+    for number in harvest(http, args.brands, args.models, args.max_models, args.max_engines, args.max_products, args.max_pages, adapter_class):
         print(number, flush=True)
 
 

@@ -83,10 +83,10 @@ def callback_reply(body):
     return result["stateObject"], html
 
 
-def initial_controls(html):
+def initial_controls(html, expected_title="FACET Catalog"):
     soup = BeautifulSoup(html, "html.parser")
     title = soup.title.get_text(" ", strip=True) if soup.title else ""
-    if normalize_brand(title) != "facetcatalog":
+    if normalize_brand(title) != normalize_brand(expected_title):
         raise SourceError("FACET catalogue brand identity is missing")
     controls = {}
     for script in soup.select("script:not([src])"):
@@ -187,9 +187,11 @@ def parse_applications(html, record_url):
 
 
 class FacetAdapter(Adapter):
-    version = "1.0.0"
+    version = "1.1.0"
     min_interval = 5.0
     cross_search = True
+    base_url = BASE_URL
+    catalog_title = "FACET Catalog"
 
     @property
     def source(self):
@@ -201,10 +203,10 @@ class FacetAdapter(Adapter):
         return ("FACET",)
 
     def _bootstrap(self):
-        return initial_controls(self.http.fetch(BASE_URL))
+        return initial_controls(self.http.fetch(self.base_url), self.catalog_title)
 
     def _metadata(self, number):
-        data = self.http.fetch_json(BASE_URL + "/Home/DettaglioFinale", method="POST", form_body={"codfacetFinale": number})
+        data = self.http.fetch_json(self.base_url + "/Home/DettaglioFinale", method="POST", form_body={"codfacetFinale": number})
         if not isinstance(data, dict) or not isinstance(data.get("Success"), bool):
             raise SourceError("FACET product metadata is missing")
         code = str(data.get("Cod") or "").strip()
@@ -224,12 +226,12 @@ class FacetAdapter(Adapter):
 
     def _callback(self, control, route, number, state, command=None, grid=True, extra=None):
         form = self._callback_form(control, number, state, command, grid, extra)
-        return callback_reply(self.http.fetch(BASE_URL + "/Home/" + route, method="POST", form_body=form))
+        return callback_reply(self.http.fetch(self.base_url + "/Home/" + route, method="POST", form_body=form))
 
     def _page_values(self, control, route, number, state, fields, extra=None):
         form = self._callback_form(control, number, state, ["PAGEROWVALUES", fields], extra=extra)
         form["DXCallbackArgument"] = "c0:FB|1;0;" + form["DXCallbackArgument"][3:]
-        body = self.http.fetch(BASE_URL + "/Home/" + route, method="POST", form_body=form)
+        body = self.http.fetch(self.base_url + "/Home/" + route, method="POST", form_body=form)
         data = callback_metadata(body).get("html")
         if not isinstance(data, str) or not data.startswith("FB|0|"):
             raise SourceError("FACET row-value callback is missing")
@@ -289,7 +291,7 @@ class FacetAdapter(Adapter):
         if not data:
             return SourceResult()
         code = data["Cod"].strip()
-        record_url = BASE_URL + "/Home/DettaglioFinale"
+        record_url = self.base_url + "/Home/DettaglioFinale"
         result = SourceResult()
         for key in ("Cod", "Descrizione_EN", "Stato", "Confezione", "Impianto", "SuperKit"):
             if isinstance(data.get(key), str) and data[key].strip():
@@ -299,7 +301,7 @@ class FacetAdapter(Adapter):
         for html in self._grid_pages(controls, "GVguidaApplicazioniBig", "DettaglioGuidaApplicazioni?tipo=Big", code, expand=True, notices=result.attributes):
             result.applications.extend(parse_applications(html, record_url))
         for record in (*result.relationships, *result.applications):
-            record.record_ref = f"FACET {code}"
+            record.record_ref = f"{self.brands[0]} {code}"
         for values, limit, name in ((result.relationships, 450, "References"), (result.applications, 5000, "Applications")):
             if len(values) > limit:
                 total = len(values)
@@ -329,11 +331,11 @@ class FacetAdapter(Adapter):
                     if not data:
                         continue
                     for refs in self._grid_pages(controls, "GVcrossReferenceBig", "DettaglioCrossReference?tipo=Big", code, notices=result.attributes):
-                        match = next((r for r in parse_references(refs, BASE_URL + "/Home/DettaglioFinale")
+                        match = next((r for r in parse_references(refs, self.base_url + "/Home/DettaglioFinale")
                                       if compact(r.to.number) == wanted and label_has_brand(r.to.brand, request.brand)), None)
                         if match:
-                            result.relationships.append(Relationship(to=NumberRef("FACET", "aftermarket", data["Cod"].strip()),
+                            result.relationships.append(Relationship(to=NumberRef(self.brands[0], "aftermarket", data["Cod"].strip()),
                                                         relation_type=match.relation_type, direction="incoming",
-                                                        raw_relation_text=match.raw_relation_text, record_ref=f"FACET {data['Cod'].strip()}", record_url=match.record_url))
+                                                        raw_relation_text=match.raw_relation_text, record_ref=f"{self.brands[0]} {data['Cod'].strip()}", record_url=match.record_url))
                             break
         return result

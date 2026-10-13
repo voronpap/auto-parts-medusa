@@ -41,6 +41,14 @@ import {
   PrepareImportInput,
 } from "./steps/lookup-tasks"
 import {
+  mergePartsBrandsStep,
+  MergeBrandsInput,
+  updatePartRelationshipStep,
+  UpdatePartRelationshipInput,
+  updatePartsBrandStep,
+  UpdateBrandInput,
+} from "./steps/edit-records"
+import {
   deletePartsBrandStep,
   deletePartNumberStep,
   deletePartRelationshipStep,
@@ -171,5 +179,26 @@ export const importPartNumberResultWorkflow = createWorkflow(
     }))
 
     return new WorkflowResponse(ingestLookupResultStep(ingest))
+  }
+)
+
+export const updatePartsBrandWorkflow = createWorkflow(
+  "update-parts-brand",
+  function (input: UpdateBrandInput) {
+    return new WorkflowResponse(updatePartsBrandStep(input))
+  }
+)
+
+export const mergePartsBrandsWorkflow = createWorkflow(
+  "merge-parts-brands",
+  function (input: MergeBrandsInput) {
+    return new WorkflowResponse(mergePartsBrandsStep(input))
+  }
+)
+
+export const updatePartRelationshipWorkflow = createWorkflow(
+  "update-part-relationship",
+  function (input: UpdatePartRelationshipInput) {
+    return new WorkflowResponse(updatePartRelationshipStep(input))
   }
 )

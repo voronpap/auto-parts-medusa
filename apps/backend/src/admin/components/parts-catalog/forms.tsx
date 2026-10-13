@@ -20,9 +20,11 @@ import {
   LICENSE_CLASS_LABELS,
   NUMBER_TYPE_LABELS,
   PartNumber,
+  Relationship,
   RELATION_TYPE_LABELS,
   Source,
   SOURCE_KIND_LABELS,
+  STATE_LABELS,
   VERDICT_LABELS,
 } from "../../lib/parts-catalog"
 
@@ -541,5 +543,156 @@ export const BrandPicker = ({
         </Text>
       )}
     </div>
+  )
+}
+
+export const EditBrandModal = ({
+  brand,
+  onOpenChange,
+}: {
+  brand: Brand
+  onOpenChange: (open: boolean) => void
+}) => {
+  const [name, setName] = useState(brand.name)
+  const [kind, setKind] = useState(brand.kind)
+  const [aliases, setAliases] = useState(
+    (brand.aliases ?? []).map((alias) => alias.alias).join(", ")
+  )
+  const mutation = useCatalogMutation(
+    `/admin/parts-catalog/brands/${brand.id}`,
+    "Бренд збережено",
+    () => onOpenChange(false)
+  )
+
+  return (
+    <FormModal
+      open
+      onOpenChange={onOpenChange}
+      title={`Бренд ${brand.name}`}
+      description="Аліаси — інші написання тієї самої назви. Джерела, що пишуть бренд інакше, потраплятимуть сюди. Якщо таке написання вже має окремий бренд, об'єднайте бренди."
+      isPending={mutation.isPending}
+      canSubmit={name.trim().length > 0}
+      onSubmit={() =>
+        mutation.mutate({
+          name,
+          kind,
+          aliases: aliases
+            .split(",")
+            .map((alias) => alias.trim())
+            .filter(Boolean),
+        })
+      }
+    >
+      <Field label="Назва">
+        <Input value={name} onChange={(e) => setName(e.target.value)} />
+      </Field>
+      <Field label="Тип">
+        <OptionSelect
+          value={kind}
+          onChange={setKind}
+          options={BRAND_KIND_LABELS}
+        />
+      </Field>
+      <Field label="Аліаси через кому">
+        <Input
+          value={aliases}
+          onChange={(e) => setAliases(e.target.value)}
+          placeholder="VW, V.A.G."
+        />
+      </Field>
+    </FormModal>
+  )
+}
+
+export const MergeBrandModal = ({
+  brand,
+  onOpenChange,
+}: {
+  brand: Brand
+  onOpenChange: (open: boolean) => void
+}) => {
+  const [target, setTarget] = useState<Brand | null>(null)
+  const mutation = useCatalogMutation(
+    "/admin/parts-catalog/brands/merge",
+    "Бренди об'єднано",
+    () => onOpenChange(false)
+  )
+
+  return (
+    <FormModal
+      open
+      onOpenChange={onOpenChange}
+      title={`Об'єднати бренд ${brand.name}`}
+      description={`Усі номери бренду «${brand.name}» перейдуть до вибраного бренду. Якщо той самий номер є в обох, їхні кроси, застосовність і характеристики зіллються в один. Назва «${brand.name}» стане аліасом, а сам бренд зникне зі списку.`}
+      isPending={mutation.isPending}
+      canSubmit={Boolean(target) && target?.id !== brand.id}
+      onSubmit={() =>
+        mutation.mutate({ source_id: brand.id, target_id: target!.id })
+      }
+    >
+      <Field label="Влити в бренд">
+        <BrandPicker value={target} onChange={setTarget} />
+      </Field>
+      {target?.id === brand.id && (
+        <Text size="small" className="text-ui-fg-error">
+          Бренд не можна об'єднати із самим собою.
+        </Text>
+      )}
+    </FormModal>
+  )
+}
+
+export const EditRelationshipModal = ({
+  relationship,
+  onOpenChange,
+}: {
+  relationship: Relationship
+  onOpenChange: (open: boolean) => void
+}) => {
+  const [verdict, setVerdict] = useState(relationship.applicability_verdict)
+  const [state, setState] = useState(relationship.relationship_state)
+  const [reason, setReason] = useState(relationship.reason ?? "")
+  const mutation = useCatalogMutation(
+    `/admin/parts-catalog/relationships/${relationship.id}`,
+    "Зв'язок збережено",
+    () => onOpenChange(false)
+  )
+
+  return (
+    <FormModal
+      open
+      onOpenChange={onOpenChange}
+      title="Вердикт зв'язку"
+      description="Вердикт, який поставила людина, нові дані парсерів не перезаписують. «Підтверджено» й «Умовно» можливі лише за наявності доказу з каталогу виробника або ліцензованої бази. Покупці бачать тільки ці два вердикти."
+      isPending={mutation.isPending}
+      canSubmit
+      onSubmit={() =>
+        mutation.mutate({
+          applicability_verdict: verdict,
+          relationship_state: state,
+          reason: reason.trim() || null,
+        })
+      }
+    >
+      <Field label="Вердикт">
+        <OptionSelect
+          value={verdict}
+          onChange={setVerdict}
+          options={Object.fromEntries(
+            Object.entries(VERDICT_LABELS).map(([key, item]) => [key, item.label])
+          )}
+        />
+      </Field>
+      <Field label="Стан твердження">
+        <OptionSelect value={state} onChange={setState} options={STATE_LABELS} />
+      </Field>
+      <Field label="Причина або умова">
+        <Textarea
+          value={reason}
+          onChange={(e) => setReason(e.target.value)}
+          placeholder="Наприклад: лише для авто до 05.2009"
+        />
+      </Field>
+    </FormModal>
   )
 }

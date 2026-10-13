@@ -16,6 +16,8 @@ import {
   CreateBrandModal,
   CreatePartNumberModal,
   CreateSourceModal,
+  EditBrandModal,
+  MergeBrandModal,
 } from "../../components/parts-catalog/forms"
 import { sdk } from "../../lib/client"
 import {
@@ -150,6 +152,8 @@ const NumbersSection = () => {
 
 const BrandsSection = () => {
   const [createOpen, setCreateOpen] = useState(false)
+  const [editing, setEditing] = useState<Brand | null>(null)
+  const [merging, setMerging] = useState<Brand | null>(null)
   const [search, setSearch] = useState("")
   const q = search.trim()
   const { data, isLoading } = useQuery({
@@ -197,6 +201,7 @@ const BrandsSection = () => {
               <Table.HeaderCell>Назва</Table.HeaderCell>
               <Table.HeaderCell>Тип</Table.HeaderCell>
               <Table.HeaderCell>Аліаси</Table.HeaderCell>
+              <Table.HeaderCell />
             </Table.Row>
           </Table.Header>
           <Table.Body>
@@ -219,12 +224,44 @@ const BrandsSection = () => {
                     ))}
                   </div>
                 </Table.Cell>
+                <Table.Cell>
+                  <div className="flex justify-end gap-x-2">
+                    <Button
+                      size="small"
+                      variant="transparent"
+                      onClick={() => setEditing(brand)}
+                    >
+                      Змінити
+                    </Button>
+                    <Button
+                      size="small"
+                      variant="transparent"
+                      onClick={() => setMerging(brand)}
+                    >
+                      Об'єднати
+                    </Button>
+                  </div>
+                </Table.Cell>
               </Table.Row>
             ))}
           </Table.Body>
         </Table>
       )}
       <CreateBrandModal open={createOpen} onOpenChange={setCreateOpen} />
+      {editing && (
+        <EditBrandModal
+          key={editing.id}
+          brand={editing}
+          onOpenChange={() => setEditing(null)}
+        />
+      )}
+      {merging && (
+        <MergeBrandModal
+          key={merging.id}
+          brand={merging}
+          onOpenChange={() => setMerging(null)}
+        />
+      )}
     </Container>
   )
 }

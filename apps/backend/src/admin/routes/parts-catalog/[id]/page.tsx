@@ -1,4 +1,4 @@
-import { ArrowLongRight, Spinner, Trash } from "@medusajs/icons"
+import { ArrowLongRight, PencilSquare, Spinner, Trash } from "@medusajs/icons"
 import {
   Badge,
   Button,
@@ -13,7 +13,10 @@ import {
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { Fragment, useState } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
-import { CreateRelationshipModal } from "../../../components/parts-catalog/forms"
+import {
+  CreateRelationshipModal,
+  EditRelationshipModal,
+} from "../../../components/parts-catalog/forms"
 import { sdk } from "../../../lib/client"
 import {
   Application,
@@ -37,10 +40,12 @@ const numberLabel = (item?: PartNumber | null) =>
 const RelationshipsTable = ({
   relationships,
   direction,
+  onEdit,
   onDelete,
 }: {
   relationships: Relationship[]
   direction: "outgoing" | "incoming"
+  onEdit: (relationship: Relationship) => void
   onDelete: (relationship: Relationship) => void
 }) => (
   <Table>
@@ -127,13 +132,22 @@ const RelationshipsTable = ({
               </div>
             </Table.Cell>
             <Table.Cell>
-              <IconButton
-                size="small"
-                variant="transparent"
-                onClick={() => onDelete(relationship)}
-              >
-                <Trash />
-              </IconButton>
+              <div className="flex justify-end gap-x-1">
+                <IconButton
+                  size="small"
+                  variant="transparent"
+                  onClick={() => onEdit(relationship)}
+                >
+                  <PencilSquare />
+                </IconButton>
+                <IconButton
+                  size="small"
+                  variant="transparent"
+                  onClick={() => onDelete(relationship)}
+                >
+                  <Trash />
+                </IconButton>
+              </div>
             </Table.Cell>
           </Table.Row>
         )
@@ -307,6 +321,9 @@ const PartNumberPage = () => {
       cancelText: "Скасувати",
     })
 
+  const [editingRelationship, setEditingRelationship] =
+    useState<Relationship | null>(null)
+
   const deleteRelationship = async (relationship: Relationship) => {
     if (await confirmDelete("Зв'язок буде видалено разом із його доказами.")) {
       deleteMutation.mutate(
@@ -424,6 +441,7 @@ const PartNumberPage = () => {
           <RelationshipsTable
             relationships={outgoing}
             direction="outgoing"
+            onEdit={setEditingRelationship}
             onDelete={deleteRelationship}
           />
         ) : (
@@ -443,6 +461,7 @@ const PartNumberPage = () => {
           <RelationshipsTable
             relationships={incoming}
             direction="incoming"
+            onEdit={setEditingRelationship}
             onDelete={deleteRelationship}
           />
         ) : (
@@ -504,6 +523,13 @@ const PartNumberPage = () => {
         </Container>
       )}
 
+      {editingRelationship && (
+        <EditRelationshipModal
+          key={editingRelationship.id}
+          relationship={editingRelationship}
+          onOpenChange={() => setEditingRelationship(null)}
+        />
+      )}
       <CreateRelationshipModal
         open={createOpen}
         onOpenChange={setCreateOpen}

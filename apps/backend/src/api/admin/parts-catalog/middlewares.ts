@@ -39,6 +39,29 @@ export const CreateBrandSchema = z.object({
   aliases: z.array(z.string().trim().min(1).max(200)).max(50).optional(),
 })
 
+export const UpdateBrandSchema = z.object({
+  name: z.string().trim().min(1).max(200).optional(),
+  kind: z.enum(BRAND_KINDS).optional(),
+  aliases: z.array(z.string().trim().min(1).max(200)).max(50).optional(),
+})
+
+export const MergeBrandsSchema = z.object({
+  source_id: z.string().min(1),
+  target_id: z.string().min(1),
+})
+
+export const UpdatePartRelationshipSchema = z.object({
+  applicability_verdict: z.enum(APPLICABILITY_VERDICTS).optional(),
+  relationship_state: z.enum(RELATIONSHIP_STATES).optional(),
+  reason: z.string().max(2000).nullish(),
+})
+
+export type UpdateBrandBody = z.infer<typeof UpdateBrandSchema>
+export type MergeBrandsBody = z.infer<typeof MergeBrandsSchema>
+export type UpdatePartRelationshipBody = z.infer<
+  typeof UpdatePartRelationshipSchema
+>
+
 export const CreateSourceSchema = z.object({
   name: z.string().trim().min(1).max(200),
   kind: z.enum(SOURCE_KINDS),
@@ -116,6 +139,21 @@ export const partsCatalogMiddlewares: MiddlewareRoute[] = [
     matcher: "/admin/parts-catalog/brands",
     method: "POST",
     middlewares: [validateAndTransformBody(CreateBrandSchema)],
+  },
+  {
+    matcher: "/admin/parts-catalog/brands/merge",
+    method: "POST",
+    middlewares: [validateAndTransformBody(MergeBrandsSchema)],
+  },
+  {
+    matcher: "/admin/parts-catalog/brands/:id",
+    method: "POST",
+    middlewares: [validateAndTransformBody(UpdateBrandSchema)],
+  },
+  {
+    matcher: "/admin/parts-catalog/relationships/:id",
+    method: "POST",
+    middlewares: [validateAndTransformBody(UpdatePartRelationshipSchema)],
   },
   {
     matcher: "/admin/parts-catalog/sources",

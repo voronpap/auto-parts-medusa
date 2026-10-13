@@ -105,6 +105,20 @@
 .ap-order .ap-primary { width: calc(100% - 32px); margin: 0 16px 16px; }
 .ap-note { padding: 13px 16px; border-top: 1px solid var(--ap-line); color: var(--ap-muted); background: var(--ap-surface-2); font-size: 11px; }
 
+.ap-workspace.ap-two { grid-template-columns: 230px minmax(0, 1fr); }
+.ap-catalog-head h1 { margin: 0 0 2px; font-size: 24px; font-weight: 800; letter-spacing: -0.035em; }
+.ap-tools { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 10px; }
+.ap-filter { display: flex; overflow: hidden; border: 1px solid var(--ap-line); border-radius: 7px; background: var(--ap-surface-2); }
+.ap-filter input { width: 190px; height: 34px; padding: 0 11px; border: 0; color: var(--ap-ink); background: transparent; outline: 0; }
+.ap-filter button { padding: 0 12px; color: var(--ap-brand-2); background: var(--ap-brand); font-weight: 800; }
+.ap-sorts { display: flex; overflow: hidden; border: 1px solid var(--ap-line); border-radius: 7px; }
+.ap-sorts a { padding: 7px 11px; color: var(--ap-muted); background: var(--ap-surface-2); }
+.ap-sorts a + a { border-left: 1px solid var(--ap-line); }
+.ap-sorts a.ap-on { color: var(--ap-ink); background: var(--ap-brand-soft); font-weight: 800; }
+.ap-link { color: var(--ap-brand); font-weight: 700; }
+.ap-pager { display: flex; align-items: center; justify-content: center; gap: 18px; padding: 15px; border-top: 1px solid var(--ap-line); color: var(--ap-muted); }
+.ap-pager a { padding: 7px 12px; border: 1px solid var(--ap-line); border-radius: 7px; color: var(--ap-ink); background: var(--ap-surface-2); font-weight: 700; }
+
 @media (max-width: 1100px) {
   .ap-workspace { grid-template-columns: 210px minmax(0, 1fr); }
   .ap-order { position: static; grid-column: 1 / -1; }
@@ -117,7 +131,9 @@
   .ap-intro { grid-template-columns: 1fr; }
   .ap-intro-visual { min-height: 200px; }
   .ap-stats { grid-template-columns: repeat(2, 1fr); }
-  .ap-workspace { grid-template-columns: 1fr; }
+  .ap-workspace, .ap-workspace.ap-two { grid-template-columns: 1fr; }
+  .ap-catalog-head { flex-direction: column; align-items: stretch; }
+  .ap-tools { justify-content: flex-start; }
   .ap-side { position: static; }
   .ap-cats { display: grid; grid-template-columns: repeat(2, 1fr); }
   .ap-table { min-width: 640px; }

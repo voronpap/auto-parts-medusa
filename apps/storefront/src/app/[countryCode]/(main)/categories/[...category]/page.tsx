@@ -2,61 +2,51 @@ import { Metadata } from "next"
 import { notFound } from "next/navigation"
 
 import { getCategoryByHandle } from "@lib/data/categories"
-import CategoryTemplate from "@modules/categories/templates"
+import Catalog from "@modules/catalog/templates/catalog"
 import { SortOptions } from "@modules/store/components/refinement-list/sort-products"
-import { parseOptionValueIds } from "@lib/util/product-option-filters"
 
 type Props = {
   params: Promise<{ category: string[]; countryCode: string }>
-  searchParams: Promise<
-    Record<string, string | string[] | undefined> & {
-      sortBy?: SortOptions
-      page?: string
-      optionValueIds?: string | string[]
-    }
-  >
+  searchParams: Promise<{ q?: string; page?: string; sortBy?: SortOptions }>
 }
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const params = await props.params
-  try {
-    const productCategory = await getCategoryByHandle(params.category)
+  const category = await getCategoryByHandle(
+    params.category.map(decodeURIComponent)
+  ).catch(() => null)
 
-    const title = productCategory.name + " | Medusa Store"
-
-    const description = productCategory.description ?? `${title} category.`
-
-    return {
-      title: `${title} | Medusa Store`,
-      description,
-      alternates: {
-        canonical: `${params.category.join("/")}`,
-      },
-    }
-  } catch {
+  if (!category) {
     notFound()
+  }
+
+  return {
+    title: `${category.name} — Auto Parts`,
+    description: category.description || `${category.name}: каталог запчастин.`,
+    alternates: { canonical: params.category.join("/") },
   }
 }
 
 export default async function CategoryPage(props: Props) {
-  const searchParams = await props.searchParams
   const params = await props.params
-  const { sortBy, page } = searchParams
-  const optionValueIds = parseOptionValueIds(searchParams)
+  const { q, page, sortBy } = await props.searchParams
+  const handle = params.category.map(decodeURIComponent)
+  const category = await getCategoryByHandle(handle)
 
-  const productCategory = await getCategoryByHandle(params.category)
-
-  if (!productCategory) {
+  if (!category) {
     notFound()
   }
 
   return (
-    <CategoryTemplate
-      category={productCategory}
-      sortBy={sortBy}
-      page={page}
+    <Catalog
       countryCode={params.countryCode}
-      optionValueIds={optionValueIds}
+      title={category.name}
+      description={category.description}
+      basePath={`/categories/${handle.join("/")}`}
+      categoryId={category.id}
+      page={page ? Math.max(1, parseInt(page) || 1) : 1}
+      sortBy={sortBy}
+      q={q?.trim() || undefined}
     />
   )
 }

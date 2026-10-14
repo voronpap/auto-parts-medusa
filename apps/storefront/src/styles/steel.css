@@ -409,3 +409,4 @@ body { background: #eef1f4; }
   .ap-pick-filter { padding: 0 12px 8px; }
   .ap-years { flex-wrap: wrap; }
 }
+.ap-pick-more { display: block; margin: 0 12px 8px; padding: 8px 12px; border: 1px dashed var(--ap-line); border-radius: 9px; background: none; color: var(--ap-brand); font-weight: 700; cursor: pointer; }

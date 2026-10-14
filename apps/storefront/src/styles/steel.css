@@ -355,3 +355,11 @@ body { background: #eef1f4; }
 .ap-fit-none { color: var(--ap-muted); background: var(--ap-surface-2); }
 .ap-btn { padding: 9px 14px; border: 0; border-radius: 8px; color: var(--ap-brand-2); background: var(--ap-brand); font-weight: 800; cursor: pointer; }
 .ap-btn:disabled { color: var(--ap-good); background: var(--ap-surface-2); cursor: default; }
+
+/* Pick-a-part request */
+.ap-request { display: grid; gap: 12px; max-width: 760px; }
+.ap-request-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.ap-request label { display: grid; gap: 5px; color: var(--ap-muted); font-size: 13px; font-weight: 700; }
+.ap-request input, .ap-request textarea { padding: 9px 11px; border: 1px solid var(--ap-line); border-radius: 8px; color: inherit; background: var(--ap-surface); font: inherit; }
+.ap-hidden { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+@media (max-width: 640px) { .ap-request-row { grid-template-columns: 1fr; } }

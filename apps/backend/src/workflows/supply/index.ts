@@ -15,6 +15,12 @@ import {
   CreateProductsFromOffersInput,
 } from "./steps/offer-products"
 import {
+  createPartsRequestStep,
+  CreatePartsRequestInput,
+  updatePartsRequestStep,
+  UpdatePartsRequestInput,
+} from "./steps/parts-requests"
+import {
   createProductByNumberStep,
   CreateProductByNumberInput,
 } from "./steps/product-by-number"
@@ -106,5 +112,19 @@ export const createProductByNumberWorkflow = createWorkflow(
   "create-product-by-number",
   function (input: CreateProductByNumberInput) {
     return new WorkflowResponse(createProductByNumberStep(input))
+  }
+)
+
+export const createPartsRequestWorkflow = createWorkflow(
+  "create-parts-request",
+  function (input: CreatePartsRequestInput) {
+    return new WorkflowResponse(createPartsRequestStep(input))
+  }
+)
+
+export const updatePartsRequestWorkflow = createWorkflow(
+  "update-parts-request",
+  function (input: UpdatePartsRequestInput) {
+    return new WorkflowResponse(updatePartsRequestStep(input))
   }
 )

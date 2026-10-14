@@ -194,6 +194,10 @@ export default async function Catalog({
                 За цим запитом товарів немає.{" "}
                 <LocalizedClientLink className="ap-link" href="/store">
                   Показати весь каталог
+                </LocalizedClientLink>{" "}
+                або{" "}
+                <LocalizedClientLink className="ap-link" href="/vin#request">
+                  попросіть підібрати за VIN
                 </LocalizedClientLink>
               </div>
             )}

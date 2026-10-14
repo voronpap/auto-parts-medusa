@@ -2,6 +2,7 @@ import { Metadata } from "next"
 import { notFound } from "next/navigation"
 
 import { lookupVin } from "@lib/data/parts-catalog"
+import PartsRequestForm from "@modules/parts-request/request-form"
 import { listProducts } from "@lib/data/products"
 import { getRegion } from "@lib/data/regions"
 import ProductTable from "@modules/catalog/components/product-table"
@@ -156,6 +157,14 @@ export default async function VinPage(props: {
             )}
           </section>
         )}
+
+        <section className="ap-section ap-card" id="request">
+          <div className="ap-section-head">
+            <h2 className="ap-pdp-title">Не знайшли? Підберемо за VIN</h2>
+            <p>Залиште телефон і що потрібно — менеджер підбере деталь і передзвонить.</p>
+          </div>
+          <PartsRequestForm vin={valid ? vin : undefined} />
+        </section>
       </div>
     </div>
   )

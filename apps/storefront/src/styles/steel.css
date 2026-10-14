@@ -373,3 +373,14 @@ body { background: #eef1f4; }
   .ap-garage { max-width: 44vw; overflow: hidden; }
   .ap-garage a { overflow: hidden; text-overflow: ellipsis; }
 }
+@media (max-width: 520px) {
+  .ap-offers .ap-table { min-width: 0; }
+  .ap-offers thead { display: none; }
+  .ap-offers tr { display: grid; grid-template-columns: 1fr auto auto; grid-template-areas: "part price buy" "name name name" "stock stock stock"; gap: 4px 10px; align-items: center; padding: 12px 13px; border-top: 1px solid var(--ap-line); }
+  .ap-offers td { padding: 0; border: 0; }
+  .ap-offers td:nth-child(1) { grid-area: part; }
+  .ap-offers td:nth-child(2) { grid-area: name; }
+  .ap-offers td:nth-child(3) { grid-area: stock; }
+  .ap-offers td:nth-child(4) { grid-area: price; }
+  .ap-offers td:nth-child(5) { grid-area: buy; }
+}

@@ -21,6 +21,11 @@ const googleEnabled = Boolean(
     process.env.STOREFRONT_URL
 )
 
+// Sign-in with Telegram is on only when the owner has put the shop's bot
+// token into .env.
+const telegramEnabled = Boolean(process.env.TELEGRAM_BOT_TOKEN)
+const socialEnabled = googleEnabled || telegramEnabled
+
 const ADMIN_MOBILE_CSS = `
 @media (max-width: 767px) {
   main .flex.items-center.justify-between.px-6.py-4 {
@@ -56,8 +61,17 @@ module.exports = defineConfig({
       authCors: process.env.AUTH_CORS!,
       jwtSecret: process.env.JWT_SECRET,
       cookieSecret: process.env.COOKIE_SECRET,
-      ...(googleEnabled
-        ? { authMethodsPerActor: { user: ["emailpass"], customer: ["emailpass", "google"] } }
+      ...(socialEnabled
+        ? {
+            authMethodsPerActor: {
+              user: ["emailpass"],
+              customer: [
+                "emailpass",
+                ...(googleEnabled ? ["google"] : []),
+                ...(telegramEnabled ? ["telegram"] : []),
+              ],
+            },
+          }
         : {}),
       ...(emailEnabled
         ? {
@@ -96,7 +110,7 @@ module.exports = defineConfig({
     }),
   },
   modules: [
-    ...(googleEnabled
+    ...(socialEnabled
       ? [
           {
             resolve: "@medusajs/medusa/auth",
@@ -104,15 +118,28 @@ module.exports = defineConfig({
             options: {
               providers: [
                 { resolve: "@medusajs/medusa/auth-emailpass", id: "emailpass" },
-                {
-                  resolve: "@medusajs/medusa/auth-google",
-                  id: "google",
-                  options: {
-                    clientId: process.env.GOOGLE_CLIENT_ID,
-                    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-                    callbackUrl: `${process.env.STOREFRONT_URL}/ua/auth/google`,
-                  },
-                },
+                ...(googleEnabled
+                  ? [
+                      {
+                        resolve: "@medusajs/medusa/auth-google",
+                        id: "google",
+                        options: {
+                          clientId: process.env.GOOGLE_CLIENT_ID,
+                          clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+                          callbackUrl: `${process.env.STOREFRONT_URL}/ua/auth/google`,
+                        },
+                      },
+                    ]
+                  : []),
+                ...(telegramEnabled
+                  ? [
+                      {
+                        resolve: "./src/modules/telegram-auth",
+                        id: "telegram",
+                        options: { botToken: process.env.TELEGRAM_BOT_TOKEN },
+                      },
+                    ]
+                  : []),
               ],
             },
           },

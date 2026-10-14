@@ -74,3 +74,59 @@ export async function finishGoogleLogin(query: Record<string, string>): Promise<
 
   return true
 }
+
+/**
+ * Telegram has sent the shopper back with signed data. Telegram gives no
+ * e-mail, so a first sign-in creates the customer with an address made
+ * from the Telegram id, which the shopper can change in the account.
+ */
+export async function finishTelegramLogin(query: Record<string, string>): Promise<boolean> {
+  let token: string
+
+  try {
+    const result = await sdk.auth.login("customer", "telegram", query)
+
+    if (typeof result !== "string") {
+      return false
+    }
+
+    token = result
+  } catch {
+    return false
+  }
+
+  const payload = payloadOf(token) as TokenPayload & {
+    user_metadata?: { telegram_id?: string; first_name?: string | null; last_name?: string | null }
+  }
+
+  if (!payload.actor_id) {
+    const meta = payload.user_metadata ?? {}
+    const id = meta.telegram_id ?? query.id
+
+    if (!id) {
+      return false
+    }
+
+    await sdk.store.customer.create(
+      {
+        email: `tg-${id}@telegram.auto-parts.pp.ua`,
+        first_name: meta.first_name ?? undefined,
+        last_name: meta.last_name ?? undefined,
+      },
+      {},
+      { Authorization: `Bearer ${token}` }
+    )
+    const refreshed = await sdk.auth.refresh({ Authorization: `Bearer ${token}` })
+
+    if (typeof refreshed !== "string") {
+      return false
+    }
+
+    token = refreshed
+  }
+
+  await setAuthToken(token)
+  await transferCart().catch(() => undefined)
+
+  return true
+}

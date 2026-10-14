@@ -138,3 +138,30 @@ export const retrieveVehicleMake = async (
       }
     )
     .catch(() => null)
+
+export type PartOffer = {
+  offer_id: string
+  brand: string
+  number: string
+  title: string | null
+  price: number
+  currency_code: string
+  in_stock: boolean
+  stock_quantity: number | null
+  lead_days: number | null
+  via: "number" | "cross"
+  matched: { brand: string; number: string } | null
+  product_handle: string | null
+}
+
+/** What can be bought for a typed number: the part itself and its confirmed analogs. */
+export const listPartOffers = async (q: string): Promise<PartOffer[]> =>
+  sdk.client
+    .fetch<{ offers: PartOffer[] }>("/store/parts-catalog/offers", {
+      method: "GET",
+      query: { q },
+      // Prices and stock follow the price list, so they are kept briefly.
+      next: { revalidate: 120, tags: ["parts-offers"] },
+    })
+    .then(({ offers }) => offers)
+    .catch(() => [])

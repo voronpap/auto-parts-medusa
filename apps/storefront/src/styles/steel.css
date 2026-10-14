@@ -340,3 +340,7 @@ body { background: #eef1f4; }
 .ap-years a:hover { border-color: var(--ap-brand); color: var(--ap-ink); }
 .ap-years a.ap-on { border-color: var(--ap-brand); color: var(--ap-brand-2); background: var(--ap-brand); font-weight: 800; }
 @media (max-width: 800px) { .ap-pick, .ap-years { padding-left: 16px; padding-right: 16px; } }
+
+/* Offers for a typed number */
+.ap-sku { display: block; margin-top: 2px; color: var(--ap-muted); font-size: 12px; }
+.ap-offers { margin-bottom: 18px; }

@@ -1,5 +1,6 @@
 import { listCategories } from "@lib/data/categories"
-import { searchByPartNumber } from "@lib/data/parts-catalog"
+import { listPartOffers, searchByPartNumber } from "@lib/data/parts-catalog"
+import OfferTable from "@modules/catalog/components/offer-table"
 import { listProducts, listProductsWithSort } from "@lib/data/products"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import { SortOptions } from "@modules/store/components/refinement-list/sort-products"
@@ -54,7 +55,10 @@ export default async function Catalog({
   ])
   // A typed part number also finds products through the parts catalog:
   // the product with that number and the confirmed crosses of that number.
-  const matches = q && !categoryId && page === 1 ? await searchByPartNumber(q) : []
+  const [matches, offers] =
+    q && !categoryId && page === 1
+      ? await Promise.all([searchByPartNumber(q), listPartOffers(q)])
+      : [[], []]
   const byNumber = matches.length
     ? await listProducts({
         countryCode,
@@ -166,6 +170,10 @@ export default async function Catalog({
               </div>
             </div>
 
+            {offers.length > 0 && (
+              <OfferTable offers={offers} countryCode={countryCode} />
+            )}
+
             {byNumber.length > 0 && (
               <>
                 <div className="ap-result-head">За номером деталі</div>
@@ -181,7 +189,7 @@ export default async function Catalog({
             )}
             {listed.length ? (
               <ProductTable products={listed} countryCode={countryCode} />
-            ) : byNumber.length ? null : (
+            ) : byNumber.length || offers.length ? null : (
               <div className="ap-empty">
                 За цим запитом товарів немає.{" "}
                 <LocalizedClientLink className="ap-link" href="/store">

@@ -4,6 +4,7 @@ import { notFound } from "next/navigation"
 import { getGarageCar } from "@lib/data/garage"
 import { listVehicleMakes, retrieveVehicleMake } from "@lib/data/parts-catalog"
 import { SaveCarButton } from "@modules/garage/save-car"
+import PickFilter from "@modules/cars/pick-filter"
 import { listProducts } from "@lib/data/products"
 import { getRegion } from "@lib/data/regions"
 import ProductTable from "@modules/catalog/components/product-table"
@@ -127,8 +128,9 @@ export default async function CarsPage(props: {
               </>
             )}
             <div className="ap-side-head">Усі марки</div>
+            {makes.length > 12 && <PickFilter target="all-makes" placeholder="Знайти марку" />}
             {makes.length ? (
-              <div className="ap-pick">
+              <div className="ap-pick" id="all-makes">
                 {makes.map((make) => (
                   <LocalizedClientLink key={make.id} href={`/cars?make=${make.id}`}>
                     <strong>{make.name}</strong>
@@ -148,8 +150,9 @@ export default async function CarsPage(props: {
               <h1 className="ap-pdp-title">{data.make.name}</h1>
               <p>Оберіть модель. У дужках — роки, для яких є деталі.</p>
             </div>
+            {data.families.length > 12 && <PickFilter target="all-models" placeholder="Знайти модель" />}
             {data.families.length ? (
-              <div className="ap-pick">
+              <div className="ap-pick" id="all-models">
                 {data.families.map((item) => (
                   <LocalizedClientLink
                     key={item.key}

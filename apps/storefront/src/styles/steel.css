@@ -396,3 +396,16 @@ body { background: #eef1f4; }
 .ap-info li { margin: 4px 0; }
 .ap-info a { color: var(--ap-brand); font-weight: 700; }
 @media (min-width: 801px) { .ap-footer-in { grid-template-columns: 1.4fr 1fr 1fr 1fr; } }
+
+/* Vehicle picker on a phone: two columns, a box to narrow long lists */
+.ap-pick-filter { padding: 0 22px 10px; }
+.ap-pick-filter input { width: 100%; padding: 10px 12px; border: 1px solid var(--ap-line); border-radius: 9px; background: var(--ap-surface); color: inherit; font: inherit; }
+@media (max-width: 520px) {
+  .ap-pick, .ap-pick-big { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; padding: 4px 12px 14px; }
+  .ap-pick a { flex-direction: column; align-items: flex-start; gap: 1px; padding: 9px 10px; }
+  .ap-pick strong { overflow-wrap: anywhere; font-size: 14px; }
+  .ap-pick-big a { padding: 10px; box-shadow: none; }
+  .ap-pick-big strong { font-size: 15px; }
+  .ap-pick-filter { padding: 0 12px 8px; }
+  .ap-years { flex-wrap: wrap; }
+}

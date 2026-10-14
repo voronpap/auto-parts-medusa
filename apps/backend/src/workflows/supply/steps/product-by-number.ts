@@ -140,11 +140,18 @@ export const createProductByNumberStep = createStep(
 
       const { data: linked } = await query.graph({
         entity: productVariantPartNumber.entryPoint,
-        fields: ["product_variant_id"],
+        fields: ["product_variant_id", "product_variant.id"],
         filters: { part_number_id: partNumber.id },
       })
+      const orphans = linked.filter((row) => !row.product_variant?.id)
 
-      if (linked.length) {
+      // Links of deleted products are taken away, so the number can get a new one.
+      if (orphans.length) {
+        await link.dismiss(orphans.map((row) => linkOf(row.product_variant_id, partNumber.id)))
+      }
+
+      // A link left behind by a deleted product does not count as a product.
+      if (linked.some((row) => row.product_variant?.id)) {
         throw new MedusaError(
           MedusaError.Types.DUPLICATE_ERROR,
           `${brand.name} ${partNumber.display_number} already has a product`

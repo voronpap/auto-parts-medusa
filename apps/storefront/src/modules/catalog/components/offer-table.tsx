@@ -11,12 +11,15 @@ type Props = {
   countryCode: string
 }
 
-const money = (value: number, currency: string) =>
-  new Intl.NumberFormat("uk-UA", {
-    style: "currency",
-    currency: currency.toUpperCase(),
-    maximumFractionDigits: 2,
-  }).format(value)
+// Formatted by hand: the server and the browser format currencies
+// differently ("грн" / "₴"), which breaks hydration.
+const money = (value: number, currency: string) => {
+  const [whole, cents] = value.toFixed(2).split(".")
+  const grouped = whole.replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+  const sign = currency.toLowerCase() === "uah" ? "₴" : currency.toUpperCase()
+
+  return `${grouped}${cents === "00" ? "" : `,${cents}`} ${sign}`
+}
 
 function availability(offer: PartOffer) {
   if (offer.in_stock) {

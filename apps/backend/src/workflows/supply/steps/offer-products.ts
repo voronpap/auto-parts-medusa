@@ -171,10 +171,19 @@ export const createProductsFromOffersStep = createStep(
       // Numbers that already have a product are not given a second one.
       const { data: linked } = await query.graph({
         entity: productVariantPartNumber.entryPoint,
-        fields: ["part_number_id"],
+        fields: ["part_number_id", "product_variant_id", "product_variant.id"],
         filters: { part_number_id: offers.map(partOf) },
       })
-      const sold = new Set(linked.map((row) => row.part_number_id))
+      const orphans = linked.filter((row) => !row.product_variant?.id)
+
+      // Links of deleted products are taken away, so the number can get a new one.
+      if (orphans.length) {
+        await link.dismiss(orphans.map((row) => linkOf(row.product_variant_id, row.part_number_id)))
+      }
+      // A link left behind by a deleted product does not count as a product.
+      const sold = new Set(
+        linked.filter((row) => row.product_variant?.id).map((row) => row.part_number_id)
+      )
       const candidates = offers.filter((offer) => {
         if (sold.has(partOf(offer))) {
           result.existing += 1

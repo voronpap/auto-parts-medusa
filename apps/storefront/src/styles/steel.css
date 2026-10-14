@@ -363,3 +363,13 @@ body { background: #eef1f4; }
 .ap-request input, .ap-request textarea { padding: 9px 11px; border: 1px solid var(--ap-line); border-radius: 8px; color: inherit; background: var(--ap-surface); font: inherit; }
 .ap-hidden { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
 @media (max-width: 640px) { .ap-request-row { grid-template-columns: 1fr; } }
+
+/* Phone: results before the category list; the saved car does not push the cart off the screen */
+@media (max-width: 800px) {
+  .ap-workspace > .ap-side { order: 2; }
+}
+@media (max-width: 520px) {
+  .ap-account { gap: 8px; min-width: 0; }
+  .ap-garage { max-width: 44vw; overflow: hidden; }
+  .ap-garage a { overflow: hidden; text-overflow: ellipsis; }
+}

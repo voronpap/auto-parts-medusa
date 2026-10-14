@@ -39,6 +39,15 @@ export default async function Footer() {
             Мої замовлення
           </LocalizedClientLink>
         </nav>
+        <nav aria-label="Інформація">
+          <strong>Інформація</strong>
+          <LocalizedClientLink href="/info/about">Про магазин</LocalizedClientLink>
+          <LocalizedClientLink href="/info/delivery">Доставка і оплата</LocalizedClientLink>
+          <LocalizedClientLink href="/info/returns">Повернення і гарантія</LocalizedClientLink>
+          <LocalizedClientLink href="/info/offer">Публічний договір</LocalizedClientLink>
+          <LocalizedClientLink href="/info/privacy">Конфіденційність</LocalizedClientLink>
+          <LocalizedClientLink href="/info/contacts">Контакти</LocalizedClientLink>
+        </nav>
       </div>
       <div className="ap-footer-copy">
         © {new Date().getFullYear()} Auto Parts. Усі права захищено.

@@ -387,3 +387,12 @@ body { background: #eef1f4; }
 
 .ap-social { display: flex; width: 100%; align-items: center; justify-content: center; gap: 10px; padding: 10px 14px; border: 1px solid var(--ap-line); border-radius: 8px; background: #fff; color: #1f2933; font-weight: 700; }
 .ap-social span { font-weight: 900; color: #4285f4; }
+
+/* Information pages */
+.ap-info { max-width: 860px; line-height: 1.6; }
+.ap-info h2 { margin: 22px 0 8px; font-size: 18px; font-weight: 800; }
+.ap-info p { margin: 0 0 10px; }
+.ap-info ul { margin: 0 0 12px; padding-left: 20px; list-style: disc; }
+.ap-info li { margin: 4px 0; }
+.ap-info a { color: var(--ap-brand); font-weight: 700; }
+@media (min-width: 801px) { .ap-footer-in { grid-template-columns: 1.4fr 1fr 1fr 1fr; } }

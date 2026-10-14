@@ -15,7 +15,7 @@ import jsonschema
 from .adapters import Adapter, LookupRequest
 from .client import CatalogClient, CatalogError
 from .http import SourceError
-from .models import LookupResult
+from .models import SourceResult, LookupResult
 
 log = logging.getLogger("parsers")
 
@@ -28,6 +28,25 @@ def load_schema(path: Path = DEFAULT_SCHEMA) -> dict[str, Any] | None:
         return None
 
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+# What one attribute value may hold in the catalog.
+MAX_ATTRIBUTE_VALUE = 500
+
+
+def fit_attribute_values(found: SourceResult) -> None:
+    """Some catalogues repeat a list in one field ("205 240 59 00; 205 240 59 00;
+    ...") past what a value may hold. The repeats go, the rest is cut to the
+    limit, and the full text is kept as the raw text."""
+    for attribute in found.attributes:
+        if len(attribute.value) <= MAX_ATTRIBUTE_VALUE:
+            continue
+
+        parts = list(dict.fromkeys(part.strip() for part in attribute.value.split(";") if part.strip()))
+        text = "; ".join(parts) or attribute.value
+
+        attribute.raw_text = attribute.raw_text or attribute.value[:2000]
+        attribute.value = text if len(text) <= MAX_ATTRIBUTE_VALUE else text[: MAX_ATTRIBUTE_VALUE - 3] + "..."
 
 
 def run_lookup(
@@ -67,6 +86,7 @@ def run_lookup(
             continue
 
         else:
+            fit_attribute_values(found)
             result.add(adapter.source, adapter.name, adapter.version, found)
         finally:
             if http is not None:

@@ -73,7 +73,8 @@ def parse_details(data: dict[str, Any], record_url: str) -> SourceResult:
         result.attributes.append(Attribute(name="Status", value=str(status["value"])))
     for row in (details.get("mainStage") or {}).values():
         if isinstance(row, dict) and row.get("label") and row.get("value"):
-            result.attributes.append(Attribute(name=str(row["label"]), value=str(row["value"])))
+            result.attributes.append(Attribute(name=str(row["label"]), value=_short(row["value"]),
+                                               raw_text=_raw(row["value"])))
     for row in (content.get("generalSpecifications") or {}).get("specifications") or []:
         for value in row.get("values") or []:
             text = str(value.get("text") or "")
@@ -106,6 +107,20 @@ def parse_details(data: dict[str, Any], record_url: str) -> SourceResult:
                 record_ref=record_ref, record_url=record_url,
             ))
     return result
+
+
+def _short(value: Any) -> str:
+    """A value as the catalogue writes it, without the repeats some rows carry
+    ("205 240 59 00; 205 240 59 00; ...") and within what one value may hold."""
+    parts = list(dict.fromkeys(part.strip() for part in str(value).split(";") if part.strip()))
+    text = "; ".join(parts) if parts else str(value).strip()
+    return text if len(text) <= 500 else text[:497] + "..."
+
+
+def _raw(value: Any) -> str | None:
+    """The full text, when the value had to be shortened."""
+    text = str(value)
+    return text[:2000] if len(_short(value)) < len(text.strip()) else None
 
 
 def _year(value: Any) -> int | None:
@@ -159,7 +174,7 @@ def parse_fitment(data: dict[str, Any], number: str, record_url: str) -> list[Ap
 
 
 class ZfAdapter(Adapter):
-    version = "1.0.0"
+    version = "1.0.1"
     min_interval = 5.0
     cross_search = True
 

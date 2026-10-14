@@ -207,3 +207,13 @@ def test_sachs_result_with_component_links_matches_schema():
     data = run_lookup([ZfAdapter(FakeHttp())], LookupRequest("SACHS", "3000951003", "aftermarket"), "test", load_schema())
     assert data.errors == []
     assert data.relationships and data.applications
+
+
+def test_long_repeated_values_are_kept_once_and_within_the_limit():
+    from parsers.adapters.zf import _raw, _short
+
+    value = "; ".join(["205 240 59 00"] * 6 + ["A 213 240 66 00"] * 6)
+    assert _short(value) == "205 240 59 00; A 213 240 66 00"
+    assert _raw(value) == value
+    assert len(_short("; ".join(f"N{i:04}" for i in range(400)))) == 500
+    assert _raw("TRW") is None

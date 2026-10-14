@@ -205,7 +205,7 @@ def queue(name: str, steps: list[tuple], work: Path, env: dict[str, str], brands
             {
                 **env,
                 "PARSERS_WORKER": f"harvest-{step_name}".replace("/", "-"),
-                **({"PARSERS_NO_ARCHIVE": "1"} if adapter == "spareto" else {}),
+                **({"PARSERS_NO_ARCHIVE": "1", "PARSERS_GIVE_UP_AFTER": "300"} if adapter == "spareto" else {}),
             },
             log,
             None,

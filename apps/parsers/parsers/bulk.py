@@ -7,6 +7,7 @@ catalogue gives for some vehicles) rather than queued by the store.
 from __future__ import annotations
 
 import json
+import os
 import logging
 import time
 from pathlib import Path
@@ -61,10 +62,18 @@ def import_numbers(
         else set()
     )
     totals = {"numbers": 0, "unknown": 0, "relationships": 0, "applications": 0, "failed": 0}
+    # A shop that does not carry a brand answers "nothing" for every number;
+    # after this many such answers in a row and none found, the brand is left.
+    give_up = int(os.environ.get("PARSERS_GIVE_UP_AFTER") or 0)
 
     for number in numbers:
         if number in done:
             continue
+
+        if give_up and not totals["numbers"] and totals["unknown"] >= give_up:
+            log.info("%s: none of the first %d numbers is known here; the rest is skipped", brand, give_up)
+            totals["skipped"] = len([n for n in numbers if n not in done])
+            break
 
         request = LookupRequest(brand, number, number_type)
 

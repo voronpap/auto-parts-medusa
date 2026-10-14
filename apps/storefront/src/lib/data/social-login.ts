@@ -34,7 +34,14 @@ export async function finishGoogleLogin(query: Record<string, string>): Promise<
   let token: string
 
   try {
-    token = await sdk.auth.callback("customer", "google", query)
+    const result = await sdk.auth.callback("customer", "google", query)
+
+    // A second factor is not offered with Google sign-in.
+    if (typeof result !== "string") {
+      return false
+    }
+
+    token = result
   } catch {
     return false
   }
@@ -53,7 +60,13 @@ export async function finishGoogleLogin(query: Record<string, string>): Promise<
       {},
       { Authorization: `Bearer ${token}` }
     )
-    token = await sdk.auth.refresh({ Authorization: `Bearer ${token}` })
+    const refreshed = await sdk.auth.refresh({ Authorization: `Bearer ${token}` })
+
+    if (typeof refreshed !== "string") {
+      return false
+    }
+
+    token = refreshed
   }
 
   await setAuthToken(token)

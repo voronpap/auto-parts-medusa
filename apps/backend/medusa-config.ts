@@ -1,4 +1,9 @@
-import { loadEnv, defineConfig } from '@medusajs/framework/utils'
+import {
+  ContainerRegistrationKeys,
+  defineConfig,
+  loadEnv,
+  Modules,
+} from '@medusajs/framework/utils'
 
 loadEnv(process.env.NODE_ENV || 'development', process.cwd())
 
@@ -6,6 +11,14 @@ loadEnv(process.env.NODE_ENV || 'development', process.cwd())
 // customers are not asked to verify an address nobody could send a link to.
 const emailEnabled = Boolean(
   process.env.RESEND_API_KEY && process.env.RESEND_FROM_EMAIL
+)
+
+// Sign-in with Google is on only when the owner has put the OAuth client of
+// the shop's Google project into .env; without it nothing changes.
+const googleEnabled = Boolean(
+  process.env.GOOGLE_CLIENT_ID &&
+    process.env.GOOGLE_CLIENT_SECRET &&
+    process.env.STOREFRONT_URL
 )
 
 const ADMIN_MOBILE_CSS = `
@@ -43,6 +56,9 @@ module.exports = defineConfig({
       authCors: process.env.AUTH_CORS!,
       jwtSecret: process.env.JWT_SECRET,
       cookieSecret: process.env.COOKIE_SECRET,
+      ...(googleEnabled
+        ? { authMethodsPerActor: { user: ["emailpass"], customer: ["emailpass", "google"] } }
+        : {}),
       ...(emailEnabled
         ? {
             authVerificationsPerActor: {
@@ -80,6 +96,28 @@ module.exports = defineConfig({
     }),
   },
   modules: [
+    ...(googleEnabled
+      ? [
+          {
+            resolve: "@medusajs/medusa/auth",
+            dependencies: [Modules.CACHE, ContainerRegistrationKeys.LOGGER],
+            options: {
+              providers: [
+                { resolve: "@medusajs/medusa/auth-emailpass", id: "emailpass" },
+                {
+                  resolve: "@medusajs/medusa/auth-google",
+                  id: "google",
+                  options: {
+                    clientId: process.env.GOOGLE_CLIENT_ID,
+                    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+                    callbackUrl: `${process.env.STOREFRONT_URL}/ua/auth/google`,
+                  },
+                },
+              ],
+            },
+          },
+        ]
+      : []),
     {
       resolve: "./src/modules/security",
     },

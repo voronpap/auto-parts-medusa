@@ -3,6 +3,7 @@ import { LOGIN_VIEW } from "@modules/account/templates/login-template"
 import ErrorMessage from "@modules/checkout/components/error-message"
 import { SubmitButton } from "@modules/checkout/components/submit-button"
 import Input from "@modules/common/components/input"
+import SocialButtons from "./social-buttons"
 import { useActionState } from "react"
 
 type Props = {
@@ -58,6 +59,7 @@ const Login = ({ setCurrentView }: Props) => {
           Увійти
         </SubmitButton>
       </form>
+      <SocialButtons />
       <button
         onClick={() => setCurrentView(LOGIN_VIEW.FORGOT_PASSWORD)}
         className="underline text-ui-fg-base text-small-regular mt-4"

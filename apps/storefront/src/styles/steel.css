@@ -344,3 +344,14 @@ body { background: #eef1f4; }
 /* Offers for a typed number */
 .ap-sku { display: block; margin-top: 2px; color: var(--ap-muted); font-size: 12px; }
 .ap-offers { margin-bottom: 18px; }
+
+/* Garage */
+.ap-garage { display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; border: 1px solid var(--ap-line); border-radius: 8px; font-size: 13px; font-weight: 700; white-space: nowrap; }
+.ap-garage.ap-on { border-color: var(--ap-brand); }
+.ap-garage-x { border: 0; background: none; color: var(--ap-muted); font-size: 16px; line-height: 1; cursor: pointer; }
+.ap-fit { margin: 10px 0; padding: 9px 12px; border-radius: 8px; font-size: 14px; font-weight: 700; }
+.ap-fit-yes { color: var(--ap-good); background: color-mix(in srgb, var(--ap-good) 12%, transparent); }
+.ap-fit-maybe { color: var(--ap-brand); background: color-mix(in srgb, var(--ap-brand) 10%, transparent); }
+.ap-fit-none { color: var(--ap-muted); background: var(--ap-surface-2); }
+.ap-btn { padding: 9px 14px; border: 0; border-radius: 8px; color: var(--ap-brand-2); background: var(--ap-brand); font-weight: 800; cursor: pointer; }
+.ap-btn:disabled { color: var(--ap-good); background: var(--ap-surface-2); cursor: default; }

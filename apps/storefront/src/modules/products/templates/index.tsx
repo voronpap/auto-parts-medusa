@@ -1,6 +1,8 @@
 import React, { Suspense } from "react"
 
+import { getGarageCar } from "@lib/data/garage"
 import { PartsCatalogInfo, retrievePartsCatalog } from "@lib/data/parts-catalog"
+import FitBadge from "@modules/garage/fit-badge"
 import { HttpTypes } from "@medusajs/types"
 import { PartIcon } from "@modules/catalog/components/product-table"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
@@ -94,7 +96,7 @@ const ProductTemplate = async ({
     return notFound()
   }
 
-  const catalog = await retrievePartsCatalog(product.id)
+  const [catalog, garage] = await Promise.all([retrievePartsCatalog(product.id), getGarageCar()])
   const number = catalog.numbers[0]
   const image = images[0]?.url || product.thumbnail
   const inStore = catalog.crosses.filter((cross) => cross.product)
@@ -172,6 +174,7 @@ const ProductTemplate = async ({
             </dl>
           </div>
           <div className="ap-pdp-buy">
+            <FitBadge car={garage} fitment={catalog.fitment} />
             <Suspense
               fallback={<ProductActions disabled={true} product={product} region={region} />}
             >

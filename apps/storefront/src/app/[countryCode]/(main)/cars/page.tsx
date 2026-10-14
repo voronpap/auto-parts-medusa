@@ -1,7 +1,9 @@
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
 
+import { getGarageCar } from "@lib/data/garage"
 import { listVehicleMakes, retrieveVehicleMake } from "@lib/data/parts-catalog"
+import { SaveCarButton } from "@modules/garage/save-car"
 import { listProducts } from "@lib/data/products"
 import { getRegion } from "@lib/data/regions"
 import ProductTable from "@modules/catalog/components/product-table"
@@ -41,6 +43,7 @@ export default async function CarsPage(props: {
 
   const year = typedYear && /^\d{4}$/.test(typedYear) ? Number(typedYear) : undefined
   const data = makeId ? await retrieveVehicleMake(makeId, model, year) : null
+  const garage = await getGarageCar()
 
   if (makeId && !data) {
     notFound()
@@ -176,6 +179,21 @@ export default async function CarsPage(props: {
                     : ""}
                   Оберіть рік, щоб звузити перелік.
                 </p>
+                <SaveCarButton
+                  saved={
+                    garage?.make_id === data.make.id &&
+                    garage?.model_key === family.key &&
+                    (garage?.year ?? null) === (year ?? null)
+                  }
+                  car={{
+                    make_id: data.make.id,
+                    make: data.make.name,
+                    model_key: family.key,
+                    model: family.label,
+                    names: family.names,
+                    year: year ?? null,
+                  }}
+                />
               </div>
               {yearList.length > 1 && (
                 <div className="ap-years">

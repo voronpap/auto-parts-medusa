@@ -3,6 +3,7 @@ import { Suspense } from "react"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import CartButton from "@modules/layout/components/cart-button"
 import HeaderSearch from "@modules/layout/components/header-search"
+import GarageChip from "@modules/garage/garage-chip"
 import SubNav from "@modules/layout/components/sub-nav"
 
 export default async function Nav() {
@@ -26,6 +27,9 @@ export default async function Nav() {
         </Suspense>
 
         <div className="ap-account">
+          <Suspense fallback={null}>
+            <GarageChip />
+          </Suspense>
           <LocalizedClientLink href="/account" data-testid="nav-account-link">
             Кабінет
           </LocalizedClientLink>

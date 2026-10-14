@@ -1,6 +1,7 @@
 import { MedusaRequest, MedusaResponse } from "@medusajs/framework/http"
 import { ContainerRegistrationKeys } from "@medusajs/framework/utils"
 import productVariantPartNumber from "../../../../../links/product-variant-part-number"
+import { fuelName } from "../../../../../modules/parts-catalog/utils/fuel"
 import { PARTS_CATALOG_MODULE } from "../../../../../modules/parts-catalog"
 import PartsCatalogModuleService from "../../../../../modules/parts-catalog/service"
 
@@ -233,6 +234,7 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
 
     const engine = [
       application.engine,
+      fuelName(application.fuel),
       application.power_kw ? `${application.power_kw} кВт` : null,
     ]
       .filter(Boolean)

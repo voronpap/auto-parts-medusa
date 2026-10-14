@@ -1,7 +1,7 @@
 import { listCategories } from "@lib/data/categories"
 import { listPartOffers, searchByPartNumber } from "@lib/data/parts-catalog"
 import OfferTable from "@modules/catalog/components/offer-table"
-import { listProducts, listProductsWithSort } from "@lib/data/products"
+import { listProducts, listProductsByPrice } from "@lib/data/products"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import { SortOptions } from "@modules/store/components/refinement-list/sort-products"
 import ProductTable from "@modules/catalog/components/product-table"
@@ -43,15 +43,20 @@ export default async function Catalog({
   }
   const [categories, { response }] = await Promise.all([
     listCategories().catch(() => []),
-    // By date the store pages the list itself, however long it is. By price
-    // the helper sorts in memory and sees the first hundred matches only.
+    // By date the store pages the list itself; by price the backend orders
+    // the whole shop and picks the page.
     sortBy === "created_at"
       ? listProducts({
           pageParam: page,
           countryCode,
           queryParams: { ...filters, order: "-created_at" },
         })
-      : listProductsWithSort({ page, sortBy, countryCode, queryParams: filters }),
+      : listProductsByPrice({
+          page,
+          order: sortBy === "price_desc" ? "desc" : "asc",
+          countryCode,
+          queryParams: filters,
+        }),
   ])
   // A typed part number also finds products through the parts catalog:
   // the product with that number and the confirmed crosses of that number.

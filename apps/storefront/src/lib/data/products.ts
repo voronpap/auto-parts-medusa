@@ -149,3 +149,52 @@ export const listProductsWithSort = async ({
     queryParams,
   }
 }
+
+/**
+ * A page of products ordered by price across the whole shop. The store's
+ * product list cannot order by price, so the backend picks the page and the
+ * products are then read as usual.
+ */
+export const listProductsByPrice = async ({
+  page = 1,
+  order,
+  countryCode,
+  queryParams,
+}: {
+  page?: number
+  order: "asc" | "desc"
+  countryCode: string
+  queryParams?: { limit?: number; category_id?: string[]; q?: string }
+}): Promise<{ response: { products: HttpTypes.StoreProduct[]; count: number } }> => {
+  const limit = queryParams?.limit || 12
+  const { product_ids, count } = await sdk.client.fetch<{ product_ids: string[]; count: number }>(
+    "/store/parts-catalog/by-price",
+    {
+      method: "GET",
+      query: {
+        order,
+        limit,
+        offset: (Math.max(1, page) - 1) * limit,
+        ...(queryParams?.category_id?.[0] ? { category_id: queryParams.category_id[0] } : {}),
+        ...(queryParams?.q ? { q: queryParams.q } : {}),
+      },
+      next: { revalidate: 120, tags: ["products"] },
+    }
+  )
+
+  if (!product_ids.length) {
+    return { response: { products: [], count } }
+  }
+
+  const {
+    response: { products },
+  } = await listProducts({ countryCode, queryParams: { id: product_ids, limit: product_ids.length } })
+  const position = new Map(product_ids.map((id, index) => [id, index]))
+
+  return {
+    response: {
+      products: products.sort((a, b) => (position.get(a.id!) ?? 0) - (position.get(b.id!) ?? 0)),
+      count,
+    },
+  }
+}

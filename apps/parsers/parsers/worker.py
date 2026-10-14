@@ -32,6 +32,7 @@ def load_schema(path: Path = DEFAULT_SCHEMA) -> dict[str, Any] | None:
 
 # What one attribute value may hold in the catalog.
 MAX_ATTRIBUTE_VALUE = 500
+MAX_RAW_TEXT = 2000
 
 
 def fit_attribute_values(found: SourceResult) -> None:
@@ -45,8 +46,15 @@ def fit_attribute_values(found: SourceResult) -> None:
         parts = list(dict.fromkeys(part.strip() for part in attribute.value.split(";") if part.strip()))
         text = "; ".join(parts) or attribute.value
 
-        attribute.raw_text = attribute.raw_text or attribute.value[:2000]
+        attribute.raw_text = attribute.raw_text or attribute.value
         attribute.value = text if len(text) <= MAX_ATTRIBUTE_VALUE else text[: MAX_ATTRIBUTE_VALUE - 3] + "..."
+
+    # Raw texts have their own, larger limit.
+    for item in [*found.attributes, *found.applications]:
+        if item.raw_text and len(item.raw_text) > MAX_RAW_TEXT:
+            parts = list(dict.fromkeys(part.strip() for part in item.raw_text.split(";") if part.strip()))
+            text = "; ".join(parts) or item.raw_text
+            item.raw_text = text if len(text) <= MAX_RAW_TEXT else text[: MAX_RAW_TEXT - 3] + "..."
 
 
 def run_lookup(

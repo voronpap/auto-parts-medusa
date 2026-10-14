@@ -9,6 +9,7 @@ import argparse
 import sys
 from pathlib import Path
 
+from parsers.http import SourceError
 from parsers.adapters.base import label_has_brand
 from parsers.adapters.zf import BRAND_IDS
 from parsers.http import PoliteSession, ResponseCache
@@ -35,31 +36,36 @@ def collect_numbers(http, makes, part_brand, *, models=None, max_models=None, ma
             if models:
                 found_models = [m for m in found_models if any(s.casefold() in str(m.get("name") or "").casefold() for s in models)]
             for model in found_models[:max_models]:
-                model_id = model["modelID"]
-                vehicles = get("getGroupedVehicles", modelID=model_id).get("content") or []
-                ids = list(dict.fromkeys(str(i) for vehicle in vehicles for i in vehicle.get("vehicleIDs") or []))
-                if not ids:
-                    continue
-                page = 0
-                while True:
-                    data = get("getArticlesForFilter", limitToBrandIDs=BRAND_IDS[part_brand],
-                               manufacturerID=make_id, modelID=model_id, vehicleIDs=",".join(ids),
-                               assemblyGroupIDs="", sort="asc", sortField="status", count=15,
-                               page=page, criteriaIDAndValue="", status="",
-                               oneMainAssemblyGroupSelected="false", articlePartIDs="")
-                    for item in data.get("content") or []:
-                        number = str(item.get("articleID") or "")
-                        if number and label_has_brand(str(item.get("brandName") or ""), part_brand) and number not in seen:
-                            seen.add(number)
-                            yield number
-                    total_pages = int(data.get("totalPages") or 0)
-                    if page + 1 >= total_pages:
-                        break
-                    if max_pages is not None and page + 1 >= max_pages:
-                        print(f"{make} {model.get('name')}: stopped after {max_pages}/{total_pages} pages", file=sys.stderr)
-                        break
-                    page += 1
-                print(f"{make} {model.get('name')}: {data.get('totalElements', 0)} catalogue rows", file=sys.stderr)
+                # A model the catalogue cannot answer for in time is left out; the rest
+                # of the make goes on, so one slow model does not stop a whole list.
+                try:
+                    model_id = model["modelID"]
+                    vehicles = get("getGroupedVehicles", modelID=model_id).get("content") or []
+                    ids = list(dict.fromkeys(str(i) for vehicle in vehicles for i in vehicle.get("vehicleIDs") or []))
+                    if not ids:
+                        continue
+                    page = 0
+                    while True:
+                        data = get("getArticlesForFilter", limitToBrandIDs=BRAND_IDS[part_brand],
+                                   manufacturerID=make_id, modelID=model_id, vehicleIDs=",".join(ids),
+                                   assemblyGroupIDs="", sort="asc", sortField="status", count=15,
+                                   page=page, criteriaIDAndValue="", status="",
+                                   oneMainAssemblyGroupSelected="false", articlePartIDs="")
+                        for item in data.get("content") or []:
+                            number = str(item.get("articleID") or "")
+                            if number and label_has_brand(str(item.get("brandName") or ""), part_brand) and number not in seen:
+                                seen.add(number)
+                                yield number
+                        total_pages = int(data.get("totalPages") or 0)
+                        if page + 1 >= total_pages:
+                            break
+                        if max_pages is not None and page + 1 >= max_pages:
+                            print(f"{make} {model.get('name')}: stopped after {max_pages}/{total_pages} pages", file=sys.stderr)
+                            break
+                        page += 1
+                    print(f"{make} {model.get('name')}: {data.get('totalElements', 0)} catalogue rows", file=sys.stderr)
+                except SourceError as error:
+                    print(f"{make} {model.get('name')}: skipped, {error}", file=sys.stderr)
 
 
 def positive(value):

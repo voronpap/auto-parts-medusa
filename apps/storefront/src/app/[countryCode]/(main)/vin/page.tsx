@@ -1,7 +1,9 @@
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
 
+import { getGarageCar } from "@lib/data/garage"
 import { lookupVin } from "@lib/data/parts-catalog"
+import { SaveCarButton } from "@modules/garage/save-car"
 import PartsRequestForm from "@modules/parts-request/request-form"
 import { listProducts } from "@lib/data/products"
 import { getRegion } from "@lib/data/regions"
@@ -45,6 +47,20 @@ export default async function VinPage(props: {
     : []
   const vehicle = result?.vehicle
   const years = vehicle?.years ?? []
+  const garage = await getGarageCar()
+  // A VIN with two candidate years saves the car without a year.
+  const car =
+    vehicle?.make_id && vehicle.make
+      ? {
+          make_id: vehicle.make_id,
+          make: vehicle.make,
+          model_key: vehicle.family?.key ?? null,
+          model: vehicle.family?.label ?? null,
+          names: vehicle.family?.names ?? [],
+          year: years.length === 1 ? years[0] : null,
+          vin: vehicle.vin,
+        }
+      : null
 
   return (
     <div className="ap-scope ap-page">
@@ -134,6 +150,21 @@ export default async function VinPage(props: {
                     " Обов'язково звірте застосовність на сторінці товару."
                   : "Цієї марки ще немає в нашому каталозі застосовності."}
             </p>
+            {car && (
+              <div className="ap-vin-save">
+                <SaveCarButton
+                  car={car}
+                  saved={
+                    garage?.make_id === car.make_id &&
+                    (garage?.model_key ?? null) === car.model_key &&
+                    (garage?.year ?? null) === car.year
+                  }
+                />
+                <LocalizedClientLink className="ap-link" href="/garage">
+                  Мій гараж
+                </LocalizedClientLink>
+              </div>
+            )}
           </section>
         )}
 

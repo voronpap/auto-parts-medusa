@@ -8,6 +8,8 @@ import { PARTS_CATALOG_MODULE } from "../../../../../modules/parts-catalog"
 import PartsCatalogModuleService from "../../../../../modules/parts-catalog/service"
 import { normalizeBrandName } from "../../../../../modules/parts-catalog/utils/normalize"
 import {
+  familyKey,
+  familyLabel,
   familyOf,
   inFamily,
 } from "../../../../../modules/parts-catalog/utils/vehicle-family"
@@ -111,6 +113,9 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
     model: vpic.model ?? null,
     engine: vpic.engine ?? null,
     models: [] as string[],
+    make_id: null as string | null,
+    /** The model family the matched models belong to, for the shopper's garage. */
+    family: null as { key: string; label: string; names: string[] } | null,
   }
 
   if (!makeName) {
@@ -132,6 +137,7 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
   }
 
   vehicle.make = make.name
+  vehicle.make_id = make.id
 
   const models = await catalog.listVehicleModels(
     { make_id: make.id },
@@ -153,6 +159,17 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
   )
 
   vehicle.models = matched.map((model) => model.name).sort()
+
+  // Only one family is offered for the garage; two would be a guess.
+  const keys = [...new Set(vehicle.models.map(familyKey))]
+
+  if (keys.length === 1) {
+    vehicle.family = {
+      key: keys[0],
+      label: familyLabel(keys[0]),
+      names: vehicle.models,
+    }
+  }
 
   const applications = await catalog.listPartApplications(
     {

@@ -82,6 +82,8 @@ export type VinLookup = {
     model: string | null
     engine: string | null
     models: string[]
+    make_id?: string | null
+    family?: { key: string; label: string; names: string[] } | null
   }
   precision: "model" | "make" | "none"
   products: { product_id: string; handle: string }[]

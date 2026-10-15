@@ -410,3 +410,16 @@ body { background: #eef1f4; }
   .ap-years { flex-wrap: wrap; }
 }
 .ap-pick-more { display: block; margin: 0 12px 8px; padding: 8px 12px; border: 1px dashed var(--ap-line); border-radius: 9px; background: none; color: var(--ap-brand); font-weight: 700; cursor: pointer; }
+
+/* Garage: the shopper's saved cars */
+.ap-garage-more { color: var(--ap-muted); font-weight: 600; }
+.ap-garage-list { display: grid; gap: 10px; margin: 16px 0; padding: 0; list-style: none; }
+.ap-garage-list li { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 14px; border: 1px solid var(--ap-line); border-radius: 10px; }
+.ap-garage-list li.ap-on { border-color: var(--ap-brand); }
+.ap-garage-car { display: grid; gap: 2px; min-width: 0; }
+.ap-garage-car strong { overflow-wrap: anywhere; }
+.ap-garage-car span { color: var(--ap-muted); font-size: 13px; overflow-wrap: anywhere; }
+.ap-garage-actions { display: flex; align-items: center; gap: 12px; }
+.ap-btn-ghost { color: var(--ap-ink); background: var(--ap-surface-2); }
+.ap-garage-add { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; }
+.ap-vin-save { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 12px; }

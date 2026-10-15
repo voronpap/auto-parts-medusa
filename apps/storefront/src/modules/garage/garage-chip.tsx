@@ -1,25 +1,26 @@
-import { getGarageCar } from "@lib/data/garage"
+import { listGarage } from "@lib/data/garage"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import { ForgetCarButton } from "./save-car"
 
-/** The saved car in the header, or a way to choose one. */
+/** The chosen car in the header (it leads to the garage), or a way to choose one. */
 export default async function GarageChip() {
-  const car = await getGarageCar()
+  const { active: car, cars } = await listGarage()
 
   if (!car) {
     return (
-      <LocalizedClientLink className="ap-garage" href="/cars">
+      <LocalizedClientLink className="ap-garage" href={cars.length ? "/garage" : "/cars"}>
         Моє авто
       </LocalizedClientLink>
     )
   }
 
-  const href = `/cars?make=${car.make_id}${car.model_key ? `&model=${encodeURIComponent(car.model_key)}` : ""}${car.year ? `&year=${car.year}` : ""}`
+  const more = cars.length - 1
 
   return (
     <span className="ap-garage ap-on">
-      <LocalizedClientLink href={href}>
+      <LocalizedClientLink href="/garage" title="Мій гараж">
         {car.make} {car.model ?? ""} {car.year ?? ""}
+        {more > 0 && <span className="ap-garage-more"> +{more}</span>}
       </LocalizedClientLink>
       <ForgetCarButton />
     </span>

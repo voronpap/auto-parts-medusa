@@ -6,11 +6,7 @@ import {
   VehicleMake,
   VehicleMatch,
 } from "@lib/data/parts-catalog"
-import {
-  pickerEngine,
-  pickerFamilies,
-  pickerSearch,
-} from "@lib/data/vehicle-picker"
+import { pickerEngine, pickerFamilies } from "@lib/data/vehicle-picker"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import { useParams, useRouter } from "next/navigation"
 import { FormEvent, useEffect, useRef, useState, useTransition } from "react"
@@ -155,7 +151,6 @@ export default function VehiclePicker({
   const router = useRouter()
   const { countryCode } = useParams<{ countryCode: string }>()
   const [tab, setTab] = useState<"pick" | "recent">("pick")
-  const [phrase, setPhrase] = useState("")
   const [engine, setEngine] = useState("")
   const [vin, setVin] = useState("")
   const [vinError, setVinError] = useState(false)
@@ -165,8 +160,7 @@ export default function VehiclePicker({
   const [year, setYear] = useState("")
   const [allFilter, setAllFilter] = useState("")
   const [pending, startTransition] = useTransition()
-  const left = useRef<HTMLFormElement>(null)
-  const found = useLookup(phrase, 2, pickerSearch)
+  const left = useRef<HTMLDivElement>(null)
   const engines = useLookup(engine, 3, pickerEngine)
 
   const make = makes.find((item) => item.id === makeId) ?? null
@@ -266,7 +260,7 @@ export default function VehiclePicker({
         <p className={current ? "ap-vp-current" : undefined}>
           {current
             ? `Обране авто: ${current}`
-            : "Не вибрано жодного транспортного засобу. Оберіть марку, модель і рік, знайдіть авто фразою, за VIN або кодом двигуна."}
+            : "Не вибрано жодного транспортного засобу. Оберіть марку, модель і рік або введіть VIN чи код двигуна."}
         </p>
       </div>
 
@@ -333,134 +327,71 @@ export default function VehiclePicker({
         </div>
       ) : (
         <div className="ap-vp-body">
-          <form
-            className="ap-vp-col ap-vp-left"
-            onSubmit={submitPick}
-            ref={left}
-          >
-            <label className="ap-vp-field">
-              <span>Вибрати автомобіль</span>
-              <input
-                type="search"
-                value={phrase}
-                onChange={(event) => setPhrase(event.target.value)}
-                placeholder="Введіть фразу, наприклад Passat"
-                autoComplete="off"
-              />
-            </label>
-            {found.asked && (
-              <ul className="ap-vp-found">
-                {found.loading ? (
-                  <li className="ap-vp-hint">Шукаємо…</li>
-                ) : found.items.length ? (
-                  found.items.map((item) => (
-                    <li key={`${item.make_id}|${item.key}`}>
-                      <button
-                        type="button"
-                        disabled={pending}
-                        onClick={() => goMatch(item)}
-                      >
-                        <strong>
-                          {item.make} {item.label}
-                        </strong>
-                        <small>{years(item.year_from, item.year_to)}</small>
-                      </button>
-                    </li>
-                  ))
-                ) : (
-                  <li className="ap-vp-hint">Нічого не знайдено</li>
-                )}
-              </ul>
-            )}
-
-            <label className="ap-vp-field">
-              <span>Марка</span>
-              <select
-                value={makeId}
-                onChange={(event) => chooseMake(event.target.value)}
-              >
-                <option value="">Виберіть марку</option>
-                {makes.map((item) => (
-                  <option key={item.id} value={item.id}>
-                    {item.name}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <label className="ap-vp-field">
-              <span>Модель</span>
-              <select
-                value={familyKey}
-                disabled={!families?.length}
-                onChange={(event) => {
-                  setFamilyKey(event.target.value)
-                  setYear("")
-                }}
-              >
-                <option value="">
-                  {makeId && !families ? "Завантаження…" : "Виберіть модель"}
-                </option>
-                {families?.map((item) => (
-                  <option key={item.key} value={item.key}>
-                    {item.label}
-                    {years(item.year_from, item.year_to)
-                      ? ` (${years(item.year_from, item.year_to)})`
-                      : ""}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <label className="ap-vp-field">
-              <span>Рік випуску</span>
-              <select
-                value={year}
-                disabled={!yearList.length}
-                onChange={(event) => setYear(event.target.value)}
-              >
-                <option value="">Усі роки</option>
-                {yearList.map((item) => (
-                  <option key={item} value={item}>
-                    {item}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <button
-              type="submit"
-              className="ap-primary"
-              disabled={!family || pending}
-            >
-              {pending ? "Відкриваємо…" : "Показати запчастини"}
-            </button>
-            {!signedIn && (
-              <p className="ap-vp-hint">
-                <LocalizedClientLink className="ap-link" href="/account">
-                  Увійдіть
-                </LocalizedClientLink>
-                , щоб зберегти авто в гараж.
-              </p>
-            )}
-          </form>
-
-          <div className="ap-vp-col ap-vp-mid">
-            <div
-              className="ap-vp-types"
-              role="group"
-              aria-label="Тип транспорту"
-            >
-              {TYPES.map((type) => (
-                <button
-                  key={type.id}
-                  type="button"
-                  className={type.active ? "ap-on" : undefined}
-                  disabled={!type.active}
-                  aria-pressed={type.active}
-                  title={type.active ? type.label : `${type.label} — незабаром`}
+          <div className="ap-vp-col ap-vp-left" ref={left}>
+            <form className="ap-vp-pick" onSubmit={submitPick}>
+              <label className="ap-vp-field">
+                <span>Марка</span>
+                <select
+                  value={makeId}
+                  onChange={(event) => chooseMake(event.target.value)}
                 >
-                  <TypeIcon id={type.id} />
-                  <span>{type.label}</span>
-                </button>
-              ))}
+                  <option value="">Виберіть марку</option>
+                  {makes.map((item) => (
+                    <option key={item.id} value={item.id}>
+                      {item.name}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label className="ap-vp-field">
+                <span>Модель</span>
+                <select
+                  value={familyKey}
+                  disabled={!families?.length}
+                  onChange={(event) => {
+                    setFamilyKey(event.target.value)
+                    setYear("")
+                  }}
+                >
+                  <option value="">
+                    {makeId && !families ? "Завантаження…" : "Виберіть модель"}
+                  </option>
+                  {families?.map((item) => (
+                    <option key={item.key} value={item.key}>
+                      {item.label}
+                      {years(item.year_from, item.year_to)
+                        ? ` (${years(item.year_from, item.year_to)})`
+                        : ""}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label className="ap-vp-field">
+                <span>Рік випуску</span>
+                <select
+                  value={year}
+                  disabled={!yearList.length}
+                  onChange={(event) => setYear(event.target.value)}
+                >
+                  <option value="">Усі роки</option>
+                  {yearList.map((item) => (
+                    <option key={item} value={item}>
+                      {item}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <button
+                type="submit"
+                className="ap-primary"
+                disabled={!family || pending}
+              >
+                {pending ? "Відкриваємо…" : "Показати запчастини"}
+              </button>
+            </form>
+
+            <div className="ap-vp-or" aria-hidden>
+              <span>або</span>
             </div>
 
             <form className="ap-vp-field ap-vp-vin" onSubmit={submitVin}>
@@ -498,6 +429,37 @@ export default function VehiclePicker({
                 </small>
               )}
             </form>
+
+            {!signedIn && (
+              <p className="ap-vp-hint">
+                <LocalizedClientLink className="ap-link" href="/account">
+                  Увійдіть
+                </LocalizedClientLink>
+                , щоб зберегти авто в гараж.
+              </p>
+            )}
+          </div>
+
+          <div className="ap-vp-col ap-vp-mid">
+            <div
+              className="ap-vp-types"
+              role="group"
+              aria-label="Тип транспорту"
+            >
+              {TYPES.map((type) => (
+                <button
+                  key={type.id}
+                  type="button"
+                  className={type.active ? "ap-on" : undefined}
+                  disabled={!type.active}
+                  aria-pressed={type.active}
+                  title={type.active ? type.label : `${type.label} — незабаром`}
+                >
+                  <TypeIcon id={type.id} />
+                  <span>{type.label}</span>
+                </button>
+              ))}
+            </div>
 
             <label className="ap-vp-field">
               <span>Код двигуна</span>

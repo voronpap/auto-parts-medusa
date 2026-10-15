@@ -460,6 +460,9 @@ body { background: #eef1f4; }
 .ap-vp-types button.ap-on { border-bottom-color: var(--ap-brand); color: var(--ap-ink); font-weight: 800; }
 .ap-vp-types button:disabled { opacity: 0.4; cursor: not-allowed; }
 .ap-vp-vin { border-color: var(--ap-brand); }
+.ap-vp-pick { display: flex; flex-direction: column; gap: 14px; }
+.ap-vp-or { display: flex; align-items: center; gap: 10px; color: var(--ap-brand); font-size: 12px; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase; }
+.ap-vp-or::before, .ap-vp-or::after { content: ""; flex: 1; height: 2px; border-radius: 2px; background: var(--ap-line); }
 .ap-vp-head { font-size: 11px; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; }
 .ap-vp-head-all { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; padding-top: 14px; border-top: 1px solid var(--ap-line); }
 .ap-vp-head-all input { width: 190px; padding: 7px 11px; border: 1px solid var(--ap-line); border-radius: 9px; color: var(--ap-ink); background: var(--ap-surface); font: inherit; font-size: 13px; font-weight: 400; letter-spacing: 0; text-transform: none; outline: 0; }

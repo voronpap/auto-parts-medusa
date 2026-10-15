@@ -4,6 +4,7 @@ import { sdk } from "@lib/config"
 import { redirect } from "next/navigation"
 import { setAuthToken } from "./cookies"
 import { transferCart } from "./customer"
+import { loadGarageFromAccount } from "./garage"
 
 type TokenPayload = { actor_id?: string; user_metadata?: { email?: string; given_name?: string; family_name?: string } }
 
@@ -70,6 +71,7 @@ export async function finishGoogleLogin(query: Record<string, string>): Promise<
   }
 
   await setAuthToken(token)
+  await loadGarageFromAccount().catch(() => undefined)
   await transferCart().catch(() => undefined)
 
   return true
@@ -126,6 +128,7 @@ export async function finishTelegramLogin(query: Record<string, string>): Promis
   }
 
   await setAuthToken(token)
+  await loadGarageFromAccount().catch(() => undefined)
   await transferCart().catch(() => undefined)
 
   return true

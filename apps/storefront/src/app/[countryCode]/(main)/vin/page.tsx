@@ -1,7 +1,7 @@
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
 
-import { getGarageCar } from "@lib/data/garage"
+import { getGarageCar, isSignedIn } from "@lib/data/garage"
 import { lookupVin } from "@lib/data/parts-catalog"
 import { SaveCarButton } from "@modules/garage/save-car"
 import PartsRequestForm from "@modules/parts-request/request-form"
@@ -47,7 +47,7 @@ export default async function VinPage(props: {
     : []
   const vehicle = result?.vehicle
   const years = vehicle?.years ?? []
-  const garage = await getGarageCar()
+  const [garage, signedIn] = await Promise.all([getGarageCar(), isSignedIn()])
   // A VIN with two candidate years saves the car without a year.
   const car =
     vehicle?.make_id && vehicle.make
@@ -153,6 +153,7 @@ export default async function VinPage(props: {
             {car && (
               <div className="ap-vin-save">
                 <SaveCarButton
+                  signedIn={signedIn}
                   car={car}
                   saved={
                     garage?.make_id === car.make_id &&
@@ -160,7 +161,7 @@ export default async function VinPage(props: {
                     (garage?.year ?? null) === car.year
                   }
                 />
-                <LocalizedClientLink className="ap-link" href="/garage">
+                <LocalizedClientLink className="ap-link" href="/account/garage">
                   Мій гараж
                 </LocalizedClientLink>
               </div>

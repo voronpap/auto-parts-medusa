@@ -7,6 +7,7 @@ import { useParams, usePathname } from "next/navigation"
 import { signout } from "@lib/data/customer"
 import { HttpTypes } from "@medusajs/types"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import Car from "@modules/common/icons/car"
 import ChevronDown from "@modules/common/icons/chevron-down"
 import MapPin from "@modules/common/icons/map-pin"
 import Package from "@modules/common/icons/package"
@@ -77,6 +78,19 @@ const AccountNav = ({
                 </li>
                 <li>
                   <LocalizedClientLink
+                    href="/account/garage"
+                    className="flex items-center justify-between py-4 border-b border-gray-200 px-8"
+                    data-testid="garage-link"
+                  >
+                    <div className="flex items-center gap-x-2">
+                      <Car size={20} />
+                      <span>Мій гараж</span>
+                    </div>
+                    <ChevronDown className="transform -rotate-90" />
+                  </LocalizedClientLink>
+                </li>
+                <li>
+                  <LocalizedClientLink
                     href="/account/orders"
                     className="flex items-center justify-between py-4 border-b border-gray-200 px-8"
                     data-testid="orders-link"
@@ -139,6 +153,15 @@ const AccountNav = ({
                   data-testid="addresses-link"
                 >
                   Адреси
+                </AccountNavLink>
+              </li>
+              <li>
+                <AccountNavLink
+                  href="/account/garage"
+                  route={route!}
+                  data-testid="garage-link"
+                >
+                  Мій гараж
                 </AccountNavLink>
               </li>
               <li>

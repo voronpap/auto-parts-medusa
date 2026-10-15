@@ -1,7 +1,7 @@
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
 
-import { getGarageCar } from "@lib/data/garage"
+import { getGarageCar, isSignedIn } from "@lib/data/garage"
 import { listVehicleMakes, retrieveVehicleMake } from "@lib/data/parts-catalog"
 import { SaveCarButton } from "@modules/garage/save-car"
 import PickFilter from "@modules/cars/pick-filter"
@@ -44,7 +44,7 @@ export default async function CarsPage(props: {
 
   const year = typedYear && /^\d{4}$/.test(typedYear) ? Number(typedYear) : undefined
   const data = makeId ? await retrieveVehicleMake(makeId, model, year) : null
-  const garage = await getGarageCar()
+  const [garage, signedIn] = await Promise.all([getGarageCar(), isSignedIn()])
 
   if (makeId && !data) {
     notFound()
@@ -183,6 +183,7 @@ export default async function CarsPage(props: {
                   Оберіть рік, щоб звузити перелік.
                 </p>
                 <SaveCarButton
+                  signedIn={signedIn}
                   saved={
                     garage?.make_id === data.make.id &&
                     garage?.model_key === family.key &&

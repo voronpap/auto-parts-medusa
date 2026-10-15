@@ -1,6 +1,8 @@
 "use server"
 
+import { sdk } from "@lib/config"
 import { cookies } from "next/headers"
+import { getAuthHeaders } from "./cookies"
 import { retrieveVehicleMake } from "./parts-catalog"
 
 /** The shopper's car, kept in a cookie so every page can check fitment. */
@@ -39,7 +41,16 @@ const sameCar = (a: GarageEntry, b: GarageEntry) =>
 
 const entryOf = ({ names: _names, ...car }: GarageCar): GarageEntry => car
 
+/** The garage is for registered shoppers: a guest is asked to sign in. */
+export async function isSignedIn(): Promise<boolean> {
+  return "authorization" in (await getAuthHeaders())
+}
+
 export async function getGarageCar(): Promise<GarageCar | null> {
+  if (!(await isSignedIn())) {
+    return null
+  }
+
   const raw = (await cookies()).get(COOKIE)?.value
 
   if (!raw) {
@@ -56,17 +67,23 @@ export async function getGarageCar(): Promise<GarageCar | null> {
 }
 
 /** All saved cars, the chosen one first. Shoppers from before the list have only the chosen one. */
-export async function listGarage(): Promise<{ active: GarageCar | null; cars: GarageEntry[] }> {
+export async function listGarage(): Promise<{
+  active: GarageCar | null
+  cars: GarageEntry[]
+}> {
   const active = await getGarageCar()
+
+  if (!(await isSignedIn())) {
+    return { active: null, cars: [] }
+  }
+
   const raw = (await cookies()).get(LIST_COOKIE)?.value
   let cars: GarageEntry[] = []
 
   try {
     const parsed = raw ? JSON.parse(raw) : []
 
-    cars = Array.isArray(parsed)
-      ? parsed.filter((car): car is GarageEntry => Boolean(car?.make_id && car.make))
-      : []
+    cars = Array.isArray(parsed) ? parsed.filter(isEntry) : []
   } catch {
     cars = []
   }
@@ -78,8 +95,71 @@ export async function listGarage(): Promise<{ active: GarageCar | null; cars: Ga
   return { active, cars: cars.slice(0, LIMIT) }
 }
 
+const isEntry = (car: unknown): car is GarageEntry =>
+  Boolean(
+    car &&
+      typeof car === "object" &&
+      (car as GarageEntry).make_id &&
+      (car as GarageEntry).make
+  )
+
+/**
+ * A signed-in shopper's garage also lives in their account (customer
+ * metadata), so it follows them to another device. A guest keeps it in the
+ * browser only.
+ */
+async function saveToAccount(cars: GarageEntry[]) {
+  const headers = await getAuthHeaders()
+
+  if (!("authorization" in headers)) {
+    return
+  }
+
+  await sdk.store.customer
+    .update({ metadata: { garage: cars.slice(0, LIMIT) } }, {}, headers)
+    .catch(() => undefined)
+}
+
 async function writeList(cars: GarageEntry[]) {
-  ;(await cookies()).set(LIST_COOKIE, JSON.stringify(cars.slice(0, LIMIT)), OPTIONS)
+  ;(await cookies()).set(
+    LIST_COOKIE,
+    JSON.stringify(cars.slice(0, LIMIT)),
+    OPTIONS
+  )
+  await saveToAccount(cars)
+}
+
+/**
+ * After sign-in: the account's cars join the ones saved in this browser
+ * (browser ones first), and the result is stored on both sides.
+ */
+export async function loadGarageFromAccount() {
+  const headers = await getAuthHeaders()
+
+  if (!("authorization" in headers)) {
+    return
+  }
+
+  const customer = await sdk.store.customer
+    .retrieve({ fields: "metadata" }, headers)
+    .then(({ customer }) => customer)
+    .catch(() => null)
+  const stored = customer?.metadata?.garage
+  const fromAccount = Array.isArray(stored) ? stored.filter(isEntry) : []
+  const { active, cars } = await listGarage()
+  const merged = [...cars]
+
+  for (const car of fromAccount) {
+    if (!merged.some((item) => sameCar(item, car))) {
+      merged.push(car)
+    }
+  }
+
+  await writeList(merged)
+
+  if (!active && merged.length) {
+    await chooseGarageCar(merged[0])
+  }
 }
 
 async function writeActive(car: GarageCar) {
@@ -91,6 +171,10 @@ async function writeActive(car: GarageCar) {
 
 /** Saves the car, makes it the chosen one and puts it first in the garage. */
 export async function saveGarageCar(car: GarageCar) {
+  if (!(await isSignedIn())) {
+    return
+  }
+
   const { cars } = await listGarage()
 
   await writeActive(car)
@@ -99,9 +183,17 @@ export async function saveGarageCar(car: GarageCar) {
 
 /** Makes a saved car the chosen one. */
 export async function chooseGarageCar(entry: GarageEntry) {
+  if (!(await isSignedIn())) {
+    return
+  }
+
   const detail =
     entry.model_key != null
-      ? await retrieveVehicleMake(entry.make_id, entry.model_key, entry.year ?? undefined)
+      ? await retrieveVehicleMake(
+          entry.make_id,
+          entry.model_key,
+          entry.year ?? undefined
+        )
       : null
 
   await saveGarageCar({ ...entry, names: detail?.family?.names ?? [] })
@@ -109,6 +201,10 @@ export async function chooseGarageCar(entry: GarageEntry) {
 
 /** Removes a car from the garage; removing the chosen one chooses the next. */
 export async function removeGarageCar(entry: GarageEntry) {
+  if (!(await isSignedIn())) {
+    return
+  }
+
   const { active, cars } = await listGarage()
   const rest = cars.filter((car) => !sameCar(car, entry))
 
@@ -132,4 +228,12 @@ export async function clearGarageCar() {
   } else {
     ;(await cookies()).delete(COOKIE)
   }
+}
+
+/** Forgets every saved car (on sign-out). */
+export async function clearGarage() {
+  const jar = await cookies()
+
+  jar.delete(COOKIE)
+  jar.delete(LIST_COOKIE)
 }

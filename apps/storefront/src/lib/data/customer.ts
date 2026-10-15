@@ -6,6 +6,7 @@ import { HttpTypes } from "@medusajs/types"
 import { FetchError } from "@medusajs/js-sdk"
 import { revalidateTag } from "next/cache"
 import { redirect } from "next/navigation"
+import { clearGarage, loadGarageFromAccount } from "./garage"
 import {
   getAuthHeaders,
   getCacheOptions,
@@ -250,6 +251,7 @@ async function completeLogin(
   }
 
   await setAuthToken(token)
+  await loadGarageFromAccount()
 
   const customerCacheTag = await getCacheTag("customers")
   revalidateTag(customerCacheTag)
@@ -350,6 +352,9 @@ export async function signout(countryCode: string) {
 
   const cartCacheTag = await getCacheTag("carts")
   revalidateTag(cartCacheTag)
+
+  // The saved cars go with the shopper who signs out.
+  await clearGarage()
 
   redirect(`/${countryCode}/account`)
 }

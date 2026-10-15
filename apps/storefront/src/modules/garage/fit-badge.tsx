@@ -1,7 +1,8 @@
 import type { GarageCar } from "@lib/data/garage"
 import type { PartsCatalogInfo } from "@lib/data/parts-catalog"
 
-const same = (a: string, b: string) => a.trim().toLowerCase() === b.trim().toLowerCase()
+const same = (a: string, b: string) =>
+  a.trim().toLowerCase() === b.trim().toLowerCase()
 
 /**
  * Whether the catalog lists this part for the saved car. Only what a source
@@ -21,7 +22,9 @@ export function fitFor(car: GarageCar, fitment: PartsCatalogInfo["fitment"]) {
   const models = make.models.filter(
     (item) =>
       car.names.some((name) => same(name, item.model)) ||
-      (car.model ? item.model.toLowerCase().includes(car.model.toLowerCase()) : false)
+      (car.model
+        ? item.model.toLowerCase().includes(car.model.toLowerCase())
+        : false)
   )
   const inYear = car.year
     ? models.filter(
@@ -35,10 +38,18 @@ export function fitFor(car: GarageCar, fitment: PartsCatalogInfo["fitment"]) {
     return "unknown" as const
   }
 
-  return inYear.some((item) => item.conditional) ? ("conditional" as const) : ("fits" as const)
+  return inYear.some((item) => item.conditional)
+    ? ("conditional" as const)
+    : ("fits" as const)
 }
 
-export default function FitBadge({ car, fitment }: { car: GarageCar | null; fitment: PartsCatalogInfo["fitment"] }) {
+export default function FitBadge({
+  car,
+  fitment,
+}: {
+  car: GarageCar | null
+  fitment: PartsCatalogInfo["fitment"]
+}) {
   if (!car) {
     return null
   }
@@ -51,12 +62,24 @@ export default function FitBadge({ car, fitment }: { car: GarageCar | null; fitm
   }
 
   if (fit === "conditional") {
-    return <div className="ap-fit ap-fit-maybe">Підходить на ваш {name} за умов — дивіться застосовність</div>
+    return (
+      <div className="ap-fit ap-fit-maybe">
+        Підходить на ваш {name} за умов — дивіться застосовність
+      </div>
+    )
   }
 
   if (fit === "make") {
-    return <div className="ap-fit ap-fit-maybe">Є застосовність для {car.make} — уточніть модель</div>
+    return (
+      <div className="ap-fit ap-fit-maybe">
+        Є застосовність для {car.make} — уточніть модель
+      </div>
+    )
   }
 
-  return <div className="ap-fit ap-fit-none">Немає даних, що деталь підходить на ваш {name}</div>
+  return (
+    <div className="ap-fit ap-fit-none">
+      Немає даних, що деталь підходить на ваш {name}
+    </div>
+  )
 }

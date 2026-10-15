@@ -26,6 +26,17 @@
     @apply left-0;
   }
 
+  /* A browser-filled field has no shown placeholder only after the first
+     keystroke, so its label would sit on the value. Separate rules: one
+     unknown selector would drop a whole list. */
+  input:-webkit-autofill ~ label {
+    @apply -translate-y-2 text-xsmall-regular;
+  }
+
+  input:autofill ~ label {
+    @apply -translate-y-2 text-xsmall-regular;
+  }
+
   input:-webkit-autofill,
   input:-webkit-autofill:hover,
   input:-webkit-autofill:focus,

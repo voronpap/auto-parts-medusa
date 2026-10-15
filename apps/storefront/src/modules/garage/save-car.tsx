@@ -8,13 +8,30 @@ import {
   removeGarageCar,
   saveGarageCar,
 } from "@lib/data/garage"
+import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import { useRouter } from "next/navigation"
 import { useTransition } from "react"
 
-/** "My car" button on the vehicle picker and the VIN page. */
-export function SaveCarButton({ car, saved }: { car: GarageCar; saved: boolean }) {
+/** "My car" button on the vehicle picker and the VIN page; a guest is asked to sign in. */
+export function SaveCarButton({
+  car,
+  saved,
+  signedIn,
+}: {
+  car: GarageCar
+  saved: boolean
+  signedIn: boolean
+}) {
   const router = useRouter()
   const [pending, startTransition] = useTransition()
+
+  if (!signedIn) {
+    return (
+      <LocalizedClientLink className="ap-btn" href="/account">
+        Увійдіть, щоб зберегти авто в гараж
+      </LocalizedClientLink>
+    )
+  }
 
   return (
     <button

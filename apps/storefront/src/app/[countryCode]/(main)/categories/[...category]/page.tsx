@@ -3,6 +3,7 @@ import { notFound } from "next/navigation"
 
 import { getCategoryByHandle } from "@lib/data/categories"
 import Catalog from "@modules/catalog/templates/catalog"
+import { breadcrumbList, JsonLd } from "@modules/seo/json-ld"
 import { SortOptions } from "@modules/store/components/refinement-list/sort-products"
 
 type Props = {
@@ -23,7 +24,9 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   return {
     title: category.name,
     description: category.description || `${category.name}: каталог запчастин.`,
-    alternates: { canonical: params.category.join("/") },
+    alternates: {
+      canonical: `/${params.countryCode}/categories/${params.category.join("/")}`,
+    },
   }
 }
 
@@ -37,16 +40,27 @@ export default async function CategoryPage(props: Props) {
     notFound()
   }
 
+  const path = `/${params.countryCode}/categories/${handle.join("/")}`
+
   return (
-    <Catalog
-      countryCode={params.countryCode}
-      title={category.name}
-      description={category.description}
-      basePath={`/categories/${handle.join("/")}`}
-      categoryId={category.id}
-      page={page ? Math.max(1, parseInt(page) || 1) : 1}
-      sortBy={sortBy}
-      q={q?.trim() || undefined}
-    />
+    <>
+      <JsonLd
+        data={breadcrumbList([
+          ["Головна", `/${params.countryCode}`],
+          ["Каталог", `/${params.countryCode}/store`],
+          [category.name, path],
+        ])}
+      />
+      <Catalog
+        countryCode={params.countryCode}
+        title={category.name}
+        description={category.description}
+        basePath={`/categories/${handle.join("/")}`}
+        categoryId={category.id}
+        page={page ? Math.max(1, parseInt(page) || 1) : 1}
+        sortBy={sortBy}
+        q={q?.trim() || undefined}
+      />
+    </>
   )
 }

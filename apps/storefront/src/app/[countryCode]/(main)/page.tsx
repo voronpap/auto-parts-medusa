@@ -4,6 +4,7 @@ import { listCategories } from "@lib/data/categories"
 import { listProducts } from "@lib/data/products"
 import { getRegion } from "@lib/data/regions"
 import SteelHome from "@modules/home/components/steel-home"
+import { absoluteUrl, JsonLd, organization } from "@modules/seo/json-ld"
 
 export const metadata: Metadata = {
   title: { absolute: "Auto Parts — підбір і замовлення автозапчастин" },
@@ -44,11 +45,38 @@ export default async function Home(props: {
   )
 
   return (
-    <SteelHome
-      countryCode={countryCode}
-      products={shelves.filter((product) => product !== undefined)}
-      count={response.count}
-      categories={categories}
-    />
+    <>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@graph": [
+            organization(),
+            {
+              "@type": "WebSite",
+              name: "Auto Parts",
+              url: absoluteUrl(`/${countryCode}`),
+              inLanguage: "uk",
+              publisher: { "@id": absoluteUrl("/#organization") },
+              potentialAction: {
+                "@type": "SearchAction",
+                target: {
+                  "@type": "EntryPoint",
+                  urlTemplate: absoluteUrl(
+                    `/${countryCode}/store?q={search_term_string}`
+                  ),
+                },
+                "query-input": "required name=search_term_string",
+              },
+            },
+          ],
+        }}
+      />
+      <SteelHome
+        countryCode={countryCode}
+        products={shelves.filter((product) => product !== undefined)}
+        count={response.count}
+        categories={categories}
+      />
+    </>
   )
 }

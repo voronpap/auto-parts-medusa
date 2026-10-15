@@ -13,11 +13,34 @@ import { getRegion } from "@lib/data/regions"
 import ProductTable from "@modules/catalog/components/product-table"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 
-export const metadata: Metadata = {
-  title: "Підбір запчастин за автомобілем",
-  alternates: { canonical: "/ua/cars" },
-  description:
-    "Оберіть марку, модель і рік автомобіля, щоб побачити запчастини, які до нього підходять.",
+const DESCRIPTION =
+  "Оберіть марку, модель і рік автомобіля, щоб побачити запчастини, які до нього підходять."
+
+// A make or a model is its own page in the sitemap, so it is its own canonical.
+export async function generateMetadata(props: {
+  searchParams: Promise<{ make?: string; model?: string }>
+}): Promise<Metadata> {
+  const { make, model } = await props.searchParams
+  const data = make ? await retrieveVehicleMake(make, model) : null
+
+  if (!make || !data) {
+    return {
+      title: "Підбір запчастин за автомобілем",
+      alternates: { canonical: "/ua/cars" },
+      description: DESCRIPTION,
+    }
+  }
+
+  const name = [data.make.name, data.family?.label].filter(Boolean).join(" ")
+  const query = `make=${encodeURIComponent(make)}${
+    data.family ? `&model=${encodeURIComponent(data.family.key)}` : ""
+  }`
+
+  return {
+    title: `Запчастини для ${name}`,
+    alternates: { canonical: `/ua/cars?${query}` },
+    description: `Запчастини, що підходять до ${name}: пошук за моделлю і роком.`,
+  }
 }
 
 const years = (from: number | null, to: number | null) => {

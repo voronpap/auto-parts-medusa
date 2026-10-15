@@ -14,7 +14,8 @@ import ProductTable from "@modules/catalog/components/product-table"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 
 export const metadata: Metadata = {
-  title: "Підбір запчастин за автомобілем — Auto Parts",
+  title: "Підбір запчастин за автомобілем",
+  alternates: { canonical: "/ua/cars" },
   description:
     "Оберіть марку, модель і рік автомобіля, щоб побачити запчастини, які до нього підходять.",
 }

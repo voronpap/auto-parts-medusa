@@ -46,8 +46,10 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   }
 
   return {
-    title: `${product.title} | Auto Parts`,
+    title: product.title,
     description: `${product.title}`,
+    // ?v_id and other parameters never make a second copy of the page.
+    alternates: { canonical: `/${params.countryCode}/products/${handle}` },
     openGraph: {
       title: `${product.title} | Auto Parts`,
       description: `${product.title}`,

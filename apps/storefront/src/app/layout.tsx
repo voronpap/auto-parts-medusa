@@ -5,6 +5,8 @@ import "styles/steel.css"
 
 export const metadata: Metadata = {
   metadataBase: new URL(getBaseURL()),
+  // Every tab and search result names the shop: "Кошик | Auto Parts".
+  title: { default: "Auto Parts", template: "%s | Auto Parts" },
 }
 
 export default function RootLayout(props: { children: React.ReactNode }) {

@@ -23,9 +23,14 @@ const CountrySelect = forwardRef<
       return []
     }
 
+    // Medusa stores English names ("Ukraine"); shoppers read Ukrainian.
+    const names = new Intl.DisplayNames(["uk"], { type: "region" })
+
     return region.countries?.map((country) => ({
       value: country.iso_2,
-      label: country.display_name,
+      label:
+        (country.iso_2 && names.of(country.iso_2.toUpperCase())) ||
+        country.display_name,
     }))
   }, [region])
 

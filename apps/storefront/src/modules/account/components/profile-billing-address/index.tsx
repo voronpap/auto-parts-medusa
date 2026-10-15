@@ -24,7 +24,12 @@ const ProfileBillingAddress: React.FC<MyInformationProps> = ({
         ?.map((region) => {
           return region.countries?.map((country) => ({
             value: country.iso_2,
-            label: country.display_name,
+            label:
+              (country.iso_2 &&
+                new Intl.DisplayNames(["uk"], { type: "region" }).of(
+                  country.iso_2.toUpperCase()
+                )) ||
+              country.display_name,
           }))
         })
         .flat() || []

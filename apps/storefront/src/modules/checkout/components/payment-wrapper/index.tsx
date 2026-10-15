@@ -1,6 +1,9 @@
 "use client"
 
-import { loadStripe } from "@stripe/stripe-js"
+// The "pure" entry adds Stripe's script only when loadStripe is called; the
+// plain one injects it on every checkout page, setting Stripe cookies even
+// though the shop does not take payments through Stripe.
+import { loadStripe } from "@stripe/stripe-js/pure"
 import React from "react"
 import StripeWrapper from "./stripe-wrapper"
 import { HttpTypes } from "@medusajs/types"

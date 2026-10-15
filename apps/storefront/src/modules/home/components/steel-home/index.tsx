@@ -1,7 +1,12 @@
 import { CategoryWithCount } from "@lib/data/categories"
+import { plural } from "@lib/util/plural"
 import { HttpTypes } from "@medusajs/types"
 import AddButton from "@modules/catalog/components/add-button"
-import { PartIcon, isAvailable, money } from "@modules/catalog/components/product-table"
+import {
+  PartIcon,
+  isAvailable,
+  money,
+} from "@modules/catalog/components/product-table"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 
 type Props = {
@@ -11,7 +16,16 @@ type Props = {
   categories: CategoryWithCount[]
 }
 
-const BRANDS = ["Bosch", "KYB", "Monroe", "SKF", "Sachs", "Gates", "MANN-FILTER", "FEBEST"]
+const BRANDS = [
+  "Bosch",
+  "KYB",
+  "Monroe",
+  "SKF",
+  "Sachs",
+  "Gates",
+  "MANN-FILTER",
+  "FEBEST",
+]
 
 export default function SteelHome({
   countryCode,
@@ -61,13 +75,17 @@ export default function SteelHome({
               <LocalizedClientLink href="/store?q=амортизатор">
                 амортизатор
               </LocalizedClientLink>
-              <LocalizedClientLink href="/cars">підбір за авто →</LocalizedClientLink>
+              <LocalizedClientLink href="/cars">
+                підбір за авто →
+              </LocalizedClientLink>
             </div>
           </div>
           <div className="ap-hero-visual" aria-hidden="true">
             <div className="ap-ring" />
             <span className="ap-visual-tag">
-              {count ? `${count} товарів у каталозі` : "Auto Parts"}
+              {count
+                ? `${plural(count, ["товар", "товари", "товарів"])} у каталозі`
+                : "Auto Parts"}
             </span>
           </div>
         </section>
@@ -201,8 +219,8 @@ export default function SteelHome({
               <b>1</b>
               <strong>Знайдіть деталь</strong>
               <span>
-                Введіть номер виробника або назву в пошуку чи відкрийте
-                потрібну категорію.
+                Введіть номер виробника або назву в пошуку чи відкрийте потрібну
+                категорію.
               </span>
             </li>
             <li>
@@ -217,8 +235,8 @@ export default function SteelHome({
               <b>3</b>
               <strong>Оберіть доставку</strong>
               <span>
-                Нова пошта, Укрпошта або самовивіз — вкажіть зручний спосіб
-                під час замовлення.
+                Нова пошта, Укрпошта або самовивіз — вкажіть зручний спосіб під
+                час замовлення.
               </span>
             </li>
           </ol>

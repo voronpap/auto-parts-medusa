@@ -36,7 +36,14 @@ export default function ProductActions({
   const pathname = usePathname()
   const searchParams = useSearchParams()
 
-  const [options, setOptions] = useState<Record<string, string | undefined>>({})
+  // A product with one variant has it chosen from the first render, so the
+  // server already shows its price and an active button.
+  const [options, setOptions] = useState<Record<string, string | undefined>>(
+    () =>
+      product.variants?.length === 1
+        ? optionsAsKeymap(product.variants[0].options) ?? {}
+        : {}
+  )
   const [isAdding, setIsAdding] = useState(false)
   const countryCode = useParams().countryCode as string
 
@@ -76,6 +83,11 @@ export default function ProductActions({
   }, [product.variants, options])
 
   useEffect(() => {
+    // One variant needs no ?v_id: the address stays the product's own.
+    if ((product.variants?.length ?? 0) <= 1) {
+      return
+    }
+
     const params = new URLSearchParams(searchParams.toString())
     const value = isValidVariant ? selectedVariant?.id : null
 

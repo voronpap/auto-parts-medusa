@@ -10,9 +10,16 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
-  const page = INFO_PAGES[(await props.params).slug]
+  const { countryCode, slug } = await props.params
+  const page = INFO_PAGES[slug]
 
-  return page ? { title: `${page.title} | Auto Parts`, description: page.description } : {}
+  return page
+    ? {
+        title: page.title,
+        description: page.description,
+        alternates: { canonical: `/${countryCode}/info/${slug}` },
+      }
+    : {}
 }
 
 export default async function InfoPage(props: Props) {
@@ -26,7 +33,8 @@ export default async function InfoPage(props: Props) {
     <div className="ap-scope ap-page">
       <div className="ap-shell">
         <nav className="ap-crumbs" aria-label="Навігація">
-          <LocalizedClientLink href="/">Головна</LocalizedClientLink> / <b>{page.title}</b>
+          <LocalizedClientLink href="/">Головна</LocalizedClientLink> /{" "}
+          <b>{page.title}</b>
         </nav>
         <article className="ap-section ap-card ap-info">
           <h1 className="ap-pdp-title">{page.title}</h1>

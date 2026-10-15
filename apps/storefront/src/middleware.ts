@@ -133,7 +133,8 @@ export async function middleware(request: NextRequest) {
   const queryString = request.nextUrl.search || ""
   const redirectUrl = `${request.nextUrl.origin}/${country}${redirectPath}${queryString}`
 
-  return NextResponse.redirect(redirectUrl, 307)
+  // Permanent: the shop has one country, so "/" always means "/ua".
+  return NextResponse.redirect(redirectUrl, 308)
 }
 
 export const config = {

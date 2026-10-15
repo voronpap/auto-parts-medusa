@@ -37,7 +37,6 @@ const Login = ({ setCurrentView }: Props) => {
             label="Email"
             name="email"
             type="email"
-            title="Вкажіть коректний email."
             autoComplete="email"
             required
             data-testid="email-input"

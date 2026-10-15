@@ -341,7 +341,9 @@ export async function resetPassword(
 }
 
 export async function signout(countryCode: string) {
-  await sdk.auth.logout()
+  // A failed backend logout (expired session, removed customer) must not keep
+  // the shopper signed in here: the local token goes regardless.
+  await sdk.auth.logout().catch(() => undefined)
 
   await removeAuthToken()
 

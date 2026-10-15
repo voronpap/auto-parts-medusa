@@ -6,7 +6,8 @@ import Catalog from "@modules/catalog/templates/catalog"
 import { SortOptions } from "@modules/store/components/refinement-list/sort-products"
 
 export const metadata: Metadata = {
-  title: "Каталог запчастин — Auto Parts",
+  title: "Каталог запчастин",
+  alternates: { canonical: "/ua/store" },
   description: "Каталог автозапчастин: пошук за артикулом і назвою.",
 }
 

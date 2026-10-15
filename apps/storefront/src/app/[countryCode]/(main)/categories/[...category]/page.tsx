@@ -21,7 +21,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   }
 
   return {
-    title: `${category.name} — Auto Parts`,
+    title: category.name,
     description: category.description || `${category.name}: каталог запчастин.`,
     alternates: { canonical: params.category.join("/") },
   }

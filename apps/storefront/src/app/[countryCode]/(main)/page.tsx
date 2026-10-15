@@ -6,7 +6,8 @@ import { getRegion } from "@lib/data/regions"
 import SteelHome from "@modules/home/components/steel-home"
 
 export const metadata: Metadata = {
-  title: "Auto Parts — підбір і замовлення автозапчастин",
+  title: { absolute: "Auto Parts — підбір і замовлення автозапчастин" },
+  alternates: { canonical: "/ua" },
   description:
     "Auto Parts — автозапчастини для СТО, магазинів та автомобілістів. Пошук за артикулом і назвою.",
 }

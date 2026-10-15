@@ -1,12 +1,8 @@
 "use client"
 
 import { chooseGarageCar, GarageEntry } from "@lib/data/garage"
-import {
-  VehicleFamily,
-  VehicleMake,
-  VehicleMatch,
-} from "@lib/data/parts-catalog"
-import { pickerEngine, pickerFamilies } from "@lib/data/vehicle-picker"
+import { VehicleFamily, VehicleMake } from "@lib/data/parts-catalog"
+import { pickerFamilies } from "@lib/data/vehicle-picker"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import { useParams, useRouter } from "next/navigation"
 import { FormEvent, useEffect, useRef, useState, useTransition } from "react"
@@ -33,112 +29,9 @@ const years = (from: number | null, to: number | null) => {
 const carTitle = (car: Pick<GarageEntry, "make" | "model" | "year">) =>
   [car.make, car.model, car.year].filter(Boolean).join(" ")
 
-/** Results of a typed search that arrive while the shopper keeps typing. */
-function useLookup(
-  text: string,
-  minLength: number,
-  find: (text: string) => Promise<VehicleMatch[]>
-) {
-  const [state, setState] = useState<{ for: string; items: VehicleMatch[] }>({
-    for: "",
-    items: [],
-  })
-  const latest = useRef("")
-
-  useEffect(() => {
-    const clean = text.trim()
-
-    latest.current = clean
-
-    if (clean.length < minLength) {
-      return
-    }
-
-    const timer = setTimeout(() => {
-      find(clean)
-        .then((items) => {
-          if (latest.current === clean) {
-            setState({ for: clean, items })
-          }
-        })
-        .catch(() => undefined)
-    }, 300)
-
-    return () => clearTimeout(timer)
-  }, [text, minLength, find])
-
-  const clean = text.trim()
-
-  return {
-    items: clean.length >= minLength && state.for === clean ? state.items : [],
-    loading: clean.length >= minLength && state.for !== clean,
-    asked: clean.length >= minLength,
-  }
-}
-
-const TYPES = [
-  { id: "car", label: "Легкові", active: true },
-  { id: "van", label: "Вантажні", active: false },
-  { id: "moto", label: "Мотоцикли", active: false },
-  { id: "tractor", label: "Сільгосптехніка", active: false },
-]
-
-function TypeIcon({ id }: { id: string }) {
-  const common = {
-    width: 34,
-    height: 34,
-    viewBox: "0 0 34 34",
-    fill: "none",
-    stroke: "currentColor",
-    strokeWidth: 1.8,
-    strokeLinecap: "round" as const,
-    strokeLinejoin: "round" as const,
-    "aria-hidden": true,
-  }
-
-  if (id === "van") {
-    return (
-      <svg {...common}>
-        <path d="M3 9h17v14H3zM20 13h6l5 5v5H20z" />
-        <circle cx="9" cy="25" r="2.6" />
-        <circle cx="25" cy="25" r="2.6" />
-      </svg>
-    )
-  }
-
-  if (id === "moto") {
-    return (
-      <svg {...common}>
-        <circle cx="7" cy="23" r="4.5" />
-        <circle cx="27" cy="23" r="4.5" />
-        <path d="M7 23l7-8h7l6 8M18 15l-2-5h-4M21 15l2-4h4" />
-      </svg>
-    )
-  }
-
-  if (id === "tractor") {
-    return (
-      <svg {...common}>
-        <circle cx="9" cy="23" r="6" />
-        <circle cx="27" cy="25" r="3.5" />
-        <path d="M6 17V7h9l3 8h10v6M15 7v8" />
-      </svg>
-    )
-  }
-
-  return (
-    <svg {...common}>
-      <path d="M4 21v-5l3-6c.4-.8 1.2-1.3 2.1-1.3h15.8c.9 0 1.7.5 2.1 1.3l3 6v5z" />
-      <path d="M4 16h26M9 21v3M25 21v3" />
-      <circle cx="10" cy="18.5" r="0.6" />
-      <circle cx="24" cy="18.5" r="0.6" />
-    </svg>
-  )
-}
-
 /**
  * The cars page before a make is chosen: make, model and year lists, a
- * phrase search, VIN and engine code, popular and all makes. Choosing a car
+ * VIN, popular and all makes. Choosing a car
  * opens its parts; a signed-in shopper's choice also goes into the garage.
  */
 export default function VehiclePicker({
@@ -151,7 +44,6 @@ export default function VehiclePicker({
   const router = useRouter()
   const { countryCode } = useParams<{ countryCode: string }>()
   const [tab, setTab] = useState<"pick" | "recent">("pick")
-  const [engine, setEngine] = useState("")
   const [vin, setVin] = useState("")
   const [vinError, setVinError] = useState(false)
   const [makeId, setMakeId] = useState("")
@@ -161,7 +53,6 @@ export default function VehiclePicker({
   const [allFilter, setAllFilter] = useState("")
   const [pending, startTransition] = useTransition()
   const left = useRef<HTMLDivElement>(null)
-  const engines = useLookup(engine, 3, pickerEngine)
 
   const make = makes.find((item) => item.id === makeId) ?? null
   const family = families?.find((item) => item.key === familyKey) ?? null
@@ -217,15 +108,6 @@ export default function VehiclePicker({
     })
   }
 
-  const goMatch = (match: VehicleMatch) =>
-    go({
-      make_id: match.make_id,
-      make: match.make,
-      model_key: match.key,
-      model: match.label,
-      year: null,
-    })
-
   const submitPick = (event: FormEvent) => {
     event.preventDefault()
 
@@ -260,7 +142,7 @@ export default function VehiclePicker({
         <p className={current ? "ap-vp-current" : undefined}>
           {current
             ? `Обране авто: ${current}`
-            : "Не вибрано жодного транспортного засобу. Оберіть марку, модель і рік або введіть VIN чи код двигуна."}
+            : "Не вибрано жодного транспортного засобу. Оберіть марку, модель і рік або введіть VIN."}
         </p>
       </div>
 
@@ -437,74 +319,6 @@ export default function VehiclePicker({
                 </LocalizedClientLink>
                 , щоб зберегти авто в гараж.
               </p>
-            )}
-          </div>
-
-          <div className="ap-vp-col ap-vp-mid">
-            <div
-              className="ap-vp-types"
-              role="group"
-              aria-label="Тип транспорту"
-            >
-              {TYPES.map((type) => (
-                <button
-                  key={type.id}
-                  type="button"
-                  className={type.active ? "ap-on" : undefined}
-                  disabled={!type.active}
-                  aria-pressed={type.active}
-                  title={type.active ? type.label : `${type.label} — незабаром`}
-                >
-                  <TypeIcon id={type.id} />
-                  <span>{type.label}</span>
-                </button>
-              ))}
-            </div>
-
-            <label className="ap-vp-field">
-              <span>Код двигуна</span>
-              <input
-                type="search"
-                value={engine}
-                onChange={(event) => setEngine(event.target.value)}
-                placeholder="Наприклад CAYC"
-                maxLength={20}
-                autoComplete="off"
-              />
-            </label>
-            {engines.asked && (
-              <ul className="ap-vp-found">
-                {engines.loading ? (
-                  <li className="ap-vp-hint">Шукаємо…</li>
-                ) : engines.items.length ? (
-                  engines.items.map((item) => (
-                    <li key={`${item.make_id}|${item.key}|${item.engine_code}`}>
-                      <button
-                        type="button"
-                        disabled={pending}
-                        onClick={() => goMatch(item)}
-                      >
-                        <strong>
-                          {item.make} {item.label}
-                        </strong>
-                        <small>
-                          {[
-                            item.engine_code,
-                            item.engine,
-                            years(item.year_from, item.year_to),
-                          ]
-                            .filter(Boolean)
-                            .join(" · ")}
-                        </small>
-                      </button>
-                    </li>
-                  ))
-                ) : (
-                  <li className="ap-vp-hint">
-                    Такого коду двигуна в каталозі немає
-                  </li>
-                )}
-              </ul>
             )}
           </div>
 

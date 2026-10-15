@@ -70,9 +70,9 @@ export default async function GarageView() {
 
         <div className="ap-garage-add">
           <LocalizedClientLink className="ap-btn" href="/cars">
-            Додати авто за маркою
+            Додати авто
           </LocalizedClientLink>
-          <LocalizedClientLink className="ap-link" href="/vin">
+          <LocalizedClientLink className="ap-link" href="/cars">
             Додати за VIN
           </LocalizedClientLink>
         </div>

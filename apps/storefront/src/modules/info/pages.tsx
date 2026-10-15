@@ -31,8 +31,8 @@ export const INFO_PAGES: Record<string, InfoPage> = {
             аналоги з цінами та наявністю.
           </li>
           <li>
-            <b>За VIN.</b> На сторінці <LocalizedClientLink href="/vin">«Підбір за VIN»</LocalizedClientLink>{" "}
-            визначимо марку й рік, а для частини авто — модель.
+            <b>За VIN.</b> Введіть VIN на сторінці <LocalizedClientLink href="/cars">«Підбір за авто»</LocalizedClientLink>{" "}
+            — визначимо марку й рік, а для частини авто модель, і покажемо деталі.
           </li>
           <li>
             <b>За авто.</b> Оберіть марку й модель у{" "}
@@ -49,7 +49,7 @@ export const INFO_PAGES: Record<string, InfoPage> = {
         </p>
         <p>
           Дані каталогів можуть містити помилки або умови (рік, двигун, комплектація). Якщо сумніваєтеся —{" "}
-          <LocalizedClientLink href="/vin#request">попросіть менеджера підібрати деталь за VIN</LocalizedClientLink>.
+          <LocalizedClientLink href="/cars#request">попросіть менеджера підібрати деталь за VIN</LocalizedClientLink>.
         </p>
         <h2>Продавець</h2>
         <Seller />
@@ -110,7 +110,7 @@ export const INFO_PAGES: Record<string, InfoPage> = {
         <p>
           Деталь, яку встановили на автомобіль, повернути як товар належної якості не можна. Тому
           перед встановленням звірте номер і застосовність або{" "}
-          <LocalizedClientLink href="/vin#request">запитайте нас</LocalizedClientLink>.
+          <LocalizedClientLink href="/cars#request">запитайте нас</LocalizedClientLink>.
         </p>
         <h2>Товар з недоліком</h2>
         <p>
@@ -253,7 +253,7 @@ export const INFO_PAGES: Record<string, InfoPage> = {
           <li>Адреса видачі: {orUnknown(SHOP.pickupAddress)}</li>
         </ul>
         <p>
-          Не знайшли деталь? <LocalizedClientLink href="/vin#request">Залиште запит на підбір за VIN</LocalizedClientLink> —
+          Не знайшли деталь? <LocalizedClientLink href="/cars#request">Залиште запит на підбір за VIN</LocalizedClientLink> —
           менеджер передзвонить.
         </p>
         <h2>Продавець</h2>

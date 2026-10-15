@@ -321,6 +321,7 @@ body { background: #eef1f4; }
 .ap-vin-form input::placeholder { letter-spacing: 0; text-transform: none; font-family: inherit; font-size: 14px; }
 .ap-vin-form button { padding: 0 22px; color: var(--ap-brand-2); background: var(--ap-brand); font-weight: 800; }
 .ap-vin-note { margin-bottom: 16px; padding: 16px 22px; border-left: 3px solid var(--ap-brand); }
+.ap-vin-note.ap-vin-bad { border-left-color: #b42318; }
 .ap-vin-facts { margin: 0; padding: 18px 22px 6px; }
 .ap-vin-models { margin: 0; padding: 8px 22px 0; color: var(--ap-muted); font-size: 12px; }
 .ap-vin-models:last-child { padding-bottom: 18px; }

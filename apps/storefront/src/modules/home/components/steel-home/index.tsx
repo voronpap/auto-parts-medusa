@@ -62,7 +62,6 @@ export default function SteelHome({
                 амортизатор
               </LocalizedClientLink>
               <LocalizedClientLink href="/cars">підбір за авто →</LocalizedClientLink>
-              <LocalizedClientLink href="/vin">за VIN →</LocalizedClientLink>
             </div>
           </div>
           <div className="ap-hero-visual" aria-hidden="true">

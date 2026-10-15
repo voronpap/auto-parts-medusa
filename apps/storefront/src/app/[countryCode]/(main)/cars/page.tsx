@@ -5,6 +5,7 @@ import { isSignedIn, listGarage } from "@lib/data/garage"
 import { listVehicleMakes, retrieveVehicleMake } from "@lib/data/parts-catalog"
 import { SaveCarButton } from "@modules/garage/save-car"
 import VehiclePicker from "@modules/garage/vehicle-picker"
+import PartsRequestForm from "@modules/parts-request/request-form"
 import PickFilter from "@modules/cars/pick-filter"
 import { listProducts } from "@lib/data/products"
 import { popularOf } from "@lib/util/popular-makes"
@@ -28,10 +29,27 @@ const years = (from: number | null, to: number | null) => {
 
 export default async function CarsPage(props: {
   params: Promise<{ countryCode: string }>
-  searchParams: Promise<{ make?: string; model?: string; year?: string }>
+  searchParams: Promise<{
+    make?: string
+    model?: string
+    year?: string
+    vin?: string
+    vin_error?: string
+  }>
 }) {
   const { countryCode } = await props.params
-  const { make: makeId, model, year: typedYear } = await props.searchParams
+  const {
+    make: makeId,
+    model,
+    year: typedYear,
+    vin: typedVin,
+    vin_error: vinError,
+  } = await props.searchParams
+  // The car came from a VIN (see /vin): it is named on the page and kept with the car.
+  const vin = typedVin
+    ?.replace(/[^A-Za-z0-9]/g, "")
+    .toUpperCase()
+    .slice(0, 17)
   const region = await getRegion(countryCode)
 
   if (!region) {
@@ -80,6 +98,21 @@ export default async function CarsPage(props: {
         ).slice(0, 40)
       : []
   const base = `/cars?make=${makeId}`
+  const vinNote = vinError
+    ? vinError === "format"
+      ? "Це не схоже на VIN: у коді має бути рівно 17 латинських літер і цифр, літер I, O та Q у VIN не буває."
+      : vinError === "lookup"
+      ? "Не вдалося перевірити VIN. Спробуйте ще раз за хвилину."
+      : "За цим VIN марку визначити не вдалося. Оберіть авто вручну або залиште запит нижче — менеджер підбере деталь."
+    : vin && data
+    ? `За VIN ${vin}: ${data.make.name}${
+        family
+          ? ` ${family.label}`
+          : " — модель за VIN не визначено, оберіть її"
+      }${
+        year ? `, ${year}` : ""
+      }. Двигун і комплектацію VIN не уточнює — звірте номер деталі перед замовленням.`
+    : null
 
   return (
     <div className="ap-scope ap-page">
@@ -113,6 +146,14 @@ export default async function CarsPage(props: {
             </>
           )}
         </nav>
+
+        {vinNote && (
+          <div
+            className={`ap-vin-note ap-card${vinError ? " ap-vin-bad" : ""}`}
+          >
+            {vinNote}
+          </div>
+        )}
 
         {!data && (
           <VehiclePicker
@@ -189,6 +230,7 @@ export default async function CarsPage(props: {
                     model: family.label,
                     names: family.names,
                     year: year ?? null,
+                    vin: vin ?? null,
                   }}
                 />
               </div>
@@ -244,6 +286,17 @@ export default async function CarsPage(props: {
             </section>
           </>
         )}
+
+        <section className="ap-section ap-card" id="request">
+          <div className="ap-section-head">
+            <h2 className="ap-pdp-title">Не знайшли? Підберемо за VIN</h2>
+            <p>
+              Залиште телефон і що потрібно — менеджер підбере деталь і
+              передзвонить.
+            </p>
+          </div>
+          <PartsRequestForm vin={vin} />
+        </section>
       </div>
     </div>
   )

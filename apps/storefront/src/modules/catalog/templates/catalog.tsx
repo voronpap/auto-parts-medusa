@@ -201,7 +201,7 @@ export default async function Catalog({
                   Показати весь каталог
                 </LocalizedClientLink>{" "}
                 або{" "}
-                <LocalizedClientLink className="ap-link" href="/vin#request">
+                <LocalizedClientLink className="ap-link" href="/cars#request">
                   попросіть підібрати за VIN
                 </LocalizedClientLink>
               </div>

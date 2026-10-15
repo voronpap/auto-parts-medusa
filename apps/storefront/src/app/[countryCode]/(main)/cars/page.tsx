@@ -1,11 +1,13 @@
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
 
-import { getGarageCar, isSignedIn } from "@lib/data/garage"
+import { isSignedIn, listGarage } from "@lib/data/garage"
 import { listVehicleMakes, retrieveVehicleMake } from "@lib/data/parts-catalog"
 import { SaveCarButton } from "@modules/garage/save-car"
+import VehiclePicker from "@modules/garage/vehicle-picker"
 import PickFilter from "@modules/cars/pick-filter"
 import { listProducts } from "@lib/data/products"
+import { popularOf } from "@lib/util/popular-makes"
 import { getRegion } from "@lib/data/regions"
 import ProductTable from "@modules/catalog/components/product-table"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
@@ -15,12 +17,6 @@ export const metadata: Metadata = {
   description:
     "Оберіть марку, модель і рік автомобіля, щоб побачити запчастини, які до нього підходять.",
 }
-
-// Makes shoppers look for first; the rest follow alphabetically.
-const POPULAR = [
-  "Volkswagen", "Skoda", "Audi", "Renault", "Toyota", "Hyundai", "Kia",
-  "Nissan", "Ford", "Opel", "Chery", "Geely", "BYD", "Great Wall",
-]
 
 const years = (from: number | null, to: number | null) => {
   if (from && to) return from === to ? `${from}` : `${from}–${to}`
@@ -42,18 +38,25 @@ export default async function CarsPage(props: {
     notFound()
   }
 
-  const year = typedYear && /^\d{4}$/.test(typedYear) ? Number(typedYear) : undefined
+  const year =
+    typedYear && /^\d{4}$/.test(typedYear) ? Number(typedYear) : undefined
   const data = makeId ? await retrieveVehicleMake(makeId, model, year) : null
-  const [garage, signedIn] = await Promise.all([getGarageCar(), isSignedIn()])
+  const [{ active: garage, cars }, signedIn] = await Promise.all([
+    listGarage(),
+    isSignedIn(),
+  ])
 
   if (makeId && !data) {
     notFound()
   }
 
-  const makes = makeId ? [] : await listVehicleMakes()
-  const popular = POPULAR.map((name) =>
-    makes.find((make) => make.name.toLowerCase() === name.toLowerCase())
-  ).filter((make): make is (typeof makes)[number] => Boolean(make))
+  // Sources write some makes in capitals: "ALSTHOM" goes after "Alfa Romeo".
+  const makes = makeId
+    ? []
+    : (await listVehicleMakes()).sort((a, b) =>
+        a.name.localeCompare(b.name, "uk", { sensitivity: "base" })
+      )
+  const popular = popularOf(makes)
   const family = data?.family ?? null
   const products = data?.product_ids.length
     ? await listProducts({
@@ -64,11 +67,17 @@ export default async function CarsPage(props: {
         .catch(() => [])
     : []
   const lastYear = family
-    ? Math.min(family.year_to ?? new Date().getFullYear(), new Date().getFullYear())
+    ? Math.min(
+        family.year_to ?? new Date().getFullYear(),
+        new Date().getFullYear()
+      )
     : 0
   const yearList =
     family?.year_from && lastYear >= family.year_from
-      ? Array.from({ length: lastYear - family.year_from + 1 }, (_, index) => lastYear - index).slice(0, 40)
+      ? Array.from(
+          { length: lastYear - family.year_from + 1 },
+          (_, index) => lastYear - index
+        ).slice(0, 40)
       : []
   const base = `/cars?make=${makeId}`
 
@@ -79,7 +88,9 @@ export default async function CarsPage(props: {
           <LocalizedClientLink href="/">Головна</LocalizedClientLink>
           <span>/</span>
           {data ? (
-            <LocalizedClientLink href="/cars">Підбір за авто</LocalizedClientLink>
+            <LocalizedClientLink href="/cars">
+              Підбір за авто
+            </LocalizedClientLink>
           ) : (
             <b>Підбір за авто</b>
           )}
@@ -87,7 +98,9 @@ export default async function CarsPage(props: {
             <>
               <span>/</span>
               {family ? (
-                <LocalizedClientLink href={base}>{data.make.name}</LocalizedClientLink>
+                <LocalizedClientLink href={base}>
+                  {data.make.name}
+                </LocalizedClientLink>
               ) : (
                 <b>{data.make.name}</b>
               )}
@@ -102,46 +115,19 @@ export default async function CarsPage(props: {
         </nav>
 
         {!data && (
-          <section className="ap-section ap-card">
-            <div className="ap-section-head">
-              <h1 className="ap-pdp-title">Підбір за автомобілем</h1>
-              <p>
-                Оберіть марку — далі модель і рік. Показуємо марки, для яких у
-                каталозі є деталі. Знаєте VIN?{" "}
-                <LocalizedClientLink className="ap-link" href="/vin">
-                  Підберіть за VIN
-                </LocalizedClientLink>
-                .
-              </p>
-            </div>
-            {popular.length > 0 && (
-              <>
-                <div className="ap-side-head">Популярні марки</div>
-                <div className="ap-pick ap-pick-big">
-                  {popular.map((make) => (
-                    <LocalizedClientLink key={make.id} href={`/cars?make=${make.id}`}>
-                      <strong>{make.name}</strong>
-                      <small>товарів: {make.products}</small>
-                    </LocalizedClientLink>
-                  ))}
-                </div>
-              </>
-            )}
-            <div className="ap-side-head">Усі марки</div>
-            {makes.length > 12 && <PickFilter target="all-makes" placeholder="Знайти марку" />}
-            {makes.length ? (
-              <div className="ap-pick" id="all-makes">
-                {makes.map((make) => (
-                  <LocalizedClientLink key={make.id} href={`/cars?make=${make.id}`}>
-                    <strong>{make.name}</strong>
-                    <small>{make.products}</small>
-                  </LocalizedClientLink>
-                ))}
-              </div>
-            ) : (
-              <div className="ap-empty">Застосовність у каталозі ще не заповнена.</div>
-            )}
-          </section>
+          <VehiclePicker
+            makes={makes}
+            popular={popular}
+            current={
+              garage
+                ? [garage.make, garage.model, garage.year]
+                    .filter(Boolean)
+                    .join(" ")
+                : null
+            }
+            cars={cars}
+            signedIn={signedIn}
+          />
         )}
 
         {data && !family && (
@@ -150,7 +136,9 @@ export default async function CarsPage(props: {
               <h1 className="ap-pdp-title">{data.make.name}</h1>
               <p>Оберіть модель. У дужках — роки, для яких є деталі.</p>
             </div>
-            {data.families.length > 12 && <PickFilter target="all-models" placeholder="Знайти модель" />}
+            {data.families.length > 12 && (
+              <PickFilter target="all-models" placeholder="Знайти модель" />
+            )}
             {data.families.length ? (
               <div className="ap-pick" id="all-models">
                 {data.families.map((item) => (
@@ -164,7 +152,9 @@ export default async function CarsPage(props: {
                 ))}
               </div>
             ) : (
-              <div className="ap-empty">Для цієї марки моделей у каталозі немає.</div>
+              <div className="ap-empty">
+                Для цієї марки моделей у каталозі немає.
+              </div>
             )}
           </section>
         )}
@@ -178,7 +168,10 @@ export default async function CarsPage(props: {
                 </h1>
                 <p>
                   {years(family.year_from, family.year_to)
-                    ? `Роки в каталозі: ${years(family.year_from, family.year_to)}. `
+                    ? `Роки в каталозі: ${years(
+                        family.year_from,
+                        family.year_to
+                      )}. `
                     : ""}
                   Оберіть рік, щоб звузити перелік.
                 </p>
@@ -211,7 +204,9 @@ export default async function CarsPage(props: {
                     <LocalizedClientLink
                       key={item}
                       className={item === year ? "ap-on" : undefined}
-                      href={`${base}&model=${encodeURIComponent(family.key)}&year=${item}`}
+                      href={`${base}&model=${encodeURIComponent(
+                        family.key
+                      )}&year=${item}`}
                     >
                       {item}
                     </LocalizedClientLink>
@@ -220,7 +215,8 @@ export default async function CarsPage(props: {
               )}
               {family.names.length > 1 && (
                 <p className="ap-vin-models">
-                  Об&apos;єднано варіанти з каталогів: {family.names.join(" · ")}
+                  Об&apos;єднано варіанти з каталогів:{" "}
+                  {family.names.join(" · ")}
                 </p>
               )}
             </section>
@@ -231,7 +227,9 @@ export default async function CarsPage(props: {
                   <h2>Підходить до авто</h2>
                   <p>
                     {products.length
-                      ? `Знайдено товарів: ${products.length}${year ? ` для ${year} року` : ""}`
+                      ? `Знайдено товарів: ${products.length}${
+                          year ? ` для ${year} року` : ""
+                        }`
                       : "Для цього вибору товарів немає"}
                     . Двигун і комплектацію звірте на сторінці товару.
                   </p>

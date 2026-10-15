@@ -141,6 +141,27 @@ export const retrieveVehicleMake = async (
     )
     .catch(() => null)
 
+export type VehicleMatch = VehicleFamily & {
+  make_id: string
+  make: string
+  engine_code: string | null
+  engine: string | null
+}
+
+/** Model families found by a phrase ("vw passat b6") or an engine code ("CAYC"). */
+export const searchVehicles = async (query: {
+  q?: string
+  engine?: string
+}): Promise<VehicleMatch[]> =>
+  sdk.client
+    .fetch<{ vehicles: VehicleMatch[] }>("/store/parts-catalog/vehicle-search", {
+      method: "GET",
+      query,
+      next: { revalidate: 900, tags: ["parts-catalog"] },
+    })
+    .then(({ vehicles }) => vehicles)
+    .catch(() => [])
+
 export type PartOffer = {
   offer_id: string
   brand: string

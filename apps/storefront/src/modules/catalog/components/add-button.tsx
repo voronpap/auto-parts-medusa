@@ -29,6 +29,9 @@ export default function AddButton({ variantId, countryCode, disabled }: Props) {
       }
     >
       {pending ? "…" : "+"}
+      <span className="ap-add-text" aria-hidden="true">
+        В кошик
+      </span>
     </button>
   )
 }

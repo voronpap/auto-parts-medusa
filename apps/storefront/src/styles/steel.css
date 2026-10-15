@@ -493,3 +493,33 @@ body { background: #eef1f4; }
 @media (max-width: 520px) {
   .ap-garage .ap-vp-open span { max-width: 34vw; }
 }
+
+/* Product table and cart rows become cards on phones */
+.ap-add-text { display: none; }
+@media (max-width: 639px) {
+  .ap-table.ap-products { display: block; min-width: 0; }
+  .ap-products thead { display: none; }
+  .ap-products tbody { display: block; }
+  .ap-products tr { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "part part" "stock price" "buy buy"; gap: 10px 12px; align-items: center; padding: 14px 13px; border-top: 1px solid var(--ap-line); }
+  .ap-products td { padding: 0; border: 0; }
+  .ap-products td:nth-child(1) { grid-area: part; }
+  .ap-products td:nth-child(2) { grid-area: stock; }
+  .ap-products td:nth-child(3) { grid-area: price; }
+  .ap-products td:nth-child(4) { grid-area: buy; }
+  .ap-products .ap-part { min-width: 0; align-items: flex-start; }
+  .ap-products .ap-part > span:last-child { min-width: 0; }
+  .ap-products .ap-part strong { display: -webkit-box; overflow: hidden; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+  .ap-products .ap-stock { white-space: normal; }
+  .ap-products .ap-add { display: flex; align-items: center; justify-content: center; gap: 6px; width: 100%; height: 42px; font-size: 15px; }
+  .ap-products .ap-add-text { display: inline; }
+
+  .ap-cart-items, .ap-cart-items tbody { display: block; }
+  .ap-cart-items thead { display: none; }
+  .ap-cart-row { display: grid; grid-template-columns: 48px minmax(0, 1fr) auto; grid-template-areas: "thumb title title" "thumb qty total"; gap: 8px 12px; align-items: center; padding: 14px 0; }
+  .ap-cart-row > td { width: auto; padding: 0 !important; }
+  .ap-cart-thumb { grid-area: thumb; align-self: start; }
+  .ap-cart-title { grid-area: title; }
+  .ap-cart-title [data-testid="product-title"] { display: -webkit-box; overflow: hidden; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+  .ap-cart-qty { grid-area: qty; }
+  .ap-cart-total { grid-area: total; text-align: right; white-space: nowrap; }
+}

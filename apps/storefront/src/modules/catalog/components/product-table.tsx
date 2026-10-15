@@ -70,13 +70,15 @@ export default function ProductTable({
   notes?: Record<string, string>
 }) {
   return (
-    <table className="ap-table">
+    <table className="ap-table ap-products">
       <thead>
         <tr>
           <th>Товар</th>
           <th>Наявність</th>
           <th>Ціна</th>
-          <th />
+          <th>
+            <span className="sr-only">Дія</span>
+          </th>
         </tr>
       </thead>
       <tbody>

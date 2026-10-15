@@ -17,7 +17,6 @@ const PROVIDER = { google: "Google", telegram: "Telegram" } as const
 export default function SocialSignupForm({ signup }: { signup: SocialSignup }) {
   const { countryCode } = useParams() as { countryCode: string }
   const [message, formAction] = useActionState(completeSocialSignup, null)
-  const telegram = signup.provider === "telegram"
 
   return (
     <div className="max-w-sm w-full flex flex-col items-center" data-testid="social-signup-page">
@@ -51,10 +50,10 @@ export default function SocialSignupForm({ signup }: { signup: SocialSignup }) {
             data-testid="last-name-input"
           />
           <Input
-            label={telegram ? "Email (необов'язковий)" : "Email"}
+            label="Email"
             name="email"
             type="email"
-            required={!telegram}
+            required
             autoComplete="email"
             defaultValue={signup.email}
             readOnly={Boolean(signup.email)}

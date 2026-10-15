@@ -143,9 +143,8 @@ export async function getSocialSignup(): Promise<SocialSignup | null> {
 
 /**
  * The shopper pressed "Створити обліковий запис": create the customer for the
- * waiting token, then sign in as usual. Telegram gives no e-mail; when the
- * shopper leaves it empty the account gets one made from the Telegram id,
- * which can be changed in the account later.
+ * waiting token, then sign in as usual. Telegram gives no e-mail, so the
+ * shopper types one; without an e-mail no account is created.
  */
 export async function completeSocialSignup(
   _state: SocialSignupState,
@@ -163,12 +162,8 @@ export async function completeSocialSignup(
   }
 
   const text = (name: string) => String(formData.get(name) ?? "").trim()
-  const telegramId = payloadOf(token).user_metadata?.telegram_id
   // An address the provider confirmed is shown read-only and kept as is.
-  const email =
-    signup.email ||
-    text("email") ||
-    (telegramId ? `tg-${telegramId}@telegram.auto-parts.pp.ua` : "")
+  const email = signup.email || text("email")
 
   if (!email) {
     return { error: "Вкажіть email." }

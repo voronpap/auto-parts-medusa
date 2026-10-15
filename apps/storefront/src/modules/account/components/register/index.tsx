@@ -87,7 +87,7 @@ const Register = ({ setCurrentView }: Props) => {
           >
             політика конфіденційності
           </LocalizedClientLink>{" "}
-          and{" "}
+          та{" "}
           <LocalizedClientLink
             href="/content/terms-of-use"
             className="underline"

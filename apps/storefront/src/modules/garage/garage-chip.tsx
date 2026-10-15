@@ -19,7 +19,7 @@ export default async function GarageChip() {
   return (
     <span className="ap-garage ap-on">
       <LocalizedClientLink href="/garage" title="Мій гараж">
-        {car.make} {car.model ?? ""} {car.year ?? ""}
+        {[car.make, car.model, car.year].filter(Boolean).join(" ")}
         {more > 0 && <span className="ap-garage-more"> +{more}</span>}
       </LocalizedClientLink>
       <ForgetCarButton />

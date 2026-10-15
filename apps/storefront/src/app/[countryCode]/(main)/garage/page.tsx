@@ -44,8 +44,13 @@ export default async function GaragePage() {
                   <div className="ap-garage-car">
                     <strong>{carName(car)}</strong>
                     <span>
-                      {isActive(car) ? "Обране авто" : car.model ? "" : "Модель не вказано"}
-                      {car.vin ? ` · VIN ${car.vin}` : ""}
+                      {[
+                        isActive(car) ? "Обране авто" : null,
+                        car.model ? null : "Модель не вказано",
+                        car.vin ? `VIN ${car.vin}` : null,
+                      ]
+                        .filter(Boolean)
+                        .join(" · ")}
                     </span>
                   </div>
                   <div className="ap-garage-actions">

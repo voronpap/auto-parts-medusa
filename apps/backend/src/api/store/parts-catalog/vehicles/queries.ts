@@ -75,3 +75,64 @@ export async function listProductIds(
 
   return rows.map((row: { id: string }) => row.id)
 }
+
+export type VehicleMatchRow = {
+  make_id: string
+  make: string
+  name: string
+  engine_code: string | null
+  engine: string | null
+  year_from: number | null
+  year_to: number | null
+  open_ended: boolean
+}
+
+// Typed text is matched literally: % and _ are not wildcards.
+const escapeLike = (text: string) => text.replace(/[\\%_]/g, "\\$&")
+
+const WITH_MODEL =
+  "from part_application a join vehicle_make m on m.id = a.vehicle_make_id and m.deleted_at is null join vehicle_model vm on vm.id = a.vehicle_model_id and vm.deleted_at is null"
+
+/** Models whose make (or a make alias) and name contain every word typed. */
+export async function searchModels(
+  db: Knex,
+  words: string[]
+): Promise<VehicleMatchRow[]> {
+  const { rows } = await db.raw(
+    `select m.id as make_id, m.name as make, vm.name, null as engine_code, null as engine,
+            min(a.year_from)::int as year_from, max(a.year_to)::int as year_to,
+            bool_or(a.year_to is null) as open_ended
+     ${FITTING}
+       and (m.name || ' ' || vm.name || ' ' || coalesce((
+         select string_agg(x.alias, ' ') from vehicle_make_alias x
+         where x.make_id = m.id and x.deleted_at is null), '')) ilike all (array[${words.map(() => "?").join(", ")}])
+     group by m.id, m.name, vm.name order by m.name, vm.name limit 200`.replace(
+      "from part_application a",
+      WITH_MODEL
+    ),
+    words.map((word) => `%${escapeLike(word)}%`)
+  )
+
+  return rows
+}
+
+/** Models with an engine whose code starts with what was typed. */
+export async function searchEngineCode(
+  db: Knex,
+  code: string
+): Promise<VehicleMatchRow[]> {
+  const { rows } = await db.raw(
+    `select m.id as make_id, m.name as make, vm.name, upper(a.engine_code) as engine_code,
+            min(a.engine) as engine, min(a.year_from)::int as year_from,
+            max(a.year_to)::int as year_to, bool_or(a.year_to is null) as open_ended
+     ${FITTING} and upper(a.engine_code) like ?
+     group by m.id, m.name, vm.name, upper(a.engine_code)
+     order by upper(a.engine_code), m.name, vm.name limit 200`.replace(
+      "from part_application a",
+      WITH_MODEL
+    ),
+    [`${escapeLike(code.toUpperCase())}%`]
+  )
+
+  return rows
+}

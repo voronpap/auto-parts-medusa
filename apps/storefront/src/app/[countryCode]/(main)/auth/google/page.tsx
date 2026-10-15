@@ -9,10 +9,14 @@ export default async function GoogleCallback(props: {
   searchParams: Promise<Record<string, string>>
 }) {
   const [{ countryCode }, query] = await Promise.all([props.params, props.searchParams])
-  const ok = await finishGoogleLogin(query)
+  const result = await finishGoogleLogin(query)
 
-  if (ok) {
+  if (result === "signed-in") {
     redirect(`/${countryCode}/account`)
+  }
+
+  if (result === "complete-signup") {
+    redirect(`/${countryCode}/auth/complete`)
   }
 
   return (

@@ -9,10 +9,14 @@ export default async function TelegramCallback(props: {
   searchParams: Promise<Record<string, string>>
 }) {
   const [{ countryCode }, query] = await Promise.all([props.params, props.searchParams])
-  const ok = await finishTelegramLogin(query)
+  const result = await finishTelegramLogin(query)
 
-  if (ok) {
+  if (result === "signed-in") {
     redirect(`/${countryCode}/account`)
+  }
+
+  if (result === "complete-signup") {
+    redirect(`/${countryCode}/auth/complete`)
   }
 
   return (

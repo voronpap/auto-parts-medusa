@@ -115,6 +115,31 @@ export const removePendingCustomer = async () => {
   })
 }
 
+// A first sign-in through Google or Telegram gives a token that is not tied to
+// a customer yet. It waits here while the shopper fills in the form that
+// finishes the sign-up; nothing is created until they press the button.
+export const setSocialSignupToken = async (token: string) => {
+  const cookies = await nextCookies()
+  cookies.set("_medusa_social_signup", token, {
+    maxAge: 60 * 30,
+    httpOnly: true,
+    sameSite: "lax",
+    secure: process.env.NODE_ENV === "production",
+  })
+}
+
+export const getSocialSignupToken = async () => {
+  const cookies = await nextCookies()
+  return cookies.get("_medusa_social_signup")?.value
+}
+
+export const removeSocialSignupToken = async () => {
+  const cookies = await nextCookies()
+  cookies.set("_medusa_social_signup", "", {
+    maxAge: -1,
+  })
+}
+
 export const getCartId = async () => {
   const cookies = await nextCookies()
   return cookies.get("_medusa_cart_id")?.value

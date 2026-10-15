@@ -7,6 +7,7 @@ import ErrorMessage from "@modules/checkout/components/error-message"
 import { SubmitButton } from "@modules/checkout/components/submit-button"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import { signup } from "@lib/data/customer"
+import SocialButtons from "../login/social-buttons"
 
 type Props = {
   setCurrentView: (view: LOGIN_VIEW) => void
@@ -82,14 +83,14 @@ const Register = ({ setCurrentView }: Props) => {
         <span className="text-center text-ui-fg-base text-small-regular mt-6">
           Створюючи обліковий запис, ви погоджуєтеся з документами:{" "}
           <LocalizedClientLink
-            href="/content/privacy-policy"
+            href="/info/privacy"
             className="underline"
           >
             політика конфіденційності
           </LocalizedClientLink>{" "}
           та{" "}
           <LocalizedClientLink
-            href="/content/terms-of-use"
+            href="/info/offer"
             className="underline"
           >
             умови користування
@@ -100,6 +101,7 @@ const Register = ({ setCurrentView }: Props) => {
           Зареєструватися
         </SubmitButton>
       </form>
+      <SocialButtons />
       <span className="text-center text-ui-fg-base text-small-regular mt-6">
         Уже зареєстровані?{" "}
         <button

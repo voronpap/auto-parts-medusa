@@ -96,6 +96,8 @@ export async function signup(
     phone: formData.get("phone") as string,
   }
 
+  let existing = false
+
   try {
     await sdk.auth.register("customer", "emailpass", {
       email: customerForm.email,
@@ -110,8 +112,10 @@ export async function signup(
       fetchError.statusText !== "Unauthorized" ||
       fetchError.message !== "Identity with email already exists"
     ) {
-      return { state: "error", error: String(error) }
+      return { state: "error", error: authErrorText(error) }
     }
+
+    existing = true
   }
 
   // Persist the extra signup fields. The customer record is created during
@@ -121,7 +125,19 @@ export async function signup(
 
   // Continue by logging in. The login response tells us whether the backend
   // requires email verification — we don't need a storefront-side flag.
-  return completeLogin(customerForm.email, password)
+  const result = await completeLogin(customerForm.email, password)
+
+  // The email already signs in somewhere (an earlier sign-up or the shop's
+  // admin): the password typed here has to be that one.
+  if (existing && result?.state === "error") {
+    return {
+      state: "error",
+      error:
+        "Цей email уже зареєстровано. Введіть пароль, з яким ви входили раніше, або скористайтеся «Забули пароль?» на сторінці входу.",
+    }
+  }
+
+  return result
 }
 
 export async function login(
@@ -137,6 +153,21 @@ export async function login(
 // Logs the customer in and reconciles the customer record. The behavior is
 // driven entirely by the backend's login response, so it works whether or not
 // email verification is enabled.
+/** Auth errors from the backend come in English; shoppers read Ukrainian. */
+function authErrorText(error: unknown): string {
+  const message = (error as FetchError)?.message ?? String(error)
+
+  if (/invalid email or password/i.test(message)) {
+    return "Невірний email або пароль."
+  }
+
+  if (/already exists/i.test(message)) {
+    return "Цей email уже зареєстровано."
+  }
+
+  return "Не вдалося виконати вхід. Спробуйте ще раз за хвилину."
+}
+
 async function completeLogin(
   email: string,
   password: string
@@ -146,7 +177,7 @@ async function completeLogin(
   try {
     result = await sdk.auth.login("customer", "emailpass", { email, password })
   } catch (error) {
-    return { state: "error", error: String(error) }
+    return { state: "error", error: authErrorText(error) }
   }
 
   // A `location` is returned by third-party auth providers, which this flow

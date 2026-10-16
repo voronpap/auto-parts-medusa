@@ -204,6 +204,8 @@
 .ap-product:hover { transform: translateY(-2px); border-color: var(--ap-brand); }
 .ap-product-img { height: 132px; display: grid; place-items: center; overflow: hidden; margin-bottom: 12px; border-radius: 9px; color: var(--ap-brand); background: linear-gradient(145deg, var(--ap-surface-2), var(--ap-brand-soft)); }
 .ap-product-img svg { width: 58px; height: 58px; }
+/* The grid track must be the box itself, or "height: 100%" on the photo means nothing and a square photo overflows the 132 px box. */
+.ap-product-img:has(img) { grid-template: minmax(0, 1fr) / minmax(0, 1fr); padding: 8px; }
 .ap-product-img img { width: 100%; height: 100%; object-fit: contain; }
 .ap-product-sku { color: var(--ap-muted); font-size: 11px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
 .ap-product-title { min-height: 40px; margin: 3px 0 8px; font-weight: 700; line-height: 1.35; }

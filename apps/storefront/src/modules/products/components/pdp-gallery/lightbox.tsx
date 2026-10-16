@@ -33,16 +33,21 @@ export default function Lightbox({
     onIndex((index + step + photos.length) % photos.length)
 
   return (
-    <Dialog open={open} onClose={onClose} className="ap-scope ap-lightbox">
+    <Dialog
+      open={open}
+      onClose={onClose}
+      className="ap-scope ap-lightbox"
+      // On the dialog itself: it holds focus until a button is focused.
+      onKeyDown={(event) => {
+        if (!many) return
+        if (event.key === "ArrowLeft") turn(-1)
+        if (event.key === "ArrowRight") turn(1)
+      }}
+    >
       <DialogBackdrop className="ap-lightbox-backdrop" />
       <div className="ap-lightbox-frame">
         <DialogPanel
           className="ap-lightbox-panel"
-          onKeyDown={(event) => {
-            if (!many) return
-            if (event.key === "ArrowLeft") turn(-1)
-            if (event.key === "ArrowRight") turn(1)
-          }}
           onTouchStart={(event) => {
             const touch = event.touches[0]
             start.current = { x: touch.clientX, y: touch.clientY }

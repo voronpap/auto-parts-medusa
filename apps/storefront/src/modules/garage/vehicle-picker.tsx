@@ -312,6 +312,12 @@ export default function VehiclePicker({
               )}
             </form>
 
+            <p className="ap-vp-hint">
+              <LocalizedClientLink className="ap-link" href="/cars#request">
+                Не знайшли? Підберемо за VIN
+              </LocalizedClientLink>
+            </p>
+
             {!signedIn && (
               <p className="ap-vp-hint">
                 <LocalizedClientLink className="ap-link" href="/account">

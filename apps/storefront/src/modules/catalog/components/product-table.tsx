@@ -7,7 +7,7 @@ export { PartIcon } from "./part-icon"
 
 export const money = (amount: number | null | undefined) =>
   `${new Intl.NumberFormat("uk-UA", { maximumFractionDigits: 2 }).format(
-    amount ?? 0
+    amount ?? 0,
   )} ₴`
 
 export const isAvailable = (variant?: HttpTypes.StoreProductVariant) =>
@@ -17,20 +17,11 @@ export const isAvailable = (variant?: HttpTypes.StoreProductVariant) =>
     (variant!.inventory_quantity ?? 0) > 0)
 
 const Stock = ({ variant }: { variant?: HttpTypes.StoreProductVariant }) => {
-  const quantity = variant?.inventory_quantity ?? 0
-
   if (!isAvailable(variant)) {
     return <span className="ap-stock ap-none">Немає в наявності</span>
   }
 
-  return (
-    <span className="ap-stock">
-      ●{" "}
-      {variant!.manage_inventory && quantity > 0
-        ? `${quantity} шт. на складі`
-        : "В наявності"}
-    </span>
-  )
+  return <span className="ap-stock">● В наявності</span>
 }
 
 export default function ProductTable({

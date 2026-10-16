@@ -249,6 +249,30 @@
 .ap-pdp-thumb[aria-pressed="true"] { border-color: var(--ap-brand); box-shadow: 0 0 0 1px var(--ap-brand); }
 .ap-pdp-thumb img { width: 100%; height: 100%; object-fit: contain; }
 .ap-pdp-thumb svg { width: 28px; height: 28px; }
+.ap-pdp-zoom { display: block; width: 100%; height: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; }
+.ap-pdp-zoom:focus-visible { outline: 3px solid var(--ap-brand); outline-offset: -3px; }
+.ap-lightbox { position: relative; z-index: 200; }
+.ap-lightbox-backdrop { position: fixed; inset: 0; background: rgba(12, 16, 20, 0.88); }
+.ap-lightbox-frame { position: fixed; inset: 0; display: grid; place-items: center; padding: 16px; }
+.ap-lightbox-panel { position: relative; width: min(92vw, 900px); max-height: calc(100dvh - 32px); display: flex; flex-direction: column; overflow: hidden; border-radius: 12px; background: #fff; touch-action: pan-y; }
+.ap-lightbox-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 8px 8px 16px; border-bottom: 1px solid var(--ap-line); }
+.ap-lightbox-count { color: var(--ap-muted); font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.ap-lightbox-close, .ap-lightbox-turn { display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 0; border-radius: 50%; color: #1d252c; background: transparent; cursor: pointer; }
+.ap-lightbox-close:hover, .ap-lightbox-turn:hover { background: var(--ap-surface-2); }
+.ap-lightbox-close:focus-visible, .ap-lightbox-turn:focus-visible { outline: 3px solid var(--ap-brand); outline-offset: 2px; }
+.ap-lightbox svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.ap-lightbox-stage { position: relative; display: grid; place-items: center; min-height: 0; flex: 1; padding: 12px 56px; }
+.ap-lightbox-stage img { width: 100%; height: auto; max-height: calc(100dvh - 120px); object-fit: contain; user-select: none; }
+.ap-lightbox-turn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255, 255, 255, 0.92); box-shadow: 0 1px 4px rgba(0, 0, 0, 0.18); }
+.ap-lightbox-prev { left: 6px; }
+.ap-lightbox-next { right: 6px; }
+@media (max-width: 640px) {
+  .ap-lightbox-frame { padding: 8px; }
+  .ap-lightbox-panel { width: 100%; max-height: calc(100dvh - 16px); }
+  .ap-lightbox-stage { padding: 8px; }
+  .ap-lightbox-stage img { max-height: calc(100dvh - 90px); }
+  .ap-lightbox-turn { top: auto; bottom: 10px; transform: none; }
+}
 .ap-pdp-title { margin: 0 0 12px; font-size: clamp(24px, 2.6vw, 36px); font-weight: 800; line-height: 1.08; letter-spacing: -0.04em; }
 .ap-keyfacts { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin: 22px 0 0; }
 .ap-keyfacts div { padding: 11px 13px; border: 1px solid var(--ap-line); border-radius: 9px; background: var(--ap-surface-2); }

@@ -31,9 +31,9 @@ export default async function Nav() {
         </Suspense>
 
         <div className="ap-account">
-          <Suspense fallback={null}>
-            <GarageChip />
-          </Suspense>
+          {/* Only reads cookies, so it renders in the shell: a chip streamed in
+              later squeezes the logo onto two lines and shifts the page (CLS). */}
+          <GarageChip />
           <LocalizedClientLink
             href="/account"
             className="ap-account-link"

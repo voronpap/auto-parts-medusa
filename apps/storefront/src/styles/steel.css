@@ -131,6 +131,12 @@
 .ap-pager a { padding: 7px 12px; border: 1px solid var(--ap-line); border-radius: 7px; color: var(--ap-ink); background: var(--ap-surface-2); font-weight: 700; }
 
 @media (max-width: 1100px) {
+  /* Tablet: brand, search and the account block share one row; "Кабінет" turns into its icon so the cart stays on screen. */
+  .ap-top-in { grid-template-columns: auto minmax(160px, 1fr) auto; gap: 16px; }
+  .ap-account { gap: 10px; min-width: 0; }
+  .ap-account-link span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .ap-garage { max-width: 220px; overflow: hidden; }
+  .ap-garage a { overflow: hidden; text-overflow: ellipsis; }
   .ap-workspace { grid-template-columns: 210px minmax(0, 1fr); }
   .ap-order { position: static; grid-column: 1 / -1; }
   .ap-order-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 28px; }

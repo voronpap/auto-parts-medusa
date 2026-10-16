@@ -4,8 +4,8 @@ import { getGarageCar } from "@lib/data/garage"
 import { PartsCatalogInfo, retrievePartsCatalog } from "@lib/data/parts-catalog"
 import FitBadge from "@modules/garage/fit-badge"
 import { HttpTypes } from "@medusajs/types"
-import { PartIcon } from "@modules/catalog/components/product-table"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import PdpGallery from "@modules/products/components/pdp-gallery"
 import ProductActions from "@modules/products/components/product-actions"
 import RelatedProducts from "@modules/products/components/related-products"
 import SkeletonRelatedProducts from "@modules/skeletons/templates/skeleton-related-products"
@@ -98,7 +98,9 @@ const ProductTemplate = async ({
 
   const [catalog, garage] = await Promise.all([retrievePartsCatalog(product.id), getGarageCar()])
   const number = catalog.numbers[0]
-  const image = images[0]?.url || product.thumbnail
+  const photos = Array.from(
+    new Set([...images.map((image) => image.url), product.thumbnail].filter(Boolean))
+  ) as string[]
   const inStore = catalog.crosses.filter((cross) => cross.product)
   const replacements = catalog.crosses.filter((cross) => cross.kind === "replacement")
   const oem = catalog.crosses.filter((cross) => cross.kind === "oem")
@@ -122,14 +124,7 @@ const ProductTemplate = async ({
         </nav>
 
         <section className="ap-pdp ap-card">
-          <div className="ap-pdp-img">
-            {image ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={image} alt={product.title} />
-            ) : (
-              <PartIcon title={product.title} />
-            )}
-          </div>
+          <PdpGallery photos={photos} title={product.title} />
           <div className="ap-pdp-info">
             <div className="ap-eyebrow">
               {number ? `${number.brand} · ${number.number}` : product.subtitle}

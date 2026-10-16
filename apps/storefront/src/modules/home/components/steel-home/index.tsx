@@ -7,6 +7,7 @@ import {
   isAvailable,
   money,
 } from "@modules/catalog/components/product-table"
+import PartImage from "@modules/catalog/components/part-image"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 
 type Props = {
@@ -159,12 +160,12 @@ export default function SteelHome({
                       href={`/products/${product.handle}`}
                       aria-label={product.title}
                     >
-                      {product.thumbnail ? (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img src={product.thumbnail} alt="" />
-                      ) : (
-                        <PartIcon title={product.title} />
-                      )}
+                      <PartImage
+                        src={product.thumbnail || product.images?.[0]?.url}
+                        title={product.title}
+                        size={240}
+                        sizes="(max-width: 640px) 50vw, 240px"
+                      />
                     </LocalizedClientLink>
                     <small className="ap-product-sku">
                       {product.subtitle || variant?.sku || ""}

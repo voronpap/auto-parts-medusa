@@ -2,7 +2,7 @@
 
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from "@headlessui/react"
 import Image from "next/image"
-import { useRef } from "react"
+import { Dispatch, SetStateAction, useRef } from "react"
 
 // A horizontal move longer than this, mostly sideways, turns the photo.
 const SWIPE_PX = 40
@@ -24,13 +24,14 @@ export default function Lightbox({
   title: string
   index: number
   open: boolean
-  onIndex: (index: number) => void
+  onIndex: Dispatch<SetStateAction<number>>
   onClose: () => void
 }) {
   const start = useRef<{ x: number; y: number } | null>(null)
   const many = photos.length > 1
+  // From the latest index, so quick repeated turns all count.
   const turn = (step: number) =>
-    onIndex((index + step + photos.length) % photos.length)
+    onIndex((from) => (from + step + photos.length) % photos.length)
 
   return (
     <Dialog

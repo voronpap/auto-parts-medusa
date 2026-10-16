@@ -59,13 +59,16 @@ const Login = ({ setCurrentView }: Props) => {
         </SubmitButton>
       </form>
       <SocialButtons />
-      <button
-        onClick={() => setCurrentView(LOGIN_VIEW.FORGOT_PASSWORD)}
-        className="underline text-ui-fg-base text-small-regular mt-4"
-        data-testid="forgot-password-button"
-      >
-        Забули пароль?
-      </button>
+      {/* The reset link goes out by email: without a mail provider it never arrives. */}
+      {process.env.NEXT_PUBLIC_EMAIL_ENABLED === "true" && (
+        <button
+          onClick={() => setCurrentView(LOGIN_VIEW.FORGOT_PASSWORD)}
+          className="underline text-ui-fg-base text-small-regular mt-4"
+          data-testid="forgot-password-button"
+        >
+          Забули пароль?
+        </button>
+      )}
       <span className="text-center text-ui-fg-base text-small-regular mt-6">
         Ще не зареєстровані?{" "}
         <button

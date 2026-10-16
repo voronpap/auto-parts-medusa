@@ -38,7 +38,10 @@ export default async function PageLayout(props: { children: React.ReactNode }) {
           shippingOptions={shippingOptions}
         />
       )}
-      {props.children}
+      {/* Target of the header's "Перейти до вмісту" link. */}
+      <div id="main" tabIndex={-1} className="outline-none">
+        {props.children}
+      </div>
       <Footer />
     </>
   )

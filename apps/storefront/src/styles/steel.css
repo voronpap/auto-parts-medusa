@@ -31,6 +31,7 @@
 .ap-account { display: flex; align-items: center; gap: 18px; white-space: nowrap; }
 .ap-account > a { color: #c3ced5; font-size: 13px; }
 .ap-account > a:hover { color: #fff; }
+.ap-account-link { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-width: 40px; min-height: 40px; }
 .ap-basket { height: 40px; padding: 0 13px; border-radius: 8px; background: rgba(255, 255, 255, 0.1); font-weight: 800; }
 .ap-basket [data-testid="nav-cart-link"] { color: #fff; }
 .ap-subnav { border-top: 1px solid rgba(255, 255, 255, 0.08); background: color-mix(in srgb, var(--ap-brand-2) 91%, white); }
@@ -153,7 +154,7 @@
 @media (max-width: 520px) {
   .ap-top-in, .ap-subnav-in, .ap-shell { width: min(100% - 24px, var(--ap-max)); }
   .ap-brand { font-size: 17px; }
-  .ap-account > a { display: none; }
+  .ap-account-link span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
   .ap-intro-copy { padding: 28px 23px; }
   .ap-h1 { font-size: 35px; }
   .ap-stat { padding: 12px; }
@@ -529,4 +530,23 @@ body { background: #eef1f4; }
   .ap-cart-title [data-testid="product-title"] { display: -webkit-box; overflow: hidden; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
   .ap-cart-qty { grid-area: qty; }
   .ap-cart-total { grid-area: total; text-align: right; white-space: nowrap; }
+}
+
+/* Skip link and keyboard focus (WCAG 2.4.1, 2.4.7): the default ring vanished on the orange buttons */
+.ap-skip { position: absolute; top: -80px; left: 12px; z-index: 100; padding: 10px 14px; border-radius: 8px; color: var(--ap-brand-2); background: #fff; font-weight: 800; }
+.ap-skip:focus { top: 12px; outline: 3px solid var(--ap-brand); outline-offset: 2px; }
+.ap-scope a:focus-visible, .ap-scope button:focus-visible, .ap-scope select:focus-visible { outline: 2px solid var(--ap-brand); outline-offset: 2px; }
+.ap-primary:focus-visible, .ap-scope button.ap-primary:focus-visible { outline: 2px solid #fff; outline-offset: 2px; box-shadow: 0 0 0 4px var(--ap-brand-2); }
+/* Search buttons sit in an overflow:hidden box, so their ring is drawn inside */
+.ap-search button:focus-visible, .ap-hero-search button:focus-visible { outline: 3px solid var(--ap-brand-2); outline-offset: -6px; }
+.ap-search:focus-within, .ap-hero-search:focus-within { box-shadow: 0 0 0 3px var(--ap-brand); }
+
+/* Phone: the hero search fits 375 px; iOS zooms into inputs under 16 px */
+@media (max-width: 520px) {
+  .ap-hero-copy { min-width: 0; max-width: 100%; padding: 26px 16px; }
+  .ap-hero-search { max-width: 100%; }
+  .ap-hero-search input { padding: 0 12px; }
+}
+@media (max-width: 800px) {
+  .ap-scope input, .ap-scope select, .ap-scope textarea { font-size: 16px; }
 }

@@ -50,7 +50,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             name={name}
             placeholder=" "
             required={required}
-            className="pt-4 pb-1 block w-full h-11 px-4 mt-0 bg-ui-bg-field border rounded-md appearance-none focus:outline-none focus:ring-0 focus:shadow-borders-interactive-with-active border-ui-border-base hover:bg-ui-bg-field-hover"
+            className="pt-4 pb-1 block w-full h-11 px-4 mt-0 bg-ui-bg-field border rounded-md appearance-none focus:outline-none focus:ring-0 focus:border-[#10202d] focus:shadow-[0_0_0_1px_#10202d] border-ui-border-base text-base small:text-sm hover:bg-ui-bg-field-hover"
             {...props}
             id={id}
             ref={inputRef}
@@ -69,7 +69,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               onClick={() => setShowPassword(!showPassword)}
               aria-label={showPassword ? "Сховати пароль" : "Показати пароль"}
               aria-pressed={showPassword}
-              className="text-ui-fg-subtle px-4 focus:outline-none transition-all duration-150 outline-none focus:text-ui-fg-base absolute right-0 top-3"
+              className="text-ui-fg-subtle px-4 rounded transition-all duration-150 outline-none focus-visible:outline-2 focus-visible:outline-[#10202d] focus:text-ui-fg-base absolute right-0 top-3"
             >
               {showPassword ? <Eye /> : <EyeOff />}
             </button>

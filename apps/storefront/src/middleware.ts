@@ -121,6 +121,8 @@ export async function middleware(request: NextRequest) {
       const response = NextResponse.next()
       response.cookies.set("_medusa_cache_id", cacheId, {
         maxAge: 60 * 60 * 24,
+        sameSite: "lax",
+        secure: process.env.NODE_ENV === "production",
       })
       return response
     }

@@ -1,12 +1,8 @@
 "use client"
 
-import {
-  Popover,
-  PopoverButton,
-  PopoverPanel,
-  Transition,
-} from "@headlessui/react"
+import { Popover, PopoverPanel, Transition } from "@headlessui/react"
 import { convertToLocale } from "@lib/util/money"
+import { plural } from "@lib/util/plural"
 import { HttpTypes } from "@medusajs/types"
 import { Button } from "@modules/common/components/ui"
 import DeleteButton from "@modules/common/components/delete-button"
@@ -80,13 +76,14 @@ const CartDropdown = ({
       onMouseLeave={close}
     >
       <Popover className="relative h-full">
-        <PopoverButton className="h-full">
-          <LocalizedClientLink
-            className="hover:text-ui-fg-base"
-            href="/cart"
-            data-testid="nav-cart-link"
-          >{`Кошик · ${totalItems}`}</LocalizedClientLink>
-        </PopoverButton>
+        {/* A plain link: the preview opens on hover, so a button around it
+            would only nest two controls (WCAG 4.1.2). */}
+        <LocalizedClientLink
+          className="flex h-full items-center hover:text-ui-fg-base"
+          href="/cart"
+          aria-label={`Кошик, ${plural(totalItems, ["товар", "товари", "товарів"])}`}
+          data-testid="nav-cart-link"
+        >{`Кошик · ${totalItems}`}</LocalizedClientLink>
         <Transition
           show={cartDropdownOpen}
           as={Fragment}

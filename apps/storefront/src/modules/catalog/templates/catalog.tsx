@@ -60,10 +60,27 @@ export default async function Catalog({
   ])
   // A typed part number also finds products through the parts catalog:
   // the product with that number and the confirmed crosses of that number.
-  const [matches, offers] =
+  const [numberMatches, allOffers] =
     q && !categoryId && page === 1
       ? await Promise.all([searchByPartNumber(q), listPartOffers(q)])
       : [[], []]
+  // One part, one row: several suppliers of the same number show as its best
+  // offer (offers come in stock first, then cheapest), and a product that is
+  // already offered is not listed again below.
+  const seen = new Set<string>()
+  const offers = allOffers.filter((offer) => {
+    const id = `${offer.brand.toLowerCase()}|${offer.number.replace(/[\s\-.\/\\]+/g, "").toUpperCase()}`
+
+    if (seen.has(id)) {
+      return false
+    }
+
+    seen.add(id)
+
+    return true
+  })
+  const offered = new Set(offers.map((offer) => offer.product_handle).filter(Boolean))
+  const matches = numberMatches.filter((match) => !offered.has(match.handle))
   const byNumber = matches.length
     ? await listProducts({
         countryCode,
@@ -82,11 +99,18 @@ export default async function Catalog({
       match.product_id,
       match.via === "number"
         ? `Номер ${match.matched.brand} ${match.matched.number}`
-        : `Аналог номера ${match.matched.brand} ${match.matched.number}`,
+        : match.via === "prefix"
+          ? `Номер ${match.matched.brand} ${match.matched.number} (частковий збіг)`
+          : `Аналог номера ${match.matched.brand} ${match.matched.number}`,
     ])
   )
-  const listed = response.products.filter((product) => !order.has(product.id!))
-  const found = byNumber.length + (response.count - (response.products.length - listed.length))
+  const listed = response.products.filter(
+    (product) => !order.has(product.id!) && !offered.has(product.handle)
+  )
+  const found =
+    offers.length +
+    byNumber.length +
+    (response.count - (response.products.length - listed.length))
   const pages = Math.max(1, Math.ceil(response.count / PAGE_SIZE))
   const total = categories.reduce(
     (sum, category) =>
@@ -197,12 +221,12 @@ export default async function Catalog({
             ) : byNumber.length || offers.length ? null : (
               <div className="ap-empty">
                 За цим запитом товарів немає.{" "}
-                <LocalizedClientLink className="ap-link" href="/store">
-                  Показати весь каталог
+                <LocalizedClientLink className="ap-link" href="/cars#request">
+                  Не знайшли? Підберемо за VIN
                 </LocalizedClientLink>{" "}
                 або{" "}
-                <LocalizedClientLink className="ap-link" href="/cars#request">
-                  попросіть підібрати за VIN
+                <LocalizedClientLink className="ap-link" href="/store">
+                  покажемо весь каталог
                 </LocalizedClientLink>
               </div>
             )}

@@ -55,7 +55,8 @@ export const retrievePartsCatalog = async (
 export type NumberMatch = {
   product_id: string
   handle: string
-  via: "number" | "cross"
+  /** "prefix": a number that starts with what was typed. */
+  via: "number" | "cross" | "prefix"
   matched: { brand: string; number: string }
 }
 

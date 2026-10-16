@@ -121,7 +121,10 @@ export default async function CarsPage(props: {
           (_, index) => lastYear - index
         ).slice(0, 40)
       : []
-  const base = `/cars?make=${makeId}`
+  // A VIN and the year it names stay with the car while the shopper picks
+  // the model; picking a year replaces the one from the VIN.
+  const vinParam = vin ? `&vin=${vin}` : ""
+  const base = `/cars?make=${makeId}${vinParam}`
   const vinNote = vinError
     ? vinError === "format"
       ? "Це не схоже на VIN: у коді має бути рівно 17 латинських літер і цифр, літер I, O та Q у VIN не буває."
@@ -129,12 +132,10 @@ export default async function CarsPage(props: {
       ? "Не вдалося перевірити VIN. Спробуйте ще раз за хвилину."
       : "За цим VIN марку визначити не вдалося. Оберіть авто вручну або залиште запит нижче — менеджер підбере деталь."
     : vin && data
-    ? `За VIN ${vin}: ${data.make.name}${
-        family
-          ? ` ${family.label}`
-          : " — модель за VIN не визначено, оберіть її"
+    ? `За VIN ${vin}: ${data.make.name}${family ? ` ${family.label}` : ""}${
+        year ? `, ${year} р.` : ""
       }${
-        year ? `, ${year}` : ""
+        family ? "" : " — модель за VIN не визначено, оберіть її"
       }. Двигун і комплектацію VIN не уточнює — звірте номер деталі перед замовленням.`
     : null
 
@@ -209,7 +210,9 @@ export default async function CarsPage(props: {
                 {data.families.map((item) => (
                   <LocalizedClientLink
                     key={item.key}
-                    href={`${base}&model=${encodeURIComponent(item.key)}`}
+                    href={`${base}&model=${encodeURIComponent(item.key)}${
+                      year ? `&year=${year}` : ""
+                    }`}
                   >
                     <strong>{item.label}</strong>
                     <small>{years(item.year_from, item.year_to)}</small>

@@ -40,8 +40,12 @@ export default async function VinPage(props: {
     query.set("model", vehicle.family.key)
   }
 
-  if (vehicle.family && vehicle.years.length === 1) {
-    query.set("year", String(vehicle.years[0]))
+  // Position ten names two years 30 years apart (B is 2011 or 1981); the
+  // newest is the likely one.
+  const year = vehicle.years[0]
+
+  if (year) {
+    query.set("year", String(year))
   }
 
   redirect(`${cars}?${query}`)

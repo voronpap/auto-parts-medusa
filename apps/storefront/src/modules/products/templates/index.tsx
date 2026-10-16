@@ -107,6 +107,10 @@ const ProductTemplate = async ({
   const aftermarket = catalog.crosses.filter(
     (cross) => cross.kind === "aftermarket" || cross.kind === "replaces"
   )
+  // Original numbers and analogs are different things to a buyer, so they
+  // are counted apart.
+  const oemCount = oem.length
+  const analogCount = catalog.crosses.length - oemCount
   const modelCount = catalog.fitment.reduce((sum, make) => sum + make.models.length, 0)
   const hasConditional =
     catalog.crosses.some((cross) => cross.conditional) ||
@@ -150,11 +154,19 @@ const ProductTemplate = async ({
                   </div>
                 </>
               )}
-              {catalog.crosses.length > 0 && (
+              {oemCount > 0 && (
+                <div>
+                  <dt>OE-номерів</dt>
+                  <dd>
+                    <a href="#crosses">{oemCount}</a>
+                  </dd>
+                </div>
+              )}
+              {analogCount > 0 && (
                 <div>
                   <dt>Аналогів</dt>
                   <dd>
-                    <a href="#crosses">{catalog.crosses.length}</a>
+                    <a href="#crosses">{analogCount}</a>
                   </dd>
                 </div>
               )}

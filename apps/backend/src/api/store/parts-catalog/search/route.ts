@@ -23,6 +23,10 @@ const CROSS_TYPES = [
 const MIN_KEY_LENGTH = 4
 const MAX_NUMBERS = 40
 const MAX_RELATED = 400
+// Products found by the start of a number; a short prefix matches many.
+const MAX_PREFIX = 20
+const LINK_TABLE = "product_product_variant_partscatalog_part_number"
+const RANK = { number: 0, cross: 1, prefix: 2 } as const
 
 type NumberRow = {
   id: string
@@ -65,7 +69,38 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
     }
   }
 
-  if (!typed.size) {
+  // Numbers that start with the typed key and belong to a product. Only those
+  // are looked up, so a short prefix does not pull in the whole catalog, and
+  // their crosses are not followed.
+  const db = req.scope.resolve(ContainerRegistrationKeys.PG_CONNECTION)
+  const prefixed: { part_number_id: string }[] = await db
+    .select("k.part_number_id")
+    .from({ k: "part_number_search_key" })
+    .join({ l: LINK_TABLE }, "l.part_number_id", "k.part_number_id")
+    .where("k.key", "like", `${key.replace(/[\\%_]/g, "\\$&")}%`)
+    .andWhere("k.key", "<>", key)
+    .whereNull("k.deleted_at")
+    .whereNull("l.deleted_at")
+    .groupBy("k.part_number_id")
+    .orderByRaw("min(k.key)")
+    .limit(MAX_PREFIX)
+  const prefixIds = prefixed
+    .map((row) => row.part_number_id)
+    .filter((id) => !typed.has(id))
+  const partial = new Map<string, NumberRow>()
+
+  if (prefixIds.length) {
+    const numbers = (await catalog.listPartNumbers(
+      { id: prefixIds },
+      { relations: ["brand"], take: null }
+    )) as unknown as NumberRow[]
+
+    for (const number of numbers) {
+      partial.set(number.id, number)
+    }
+  }
+
+  if (!typed.size && !partial.size) {
     return res.status(200).json({ matches: [] })
   }
 
@@ -75,7 +110,7 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
     applicability_verdict: [...PUBLIC_VERDICTS],
     relationship_state: "ASSERTED" as const,
   }
-  const [outgoing, incoming] = await Promise.all([
+  const [outgoing, incoming] = ids.length ? await Promise.all([
     catalog.listPartRelationships(
       { from_part_number_id: ids, ...filters },
       { take: MAX_RELATED }
@@ -84,7 +119,7 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
       { to_part_number_id: ids, ...filters },
       { take: MAX_RELATED }
     ),
-  ])
+  ]) : [[], []]
   // Number the shopper typed -> numbers stated as its crosses.
   const via = new Map<string, string>()
 
@@ -100,7 +135,7 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
     }
   }
 
-  const candidates = [...new Set([...ids, ...via.keys()])]
+  const candidates = [...new Set([...ids, ...partial.keys(), ...via.keys()])]
   const { data: links } = await query.graph({
     entity: productVariantPartNumber.entryPoint,
     fields: ["product_variant_id", "part_number_id"],
@@ -122,7 +157,7 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
     {
       product_id: string
       handle: string
-      via: "number" | "cross"
+      via: "number" | "cross" | "prefix"
       matched: { brand: string; number: string }
     }
   >()
@@ -130,9 +165,13 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
   for (const link of links) {
     const product = byVariant.get(link.product_variant_id)?.product
     const direct = typed.has(link.part_number_id)
-    const source = typed.get(
-      direct ? link.part_number_id : via.get(link.part_number_id) ?? ""
-    )
+    const cross = via.get(link.part_number_id)
+    const kind = direct ? "number" : cross ? "cross" : "prefix"
+    const source = direct
+      ? typed.get(link.part_number_id)
+      : cross
+        ? typed.get(cross)
+        : partial.get(link.part_number_id)
 
     if (!product?.handle || product.status !== "published" || !source) {
       continue
@@ -140,15 +179,15 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
 
     const known = matches.get(product.id)
 
-    // The product that carries the number itself outranks a cross.
-    if (known && (known.via === "number" || !direct)) {
+    // The typed number outranks a cross, and a cross a partial match.
+    if (known && RANK[known.via] <= RANK[kind]) {
       continue
     }
 
     matches.set(product.id, {
       product_id: product.id,
       handle: product.handle,
-      via: direct ? "number" : "cross",
+      via: kind,
       matched: {
         brand: source.brand?.name ?? "",
         number: source.display_number,
@@ -157,8 +196,6 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
   }
 
   return res.status(200).json({
-    matches: [...matches.values()].sort(
-      (a, b) => Number(b.via === "number") - Number(a.via === "number")
-    ),
+    matches: [...matches.values()].sort((a, b) => RANK[a.via] - RANK[b.via]),
   })
 }

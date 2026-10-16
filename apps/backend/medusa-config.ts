@@ -146,6 +146,23 @@ module.exports = defineConfig({
         ]
       : []),
     {
+      // Files stay on this server (product photos are small); their public
+      // address is the shop's own, not the default localhost:9000.
+      resolve: "@medusajs/medusa/file",
+      options: {
+        providers: [
+          {
+            resolve: "@medusajs/medusa/file-local",
+            id: "local",
+            options: {
+              upload_dir: "static",
+              backend_url: `${process.env.MEDUSA_BACKEND_URL || "http://localhost:9000"}/static`,
+            },
+          },
+        ],
+      },
+    },
+    {
       resolve: "./src/modules/security",
     },
     {

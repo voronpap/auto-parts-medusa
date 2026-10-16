@@ -6,6 +6,7 @@ import NumberSearch from "./models/number-search"
 import Observation from "./models/observation"
 import PartApplication from "./models/part-application"
 import PartAttribute from "./models/part-attribute"
+import PartImage from "./models/part-image"
 import PartNumber from "./models/part-number"
 import PartNumberSearchKey from "./models/part-number-search-key"
 import PartRelationship from "./models/part-relationship"
@@ -32,6 +33,7 @@ class PartsCatalogModuleService extends MedusaService({
   Observation,
   PartApplication,
   PartAttribute,
+  PartImage,
   LookupTask,
   NumberSearch,
   VehicleMake,

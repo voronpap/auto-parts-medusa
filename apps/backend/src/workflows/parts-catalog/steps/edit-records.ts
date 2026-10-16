@@ -243,6 +243,7 @@ type NumberMerge = {
   moved_evidence: { id: string; relationship_id: string }[]
   application_ids: string[]
   attribute_ids: string[]
+  image_ids: string[]
   task_ids: string[]
   linked_variant_ids: string[]
   dismissed_variant_ids: string[]
@@ -338,6 +339,7 @@ export const mergePartsBrandsStep = createStep(
           moved_evidence: [],
           application_ids: [],
           attribute_ids: [],
+          image_ids: [],
           task_ids: [],
           linked_variant_ids: [],
           dismissed_variant_ids: [],
@@ -418,12 +420,16 @@ export const mergePartsBrandsStep = createStep(
           item.folded_relationship_ids.push(relationship.id)
         }
 
-        const [applications, attributes, tasks] = await Promise.all([
+        const [applications, attributes, images, tasks] = await Promise.all([
           catalog.listPartApplications(
             { part_number_id: number.id },
             { select: ["id"], take: null }
           ),
           catalog.listPartAttributes(
+            { part_number_id: number.id },
+            { select: ["id"], take: null }
+          ),
+          catalog.listPartImages(
             { part_number_id: number.id },
             { select: ["id"], take: null }
           ),
@@ -434,6 +440,7 @@ export const mergePartsBrandsStep = createStep(
         ])
         item.application_ids = applications.map((row) => row.id)
         item.attribute_ids = attributes.map((row) => row.id)
+        item.image_ids = images.map((row) => row.id)
         item.task_ids = tasks.map((row) => row.id)
 
         if (item.application_ids.length) {
@@ -446,6 +453,13 @@ export const mergePartsBrandsStep = createStep(
         if (item.attribute_ids.length) {
           await catalog.updatePartAttributes({
             selector: { id: item.attribute_ids },
+            data: { part_number_id: twinId },
+          })
+        }
+
+        if (item.image_ids.length) {
+          await catalog.updatePartImages({
+            selector: { id: item.image_ids },
             data: { part_number_id: twinId },
           })
         }
@@ -587,6 +601,13 @@ async function undoBrandMerge(
     if (item.attribute_ids.length) {
       await catalog.updatePartAttributes({
         selector: { id: item.attribute_ids },
+        data: { part_number_id: item.old_id },
+      })
+    }
+
+    if (item.image_ids.length) {
+      await catalog.updatePartImages({
+        selector: { id: item.image_ids },
         data: { part_number_id: item.old_id },
       })
     }

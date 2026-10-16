@@ -12,12 +12,13 @@ import re
 from typing import Any
 from urllib.parse import quote
 
-from ..models import Application, Attribute, NumberRef, Relationship, SourceMeta, SourceResult
+from ..models import Application, Attribute, Image, NumberRef, Relationship, SourceMeta, SourceResult
 from .base import MIN_FOREIGN_NUMBER, Adapter, LookupRequest, label_has_brand
 
 log = logging.getLogger("parsers")
 
 API_URL = "https://ps.emea.dxtservice.com/ps/api/uk/ua"
+MAX_IMAGES = 6
 PAGE_URL = "https://www.boschaftermarket.com/ua/uk/parts/product-search.html"
 CATALOG_PARAMS = {
     "queryPIM": "true",
@@ -41,6 +42,32 @@ ENGINE_SPLIT_RE = re.compile(r"^(?P<model>.+?)\s+(?P<engine>\d[.,]\d.*)$")
 def _compact(number: str) -> str:
     """Comparison key only; numbers are always reported as the source writes them."""
     return re.sub(r"[^0-9A-Za-z]", "", number).upper()
+
+
+def _gallery(details: dict[str, Any], record_url: str) -> list[Image]:
+    """Product photos in the catalogue's order, without drawings or repeats."""
+    images: list[Image] = []
+    seen: set[str] = set()
+
+    for item in details.get("images") or []:
+        if not isinstance(item, dict):
+            continue
+
+        url = str(item.get("url") or "").strip()
+
+        if url.startswith("//"):
+            url = f"https:{url}"
+
+        if item.get("type") != "gallery" or not url.startswith("http") or url in seen:
+            continue
+
+        seen.add(url)
+        images.append(Image(url=url, kind="photo", record_url=record_url))
+
+        if len(images) >= MAX_IMAGES:
+            break
+
+    return images
 
 
 def _make_name(make: str) -> str:
@@ -171,6 +198,8 @@ class BoschAdapter(Adapter):
 
         if details.get("name"):
             result.attributes.append(Attribute(name="Назва", value=str(details["name"])))
+
+        result.images.extend(_gallery(details, record_url))
 
         for row in details.get("specificationTabData") or []:
             columns = [str(column).strip() for column in row.get("columnData") or []]

@@ -111,6 +111,18 @@ export const LookupResultSchema = z.object({
     )
     .max(300)
     .default([]),
+  // Addresses of the part's photos at the source; the shop copies them later.
+  images: z
+    .array(
+      z.object({
+        source: text(100).min(1),
+        url: text(2000).min(1),
+        kind: optionalText(50),
+        record_url: optionalText(2000),
+      })
+    )
+    .max(50)
+    .default([]),
   errors: z
     .array(
       z.object({

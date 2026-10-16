@@ -189,3 +189,16 @@ export const listPartOffers = async (q: string): Promise<PartOffer[]> =>
     })
     .then(({ offers }) => offers)
     .catch(() => [])
+
+/**
+ * Tells the shop that a product without photos was opened, so it copies the
+ * photos the parts catalog knows for it. Never fails the page.
+ */
+export const requestProductPhotos = async (productId: string) => {
+  await sdk.client
+    .fetch(`/store/parts-catalog/products/${productId}/photos`, {
+      method: "POST",
+      cache: "no-store",
+    })
+    .catch(() => undefined)
+}

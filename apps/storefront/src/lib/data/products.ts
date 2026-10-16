@@ -57,6 +57,9 @@ export const listProducts = async ({
   }
 
   const next = {
+    // Products change behind the shop's back (photos copied on first view,
+    // edits in the admin), so a cached list is refreshed every few minutes.
+    revalidate: 300,
     ...(await getCacheOptions("products")),
   }
 

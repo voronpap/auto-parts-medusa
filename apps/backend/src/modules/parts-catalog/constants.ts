@@ -106,3 +106,12 @@ export type ObservationStatus = (typeof OBSERVATION_STATUSES)[number]
 export type RelationType = (typeof RELATION_TYPES)[number]
 export type RelationshipState = (typeof RELATIONSHIP_STATES)[number]
 export type ApplicabilityVerdict = (typeof APPLICABILITY_VERDICTS)[number]
+
+// pending: known address, no copy yet; stored: copied to the shop's files;
+// failed: gave up after several tries; skipped: not allowed to fetch.
+export const PART_IMAGE_STATUSES = [
+  "pending",
+  "stored",
+  "failed",
+  "skipped",
+] as const

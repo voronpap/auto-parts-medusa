@@ -11,6 +11,11 @@ import {
 } from "../../../modules/parts-catalog/constants"
 import PartsCatalogModuleService from "../../../modules/parts-catalog/service"
 import {
+  IMAGE_SOURCE_KINDS,
+  MAX_IMAGES_PER_NUMBER,
+  normalizeImageUrl,
+} from "../../../modules/parts-catalog/utils/images"
+import {
   formatDisplayNumber,
   normalizeBrandName,
   normalizePartNumber,
@@ -85,6 +90,12 @@ export type LookupResult = {
     unit?: string | null
     raw_text?: string | null
   }[]
+  images?: {
+    source: string
+    url: string
+    kind?: string | null
+    record_url?: string | null
+  }[]
   errors: { source?: string | null; message: string }[]
 }
 
@@ -108,6 +119,7 @@ type Created = {
   evidence: string[]
   applications: string[]
   attributes: string[]
+  images: string[]
   vehicle_makes: string[]
   vehicle_models: string[]
   verdicts: { id: string; applicability_verdict: ApplicabilityVerdict }[]
@@ -130,6 +142,9 @@ async function rollback(catalog: PartsCatalogModuleService, created: Created) {
   }
   if (created.attributes.length) {
     await catalog.deletePartAttributes(created.attributes)
+  }
+  if (created.images.length) {
+    await catalog.deletePartImages(created.images)
   }
   if (created.observations.length) {
     await catalog.deleteObservations(created.observations)
@@ -188,6 +203,7 @@ export const ingestLookupResultStep = createStep(
       evidence: [],
       applications: [],
       attributes: [],
+      images: [],
       vehicle_makes: [],
       vehicle_models: [],
       verdicts: [],
@@ -198,6 +214,7 @@ export const ingestLookupResultStep = createStep(
       relationships_unchanged: 0,
       applications_added: 0,
       attributes_added: 0,
+      images_added: 0,
       skipped: 0,
       errors: result.errors.length,
     }
@@ -650,10 +667,52 @@ export const ingestLookupResultStep = createStep(
         summary.attributes_added += 1
       }
 
+      const images = result.images ?? []
+      const knownImages = new Set(
+        (
+          await catalog.listPartImages(
+            { part_number_id: subject.id },
+            { select: ["source_url"], take: null }
+          )
+        ).map((image) => image.source_url)
+      )
+      let position = knownImages.size
+
+      for (const item of images) {
+        const source = sources.get(item.source)
+        const url = normalizeImageUrl(item.url)
+
+        if (
+          !source ||
+          !url ||
+          !IMAGE_SOURCE_KINDS.includes(source.kind) ||
+          knownImages.has(url) ||
+          knownImages.size >= MAX_IMAGES_PER_NUMBER
+        ) {
+          summary.skipped += 1
+          continue
+        }
+
+        knownImages.add(url)
+
+        const observation = await observe(source, {
+          record_url: item.record_url,
+        })
+        const image = await catalog.createPartImages({
+          part_number_id: subject.id,
+          observation_id: observation.id,
+          source_url: url,
+          position: position++,
+        })
+        created.images.push(image.id)
+        summary.images_added += 1
+      }
+
       const foundNothing =
         !result.relationships.length &&
         !result.applications.length &&
-        !result.attributes.length
+        !result.attributes.length &&
+        !images.length
 
       await catalog.updateLookupTasks({
         id: task.id,

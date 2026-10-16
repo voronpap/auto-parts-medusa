@@ -4,6 +4,7 @@ import Brand from "./brand"
 import LookupTask from "./lookup-task"
 import PartApplication from "./part-application"
 import PartAttribute from "./part-attribute"
+import PartImage from "./part-image"
 import PartNumberSearchKey from "./part-number-search-key"
 import PartRelationship from "./part-relationship"
 
@@ -32,12 +33,21 @@ const PartNumber = model
     attributes: model.hasMany(() => PartAttribute, {
       mappedBy: "part_number",
     }),
+    images: model.hasMany(() => PartImage, {
+      mappedBy: "part_number",
+    }),
     lookup_tasks: model.hasMany(() => LookupTask, {
       mappedBy: "part_number",
     }),
   })
   .cascades({
-    delete: ["search_keys", "applications", "attributes", "lookup_tasks"],
+    delete: [
+      "search_keys",
+      "applications",
+      "attributes",
+      "images",
+      "lookup_tasks",
+    ],
   })
   .indexes([
     {

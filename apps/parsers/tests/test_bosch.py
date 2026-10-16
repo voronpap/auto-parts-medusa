@@ -113,6 +113,16 @@ def test_unknown_number_gives_an_empty_result_after_one_request():
     assert len(http.paths) == 1
 
 
+def test_gallery_photos_become_images_without_drawings_or_repeats():
+    result, _ = lookup()
+    urls = [image.url for image in result.images]
+
+    assert urls[0].endswith("/0986424797PHANWHCO0000.jpg")
+    assert all(url.startswith("https://emea.resource.bosch.com/") for url in urls)
+    assert len(urls) == len(set(urls))
+    assert not any("DRFR" in url for url in urls)
+
+
 def test_result_matches_the_catalog_schema():
     http = FakeHttp()
     adapter = BoschAdapter(http)  # type: ignore[arg-type]

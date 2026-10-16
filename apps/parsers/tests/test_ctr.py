@@ -33,6 +33,14 @@ class FakeHttp:
         return self.detail or fixture("detail_old" if url.endswith("6513290") else "detail_haval")
 
 
+def test_search_hit_photo_becomes_an_image():
+    data = CtrAdapter(FakeHttp()).lookup(LookupRequest("CTR", "CB0672", "aftermarket"))
+
+    assert [image.url for image in data.images] == [
+        "https://ctr-cdn2-e7f6e5bugjh6gfc0.z01.azurefd.net/aftermarket/ncu_rus/CB0672_1.jpg"
+    ]
+
+
 def test_own_legacy_identity_does_not_create_a_replacement_claim():
     data = CtrAdapter(FakeHttp()).lookup(LookupRequest("CTR", "CBKD-8", "aftermarket"))
     assert len(data.relationships) == 3 and len(data.applications) == 5

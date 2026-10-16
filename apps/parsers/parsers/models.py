@@ -82,16 +82,30 @@ class Attribute:
 
 
 @dataclass
+class Image:
+    """A photo of the part the source publishes, by its address only.
+
+    The catalog keeps the address; the shop copies the file later, when a
+    shopper opens the product. Only a maker's own photos belong here.
+    """
+
+    url: str
+    kind: str | None = None
+    record_url: str | None = None
+
+
+@dataclass
 class SourceResult:
     """Everything one adapter found for one number."""
 
     relationships: list[Relationship] = field(default_factory=list)
     applications: list[Application] = field(default_factory=list)
     attributes: list[Attribute] = field(default_factory=list)
+    images: list[Image] = field(default_factory=list)
 
     @property
     def is_empty(self) -> bool:
-        return not (self.relationships or self.applications or self.attributes)
+        return not (self.relationships or self.applications or self.attributes or self.images)
 
 
 @dataclass
@@ -103,6 +117,7 @@ class LookupResult:
     relationships: list[dict[str, Any]] = field(default_factory=list)
     applications: list[dict[str, Any]] = field(default_factory=list)
     attributes: list[dict[str, Any]] = field(default_factory=list)
+    images: list[dict[str, Any]] = field(default_factory=list)
     errors: list[dict[str, Any]] = field(default_factory=list)
     #: Raw responses the result was read from. They go to the catalog's
     #: archive separately and are not part of the result itself.
@@ -145,6 +160,9 @@ class LookupResult:
             self.attributes.append(
                 {"source": source.key, **_drop_none(asdict(attribute))}
             )
+
+        for image in result.images:
+            self.images.append({"source": source.key, **_drop_none(asdict(image))})
 
     def add_error(self, source_key: str, message: str) -> None:
         self.errors.append({"source": source_key, "message": message[:2000]})

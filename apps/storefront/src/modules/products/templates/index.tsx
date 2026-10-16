@@ -1,7 +1,11 @@
 import React, { Suspense } from "react"
 
 import { getGarageCar } from "@lib/data/garage"
-import { PartsCatalogInfo, retrievePartsCatalog } from "@lib/data/parts-catalog"
+import {
+  PartsCatalogInfo,
+  requestProductPhotos,
+  retrievePartsCatalog,
+} from "@lib/data/parts-catalog"
 import FitBadge from "@modules/garage/fit-badge"
 import { HttpTypes } from "@medusajs/types"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
@@ -10,6 +14,7 @@ import ProductActions from "@modules/products/components/product-actions"
 import RelatedProducts from "@modules/products/components/related-products"
 import SkeletonRelatedProducts from "@modules/skeletons/templates/skeleton-related-products"
 import { notFound } from "next/navigation"
+import { after } from "next/server"
 
 import ProductActionsWrapper from "./product-actions-wrapper"
 
@@ -101,6 +106,11 @@ const ProductTemplate = async ({
   const photos = Array.from(
     new Set([...images.map((image) => image.url), product.thumbnail].filter(Boolean))
   ) as string[]
+
+  if (!photos.length) {
+    // After the page is sent: the shop may copy the photos for next time.
+    after(() => requestProductPhotos(product.id!))
+  }
   const inStore = catalog.crosses.filter((cross) => cross.product)
   const replacements = catalog.crosses.filter((cross) => cross.kind === "replacement")
   const oem = catalog.crosses.filter((cross) => cross.kind === "oem")

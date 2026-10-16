@@ -2,6 +2,7 @@ import { model } from "@medusajs/framework/utils"
 import { OBSERVATION_STATUSES } from "../constants"
 import PartApplication from "./part-application"
 import PartAttribute from "./part-attribute"
+import PartImage from "./part-image"
 import RelationshipEvidence from "./relationship-evidence"
 import Source from "./source"
 
@@ -24,6 +25,9 @@ const Observation = model
       mappedBy: "observation",
     }),
     attributes: model.hasMany(() => PartAttribute, {
+      mappedBy: "observation",
+    }),
+    images: model.hasMany(() => PartImage, {
       mappedBy: "observation",
     }),
   })

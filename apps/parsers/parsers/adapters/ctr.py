@@ -12,7 +12,7 @@ from itertools import count
 from urllib.parse import quote
 
 from ..http import BLOCKED_STATUSES, SourceBlocked, SourceError
-from ..models import Application, Attribute, NumberRef, Relationship, SourceMeta, SourceResult
+from ..models import Application, Attribute, Image, NumberRef, Relationship, SourceMeta, SourceResult
 from .base import MIN_FOREIGN_NUMBER, Adapter, LookupRequest, label_has_brand
 
 API_URL = "https://aftermarket-front-api-exfwgzdybdbmfsfu.koreacentral-01.azurewebsites.net/api/v1/catalogue"
@@ -164,6 +164,10 @@ class CtrAdapter(Adapter):
             data, url = self.detail(hit)
             if data and wanted in {compact(data.get(key)) for key in ("ctrno", "article", "etc")}:
                 result = parse_detail(data, url)
+                # The photo is on the search hit, not in the article details.
+                photo = hit.get("image")
+                if isinstance(photo, str) and photo.startswith("https://"):
+                    result.images.append(Image(url=photo, kind="photo", record_url=url))
                 for values, limit, name in ((result.relationships, 450, "OE"), (result.applications, 5000, "Applications"), (result.attributes, 295, "Attributes")):
                     if len(values) > limit:
                         total = len(values)

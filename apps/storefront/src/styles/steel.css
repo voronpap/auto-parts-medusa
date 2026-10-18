@@ -157,6 +157,7 @@
   .ap-side { position: static; }
   .ap-cats { display: grid; grid-template-columns: repeat(2, 1fr); }
   .ap-table { min-width: 640px; }
+  .ap-table.ap-facts { min-width: 0; table-layout: fixed; }
   .ap-catalog { overflow: auto; }
   .ap-order { grid-column: auto; }
 }

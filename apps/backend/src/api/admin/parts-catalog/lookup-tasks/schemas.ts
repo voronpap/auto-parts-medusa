@@ -142,6 +142,18 @@ export const ImportResultSchema = z.object({
   worker: text(100).min(1),
   number: NumberRefSchema,
   result: LookupResultSchema,
+  // Where the uploader read this line, kept on the import receipt.
+  delivery: z
+    .object({
+      spool_file: z
+        .string()
+        .min(1)
+        .max(255)
+        .regex(/^[^/\\]+$/)
+        .refine((name) => name !== "." && name !== ".."),
+      byte_offset: z.number().int().nonnegative().safe(),
+    })
+    .optional(),
 })
 
 export type ImportResultBody = z.infer<typeof ImportResultSchema>

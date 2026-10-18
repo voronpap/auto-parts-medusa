@@ -1,6 +1,7 @@
 import { MedusaService } from "@medusajs/framework/utils"
 import Brand from "./models/brand"
 import BrandAlias from "./models/brand-alias"
+import ImportReceipt from "./models/import-receipt"
 import LookupTask from "./models/lookup-task"
 import NumberSearch from "./models/number-search"
 import Observation from "./models/observation"
@@ -24,6 +25,7 @@ class PartsCatalogModuleService extends MedusaService({
   // "s" differ between the types (listBrandAlias) and runtime
   // (listBrandAliases).
   BrandAliasRecord: BrandAlias,
+  ImportReceipt,
   PartNumber,
   PartNumberSearchKey,
   PartRelationship,

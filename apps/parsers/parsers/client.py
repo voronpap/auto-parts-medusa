@@ -19,6 +19,10 @@ import requests
 class CatalogError(Exception):
     """The catalog rejected a request or could not be reached."""
 
+    def __init__(self, message: str, status_code: int | None = None) -> None:
+        super().__init__(message)
+        self.status_code = status_code
+
 
 class CatalogClient:
     def __init__(
@@ -51,7 +55,10 @@ class CatalogClient:
             time.sleep(20)
 
         if response.status_code >= 400:
-            raise CatalogError(f"HTTP {response.status_code}: {response.text[:500]}")
+            raise CatalogError(
+                f"HTTP {response.status_code}: {response.text[:500]}",
+                status_code=response.status_code,
+            )
 
         return response.json()
 
@@ -62,7 +69,10 @@ class CatalogClient:
             raise CatalogError(f"{type(error).__name__}: {error}") from error
 
         if response.status_code >= 400:
-            raise CatalogError(f"HTTP {response.status_code}: {response.text[:500]}")
+            raise CatalogError(
+                f"HTTP {response.status_code}: {response.text[:500]}",
+                status_code=response.status_code,
+            )
 
         return response.json()
 
@@ -84,9 +94,14 @@ class CatalogClient:
             f"/admin/parts-catalog/lookup-tasks/{task_id}/result", payload
         )
 
-    def import_result(self, payload: dict[str, Any]) -> dict[str, Any]:
+    def import_result(
+        self,
+        payload: dict[str, Any],
+        delivery: dict[str, Any] | None = None,
+    ) -> dict[str, Any]:
         """Loads bulk-read data for one part number, bypassing the queue."""
-        return self._post("/admin/parts-catalog/import", payload)
+        body = {**payload, **({"delivery": delivery} if delivery else {})}
+        return self._post("/admin/parts-catalog/import", body)
 
     def archive(self, number: dict[str, Any] | None, documents: list[dict[str, Any]]) -> int:
         """Stores raw source responses in the catalog; returns how many were sent."""

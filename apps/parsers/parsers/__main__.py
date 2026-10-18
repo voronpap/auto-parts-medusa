@@ -150,8 +150,9 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "upload-spool":
         from .spool import upload_spool
 
-        print(json.dumps(upload_spool(client, Path(args.dir), with_archive=args.with_archive)))
-        return 0
+        totals = upload_spool(client, Path(args.dir), with_archive=args.with_archive)
+        print(json.dumps(totals))
+        return 1 if totals["dead_letters"] else 0
 
     if args.command == "import-numbers":
         from .bulk import import_numbers

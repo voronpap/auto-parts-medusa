@@ -88,7 +88,7 @@ def import_numbers(
         relationships = result["relationships"]
         applications = result["applications"]
 
-        if not (relationships or applications or result["attributes"]):
+        if not (relationships or applications or result["attributes"] or result["images"]):
             totals["unknown"] += 1
             log.info("%s %s: nothing found", brand, number)
         else:

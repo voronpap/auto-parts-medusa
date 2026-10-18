@@ -4,7 +4,7 @@ import json
 
 from parsers.adapters import Adapter, LookupRequest
 from parsers.bulk import import_numbers
-from parsers.models import NumberRef, Relationship, SourceMeta, SourceResult
+from parsers.models import Image, NumberRef, Relationship, SourceMeta, SourceResult
 
 SOURCE = SourceMeta(
     key="fake", name="Fake", kind="manufacturer_catalog", license_class="OPEN", lineage="fake"
@@ -34,6 +34,12 @@ class FakeAdapter(Adapter):
                 for index in range(self._crosses.get(request.number, 0))
             ]
         )
+
+
+class ImageOnlyAdapter(FakeAdapter):
+    def lookup(self, request: LookupRequest) -> SourceResult:
+        self.asked.append(request.number)
+        return SourceResult(images=[Image(url="https://example.com/part.jpg")])
 
 
 class FakeClient:
@@ -67,3 +73,16 @@ def test_an_interrupted_run_resumes_and_a_long_result_goes_in_parts(tmp_path):
     assert adapter.asked == ["C 3"]
     assert [len(p["result"]["relationships"]) for p in client.payloads] == [500, 500, 200]
     assert totals["relationships"] == 1200
+
+
+def test_image_only_result_is_imported(tmp_path):
+    client = FakeClient()
+    adapter = ImageOnlyAdapter({})
+
+    totals = import_numbers(client, [adapter], "Fake", ["A 1"], "w", pause=0)  # type: ignore[arg-type]
+
+    assert totals["numbers"] == 1
+    assert totals["unknown"] == 0
+    assert client.payloads[0]["result"]["images"] == [
+        {"source": "fake", "url": "https://example.com/part.jpg"}
+    ]

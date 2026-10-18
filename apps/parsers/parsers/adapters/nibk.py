@@ -11,7 +11,7 @@ from urllib.parse import unquote, urljoin, urlsplit
 
 from bs4 import BeautifulSoup
 
-from ..models import Application, Attribute, NumberRef, Relationship, SourceMeta, SourceResult
+from ..models import Application, Attribute, Image, NumberRef, Relationship, SourceMeta, SourceResult
 from .base import MIN_FOREIGN_NUMBER, Adapter, LookupRequest, label_has_brand, normalize_brand
 from .mann_hummel import VEHICLE_MAKERS
 
@@ -51,6 +51,26 @@ def _year(value: str | None) -> int | None:
     return year if len(value) == 4 else year + (1900 if year >= 50 else 2000)
 
 
+def product_image_url(soup: BeautifulSoup, code: str) -> str | None:
+    for image in soup.select("a[href] img[alt]"):
+        anchor = image.find_parent("a")
+        if anchor is None or compact(image.get("alt", "")) != compact(code):
+            continue
+        if compact(anchor.get("title", "")) != compact(code):
+            continue
+        url = urljoin(BASE_URL, str(anchor.get("href") or ""))
+        parsed = urlsplit(url)
+        if (
+            parsed.scheme == "https"
+            and parsed.hostname == "www.nibk.jp"
+            and not parsed.query
+            and not parsed.fragment
+            and re.fullmatch(r"/images/watermark_images/[0-9a-f]{32}_watermark\.jpg", parsed.path)
+        ):
+            return url
+    return None
+
+
 def _label_makers(label: str) -> list[str]:
     # A parenthesis is the source's corporate alias, not a second vehicle
     # maker (e.g. MG (SAIC)). Slash-separated makes are explicitly joint.
@@ -70,6 +90,9 @@ def parse_product_page(html: str, record_url: str) -> tuple[str | None, SourceRe
         return None, result
 
     ref = f"product {code}"
+    image_url = product_image_url(soup, code)
+    if image_url:
+        result.images.append(Image(url=image_url, kind="photo", record_url=record_url))
     # The source's own car-maker selector extends the shared list, including
     # new Chinese makes such as ZEEKR and VOYAH without guessing by number.
     car_makers = set(VEHICLE_MAKERS)

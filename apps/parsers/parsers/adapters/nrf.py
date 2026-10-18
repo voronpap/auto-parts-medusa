@@ -16,7 +16,7 @@ from urllib.parse import quote, urljoin
 
 from bs4 import BeautifulSoup
 
-from ..models import Application, Attribute, NumberRef, Relationship, SourceMeta, SourceResult
+from ..models import Application, Attribute, Image, NumberRef, Relationship, SourceMeta, SourceResult
 from .base import MIN_FOREIGN_NUMBER, Adapter, LookupRequest, label_has_brand
 
 log = logging.getLogger("parsers")
@@ -26,6 +26,10 @@ SEARCH_URL = f"{BASE_URL}/catalogsearch/advanced/result/"
 MAX_APPLICATIONS = 5000
 MAX_FOREIGN_PRODUCTS = 5
 MAX_RELATIONSHIPS = 450
+MAX_PRODUCT_IMAGES = 4
+PRODUCT_IMAGE = re.compile(
+    r"https://webshop\.nrf\.eu/media/catalog/product/\w/\w/(\d+)_1500x1000_WM_(\d+)(?:_\d+)?\.jpg"
+)
 
 def _compact(number: str) -> str:
     """Comparison key only; output always keeps the catalogue spelling."""
@@ -93,6 +97,14 @@ def parse_product_page(
     code = code_node.get_text(" ", strip=True) if code_node else None
     title = title_node.get_text(" ", strip=True) if title_node else None
     result = SourceResult()
+    images: dict[int, str] = {}
+    for photo in PRODUCT_IMAGE.finditer(html):
+        if _compact(photo.group(1)) == _compact(code or ""):
+            images.setdefault(int(photo.group(2)), photo.group(0))
+    result.images.extend(
+        Image(url=url, kind="photo", record_url=record_url)
+        for _, url in sorted(images.items())[:MAX_PRODUCT_IMAGES]
+    )
     oe_numbers: list[str] = []
     seen_oe: set[str] = set()
     seen_attributes: set[tuple[str, str]] = set()

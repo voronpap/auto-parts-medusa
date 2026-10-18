@@ -10,16 +10,18 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass
+from urllib.parse import urlsplit
 
 from bs4 import BeautifulSoup
 
 from ..http import SourceError
-from ..models import Application, Attribute, SourceMeta, SourceResult
+from ..models import Application, Attribute, Image, SourceMeta, SourceResult
 from .base import Adapter, LookupRequest
 
 CATALOG_URL = "https://www.mgmotor.com.eg/spareparts-catalog/"
 AJAX_URL = "https://www.mgmotor.com.eg/wp-admin/admin-ajax.php"
 MAX_RECORDS = 5000
+MAX_PRODUCT_IMAGES = 4
 
 
 def compact(number):
@@ -35,6 +37,40 @@ class PartRow:
     year: int | None
     category: str
     fitment_text: str
+    image_url: str | None = None
+
+
+def _product_image_url(card, number: str) -> str | None:
+    candidates = []
+    image = card.select_one(".img img")
+    if image:
+        candidates.extend((image.get("data-lazy-src"), image.get("src")))
+    candidates.extend(node.get("src") for node in card.select(".img noscript img[src]"))
+    for candidate in candidates:
+        if not isinstance(candidate, str):
+            continue
+        try:
+            url = urlsplit(candidate.strip())
+            port = url.port
+        except ValueError:
+            continue
+        filename = url.path.rsplit("/", 1)[-1]
+        if (
+            url.scheme == "https"
+            and url.hostname in {"www.mgmotor.com.eg", "mgmotor.com.eg"}
+            and port is None
+            and not url.username
+            and not url.password
+            and url.path.startswith("/wp-content/uploads/")
+            and not url.query
+            and not url.fragment
+            and ".." not in url.path.split("/")
+            and re.fullmatch(r"[A-Za-z0-9._-]+\.jpe?g", filename, re.IGNORECASE)
+            and re.match(re.escape(number) + r"[-_]", filename, re.IGNORECASE)
+            and not re.search(r"placeholder|no[-_]?image|default", filename, re.IGNORECASE)
+        ):
+            return candidate.strip()
+    return None
 
 
 def bootstrap(html):
@@ -94,12 +130,12 @@ def parse_rows(html, expected_count):
         if year is not None and not 1900 <= year <= 2100:
             raise SourceError("MG Egypt model year is invalid")
         rows.append(PartRow(identity.group(1), number, title, model.strip(), year,
-                            category.strip(), fitment))
+                            category.strip(), fitment, _product_image_url(card, number)))
     return rows
 
 
 class MgEgyptAdapter(Adapter):
-    version = "1.0.0"
+    version = "1.1.0"
     min_interval = 5.0
 
     @property
@@ -133,6 +169,7 @@ class MgEgyptAdapter(Adapter):
         if not wanted or not self.supports(request):
             return result
         seen_apps, seen_attrs = set(), set()
+        seen_images: set[str] = set()
         for row in self.rows():
             if compact(row.number) != wanted:
                 continue
@@ -147,4 +184,7 @@ class MgEgyptAdapter(Adapter):
                 if (name, value) not in seen_attrs:
                     seen_attrs.add((name, value))
                     result.attributes.append(Attribute(name=name, value=value, raw_text=raw))
+            if row.image_url and row.image_url not in seen_images and len(seen_images) < MAX_PRODUCT_IMAGES:
+                seen_images.add(row.image_url)
+                result.images.append(Image(url=row.image_url, kind="photo", record_url=CATALOG_URL))
         return result

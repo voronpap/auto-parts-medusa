@@ -44,6 +44,91 @@ def test_numbers_keep_internal_spaces_suffixes_and_zeros():
     assert all("Comparable OE Numbers:" in r.raw_relation_text for r in data.relationships if r.relation_type == "OEM_REFERENCE")
 
 
+def test_article_photos_require_exact_brand_number_and_catalog_media_url():
+    data = fixture("details_GDB1330")
+    data["articleImageMedias"] = [
+        {
+            "mediaTypeID": 5,
+            "fileName": "0161GDB1330_00",
+            "url": "https://aftermarket.zf.com/app/controller/opc/getMedia?fileName=0161GDB1330_00&typeID=5",
+        },
+        {
+            "mediaTypeID": 5,
+            "fileName": "0032GDB1330_00",
+            "url": "https://aftermarket.zf.com/app/controller/opc/getMedia?fileName=0032GDB1330_00&typeID=5",
+        },
+        {
+            "mediaTypeID": 4,
+            "fileName": "0161GDB1330_04",
+            "url": "https://aftermarket.zf.com/app/controller/opc/getMedia?fileName=0161GDB1330_04&typeID=5",
+        },
+        {
+            "mediaTypeID": 5,
+            "fileName": "0161GDB13300_00",
+            "url": "https://aftermarket.zf.com/app/controller/opc/getMedia?fileName=0161GDB13300_00&typeID=5",
+        },
+        {
+            "mediaTypeID": 5,
+            "fileName": "0161GDB1330_01",
+            "url": "https://example.com/app/controller/opc/getMedia?fileName=0161GDB1330_01&typeID=5",
+        },
+    ]
+
+    result = parse_details(data, "https://aftermarket.zf.com/en/catalog/products/GDB1330?country=UA")
+
+    assert [image.url for image in result.images] == [
+        "https://aftermarket.zf.com/app/controller/opc/getMedia?fileName=0161GDB1330_00&typeID=5"
+    ]
+    assert result.images[0].record_url.endswith("GDB1330?country=UA")
+
+
+def test_lookup_uses_exact_search_card_photo_when_details_omit_media():
+    expected = "https://media-aftermarket.zf.com/public/images/928x556/92090.webp?version=0"
+
+    class SearchImageHttp(FakeHttp):
+        def fetch_json(self, url, params=None, **kwargs):
+            data = super().fetch_json(url, params=params, **kwargs)
+            if url == f"{API_URL}/search":
+                hit = next(item for item in data["products"]["items"]
+                           if item.get("productNumber") == "GDB1330")
+                hit["productImage"] = {
+                    "brandName": "TRW",
+                    "number": "GDB1330",
+                    "images": [
+                        {"src": expected},
+                        {"src": "https://example.com/public/images/928x556/92090.webp?version=0"},
+                        {"src": "https://media-aftermarket.zf.com/public/images/928x556/92090.png?version=0"},
+                    ],
+                }
+            return data
+
+    result = ZfAdapter(SearchImageHttp()).lookup(LookupRequest("TRW", "GDB1330", "aftermarket"))
+
+    assert [image.url for image in result.images] == [expected]
+    assert result.images[0].record_url.endswith("GDB1330?country=UA")
+
+
+@pytest.mark.parametrize("field,value", [("brandName", "SACHS"), ("number", "GDB1335")])
+def test_search_card_photo_requires_exact_product_identity(field, value):
+    class SearchImageHttp(FakeHttp):
+        def fetch_json(self, url, params=None, **kwargs):
+            data = super().fetch_json(url, params=params, **kwargs)
+            if url == f"{API_URL}/search":
+                hit = next(item for item in data["products"]["items"]
+                           if item.get("productNumber") == "GDB1330")
+                hit["productImage"] = {
+                    "brandName": "TRW",
+                    "number": "GDB1330",
+                    "images": [{"src": "https://media-aftermarket.zf.com/public/images/928x556/92090.webp?version=0"}],
+                }
+                hit["productImage"][field] = value
+            return data
+
+    result = ZfAdapter(SearchImageHttp()).lookup(LookupRequest("TRW", "GDB1330", "aftermarket"))
+
+    assert not result.images
+
+
 def test_oe_makers_are_explicit_not_inferred_from_fitment():
     data = parse_details(fixture("details_GDB1330"), "u")
     assert ("MG", "10030811") in {(r.to.brand, r.to.number) for r in data.relationships}

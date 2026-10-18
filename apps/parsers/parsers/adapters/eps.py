@@ -6,9 +6,10 @@ BASE_URL = "https://catalogo.eps-autoparts.com/EN"
 
 
 class EpsAdapter(FacetAdapter):
-    version = "1.1.0"
+    version = "1.2.0"
     base_url = BASE_URL
     catalog_title = "EPS Catalog"
+    include_product_card_images = True
 
     @property
     def source(self):

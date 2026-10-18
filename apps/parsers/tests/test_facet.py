@@ -55,11 +55,25 @@ class FakeHttp:
 def test_own_lookup_preserves_explicit_oe_and_competitor_numbers():
     result = FacetAdapter(FakeHttp()).lookup(LookupRequest("FACET", "9.6027", "aftermarket"))
     assert len(result.relationships) == 6 and len(result.applications) == 4
+    assert [(image.url, image.kind, image.record_url) for image in result.images] == [
+        (
+            "https://catalogo.facet.eu/gecaf-images/facet/0960/medium/9.6027.jpg",
+            "photo",
+            "https://catalogo.facet.eu/EN/Home/DettaglioFinale",
+        )
+    ]
     oe = [r for r in result.relationships if r.relation_type == "OEM_REFERENCE"]
     assert {(r.to.brand, r.to.number) for r in oe} == {("AUDI", "811 905 115"), ("VW", "811 905 115")}
     assert any(r.to.brand == "BOSCH" and r.to.number == "0 221 122 379" for r in result.relationships)
     assert any(r.to.brand == "KW" and r.to.number == "470 127" for r in result.relationships)
     assert all(r.record_ref == "FACET 9.6027" and r.record_url for r in result.relationships)
+
+
+def test_facet_image_requires_photo_code_to_match_exact_catalogue_part():
+    metadata = json.loads(fixture("metadata_9.6027.json"))
+    metadata["Foto"] = "9.3001"
+    result = FacetAdapter(FakeHttp(metadata)).lookup(LookupRequest("FACET", "9.6027", "aftermarket"))
+    assert result.images == []
 
 
 def test_foreign_number_requires_explicit_maker_and_is_incoming():

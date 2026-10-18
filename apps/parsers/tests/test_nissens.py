@@ -60,6 +60,21 @@ def test_specifications_are_not_given_invented_units_or_values():
     assert "Date" not in attrs
 
 
+def test_product_photos_are_limited_to_the_exact_nissens_number():
+    html = fixture("details_607401") + "".join(
+        f'<img src="https://customerportal.nissens.com/ImageBank360Degree/607401/NIS-607401-{index}.jpg">'
+        for index in range(1, 7)
+    )
+    html += '<img src="https://customerportal.nissens.com/ImageBank360Degree/999999/NIS-999999-1.jpg">'
+
+    code, _, result = parse_details(html, "https://catalogue.nissens.com/product")
+
+    assert code == "607401"
+    assert len(result.images) == 4
+    assert [image.url.rsplit("-", 1)[-1] for image in result.images] == ["1.jpg", "2.jpg", "4.jpg", "5.jpg"]
+    assert all(image.record_url == "https://catalogue.nissens.com/product" for image in result.images)
+
+
 def test_oe_spelling_and_hidden_oe_values_are_kept():
     html = fixture("details_607401").replace("10792284", "00 1079-2284A")
     code, _, data = parse_details(html, "u")

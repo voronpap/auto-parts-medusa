@@ -17,11 +17,11 @@ as "the assembly contains this part", not as an equivalent.
 from __future__ import annotations
 
 import re
-from urllib.parse import quote
+from urllib.parse import quote, urljoin, urlsplit
 
 from bs4 import BeautifulSoup
 
-from ..models import Application, Attribute, NumberRef, Relationship, SourceMeta, SourceResult
+from ..models import Application, Attribute, Image, NumberRef, Relationship, SourceMeta, SourceResult
 from .base import MIN_FOREIGN_NUMBER, Adapter, LookupRequest, label_has_brand
 
 BASE_URL = "https://febest.de"
@@ -93,6 +93,23 @@ def parse_product_page(html: str, record_url: str) -> tuple[str | None, SourceRe
 
     if name_node and name_node.get_text(strip=True):
         result.attributes.append(Attribute(name="Назва", value=name_node.get_text(" ", strip=True)))
+
+    seen_photos: set[str] = set()
+
+    for photo in soup.select("#foto .modal-body img[src]"):
+        photo_url = urljoin(record_url, photo["src"].strip())
+        parsed_url = urlsplit(photo_url)
+
+        if (
+            parsed_url.scheme != "https"
+            or parsed_url.hostname != "static.febest.de"
+            or not parsed_url.path.startswith("/images/")
+            or photo_url in seen_photos
+        ):
+            continue
+
+        seen_photos.add(photo_url)
+        result.images.append(Image(url=photo_url, kind="photo", record_url=record_url))
 
     makes: list[str] = []
 

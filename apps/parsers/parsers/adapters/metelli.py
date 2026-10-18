@@ -13,7 +13,7 @@ from urllib.parse import parse_qs, urljoin, urlsplit
 from bs4 import BeautifulSoup
 
 from ..http import SourceError
-from ..models import Application, Attribute, NumberRef, Relationship, SourceMeta, SourceResult
+from ..models import Application, Attribute, Image, NumberRef, Relationship, SourceMeta, SourceResult
 from .base import MIN_FOREIGN_NUMBER, Adapter, LookupRequest, label_has_brand, normalize_brand
 
 BASE_URL = "https://www.metelligroup.it"
@@ -46,12 +46,28 @@ def _safe_url(path: str) -> str | None:
                    and parts.path.rsplit("/", 1)[-1].lower() in actions and not parts.fragment) else None
 
 
+def _safe_image_url(path: str, number: str) -> str | None:
+    url = urljoin(BASE_URL, path)
+    parts = urlsplit(url)
+    match = re.fullmatch(
+        r"/files/img_catalogo/Immagini(?:_[A-Za-z0-9.-]+)?/([0-9A-Za-z._-]+)\.jpg",
+        parts.path,
+        flags=re.IGNORECASE,
+    )
+    if (parts.netloc != urlsplit(BASE_URL).netloc or parts.scheme != "https"
+            or parts.query or parts.fragment or not match
+            or _compact(match.group(1)) != _compact(number)):
+        return None
+    return url
+
+
 @dataclass(frozen=True)
 class SearchHit:
     brand: str
     number: str
     url: str
     label: str
+    image_url: str | None = None
 
 
 def parse_search(html: str) -> list[SearchHit]:
@@ -69,8 +85,18 @@ def parse_search(html: str) -> list[SearchHit]:
             text = link.get_text(" ", strip=True)
             number = text.partition(" ")[0]
             url = _safe_url(href)
+            image_url = None
+            row = link.find_parent("tr")
+            if row and url:
+                for image_link in row.select("a[href]"):
+                    if _safe_url(str(image_link.get("href") or "")) != url:
+                        continue
+                    image = image_link.select_one("img[src]")
+                    if image:
+                        image_url = _safe_image_url(str(image.get("src") or ""), number)
+                    break
             if number and url and (brand, number, url) not in seen:
-                found.append(SearchHit(brand, number, url, text))
+                found.append(SearchHit(brand, number, url, text, image_url))
                 seen.add((brand, number, url))
     return found
 
@@ -210,7 +236,12 @@ class MetelliAdapter(Adapter):
 
     def _product(self, hit: SearchHit) -> Product | None:
         product = parse_product(self.http.fetch(hit.url), hit.url)
-        return product if hit_matches_product(hit, product) else None
+        if not hit_matches_product(hit, product):
+            return None
+        if (hit.image_url and product.number
+                and _compact(hit.number) == _compact(product.number)):
+            product.result.images.append(Image(url=hit.image_url, kind="photo", record_url=hit.url))
+        return product
 
     def lookup(self, request: LookupRequest) -> SourceResult:
         wanted = _compact(request.number)

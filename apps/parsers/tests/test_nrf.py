@@ -132,6 +132,23 @@ def test_product_page_reads_hidden_oe_number():
     assert numbers == ["8E0121251", "8E0121251A", "8E0121251AF"]
 
 
+def test_product_photos_are_matched_to_the_exact_nrf_number():
+    html = page("nrf_product_50539.html") + "".join(
+        f'<img src="https://webshop.nrf.eu/media/catalog/product/5/0/50539_1500x1000_WM_{index:03}.jpg">'
+        for index in range(1, 7)
+    )
+    html += '<img src="https://webshop.nrf.eu/media/catalog/product/5/0/50539A_1500x1000_WM_001.jpg">'
+
+    code, _, result, _ = parse_product_page(html, "https://webshop.nrf.eu/product/50539")
+
+    assert code == "50539"
+    assert len(result.images) == 4
+    assert [image.url.rsplit("_", 1)[-1] for image in result.images] == [
+        "001.jpg", "002.jpg", "003.jpg", "004.jpg"
+    ]
+    assert all(image.record_url == "https://webshop.nrf.eu/product/50539" for image in result.images)
+
+
 def test_foreign_number_requires_the_requested_vehicle_make():
     adapter = NrfAdapter(FakeHttp())  # type: ignore[arg-type]
     found = adapter.lookup_foreign(LookupRequest("Audi", "8E0 121 251", "oem"))

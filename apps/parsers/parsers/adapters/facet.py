@@ -11,11 +11,12 @@ from __future__ import annotations
 import ast
 import json
 import re
+from urllib.parse import urlsplit
 
 from bs4 import BeautifulSoup
 
 from ..http import SourceError
-from ..models import Application, Attribute, NumberRef, Relationship, SourceMeta, SourceResult
+from ..models import Application, Attribute, Image, NumberRef, Relationship, SourceMeta, SourceResult
 from .base import MIN_FOREIGN_NUMBER, Adapter, LookupRequest, label_has_brand, normalize_brand
 
 BASE_URL = "https://catalogo.facet.eu/EN"
@@ -42,6 +43,20 @@ AUTO_MAKES = (
 
 def compact(number):
     return re.sub(r"[^A-Za-z0-9]", "", number or "").upper()
+
+
+def product_image_url(data):
+    code = str(data.get("Cod") or "").strip()
+    photo = str(data.get("Foto") or "").strip()
+    class_code = str(data.get("CodiceClasse") or "").strip()
+    if (
+        not code
+        or photo != code
+        or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._-]{0,63}", photo)
+        or not re.fullmatch(r"\d{4}", class_code)
+    ):
+        return None
+    return f"https://catalogo.facet.eu/gecaf-images/facet/{class_code}/medium/{photo}.jpg"
 
 
 def literal_object(text):
@@ -113,6 +128,30 @@ def search_codes(html):
         if match and match.group(1) not in seen:
             seen.add(match.group(1))
             yield match.group(1)
+
+
+def search_product_images(html):
+    """Photos explicitly shown on the catalogue card for each exact part code."""
+    soup = BeautifulSoup(html, "html.parser")
+    seen = set()
+    for link in soup.select('a[onclick*="CallDetailCommerce"]'):
+        match = re.fullmatch(r'\s*CallDetailCommerce\("([^"<>]+)"\);?\s*', str(link.get("onclick") or ""))
+        image = link.select_one("img[src]")
+        if not match or not image:
+            continue
+        code, raw_url = match.group(1), str(image.get("src") or "").strip()
+        url = urlsplit(raw_url)
+        if (
+            code in seen
+            or url.scheme != "https"
+            or url.netloc not in {"catalogo.facet.eu", "catalogo.eps-autoparts.com"}
+            or url.query
+            or url.fragment
+            or not re.fullmatch(r"/gecaf-images/facet/\d{4}/medium/[A-Za-z0-9._-]+\.jpg", url.path, re.IGNORECASE)
+        ):
+            continue
+        seen.add(code)
+        yield code, raw_url
 
 
 def grouped_rows(html, control):
@@ -192,6 +231,7 @@ class FacetAdapter(Adapter):
     cross_search = True
     base_url = BASE_URL
     catalog_title = "FACET Catalog"
+    include_product_card_images = False
 
     @property
     def source(self):
@@ -310,6 +350,24 @@ class FacetAdapter(Adapter):
         for key in ("Cod", "Descrizione_EN", "Stato", "Confezione", "Impianto", "SuperKit"):
             if isinstance(data.get(key), str) and data[key].strip():
                 result.attributes.append(Attribute(name=key, value=data[key].strip(), raw_text=f"{key}: {data[key]}"))
+        if self.brands == ("FACET",):
+            image_url = product_image_url(data)
+            if image_url:
+                result.images.append(Image(url=image_url, kind="photo", record_url=record_url))
+        elif self.include_product_card_images:
+            wanted = compact(code)
+            for html in self._view_pages(controls, "GVArticoliFacet2", "ArticoliFacetGriglia", code):
+                match = next(
+                    (
+                        url
+                        for card_code, url in search_product_images(html)
+                        if compact(card_code) == wanted
+                    ),
+                    None,
+                )
+                if match:
+                    result.images.append(Image(url=match, kind="photo", record_url=record_url))
+                    break
         for html in self._grid_pages(controls, "GVcrossReferenceBig", "DettaglioCrossReference?tipo=Big", code, notices=result.attributes):
             result.relationships.extend(parse_references(html, record_url))
         for html in self._grid_pages(controls, "GVguidaApplicazioniBig", "DettaglioGuidaApplicazioni?tipo=Big", code, expand=True, notices=result.attributes):

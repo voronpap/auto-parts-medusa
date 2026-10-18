@@ -46,6 +46,52 @@ def test_own_hs_brake_number_retains_prefix_title_and_exact_years():
     assert all("Part No. MG10767908" in a.raw_text and a.record_ref and a.record_url for a in result.applications)
 
 
+def test_product_photo_is_taken_from_the_exact_sku_card():
+    from bs4 import BeautifulSoup
+
+    soup = BeautifulSoup(fixture("parts"), "html.parser")
+    card = soup.select_one("#product_4676_block")
+    image = soup.new_tag("img")
+    image["src"] = "data:image/svg+xml,placeholder"
+    image["data-lazy-src"] = (
+        "https://www.mgmotor.com.eg/wp-content/uploads/2023/01/"
+        "MG10427930-MG-RX5-2021-thumb.jpg"
+    )
+    image_block = soup.new_tag("div", attrs={"class": "img"})
+    image_block.append(image)
+    card.insert(0, image_block)
+
+    result = MgEgyptAdapter(FakeHttp(parts=str(soup))).lookup(
+        LookupRequest("MG", "MG10427930", "oem")
+    )
+
+    assert [image.url for image in result.images] == [
+        "https://www.mgmotor.com.eg/wp-content/uploads/2023/01/"
+        "MG10427930-MG-RX5-2021-thumb.jpg"
+    ]
+
+
+def test_product_photo_rejects_wrong_sku_and_untrusted_image_urls():
+    from bs4 import BeautifulSoup
+
+    soup = BeautifulSoup(fixture("parts"), "html.parser")
+    card = soup.select_one("#product_4676_block")
+    image = soup.new_tag("img")
+    image["data-lazy-src"] = (
+        "https://www.mgmotor.com.eg/wp-content/uploads/2023/01/"
+        "MG10427931-MG-RX5-2021-thumb.jpg"
+    )
+    image_block = soup.new_tag("div", attrs={"class": "img"})
+    image_block.append(image)
+    card.insert(0, image_block)
+
+    result = MgEgyptAdapter(FakeHttp(parts=str(soup))).lookup(
+        LookupRequest("MG", "MG10427930", "oem")
+    )
+
+    assert result.images == []
+
+
 def test_zs_brake_rows_preserve_each_published_year():
     result = MgEgyptAdapter(FakeHttp()).lookup(LookupRequest("MG", "MG10343249", "oem"))
     assert len(result.applications) == 4

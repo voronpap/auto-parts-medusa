@@ -52,11 +52,37 @@ def test_own_search_returns_labelled_crosses_and_not_sibling_brands():
     assert data.relationships[0].raw_relation_text == "AD. NUMBER: 1EA 611 053C | OE | SKODA"
 
 
+def test_product_photo_comes_from_exact_catalogue_result_not_ui_images():
+    hits = parse_search(fixture("search"))
+    metelli = next(hit for hit in hits if hit.brand == "Metelli")
+    assert metelli.image_url == "https://www.metelligroup.it/files/img_catalogo/Immagini/04-1143.jpg"
+
+    data = MetelliAdapter(FakeHttp()).lookup(LookupRequest("Metelli", "04-1143", "aftermarket"))
+    assert len(data.images) == 1
+    assert data.images[0].url == metelli.image_url
+    assert data.images[0].kind == "photo"
+    assert data.images[0].record_url == metelli.url
+    assert all("/files/img_catalogo/Immagini/" in image.url for image in data.images)
+
+
+def test_product_photo_requires_filename_and_detail_identity_match():
+    altered = fixture("search").replace("/04-1143.jpg", "/04-1143K.jpg", 1)
+    metelli = next(hit for hit in parse_search(altered) if hit.brand == "Metelli")
+    assert metelli.image_url is None
+
+    wrong_product = fixture("product_metelli").replace("04-1143 -", "04-1144 -", 1)
+    data = MetelliAdapter(FakeHttp(product=wrong_product)).lookup(
+        LookupRequest("Metelli", "04-1143", "aftermarket")
+    )
+    assert data.is_empty
+
+
 def test_cifam_visible_number_not_internal_metelli_code():
     http = FakeHttp(search=fixture("search_cifam"))
     data = MetelliAdapter(http).lookup(LookupRequest("Cifam", "101-1143", "aftermarket"))
     assert data.relationships[0].record_ref == "product 101-1143"
     assert "code=04-1143&brand=cifam" in data.relationships[0].record_url
+    assert data.images[0].url == "https://www.metelligroup.it/files/img_catalogo/Immagini/101-1143.jpg"
     assert data.attributes[-1].value == "8032747477892"
     assert len(data.applications) == 3
 
@@ -178,6 +204,8 @@ def test_lookup_matches_schema_and_archives_all_three_raw_responses():
     assert result.errors == [] and len(result.documents) == 3
     assert result.documents[0]["params"]["form"] == {"searchtext": "04-1143"}
     assert result.documents[1]["body"] == fixture("product_metelli")
+    assert len(result.images) == 1
+    assert result.images[0]["url"] == "https://www.metelligroup.it/files/img_catalogo/Immagini/04-1143.jpg"
     assert MetelliAdapter.min_interval >= 5
 
 

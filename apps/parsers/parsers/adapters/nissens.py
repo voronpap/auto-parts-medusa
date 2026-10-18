@@ -15,7 +15,7 @@ from urllib.parse import urlencode
 from bs4 import BeautifulSoup
 
 from ..http import SourceError
-from ..models import Application, Attribute, NumberRef, Relationship, SourceMeta, SourceResult
+from ..models import Application, Attribute, Image, NumberRef, Relationship, SourceMeta, SourceResult
 from .base import MIN_FOREIGN_NUMBER, Adapter, LookupRequest, label_has_brand
 
 BASE_URL = "https://catalogue.nissens.com"
@@ -31,7 +31,11 @@ PAGE_SIZE = 100
 MAX_APPLICATIONS = 5000
 MAX_FOREIGN_PRODUCTS = 5
 MAX_RELATIONSHIPS = 450
+MAX_PRODUCT_IMAGES = 4
 DATE = re.compile(r"(?:(\d{1,2})/(\d{4}))?\s*->\s*(?:(\d{1,2})/(\d{4}))?")
+PRODUCT_IMAGE = re.compile(
+    r"https://customerportal\.nissens\.com/ImageBank360Degree/([0-9A-Za-z]+)/NIS-\1-(\d+)\.jpg"
+)
 
 
 def compact(number: str) -> str:
@@ -128,6 +132,17 @@ def parse_details(html: str, record_url: str) -> tuple[str | None, str | None, S
     title = sub.get_text(" ", strip=True) if sub else ""
     make = title.partition("|")[0].strip() if "|" in title else None
     result = SourceResult()
+    images: dict[int, str] = {}
+    for photo in PRODUCT_IMAGE.finditer(html):
+        if compact(photo.group(1)) == compact(number):
+            images.setdefault(int(photo.group(2)), photo.group(0))
+    ordered_images = [images[index] for index in sorted(images)]
+    if len(ordered_images) > MAX_PRODUCT_IMAGES:
+        step = len(ordered_images) / MAX_PRODUCT_IMAGES
+        ordered_images = [ordered_images[int(index * step)] for index in range(MAX_PRODUCT_IMAGES)]
+    result.images.extend(
+        Image(url=url, kind="photo", record_url=record_url) for url in ordered_images
+    )
     seen_attributes: set[tuple[str, str]] = set()
     for row in soup.select(".productdetails__info__info li"):
         label, value = row.select_one(".type"), row.select_one(".value")

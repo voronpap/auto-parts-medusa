@@ -40,9 +40,38 @@ def test_product_is_found_by_its_code_through_the_search():
     result, http = lookup("02606 001")
 
     assert not result.is_empty
+    assert [(image.url, image.kind, image.record_url) for image in result.images] == [
+        (
+            "https://static.febest.de/images/big/z/z2w6dc1_p0.jpg",
+            "photo",
+            "https://febest.de/en/details/abs_sensor_front-02606_001",
+        )
+    ]
     assert http.urls == [
         "https://febest.de/en/catalog?code=02606%20001",
         "https://febest.de/en/details/abs_sensor_front-02606_001",
+    ]
+
+
+def test_product_photos_are_deduplicated_and_untrusted_urls_are_ignored():
+    html = """
+        <h2 class="detPartCode">Code: 02606-001</h2>
+        <div id="foto"><div class="modal-body">
+            <img src="https://static.febest.de/images/big/z/photo.jpg">
+            <img src="https://static.febest.de/images/big/z/photo.jpg">
+            <img src="http://static.febest.de/images/big/z/insecure.jpg">
+            <img src="https://example.com/images/big/z/external.jpg">
+        </div></div>
+        <div id="foto3d"><div class="modal-body">
+            <img src="https://static.febest.de/3d/z/photo.jpg">
+        </div></div>
+    """
+
+    code, result, _ = parse_product_page(html, "https://febest.de/en/details/02606_001")
+
+    assert code == "02606-001"
+    assert [image.url for image in result.images] == [
+        "https://static.febest.de/images/big/z/photo.jpg"
     ]
 
 
@@ -71,9 +100,13 @@ def test_oe_number_of_a_part_fitting_several_makes_is_marked_for_review():
 
 
 def test_vehicle_without_months_or_market_is_read_too():
-    _, result, numbers = parse_product_page(page("febest_1512_001.html"), "u")
+    code, result, numbers = parse_product_page(page("febest_1512_001.html"), "u")
 
+    assert code == "1512-001"
     assert numbers == [("T11-2203040BC", False)]
+    assert [(image.url, image.kind, image.record_url) for image in result.images] == [
+        ("https://static.febest.de/images/big/w/w3opl05_p0.jpg", "photo", "u")
+    ]
     assert [(a.make, a.model, a.year_from, a.year_to) for a in result.applications] == [
         ("CHERY", "TIGGO T11", 2006, 2013),
         ("VORTEX", "TINGO", 2006, 2013),

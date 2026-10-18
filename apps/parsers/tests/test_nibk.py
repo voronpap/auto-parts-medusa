@@ -29,11 +29,24 @@ class FakeHttp:
 def test_geely_oe_numbers_are_explicit_maker_references():
     adapter = NibkAdapter(FakeHttp())
     result = adapter.lookup(LookupRequest("NiBK", "PN8056", "aftermarket"))
+    assert [(image.url, image.kind, image.record_url) for image in result.images] == [
+        (
+            "https://www.nibk.jp/images/watermark_images/ee17138c771e0cb6d1bb743a9263337b_watermark.jpg",
+            "photo",
+            "https://www.nibk.jp/catalogue/cars/brake/71073956/PN8056",
+        )
+    ]
     assert [(r.to.brand, r.to.number, r.relation_type) for r in result.relationships] == [
         ("GEELY", "4048102700", "OEM_REFERENCE"),
         ("GEELY", "8894490939", "OEM_REFERENCE"),
     ]
     assert result.relationships[0].raw_relation_text == "Cross Reference: GEELY 4048102700"
+
+
+def test_nibk_product_image_requires_matching_part_identity():
+    html = page("PN8056").replace('alt="PN8056"', 'alt="PN8057"')
+    _, result = parse_product_page(html, "u")
+    assert result.images == []
 
 
 def test_geely_fitment_keeps_open_dates_and_front_position():

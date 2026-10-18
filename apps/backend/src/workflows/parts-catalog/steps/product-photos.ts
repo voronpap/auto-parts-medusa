@@ -1,6 +1,7 @@
 import { ContainerRegistrationKeys } from "@medusajs/framework/utils"
 import { createStep, StepResponse } from "@medusajs/framework/workflows-sdk"
 import { Worker } from "worker_threads"
+import sharp from "sharp"
 import { PARTS_CATALOG_MODULE } from "../../../modules/parts-catalog"
 import PartsCatalogModuleService from "../../../modules/parts-catalog/service"
 import { isAllowed, parseRobots } from "../../../modules/parts-catalog/utils/robots"
@@ -18,7 +19,8 @@ const MAX_SIDE = 800
 const MIN_CROPPED_SIDE = 300
 const RESIZE_TIMEOUT_MS = 60000
 const TIMEOUT_MS = 20000
-const TYPES = ["image/jpeg", "image/png"]
+const TYPES = ["image/jpeg", "image/png", "image/webp"]
+const MAX_WEBP_PIXELS = 20_000_000
 
 type Robots = { rules: ReturnType<typeof parseRobots> | null; at: number }
 
@@ -166,7 +168,12 @@ async function download(address: string): Promise<Buffer> {
     throw new Error("file is too large")
   }
 
-  return shrink(body)
+  const resizeBody =
+    type === "image/webp"
+      ? await sharp(body, { limitInputPixels: MAX_WEBP_PIXELS }).png({ compressionLevel: 1 }).toBuffer()
+      : body
+
+  return shrink(resizeBody)
 }
 
 export type FetchProductPhotosInput = { product_id: string }

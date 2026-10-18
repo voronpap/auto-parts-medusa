@@ -8,10 +8,10 @@ from __future__ import annotations
 
 import re
 from typing import Any
-from urllib.parse import quote, urlsplit
+from urllib.parse import parse_qs, quote, urlsplit
 
 from ..http import SourceBlocked, SourceError
-from ..models import Application, Attribute, NumberRef, Relationship, SourceMeta, SourceResult
+from ..models import Application, Attribute, Image, NumberRef, Relationship, SourceMeta, SourceResult
 from .base import MIN_FOREIGN_NUMBER, Adapter, LookupRequest, label_has_brand, normalize_brand
 
 CATALOG_URL = "https://aftermarket.zf.com/en/catalog/"
@@ -22,6 +22,7 @@ MAX_RELATIONSHIPS = 450
 MAX_APPLICATIONS = 5000
 MAX_FOREIGN_PRODUCTS = 5
 MAX_SEARCH_PAGES = 3
+MAX_PRODUCT_IMAGES = 4
 
 
 def _compact(value: str) -> str:
@@ -59,6 +60,51 @@ def _groups(data: dict[str, Any]):
             yield str(section.get("label") or key), row, relation
 
 
+def _append_search_images(result: SourceResult, hit: dict[str, Any], number: str,
+                          brand: str, record_url: str) -> None:
+    if (
+        _compact(str(hit.get("productNumber") or "")) != _compact(number)
+        or _brand(str(hit.get("brandName") or "")) != brand
+    ):
+        return
+    product_image = hit.get("productImage") or {}
+    if not isinstance(product_image, dict):
+        return
+    if (
+        _compact(str(product_image.get("number") or "")) != _compact(number)
+        or _brand(str(product_image.get("brandName") or "")) != brand
+    ):
+        return
+    seen = {image.url for image in result.images}
+    image_rows = product_image.get("images") or []
+    if not isinstance(image_rows, list):
+        return
+    for image in image_rows:
+        if len(result.images) >= MAX_PRODUCT_IMAGES:
+            break
+        if not isinstance(image, dict):
+            continue
+        address = str(image.get("src") or "")
+        try:
+            parsed = urlsplit(address)
+            query = parse_qs(parsed.query, strict_parsing=True) if parsed.query else {}
+        except ValueError:
+            continue
+        if (
+            parsed.scheme != "https"
+            or parsed.netloc != "media-aftermarket.zf.com"
+            or not re.fullmatch(r"/public/images/\d+x\d+/\d+\.webp", parsed.path)
+            or parsed.fragment
+            or query.keys() != {"version"}
+            or len(query["version"]) != 1
+            or not re.fullmatch(r"\d+", query["version"][0])
+            or address in seen
+        ):
+            continue
+        seen.add(address)
+        result.images.append(Image(url=address, kind="photo", record_url=record_url))
+
+
 def parse_details(data: dict[str, Any], record_url: str) -> SourceResult:
     result = SourceResult()
     details = data.get("details") or {}
@@ -67,6 +113,39 @@ def parse_details(data: dict[str, Any], record_url: str) -> SourceResult:
     content = (data.get("specifications") or {}).get("content") or {}
     if details.get("name"):
         result.attributes.append(Attribute(name="Назва", value=str(details["name"])))
+    brand_id = BRAND_IDS.get(_brand(str(details.get("brandName") or "")) or "")
+    prefix = f"{int(brand_id):04d}{_compact(number)}" if brand_id else ""
+    seen_images: set[str] = set()
+    image_rows = data.get("articleImageMedias") or details.get("articleImageMedias") or []
+    if not isinstance(image_rows, list):
+        image_rows = []
+    for item in image_rows:
+        if not prefix or not isinstance(item, dict) or str(item.get("mediaTypeID")) != "5":
+            continue
+        file_name = str(item.get("fileName") or "")
+        if not re.fullmatch(re.escape(prefix) + r"(?:_[A-Za-z0-9]+)?", file_name):
+            continue
+        try:
+            raw_url = urlsplit(str(item.get("url") or ""))
+        except ValueError:
+            continue
+        try:
+            query = parse_qs(raw_url.query, strict_parsing=True) if raw_url.query else {}
+        except ValueError:
+            continue
+        if (
+            raw_url.scheme != "https"
+            or raw_url.netloc != "aftermarket.zf.com"
+            or raw_url.path != "/app/controller/opc/getMedia"
+            or raw_url.fragment
+            or query != {"fileName": [file_name], "typeID": ["5"]}
+            or file_name in seen_images
+        ):
+            continue
+        seen_images.add(file_name)
+        result.images.append(Image(url=str(item["url"]), kind="photo", record_url=record_url))
+        if len(result.images) >= MAX_PRODUCT_IMAGES:
+            break
     status = details.get("status") or {}
     if status.get("value"):
         # "No longer deliverable" alone does not assert no replacement exists.
@@ -174,7 +253,7 @@ def parse_fitment(data: dict[str, Any], number: str, record_url: str) -> list[Ap
 
 
 class ZfAdapter(Adapter):
-    version = "1.0.1"
+    version = "1.1.0"
     min_interval = 5.0
     cross_search = True
 
@@ -257,6 +336,7 @@ class ZfAdapter(Adapter):
             return SourceResult()
         url = _record_url(number, str(hit["productDetailsPageHref"]))
         result = parse_details(data, url)
+        _append_search_images(result, hit, number, brand, url)
         self._linked_relations(data, number, url, result)
         if not self.skip_fitment:
             fitment = self.http.fetch_json(FITMENT_URL, params={

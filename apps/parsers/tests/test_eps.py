@@ -5,7 +5,7 @@ import pytest
 
 from parsers.adapters import ADAPTERS, LookupRequest
 from parsers.adapters.eps import BASE_URL, EpsAdapter
-from parsers.adapters.facet import FacetAdapter, initial_controls
+from parsers.adapters.facet import FacetAdapter, initial_controls, search_product_images
 from parsers.http import PoliteSession, RateLimiter, SourceBlocked, SourceError
 from parsers.worker import load_schema, run_lookup
 
@@ -49,10 +49,21 @@ class FakeHttp:
 def test_native_eps_identity_not_facet_photo_code():
     result = EpsAdapter(FakeHttp()).lookup(LookupRequest("EPS", "1.957.001", "aftermarket"))
     assert len(result.relationships) == 18 and len(result.applications) == 3
+    assert [image.url for image in result.images] == [
+        "https://catalogo.eps-autoparts.com/gecaf-images/facet/0930/medium/9.3001.jpg"
+    ]
     assert any(a.name == "Cod" and a.value == "1.957.001" for a in result.attributes)
     assert not any(a.value == "9.3001" for a in result.attributes)
     assert all(r.record_ref == "EPS 1.957.001" and r.record_url.startswith(BASE_URL) for r in result.relationships)
     assert any(r.to.brand == "MG" and r.to.number == "NSC90019C" for r in result.relationships)
+
+
+def test_eps_card_image_requires_exact_native_article_code():
+    result = EpsAdapter(FakeHttp()).lookup(LookupRequest("EPS", "1.970.127", "aftermarket"))
+    assert result.images == []
+    assert list(search_product_images(fixture("search_GVArticoliOE2.html"))) == [
+        ("1.957.001", "https://catalogo.eps-autoparts.com/gecaf-images/facet/0930/medium/9.3001.jpg")
+    ]
 
 
 def test_native_ignition_coil_and_spaced_oe_spelling():
@@ -112,7 +123,7 @@ def test_schema_and_raw_forms_stay_on_eps_host():
             return Response(fake.fetch(url, method=method, form_body=kwargs.get("data")))
     http = PoliteSession(session=Session(), limiter=RateLimiter(0))
     result = run_lookup([EpsAdapter(http)], LookupRequest("EPS", "1.957.001", "aftermarket"), "test", load_schema())
-    assert result.errors == [] and len(result.documents) == 5
+    assert result.errors == [] and len(result.documents) == 6
     assert all(d["url"].startswith(BASE_URL) for d in result.documents)
     assert json.loads(result.documents[1]["body"]) == json.loads(fixture("metadata_1.957.001.json"))
 

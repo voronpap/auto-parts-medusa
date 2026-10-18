@@ -75,9 +75,11 @@ async function productJsonLd(
             priceCurrency: (
               variant.calculated_price!.currency_code || "uah"
             ).toUpperCase(),
-            availability: isAvailable(variant)
-              ? "https://schema.org/InStock"
-              : "https://schema.org/OutOfStock",
+            availability: !isAvailable(variant)
+              ? "https://schema.org/OutOfStock"
+              : variant.manage_inventory && (variant.inventory_quantity ?? 0) <= 0
+              ? "https://schema.org/BackOrder"
+              : "https://schema.org/InStock",
             itemCondition: "https://schema.org/NewCondition",
             seller: organization(),
           },

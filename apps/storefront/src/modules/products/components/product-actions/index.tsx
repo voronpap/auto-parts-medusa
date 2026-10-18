@@ -5,6 +5,8 @@ import { useIntersection } from "@lib/hooks/use-in-view"
 import { HttpTypes } from "@medusajs/types"
 import { Button } from "@modules/common/components/ui"
 import Divider from "@modules/common/components/divider"
+import { refreshStock, StockStatus } from "@modules/common/components/stock-status"
+import { staticStock } from "@lib/util/stock"
 import OptionSelect from "@modules/products/components/product-actions/option-select"
 import { isEqual } from "lodash"
 import { useParams, usePathname, useSearchParams } from "next/navigation"
@@ -145,6 +147,7 @@ export default function ProductActions({
     })
 
     setIsAdding(false)
+    refreshStock()
   }
 
   return (
@@ -173,6 +176,10 @@ export default function ProductActions({
         </div>
 
         <ProductPrice product={product} variant={selectedVariant} />
+
+        {selectedVariant && (
+          <StockStatus variantId={selectedVariant.id} fallback={staticStock(selectedVariant)} />
+        )}
 
         <Button
           onClick={handleAddToCart}

@@ -1,6 +1,7 @@
 "use client"
 
 import { addToCart } from "@lib/data/cart"
+import { refreshStock } from "@modules/common/components/stock-status"
 import { useRouter } from "next/navigation"
 import { useTransition } from "react"
 
@@ -25,6 +26,7 @@ export default function AddButton({ variantId, countryCode, disabled }: Props) {
         startTransition(async () => {
           await addToCart({ variantId: variantId!, quantity: 1, countryCode })
           router.refresh()
+          refreshStock()
         })
       }
     >

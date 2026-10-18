@@ -12,6 +12,12 @@ type ItemProps = {
 }
 
 const Item = ({ item, currencyCode }: ItemProps) => {
+  // Set by the shop when the order is placed: units that were not on the
+  // shelf and are ordered from a supplier.
+  const backorder = Number(
+    (item.metadata as Record<string, unknown> | null)?.backorder_quantity ?? 0
+  )
+
   return (
     <Table.Row className="w-full" data-testid="product-row">
       <Table.Cell className="!pl-0 p-4 w-24">
@@ -28,6 +34,12 @@ const Item = ({ item, currencyCode }: ItemProps) => {
           {item.product_title}
         </Text>
         <LineItemOptions variant={item.variant} data-testid="product-variant" />
+        {backorder > 0 && (
+          <span className="ap-stock ap-stock-wait" data-testid="product-backorder">
+            ● Під замовлення
+            {backorder < item.quantity ? `: ${backorder} шт.` : ""}
+          </span>
+        )}
       </Table.Cell>
 
       <Table.Cell className="!pr-0">

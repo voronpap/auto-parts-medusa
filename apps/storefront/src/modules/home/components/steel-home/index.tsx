@@ -1,5 +1,6 @@
 import { CategoryWithCount } from "@lib/data/categories"
 import { plural } from "@lib/util/plural"
+import { staticStock } from "@lib/util/stock"
 import { HttpTypes } from "@medusajs/types"
 import AddButton from "@modules/catalog/components/add-button"
 import {
@@ -9,6 +10,7 @@ import {
 } from "@modules/catalog/components/product-table"
 import PartImage from "@modules/catalog/components/part-image"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import { StockStatus } from "@modules/common/components/stock-status"
 
 type Props = {
   countryCode: string
@@ -176,11 +178,11 @@ export default function SteelHome({
                     >
                       {product.title}
                     </LocalizedClientLink>
-                    <span
-                      className={available ? "ap-stock" : "ap-stock ap-none"}
-                    >
-                      {available ? "● В наявності" : "Немає в наявності"}
-                    </span>
+                    <StockStatus
+                      variantId={variant?.id}
+                      fallback={staticStock(variant, false)}
+                      compact
+                    />
                     <div className="ap-product-foot">
                       <span className="ap-price">
                         {price != null ? money(price) : "—"}

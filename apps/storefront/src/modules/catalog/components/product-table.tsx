@@ -1,5 +1,7 @@
 import { HttpTypes } from "@medusajs/types"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import { isAvailable, staticStock } from "@lib/util/stock"
+import { StockStatus } from "@modules/common/components/stock-status"
 import AddButton from "./add-button"
 import PartImage from "./part-image"
 
@@ -10,19 +12,11 @@ export const money = (amount: number | null | undefined) =>
     amount ?? 0,
   )} ₴`
 
-export const isAvailable = (variant?: HttpTypes.StoreProductVariant) =>
-  Boolean(variant) &&
-  (!variant!.manage_inventory ||
-    Boolean(variant!.allow_backorder) ||
-    (variant!.inventory_quantity ?? 0) > 0)
+export { isAvailable }
 
-const Stock = ({ variant }: { variant?: HttpTypes.StoreProductVariant }) => {
-  if (!isAvailable(variant)) {
-    return <span className="ap-stock ap-none">Немає в наявності</span>
-  }
-
-  return <span className="ap-stock">● В наявності</span>
-}
+const Stock = ({ variant }: { variant?: HttpTypes.StoreProductVariant }) => (
+  <StockStatus variantId={variant?.id} fallback={staticStock(variant, false)} compact />
+)
 
 export default function ProductTable({
   products,

@@ -10,6 +10,7 @@
   --ap-brand-2: #10202d;
   --ap-brand-soft: #fff0e7;
   --ap-good: #12845b;
+  --ap-wait: #9a5300;
   --ap-radius: 12px;
   --ap-shadow: 0 10px 30px rgba(21, 37, 49, 0.07);
   --ap-max: 1480px;
@@ -99,7 +100,9 @@
 .ap-part strong { font-weight: 700; }
 .ap-part small { margin-top: 3px; color: var(--ap-muted); font-size: 11px; }
 .ap-stock { color: var(--ap-good); font-size: 12px; font-weight: 800; white-space: nowrap; }
-.ap-stock.ap-none { color: var(--ap-muted); }
+.ap-stock.ap-none, .ap-stock.ap-stock-none { color: var(--ap-muted); }
+.ap-stock.ap-stock-wait { color: var(--ap-wait); }
+.ap-stock-note { display: block; max-width: 34ch; margin-top: 2px; color: var(--ap-muted); font-size: 11px; font-weight: 600; white-space: normal; }
 .ap-price { font-size: 17px; font-weight: 900; white-space: nowrap; }
 .ap-add { width: 34px; height: 34px; border: 0; border-radius: 7px; color: var(--ap-brand-2); background: var(--ap-brand); font-size: 20px; font-weight: 900; line-height: 1; }
 .ap-add:disabled { color: var(--ap-muted); background: var(--ap-line); cursor: not-allowed; }

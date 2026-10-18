@@ -11,6 +11,7 @@ import LineItemPrice from "@modules/common/components/line-item-price"
 import LineItemUnitPrice from "@modules/common/components/line-item-unit-price"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import Spinner from "@modules/common/icons/spinner"
+import { CartLineStock, refreshStock } from "@modules/common/components/stock-status"
 import Thumbnail from "@modules/products/components/thumbnail"
 import { useState } from "react"
 
@@ -37,6 +38,7 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
       })
       .finally(() => {
         setUpdating(false)
+        refreshStock()
       })
   }
 
@@ -74,6 +76,7 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
           {item.product_title}
         </Text>
         <LineItemOptions variant={item.variant} data-testid="product-variant" />
+        <CartLineStock variantId={item.variant_id} quantity={item.quantity} />
       </Table.Cell>
 
       {type === "full" && (

@@ -172,6 +172,9 @@ module.exports = defineConfig({
       resolve: "./src/modules/supply",
     },
     {
+      resolve: "./src/modules/stock",
+    },
+    {
       resolve: "@medusajs/medusa/translation",
     },
     ...(emailEnabled

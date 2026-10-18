@@ -1,7 +1,6 @@
 import { ContainerRegistrationKeys } from "@medusajs/framework/utils"
 import { createStep, StepResponse } from "@medusajs/framework/workflows-sdk"
 import { Worker } from "worker_threads"
-import sharp from "sharp"
 import { PARTS_CATALOG_MODULE } from "../../../modules/parts-catalog"
 import PartsCatalogModuleService from "../../../modules/parts-catalog/service"
 import { isAllowed, parseRobots } from "../../../modules/parts-catalog/utils/robots"
@@ -101,6 +100,30 @@ const { Jimp } = require("jimp")
 })()
 `
 
+// sharp converts WebP (ZF photos), but its prebuilt binaries refuse the
+// server's old CPU ("Unsupported CPU") and a top-level import kept the whole
+// backend from starting. It is loaded only when a WebP photo arrives; where it
+// cannot load, WebP photos are skipped and everything else keeps working.
+type SharpFactory = (
+  input: Buffer,
+  options: { limitInputPixels: number }
+) => { png: (options: { compressionLevel: number }) => { toBuffer: () => Promise<Buffer> } }
+
+let sharpFactory: SharpFactory | null | undefined
+
+async function loadSharp(): Promise<SharpFactory | null> {
+  if (sharpFactory === undefined) {
+    try {
+      const loaded = (await import("sharp")) as unknown as { default?: SharpFactory }
+      sharpFactory = loaded.default ?? (loaded as unknown as SharpFactory)
+    } catch {
+      sharpFactory = null
+    }
+  }
+
+  return sharpFactory
+}
+
 function shrink(body: Buffer): Promise<Buffer> {
   return new Promise((resolve, reject) => {
     const worker = new Worker(RESIZE_WORKER, {
@@ -168,10 +191,19 @@ async function download(address: string): Promise<Buffer> {
     throw new Error("file is too large")
   }
 
-  const resizeBody =
-    type === "image/webp"
-      ? await sharp(body, { limitInputPixels: MAX_WEBP_PIXELS }).png({ compressionLevel: 1 }).toBuffer()
-      : body
+  let resizeBody = body
+
+  if (type === "image/webp") {
+    const sharp = await loadSharp()
+
+    if (!sharp) {
+      throw new Skip("WebP photos need sharp, which cannot run on this machine")
+    }
+
+    resizeBody = await sharp(body, { limitInputPixels: MAX_WEBP_PIXELS })
+      .png({ compressionLevel: 1 })
+      .toBuffer()
+  }
 
   return shrink(resizeBody)
 }

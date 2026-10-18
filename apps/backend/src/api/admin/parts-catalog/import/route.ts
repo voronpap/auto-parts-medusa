@@ -18,6 +18,10 @@ type ReceiptRow = {
   created_at: Date
 }
 
+// No single import runs this long; an older "processing" receipt was left by
+// a backend that stopped before it could finish or roll back.
+const STALE_RECEIPT_SECONDS = 10 * 60
+
 type CatalogDatabase = {
   raw: (query: string, bindings?: unknown[]) => Promise<{ rows: ReceiptRow[] }>
 }
@@ -89,11 +93,25 @@ export async function POST(
       return res.status(200).json(receipt.response)
     }
 
-    return res.status(409).json({
-      message: "An identical import is already processing",
-      receipt_id: receipt.id,
-      created_at: receipt.created_at,
-    })
+    // A receipt left "processing" by a backend that went down mid-import
+    // (power cuts happen) is taken over once it is old enough; loading the
+    // same result again only confirms what is already there.
+    const takenOver = await db.raw(
+      `update "parts_import_receipt"
+       set "updated_at" = now()
+       where "idempotency_key" = ? and "status" = 'processing'
+         and "updated_at" < now() - make_interval(secs => ?)
+       returning "id"`,
+      [idempotencyKey, STALE_RECEIPT_SECONDS]
+    )
+
+    if (!takenOver.rows.length) {
+      return res.status(409).json({
+        message: "An identical import is already processing",
+        receipt_id: receipt.id,
+        created_at: receipt.created_at,
+      })
+    }
   }
 
   let result: unknown

@@ -16,12 +16,12 @@ from __future__ import annotations
 import json
 import re
 from typing import Any
-from urllib.parse import parse_qs, quote, unquote_plus
+from urllib.parse import parse_qs, quote, unquote_plus, urlsplit
 
 from bs4 import BeautifulSoup
 
 from ..http import SourceError
-from ..models import Application, Attribute, NumberRef, Relationship, SourceMeta, SourceResult
+from ..models import Application, Attribute, Image, NumberRef, Relationship, SourceMeta, SourceResult
 from .base import MIN_FOREIGN_NUMBER, Adapter, LookupRequest, label_has_brand, normalize_brand
 
 SPEC_HEADINGS = re.compile(r"Розміри|технічні характеристики|Dimensions|Technical", re.I)
@@ -37,6 +37,7 @@ CROSS_QUERY = (
 )
 # The catalog accepts at most this many crosses in one result.
 MAX_RELATIONSHIPS = 450
+MAX_IMAGES = 6
 
 # Vehicle and engine makers as the catalogue labels them (normalized): a
 # comparison number under one of these is an OE number.
@@ -166,12 +167,41 @@ def _number(value: str | None) -> float | None:
         return None
 
 
+def _product_images(soup: BeautifulSoup, record_url: str) -> list[Image]:
+    """Product photos from the catalogue gallery, excluding repeated print images."""
+    images: list[Image] = []
+    seen: set[str] = set()
+
+    for image in soup.select("img.cmp-product__gallery-img"):
+        url = str(image.get("src") or "").strip()
+        alt = str(image.get("alt") or "").strip()
+        parsed_url = urlsplit(url)
+
+        if (
+            not alt.startswith("Product Image ")
+            or parsed_url.scheme != "https"
+            or parsed_url.netloc != "s7g10.scene7.com"
+            or not parsed_url.path.startswith("/is/image/mannhummel/")
+            or url in seen
+        ):
+            continue
+
+        seen.add(url)
+        images.append(Image(url=url, kind="photo", record_url=record_url))
+
+        if len(images) >= MAX_IMAGES:
+            break
+
+    return images
+
+
 def parse_product_page(html: str, record_url: str) -> tuple[str | None, SourceResult]:
     """Title of the product page and what it states about the product."""
     soup = BeautifulSoup(html, "html.parser")
     heading = soup.find("h1")
     title = re.sub(r"\s+", " ", heading.get_text(" ", strip=True)) if heading else None
     result = SourceResult()
+    result.images = _product_images(soup, record_url)
 
     if title:
         result.attributes.append(Attribute(name="Назва", value=title))
@@ -251,7 +281,7 @@ def parse_product_page(html: str, record_url: str) -> tuple[str | None, SourceRe
 class _MannHummelAdapter(Adapter):
     """Reads one brand's product pages. Subclasses name the brand and site."""
 
-    version = "1.2.0"
+    version = "1.3.0"
     min_interval = 5.0
     cross_search = True
     base_url: str

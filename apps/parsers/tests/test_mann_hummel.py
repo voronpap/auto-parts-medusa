@@ -6,7 +6,12 @@ from pathlib import Path
 import pytest
 
 from parsers.adapters import LookupRequest
-from parsers.adapters.mann_hummel import FiltronAdapter, MannFilterAdapter, parse_comparison_numbers
+from parsers.adapters.mann_hummel import (
+    FiltronAdapter,
+    MannFilterAdapter,
+    parse_comparison_numbers,
+    parse_product_page,
+)
 from parsers.http import SourceError
 from parsers.worker import load_schema, run_lookup
 
@@ -82,6 +87,32 @@ def test_dimensions_and_technical_data_become_attributes():
     assert attributes["Назва"].endswith("W 712/95")
     assert attributes["Висота"] == "79 мм"
     assert attributes["Кількість зворотних клапанів"] == "1"
+
+
+def test_product_gallery_returns_unique_product_photos_only():
+    record_url = "https://www.mann-filter.com/ru-ru/catalog/product.html/w712/95_mann-filter.html"
+    gallery = """
+    <h1>MANN-FILTER W 712/95</h1>
+    <img class="cmp-product__gallery-img"
+         alt="Product Image W712/95_MANN-FILTER"
+         src="https://s7g10.scene7.com/is/image/mannhummel/W_712.95-1?qlt=82">
+    <img class="cmp-product__gallery-img"
+         alt="Product Image W712/95_MANN-FILTER"
+         src="https://s7g10.scene7.com/is/image/mannhummel/W_712.95-filter-with-box?qlt=82">
+    <img class="cmp-product__gallery__print-img cmp-product__gallery-img"
+         alt="Product Image W712/95_MANN-FILTER"
+         src="https://s7g10.scene7.com/is/image/mannhummel/W_712.95-1?qlt=82">
+    <img class="cmp-product__gallery-img" alt="Product Image" src="https://example.com/not-a-product-photo.jpg">
+    <img src="https://www.mann-filter.com/logo.svg" alt="MANN-FILTER logo">
+    """
+
+    _, result = parse_product_page(gallery, record_url)
+
+    assert [image.url for image in result.images] == [
+        "https://s7g10.scene7.com/is/image/mannhummel/W_712.95-1?qlt=82",
+        "https://s7g10.scene7.com/is/image/mannhummel/W_712.95-filter-with-box?qlt=82",
+    ]
+    assert all(image.kind == "photo" and image.record_url == record_url for image in result.images)
 
 
 def test_comparison_numbers_become_crosses_to_other_makers():

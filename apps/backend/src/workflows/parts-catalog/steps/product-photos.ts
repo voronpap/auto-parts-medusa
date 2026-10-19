@@ -7,8 +7,8 @@ import { isAllowed, parseRobots } from "../../../modules/parts-catalog/utils/rob
 import { brandKey, numberNorm, parsersDb } from "../../../lib/parsers-db"
 
 export const USER_AGENT = "AutoPartsPpUaBot/1.0 (+https://auto-parts.pp.ua)"
-// A product gets at most this many photos copied, on its first opening.
-export const MAX_PHOTOS_PER_PRODUCT = 4
+// A product gets all its photos copied on its first opening, up to this many.
+export const MAX_PHOTOS_PER_PRODUCT = 20
 const MAX_ATTEMPTS = 3
 const RETRY_AFTER_MS = 60 * 60 * 1000
 const HOST_INTERVAL_MS = 3000

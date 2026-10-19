@@ -3,19 +3,35 @@ import { MedusaError } from "@medusajs/framework/utils"
 import { z } from "@medusajs/framework/zod"
 import { shopProductsByNumber } from "../../../../../lib/catalog-shop"
 import { brandKey, parsersDb } from "../../../../../lib/parsers-db"
+import {
+  groupTree,
+  partTypes,
+  rootOf,
+  SERVICE_ROOTS,
+  subtreeOf,
+} from "../../../../../lib/tecdoc-groups"
 
 const Query = z.object({
-  category: z.string().trim().max(200).optional(),
+  // A TecDoc group (a section or one of its groups); 0 is "other", the parts
+  // that have no group yet.
+  group: z.coerce.number().int().min(0).optional(),
   offset: z.coerce.number().int().min(0).max(10_000).default(0),
 })
 
 const PAGE_SIZE = 60
-const OTHER = "Інше"
+const OTHER = 0
+
+type Section = {
+  id: number
+  name: string
+  parts: number
+  groups: { id: number; name: string; parts: number }[]
+}
 
 /**
  * A TecDoc vehicle version (KType) and the parts the catalogue lists for it:
- * categories with counts, or one category's parts page by page. A category is
- * the source's own wording, so the same kind of part may sit under two.
+ * the TecDoc sections and groups those parts fall into, in Ukrainian, or one
+ * group's parts page by page.
  */
 export async function GET(req: MedusaRequest, res: MedusaResponse) {
   const db = parsersDb()
@@ -52,79 +68,143 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
     throw new MedusaError(MedusaError.Types.NOT_FOUND, "Vehicle not found")
   }
 
-  // Sources mostly name the category in TecDoc's English; the TecDoc group of
-  // the same name gives it in Ukrainian. Others keep the source's wording.
-  const labels = async (names: string[]) => {
-    const rows: { key: string; name_uk: string }[] = names.length
-      ? await db("tecdoc_group")
-          .select(db.raw("distinct on (lower(name)) lower(name) as key"), "name_uk")
-          .where("type", "P")
-          .whereNotNull("name_uk")
-          .whereRaw("lower(name) = any(?)", [names.map((name) => name.toLowerCase())])
-          .orderByRaw("lower(name), parent_id nulls first")
-      : []
-    const byName = new Map(rows.map((row) => [row.key, row.name_uk]))
+  const nodes = await groupTree(db)
+  const ref = `KType ${ktype}`
 
-    return (name: string) => byName.get(name.toLowerCase()) ?? name
-  }
-
-  const category = db.raw("coalesce(nullif(trim(p.category), ''), ?)", [OTHER])
-  const fitting = () =>
-    db("part_application as a")
+  if (parsed.data.group === undefined) {
+    // Every part fitted to the vehicle with the groups it belongs to.
+    const rows: { part_id: string; group_id: number | null }[] = await db(
+      "part_application as a"
+    )
       .join("part as p", "p.id", "a.part_id")
-      .where("a.vehicle_ref", `KType ${ktype}`)
+      .leftJoin("part_group as g", function () {
+        this.on("g.part_id", "a.part_id").andOnNotNull("g.group_id")
+      })
+      .distinct("a.part_id", "g.group_id")
+      .where("a.vehicle_ref", ref)
       .whereNot("p.status", "absent")
 
-  if (!parsed.data.category) {
-    const groups: { category: string; parts: string }[] = await fitting()
-      .select(db.raw("? as category", [category]))
-      .select(db.raw("count(distinct (upper(p.brand), p.number_norm)) as parts"))
-      .groupByRaw("1")
-      .orderByRaw("2 desc, 1")
+    const byPart = new Map<string, number[]>()
 
-    const label = await labels(groups.map((group) => group.category))
+    for (const row of rows) {
+      const groups = byPart.get(String(row.part_id)) ?? []
+
+      if (row.group_id != null && nodes.has(Number(row.group_id))) {
+        groups.push(Number(row.group_id))
+      }
+
+      byPart.set(String(row.part_id), groups)
+    }
+
+    const sectionParts = new Map<number, Set<string>>()
+    const groupParts = new Map<number, Set<string>>()
+    let other = 0
+
+    for (const [part, groups] of byPart) {
+      const working = groups.filter((id) => !SERVICE_ROOTS.has(rootOf(nodes, id)))
+      const shown = working.length ? working : groups
+
+      if (!shown.length) {
+        other++
+        continue
+      }
+
+      for (const id of shown) {
+        const root = rootOf(nodes, id)
+
+        sectionParts.set(root, (sectionParts.get(root) ?? new Set()).add(part))
+        groupParts.set(id, (groupParts.get(id) ?? new Set()).add(part))
+      }
+    }
+
+    const sections: Section[] = [...sectionParts.entries()]
+      .map(([id, parts]) => ({
+        id,
+        name: nodes.get(id)?.name ?? String(id),
+        parts: parts.size,
+        groups: [...groupParts.entries()]
+          .filter(([group]) => group !== id && rootOf(nodes, group) === id)
+          .map(([group, groupSet]) => ({
+            id: group,
+            name: nodes.get(group)?.name ?? String(group),
+            parts: groupSet.size,
+          }))
+          .sort((a, b) => b.parts - a.parts || a.name.localeCompare(b.name)),
+      }))
+      .sort((a, b) => b.parts - a.parts || a.name.localeCompare(b.name))
 
     return res.status(200).json({
       vehicle,
-      groups: groups.map((group) => ({
-        category: group.category,
-        label: label(group.category),
-        parts: Number(group.parts),
-      })),
+      total: byPart.size,
+      sections,
+      other,
     })
   }
 
+  const group = parsed.data.group
+  const label =
+    group === OTHER ? "Інше" : nodes.get(group)?.name
+
+  if (!label) {
+    throw new MedusaError(MedusaError.Types.NOT_FOUND, "Group not found")
+  }
+
+  const inGroup = db("part_group")
+    .select("part_id")
+    .whereIn("group_id", group === OTHER ? [] : subtreeOf(nodes, group))
+  const query = db("part_application as a")
+    .join("part as p", "p.id", "a.part_id")
+    .where("a.vehicle_ref", ref)
+    .whereNot("p.status", "absent")
+
+  if (group === OTHER) {
+    query.whereNotExists(
+      db("part_group as g")
+        .select(db.raw("1"))
+        .whereRaw("g.part_id = a.part_id")
+        .whereNotNull("g.group_id")
+    )
+  } else {
+    query.whereIn("a.part_id", inGroup)
+  }
+
   const rows: {
+    id: string
     brand: string
     number: string
     number_norm: string
     title: string | null
     conditions: string | null
-  }[] = await fitting()
+  }[] = await query
     .select(
       db.raw(
-        "distinct on (upper(p.brand), p.number_norm) p.brand, p.number, p.number_norm, p.title, a.conditions"
+        "distinct on (upper(p.brand), p.number_norm) p.id, p.brand, p.number, p.number_norm, p.title, a.conditions"
       )
     )
-    .whereRaw("? = ?", [category, parsed.data.category])
     .orderByRaw("upper(p.brand), p.number_norm, (p.title is null)")
     .offset(parsed.data.offset)
     .limit(PAGE_SIZE + 1)
 
   const page = rows.slice(0, PAGE_SIZE)
-  const [products, label] = await Promise.all([
+  const [products, types] = await Promise.all([
     shopProductsByNumber(req, [...new Set(page.map((row) => row.number_norm))]),
-    labels([parsed.data.category]),
+    partTypes(db, page.map((row) => row.id)),
   ])
+  const section = group === OTHER ? null : rootOf(nodes, group)
 
   return res.status(200).json({
     vehicle,
-    category: parsed.data.category,
-    label: label(parsed.data.category),
+    group,
+    label,
+    section:
+      section != null && section !== group
+        ? { id: section, name: nodes.get(section)?.name ?? "" }
+        : null,
     offset: parsed.data.offset,
     more: rows.length > PAGE_SIZE,
-    parts: page.map((row) => ({
+    parts: page.map(({ id, ...row }) => ({
       ...row,
+      type: types.get(String(id)) ?? null,
       // Fitting notes such as axle or gearbox; the vehicle's own data that
       // older TecDoc reads put here is not a condition, so it is left out.
       conditions:

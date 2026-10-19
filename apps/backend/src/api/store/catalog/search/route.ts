@@ -3,6 +3,7 @@ import { MedusaError } from "@medusajs/framework/utils"
 import { z } from "@medusajs/framework/zod"
 import { catalogImagePath } from "../../../../lib/catalog-images"
 import { shopProductsByNumber } from "../../../../lib/catalog-shop"
+import { partTypes } from "../../../../lib/tecdoc-groups"
 import {
   brandKey,
   numberNorm,
@@ -228,7 +229,7 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
     .slice(0, MAX_RESULTS)
 
   const partIds = list.flatMap((entry) => entry.partIds)
-  const [images, products] = await Promise.all([
+  const [images, products, types] = await Promise.all([
     partIds.length
       ? (db("part_image")
           .distinctOn("part_id")
@@ -242,6 +243,7 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
     shopProductsByNumber(req, [
       ...new Set(list.map((entry) => entry.number_norm)),
     ]),
+    partTypes(db, partIds),
   ])
   const imageByPart = new Map(
     images.map((row) => [String(row.part_id), catalogImagePath(row.id)])
@@ -251,6 +253,7 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
     query: key,
     parts: list.map(({ partIds, ...entry }) => ({
       ...entry,
+      type: partIds.map((id) => types.get(String(id))).find(Boolean) ?? null,
       image:
         partIds.map((id) => imageByPart.get(String(id))).find(Boolean) ?? null,
       product:

@@ -2,6 +2,7 @@ import { MedusaRequest, MedusaResponse } from "@medusajs/framework/http"
 import { MedusaError } from "@medusajs/framework/utils"
 import { catalogImagePath } from "../../../../../../lib/catalog-images"
 import { shopProductsByNumber } from "../../../../../../lib/catalog-shop"
+import { partTypes } from "../../../../../../lib/tecdoc-groups"
 import {
   brandKey,
   numberNorm,
@@ -213,9 +214,12 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
   }
 
   const allCrosses = [...oe.values(), ...analogs.values(), ...newer.values(), ...older.values()]
-  const products = await shopProductsByNumber(req, [
-    norm,
-    ...new Set(allCrosses.map((cross) => cross.number_norm)),
+  const [products, types] = await Promise.all([
+    shopProductsByNumber(req, [
+      norm,
+      ...new Set(allCrosses.map((cross) => cross.number_norm)),
+    ]),
+    partTypes(db, ids),
   ])
 
   for (const [id, cross] of [
@@ -335,6 +339,7 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
       number: parts[0]?.number ?? norm,
       number_norm: norm,
       title: named?.title ?? null,
+      type: ids.map((id) => types.get(String(id))).find(Boolean) ?? null,
       description: parts.find((part) => part.description)?.description ?? null,
       category: parts.find((part) => part.category)?.category ?? null,
       discontinued:

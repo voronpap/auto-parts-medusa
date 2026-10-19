@@ -191,7 +191,7 @@ async function download(address: string): Promise<Buffer> {
     throw new Error("file is too large")
   }
 
-  let resizeBody = body
+  let resizeBody: Buffer = body
 
   if (type === "image/webp") {
     const sharp = await loadSharp()

@@ -32,6 +32,17 @@ type Cross = {
   product: { handle: string; title: string } | null
 }
 
+type ApplicationRow = {
+  make: string
+  model: string | null
+  year_from: number | null
+  year_to: number | null
+  engine: string | null
+  fuel: string | null
+  power_kw: number | null
+  applicability_verdict: string
+}
+
 type ModelFitment = {
   model: string
   year_from: number | null
@@ -47,6 +58,7 @@ type ModelFitment = {
  */
 export async function GET(req: MedusaRequest, res: MedusaResponse) {
   const query = req.scope.resolve(ContainerRegistrationKeys.QUERY)
+  const db = req.scope.resolve(ContainerRegistrationKeys.PG_CONNECTION)
   const catalog = req.scope.resolve<PartsCatalogModuleService>(
     PARTS_CATALOG_MODULE
   )
@@ -96,14 +108,34 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
         take: MAX_CROSSES,
       }
     ),
-    catalog.listPartApplications(
-      { part_number_id: ids, applicability_verdict: [...PUBLIC_VERDICTS] },
-      {
-        relations: ["vehicle_make", "vehicle_model"],
-        order: { make: "ASC", model: "ASC", year_from: "ASC" },
-        take: MAX_APPLICATIONS,
-      }
-    ),
+    // A popular part fits thousands of vehicles; loading them as ORM entities
+    // took seconds on the shop server, so only the shown columns are read.
+    db("part_application as a")
+      .leftJoin("vehicle_make as m", function () {
+        this.on("m.id", "a.vehicle_make_id").andOnNull("m.deleted_at")
+      })
+      .leftJoin("vehicle_model as vm", function () {
+        this.on("vm.id", "a.vehicle_model_id").andOnNull("vm.deleted_at")
+      })
+      .whereIn("a.part_number_id", ids)
+      .whereIn("a.applicability_verdict", [...PUBLIC_VERDICTS])
+      .whereNull("a.deleted_at")
+      .orderBy([
+        { column: "a.make" },
+        { column: "a.model" },
+        { column: "a.year_from" },
+      ])
+      .limit(MAX_APPLICATIONS)
+      .select(
+        db.raw("coalesce(m.name, a.make) as make"),
+        db.raw("coalesce(vm.name, a.model) as model"),
+        "a.year_from",
+        "a.year_to",
+        "a.engine",
+        "a.fuel",
+        "a.power_kw",
+        "a.applicability_verdict"
+      ) as Promise<ApplicationRow[]>,
     catalog.listPartAttributes(
       { part_number_id: ids },
       { order: { name: "ASC" }, take: 100 }
@@ -201,12 +233,8 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
   const makes = new Map<string, Map<string, ModelFitment & { all: Set<string> }>>()
 
   for (const application of applications) {
-    const make = (application.vehicle_make?.name ?? application.make).trim()
-    const model = (
-      application.vehicle_model?.name ??
-      application.model ??
-      ""
-    ).trim()
+    const make = application.make.trim()
+    const model = (application.model ?? "").trim()
     const models = makes.get(make) ?? new Map()
     const entry = models.get(model) ?? {
       model,

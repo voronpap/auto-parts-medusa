@@ -1,5 +1,7 @@
 import { listCategories } from "@lib/data/categories"
+import { searchCatalog } from "@lib/data/catalog"
 import { listPartOffers, searchByPartNumber } from "@lib/data/parts-catalog"
+import CatalogPartTable from "@modules/catalog/components/catalog-part-table"
 import OfferTable from "@modules/catalog/components/offer-table"
 import { listProducts, listProductsByPrice } from "@lib/data/products"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
@@ -60,10 +62,10 @@ export default async function Catalog({
   ])
   // A typed part number also finds products through the parts catalog:
   // the product with that number and the confirmed crosses of that number.
-  const [numberMatches, allOffers] =
+  const [numberMatches, allOffers, catalogFound] =
     q && !categoryId && page === 1
-      ? await Promise.all([searchByPartNumber(q), listPartOffers(q)])
-      : [[], []]
+      ? await Promise.all([searchByPartNumber(q), listPartOffers(q), searchCatalog(q)])
+      : [[], [], []]
   // One part, one row: several suppliers of the same number show as its best
   // offer (offers come in stock first, then cheapest), and a product that is
   // already offered is not listed again below.
@@ -107,7 +109,16 @@ export default async function Catalog({
   const listed = response.products.filter(
     (product) => !order.has(product.id!) && !offered.has(product.handle)
   )
+  // Makers' catalogue numbers the shop already lists above are not repeated.
+  const shown = new Set([
+    ...offers.map((offer) => offer.product_handle),
+    ...byNumber.map((product) => product.handle),
+  ])
+  const catalogParts = catalogFound.filter(
+    (part) => !part.product || !shown.has(part.product.handle)
+  )
   const found =
+    catalogParts.length +
     offers.length +
     byNumber.length +
     (response.count - (response.products.length - listed.length))
@@ -218,7 +229,7 @@ export default async function Catalog({
             )}
             {listed.length ? (
               <ProductTable products={listed} countryCode={countryCode} />
-            ) : byNumber.length || offers.length ? null : (
+            ) : byNumber.length || offers.length || catalogParts.length ? null : (
               <div className="ap-empty">
                 За цим запитом товарів немає.{" "}
                 <LocalizedClientLink className="ap-link" href="/cars#request">
@@ -229,6 +240,15 @@ export default async function Catalog({
                   покажемо весь каталог
                 </LocalizedClientLink>
               </div>
+            )}
+
+            {catalogParts.length > 0 && (
+              <>
+                <div className="ap-result-head">
+                  У каталогах виробників · під замовлення
+                </div>
+                <CatalogPartTable parts={catalogParts} />
+              </>
             )}
 
             {pages > 1 && (

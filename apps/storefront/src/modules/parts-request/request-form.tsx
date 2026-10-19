@@ -4,7 +4,16 @@ import { sendPartsRequest } from "@lib/data/parts-requests"
 import { useActionState } from "react"
 
 /** "Not found? We will pick it for you" — a request to the shop's manager. */
-export default function PartsRequestForm({ vin }: { vin?: string }) {
+export default function PartsRequestForm({
+  vin,
+  message,
+  submitLabel = "Надіслати запит",
+}: {
+  vin?: string
+  /** What the shopper needs, filled in when the page already knows it. */
+  message?: string
+  submitLabel?: string
+}) {
   const [state, action, pending] = useActionState(sendPartsRequest, { ok: false, error: null })
 
   if (state.ok) {
@@ -39,13 +48,13 @@ export default function PartsRequestForm({ vin }: { vin?: string }) {
       </div>
       <label>
         Що потрібно
-        <textarea name="message" required minLength={3} maxLength={2000} rows={3} placeholder="Наприклад: колодки передні та диски" />
+        <textarea name="message" defaultValue={message} required minLength={3} maxLength={2000} rows={3} placeholder="Наприклад: колодки передні та диски" />
       </label>
       {/* Left empty by people; filled only by robots. */}
       <input className="ap-hidden" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" />
       {state.error && <div className="ap-fit ap-fit-none">{state.error}</div>}
       <button className="ap-btn" type="submit" disabled={pending}>
-        {pending ? "Надсилаю…" : "Надіслати запит"}
+        {pending ? "Надсилаю…" : submitLabel}
       </button>
     </form>
   )

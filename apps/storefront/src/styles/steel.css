@@ -586,3 +586,11 @@ body { background: #eef1f4; }
 @media (max-width: 800px) {
   .ap-scope input, .ap-scope select, .ap-scope textarea { font-size: 16px; }
 }
+
+/* TecDoc vehicle tree (/vehicles): makes, models and part groups as tiles. */
+.ap-tree { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 8px; padding: 16px 21px 21px; }
+.ap-tree a { display: flex; flex-direction: column; gap: 2px; min-width: 0; padding: 10px 12px; border: 1px solid var(--ap-line); border-radius: 9px; color: var(--ap-ink); background: var(--ap-surface-2); }
+.ap-tree a:hover { border-color: var(--ap-brand); }
+.ap-tree strong { overflow-wrap: anywhere; }
+.ap-tree small { color: var(--ap-muted); }
+.ap-crumb { display: contents; }

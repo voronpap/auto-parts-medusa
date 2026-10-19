@@ -1,5 +1,5 @@
 import { createHmac, timingSafeEqual } from "node:crypto"
-import { mkdir, rename, statfs, writeFile } from "node:fs/promises"
+import { mkdir, rename, stat, statfs, writeFile } from "node:fs/promises"
 import { homedir } from "node:os"
 import { join } from "node:path"
 import { download } from "../workflows/parts-catalog/steps/product-photos"
@@ -49,9 +49,16 @@ export function verifyCatalogImageKey(key: string): string | null {
 
 export const catalogImageFile = (id: string) => join(CATALOG_IMAGES_DIR, `${id}.jpg`)
 
+/** Whether photo `id` is already copied to this server. */
+export const copied = (id: string) =>
+  stat(catalogImageFile(id)).then(
+    (info) => info.isFile() && info.size > 0,
+    () => false
+  )
+
 // One copy at a time: the download waits its turn per host and the resize
 // takes a CPU core, and the shop must keep answering meanwhile.
-const queue = new Map<string, string>()
+const queue = new Map<string, { url: string; crop: boolean }>()
 let running = false
 // A photo that could not be copied is retried a day later, not on every view.
 const failed = new Map<string, number>()
@@ -64,7 +71,10 @@ async function work(log: (message: string) => void) {
     await mkdir(CATALOG_IMAGES_DIR, { recursive: true })
 
     while (queue.size) {
-      const [id, url] = queue.entries().next().value as [string, string]
+      const [id, { url, crop }] = queue.entries().next().value as [
+        string,
+        { url: string; crop: boolean },
+      ]
 
       try {
         const disk = await statfs(CATALOG_IMAGES_DIR)
@@ -75,7 +85,7 @@ async function work(log: (message: string) => void) {
           break
         }
 
-        const body = await download(url)
+        const body = await download(url, { crop })
         const file = catalogImageFile(id)
         const temporary = `${file}.${process.pid}.tmp`
 
@@ -93,12 +103,23 @@ async function work(log: (message: string) => void) {
   }
 }
 
-/** Queues a copy of photo `id` from `url`; repeated calls are ignored. */
-export function queueCatalogImage(
+/** Frames of a 360° turn are not cropped, so the part stays in place. */
+export const keepsMargins = (kind: string | null) => kind === "photo360"
+
+/**
+ * Queues a copy of photo `id` from `url` unless it is already on disk;
+ * repeated calls are ignored.
+ */
+export async function queueCatalogImage(
   id: string,
   url: string,
-  log: (message: string) => void
+  log: (message: string) => void,
+  { crop = true }: { crop?: boolean } = {}
 ) {
+  if (await copied(id)) {
+    return
+  }
+
   if (queue.has(id) || queue.size >= MAX_QUEUE) {
     return
   }
@@ -109,7 +130,7 @@ export function queueCatalogImage(
 
   failed.delete(id)
 
-  queue.set(id, url)
+  queue.set(id, { url, crop })
 
   if (!running) {
     void work(log)

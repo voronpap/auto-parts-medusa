@@ -87,10 +87,13 @@ const { parentPort, workerData } = require("worker_threads")
 const { Jimp } = require("jimp")
 
 ;(async () => {
-  const { body, maxSide, minSide } = workerData
+  const { body, maxSide, minSide, crop } = workerData
   const original = await Jimp.read(Buffer.from(body))
-  // Catalogue shots sit on wide white margins; keep a thin border.
-  const cropped = original.clone().autocrop({ tolerance: 0.02, leaveBorder: 12 })
+  // Catalogue shots sit on wide white margins; keep a thin border. Frames of
+  // a 360° turn keep theirs, or the part would jump from frame to frame.
+  const cropped = crop
+    ? original.clone().autocrop({ tolerance: 0.02, leaveBorder: 12 })
+    : original
   const image = Math.max(cropped.width, cropped.height) >= minSide ? cropped : original
 
   if (image.width > maxSide || image.height > maxSide) {
@@ -125,11 +128,11 @@ async function loadSharp(): Promise<SharpFactory | null> {
   return sharpFactory
 }
 
-function shrink(body: Buffer): Promise<Buffer> {
+function shrink(body: Buffer, crop = true): Promise<Buffer> {
   return new Promise((resolve, reject) => {
     const worker = new Worker(RESIZE_WORKER, {
       eval: true,
-      workerData: { body, maxSide: MAX_SIDE, minSide: MIN_CROPPED_SIDE },
+      workerData: { body, maxSide: MAX_SIDE, minSide: MIN_CROPPED_SIDE, crop },
       resourceLimits: { maxOldGenerationSizeMb: 256 },
     })
     const timer = setTimeout(() => {
@@ -155,7 +158,10 @@ function shrink(body: Buffer): Promise<Buffer> {
 }
 
 /** The photo, shrunk to MAX_SIDE and re-encoded as JPEG. Also used for catalogue photos. */
-export async function download(address: string): Promise<Buffer> {
+export async function download(
+  address: string,
+  { crop = true }: { crop?: boolean } = {}
+): Promise<Buffer> {
   const url = new URL(address)
 
   if (!["https:", "http:"].includes(url.protocol) || isPrivateHost(url.hostname)) {
@@ -206,7 +212,7 @@ export async function download(address: string): Promise<Buffer> {
       .toBuffer()
   }
 
-  return shrink(resizeBody)
+  return shrink(resizeBody, crop)
 }
 
 export type FetchProductPhotosInput = { product_id: string }

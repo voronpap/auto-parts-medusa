@@ -9,6 +9,7 @@ import {
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import PartsRequestForm from "@modules/parts-request/request-form"
 import PdpGallery from "@modules/products/components/pdp-gallery"
+import PartMedia from "@modules/catalog/components/part-media"
 
 type Props = {
   params: Promise<{ countryCode: string; brand: string; number: string }>
@@ -219,6 +220,8 @@ export default async function CatalogPartPage(props: Props) {
             </ul>
           </div>
         </section>
+
+        <PartMedia media={part} title={heading} />
 
         {crossCount > 0 && (
           <section className="ap-section ap-card" id="crosses">

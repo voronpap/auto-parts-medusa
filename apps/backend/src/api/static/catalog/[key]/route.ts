@@ -1,8 +1,9 @@
 import { MedusaRequest, MedusaResponse } from "@medusajs/framework/http"
 import { ContainerRegistrationKeys } from "@medusajs/framework/utils"
-import { stat } from "node:fs/promises"
 import {
   catalogImageFile,
+  copied,
+  keepsMargins,
   queueCatalogImage,
   verifyCatalogImageKey,
 } from "../../../../lib/catalog-images"
@@ -21,12 +22,8 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
   }
 
   const file = catalogImageFile(id)
-  const copied = await stat(file).then(
-    (info) => info.isFile() && info.size > 0,
-    () => false
-  )
 
-  if (copied) {
+  if (await copied(id)) {
     res.setHeader("Cache-Control", "public, max-age=31536000, immutable")
     res.type("image/jpeg")
 
@@ -35,7 +32,10 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
 
   const db = parsersDb()
   const [image] = db
-    ? ((await db("part_image").select("url").where("id", id)) as { url: string }[])
+    ? ((await db("part_image").select("url", "kind").where("id", id)) as {
+        url: string
+        kind: string | null
+      }[])
     : []
 
   if (!image?.url || !/^https?:\/\//.test(image.url)) {
@@ -44,7 +44,9 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
 
   const logger = req.scope.resolve(ContainerRegistrationKeys.LOGGER)
 
-  queueCatalogImage(id, image.url, (message) => logger.warn(message))
+  void queueCatalogImage(id, image.url, (message) => logger.warn(message), {
+    crop: !keepsMargins(image.kind),
+  })
 
   // Not cached, so the next view asks again and gets the copy.
   res.setHeader("Cache-Control", "no-store")

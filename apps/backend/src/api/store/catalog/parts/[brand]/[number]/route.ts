@@ -1,6 +1,6 @@
 import { MedusaRequest, MedusaResponse } from "@medusajs/framework/http"
-import { MedusaError } from "@medusajs/framework/utils"
-import { catalogImagePath } from "../../../../../../lib/catalog-images"
+import { ContainerRegistrationKeys, MedusaError } from "@medusajs/framework/utils"
+import { isVideoLink, partMedia } from "../../../../../../lib/catalog-media"
 import { shopProductsByNumber } from "../../../../../../lib/catalog-shop"
 import { partTypes } from "../../../../../../lib/tecdoc-groups"
 import {
@@ -10,7 +10,6 @@ import {
   SUBSTITUTE_KINDS,
 } from "../../../../../../lib/parsers-db"
 
-const MAX_IMAGES = 12
 const MAX_CROSSES = 600
 const MAX_APPLICATIONS = 5000
 const MAX_ENGINES = 14
@@ -109,7 +108,7 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
     throw new MedusaError(MedusaError.Types.NOT_FOUND, "Part not found")
   }
 
-  const [stated, attributes, images, applications] = ids.length
+  const [stated, attributes, applications] = ids.length
     ? await Promise.all([
         db("part_cross")
           .select("kind", "brand", "number", "number_norm")
@@ -123,11 +122,6 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
           .whereIn("part_id", ids)
           .orderBy(["part_id", "position"])
           .limit(400) as Promise<{ grp: string | null; name: string; value: string }[]>,
-        db("part_image")
-          .select("id", "url", "kind")
-          .whereIn("part_id", ids)
-          .orderByRaw("(kind = 'photo') desc, position")
-          .limit(60) as Promise<{ id: string; url: string; kind: string }[]>,
         db("part_application")
           .select(
             "make",
@@ -156,7 +150,7 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
           }[]
         >,
       ])
-    : [[], [], [], []]
+    : [[], [], []]
 
   // Crosses split the way a buyer reads them.
   const oe = new Map<string, CrossOut>()
@@ -214,12 +208,14 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
   }
 
   const allCrosses = [...oe.values(), ...analogs.values(), ...newer.values(), ...older.values()]
-  const [products, types] = await Promise.all([
+  const logger = req.scope.resolve(ContainerRegistrationKeys.LOGGER)
+  const [products, types, media] = await Promise.all([
     shopProductsByNumber(req, [
       norm,
       ...new Set(allCrosses.map((cross) => cross.number_norm)),
     ]),
     partTypes(db, ids),
+    partMedia(db, ids, (message) => logger.warn(message)),
   ])
 
   for (const [id, cross] of [
@@ -250,19 +246,14 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
     seen.add(id)
 
     if (attribute.grp === "Документи") {
-      if (/^https?:\/\//.test(attribute.value)) {
+      // Videos are shown as players, not listed as documents.
+      if (/^https?:\/\//.test(attribute.value) && !isVideoLink(attribute.value)) {
         documents.push({ name: attribute.name, url: attribute.value })
       }
     } else {
       characteristics.push({ name: attribute.name, value: attribute.value })
     }
   }
-
-  // The same photo is often listed by several sources; it is shown once.
-  const byUrl = new Map(images.map((image) => [image.url, image.id] as const))
-  const imageUrls = [...new Set(images.map((image) => image.url))]
-    .slice(0, MAX_IMAGES)
-    .map((url) => catalogImagePath(byUrl.get(url)!))
 
   const makes = new Map<string, Map<string, ModelFitment & { all: Set<string>; open: boolean }>>()
 
@@ -350,7 +341,10 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
         status: part.status,
         fetched_at: part.fetched_at,
       })),
-      images: imageUrls,
+      images: media.images,
+      spin: media.spin,
+      viewers: media.viewers,
+      videos: media.videos,
       characteristics,
       documents,
       oe: [...oe.values()].sort(byShopFirst),

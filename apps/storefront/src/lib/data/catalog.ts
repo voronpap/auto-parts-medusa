@@ -44,6 +44,11 @@ export type CatalogPart = {
   discontinued: boolean
   sources: { source: string; url: string | null; status: string; fetched_at: string }[]
   images: string[]
+  /** Frames of a 360° turn, in order. */
+  spin: string[]
+  /** Makers' own 3D viewers. */
+  viewers: string[]
+  videos: { title: string; youtube_id: string }[]
   characteristics: { name: string; value: string }[]
   documents: { name: string; url: string }[]
   oe: CatalogCross[]

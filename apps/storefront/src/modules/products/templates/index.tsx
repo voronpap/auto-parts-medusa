@@ -6,6 +6,8 @@ import {
   requestProductPhotos,
   retrievePartsCatalog,
 } from "@lib/data/parts-catalog"
+import { retrieveCatalogPart } from "@lib/data/catalog"
+import PartMedia from "@modules/catalog/components/part-media"
 import FitBadge from "@modules/garage/fit-badge"
 import { HttpTypes } from "@medusajs/types"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
@@ -103,11 +105,15 @@ const ProductTemplate = async ({
 
   const [catalog, garage] = await Promise.all([retrievePartsCatalog(product.id), getGarageCar()])
   const number = catalog.numbers[0]
-  const photos = Array.from(
+  // The makers' catalogue usually has more photos, a 360° turn and videos of
+  // the same number; its photos are copied to the shop as they are opened.
+  const media = number ? await retrieveCatalogPart(number.brand, number.number) : null
+  const own = Array.from(
     new Set([...images.map((image) => image.url), product.thumbnail].filter(Boolean))
   ) as string[]
+  const photos = media && media.images.length > own.length ? media.images : own
 
-  if (!photos.length) {
+  if (!own.length) {
     // After the page is sent: the shop may copy the photos for next time.
     after(() => requestProductPhotos(product.id!))
   }
@@ -203,6 +209,8 @@ const ProductTemplate = async ({
             </ul>
           </div>
         </section>
+
+        {media && <PartMedia media={media} title={product.title} />}
 
         {catalog.crosses.length > 0 && (
           <section className="ap-section ap-card" id="crosses">

@@ -1,26 +1,23 @@
+# systemd user unit: install to ~/.config/systemd/user/medusa.service
+# (needs `loginctl enable-linger vrn` once, so it starts at boot).
+# The database is remote and Redis is a system service, so neither is a
+# dependency here; Medusa retries its connections on start.
 [Unit]
 Description=Medusa backend and admin
-After=network-online.target postgresql.service redis-server.service
-Wants=network-online.target
-Requires=postgresql.service redis-server.service
+After=network-online.target
 
 [Service]
 Type=simple
-User=vrn
-Group=vrn
-WorkingDirectory=/home/vrn/medusa-runtime
+WorkingDirectory=%h/medusa-runtime
 Environment=NODE_ENV=production
-Environment=PATH=/home/vrn/.nvm/versions/node/v22.22.3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-EnvironmentFile=/home/vrn/medusa-store/apps/backend/.env
+Environment=PATH=/home/vrn/.nvm/versions/node/v22.22.3/bin:/usr/local/bin:/usr/bin:/bin
+EnvironmentFile=%h/medusa-store/apps/backend/.env
 ExecStart=/home/vrn/.nvm/versions/node/v22.22.3/bin/pnpm start
 Restart=on-failure
 RestartSec=5
 TimeoutStopSec=30
 KillSignal=SIGINT
-NoNewPrivileges=true
-PrivateTmp=true
-ProtectSystem=full
 UMask=0027
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=default.target

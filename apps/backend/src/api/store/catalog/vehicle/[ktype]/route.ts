@@ -52,6 +52,22 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
     throw new MedusaError(MedusaError.Types.NOT_FOUND, "Vehicle not found")
   }
 
+  // Sources mostly name the category in TecDoc's English; the TecDoc group of
+  // the same name gives it in Ukrainian. Others keep the source's wording.
+  const labels = async (names: string[]) => {
+    const rows: { key: string; name_uk: string }[] = names.length
+      ? await db("tecdoc_group")
+          .select(db.raw("distinct on (lower(name)) lower(name) as key"), "name_uk")
+          .where("type", "P")
+          .whereNotNull("name_uk")
+          .whereRaw("lower(name) = any(?)", [names.map((name) => name.toLowerCase())])
+          .orderByRaw("lower(name), parent_id nulls first")
+      : []
+    const byName = new Map(rows.map((row) => [row.key, row.name_uk]))
+
+    return (name: string) => byName.get(name.toLowerCase()) ?? name
+  }
+
   const category = db.raw("coalesce(nullif(trim(p.category), ''), ?)", [OTHER])
   const fitting = () =>
     db("part_application as a")
@@ -66,10 +82,13 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
       .groupByRaw("1")
       .orderByRaw("2 desc, 1")
 
+    const label = await labels(groups.map((group) => group.category))
+
     return res.status(200).json({
       vehicle,
       groups: groups.map((group) => ({
         category: group.category,
+        label: label(group.category),
         parts: Number(group.parts),
       })),
     })
@@ -93,13 +112,15 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
     .limit(PAGE_SIZE + 1)
 
   const page = rows.slice(0, PAGE_SIZE)
-  const products = await shopProductsByNumber(req, [
-    ...new Set(page.map((row) => row.number_norm)),
+  const [products, label] = await Promise.all([
+    shopProductsByNumber(req, [...new Set(page.map((row) => row.number_norm))]),
+    labels([parsed.data.category]),
   ])
 
   return res.status(200).json({
     vehicle,
     category: parsed.data.category,
+    label: label(parsed.data.category),
     offset: parsed.data.offset,
     more: rows.length > PAGE_SIZE,
     parts: page.map((row) => ({

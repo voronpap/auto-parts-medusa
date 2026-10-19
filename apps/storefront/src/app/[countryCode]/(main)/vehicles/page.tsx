@@ -117,12 +117,12 @@ export default async function VehiclesPage(props: {
       )
 
       if (page && search.category) {
-        crumbs.push({ label: search.category })
+        crumbs.push({ label: page.label })
         body = (
           <>
             <div className="ap-section-head">
               <h1 className="ap-pdp-title">
-                {search.category}: {vehicle.make} {vehicle.model} {vehicle.description}
+                {page.label}: {vehicle.make} {vehicle.model} {vehicle.description}
               </h1>
               {facts}
             </div>
@@ -217,8 +217,7 @@ export default async function VehiclesPage(props: {
               </h1>
               {facts}
               <p>
-                Деталей у каталогах виробників: {total}. Групи названо так, як
-                їх називає джерело.
+                Деталей у каталогах виробників: {total}.
               </p>
             </div>
             {groups!.groups.length ? (
@@ -228,7 +227,7 @@ export default async function VehiclesPage(props: {
                     key={group.category}
                     href={href({ ktype: String(ktype), category: group.category })}
                   >
-                    <strong>{group.category}</strong>
+                    <strong>{group.label}</strong>
                     <small>деталей: {group.parts}</small>
                   </LocalizedClientLink>
                 ))}

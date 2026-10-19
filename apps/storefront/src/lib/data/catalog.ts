@@ -163,10 +163,10 @@ export const retrieveTecdocVehicleGroups = async (
   ktype: number
 ): Promise<{
   vehicle: TecdocVehicle
-  groups: { category: string; parts: number }[]
+  groups: { category: string; label: string; parts: number }[]
 } | null> =>
   sdk.client
-    .fetch<{ vehicle: TecdocVehicle; groups: { category: string; parts: number }[] }>(
+    .fetch<{ vehicle: TecdocVehicle; groups: { category: string; label: string; parts: number }[] }>(
       `/store/catalog/vehicle/${ktype}`,
       { method: "GET", next: CACHE }
     )
@@ -178,11 +178,12 @@ export const listTecdocVehicleParts = async (
   offset: number
 ): Promise<{
   vehicle: TecdocVehicle
+  label: string
   parts: VehiclePart[]
   more: boolean
 } | null> =>
   sdk.client
-    .fetch<{ vehicle: TecdocVehicle; parts: VehiclePart[]; more: boolean }>(
+    .fetch<{ vehicle: TecdocVehicle; label: string; parts: VehiclePart[]; more: boolean }>(
       `/store/catalog/vehicle/${ktype}`,
       { method: "GET", query: { category, offset }, next: CACHE }
     )

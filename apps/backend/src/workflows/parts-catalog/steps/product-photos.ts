@@ -4,6 +4,7 @@ import { Worker } from "worker_threads"
 import { PARTS_CATALOG_MODULE } from "../../../modules/parts-catalog"
 import PartsCatalogModuleService from "../../../modules/parts-catalog/service"
 import { isAllowed, parseRobots } from "../../../modules/parts-catalog/utils/robots"
+import { brandKey, numberNorm, parsersDb } from "../../../lib/parsers-db"
 
 export const USER_AGENT = "AutoPartsPpUaBot/1.0 (+https://auto-parts.pp.ua)"
 // A product gets at most this many photos copied, on its first opening.
@@ -225,6 +226,54 @@ export type FetchedPhotos = {
   outcomes: PhotoOutcome[]
 }
 
+// Outcome ids of photos found in the parsers' catalogue, not the shop's.
+const PARSERS_IMAGE = "parsers:"
+// Parsers' photos that could not be copied wait a day before the next try.
+const parsersFailed = new Map<string, number>()
+
+/**
+ * Photos the parsers' catalogue has for these part numbers, same brand and
+ * number, actual photos before drawings.
+ */
+async function parsersPhotos(
+  numbers: { display_number: string; brand?: { name: string } | null }[]
+): Promise<{ id: string; url: string; name: string }[]> {
+  const db = parsersDb()
+  const wanted = new Map(
+    numbers
+      .filter((number) => number.brand?.name)
+      .map((number) => [
+        `${brandKey(number.brand!.name)}|${numberNorm(number.display_number)}`,
+        `${number.brand!.name} ${number.display_number}`,
+      ])
+  )
+
+  if (!db || !wanted.size) {
+    return []
+  }
+
+  const rows: { id: string; url: string; brand: string; number_norm: string }[] = await db(
+    "part as p"
+  )
+    .join("part_image as i", "i.part_id", "p.id")
+    .select("i.id", "i.url", "p.brand", "p.number_norm")
+    .whereIn(
+      "p.number_norm",
+      [...wanted.keys()].map((key) => key.split("|")[1])
+    )
+    .whereNot("p.status", "absent")
+    .orderByRaw("(i.kind = 'photo') desc, i.position")
+    .limit(40)
+
+  return rows
+    .filter((row) => wanted.has(`${brandKey(row.brand)}|${row.number_norm}`))
+    .map((row) => ({
+      id: String(row.id),
+      url: row.url,
+      name: wanted.get(`${brandKey(row.brand)}|${row.number_norm}`)!,
+    }))
+}
+
 const slug = (value: string) =>
   value
     .toLowerCase()
@@ -334,6 +383,42 @@ export const fetchProductPhotosStep = createStep(
       }
     }
 
+    // The shop catalogue had no photo to copy (or none is due for a retry):
+    // the parsers' catalogue usually has the same number with photos.
+    if (!result.files.length && !candidates.length) {
+      for (const photo of await parsersPhotos([...numbers.values()])) {
+        if (result.files.length >= MAX_PHOTOS_PER_PRODUCT) {
+          break
+        }
+        if (seen.has(photo.url) || Date.now() - (parsersFailed.get(photo.url) ?? 0) < RETRY_AFTER_MS) {
+          continue
+        }
+        seen.add(photo.url)
+
+        try {
+          const content = await download(photo.url)
+
+          result.files.push({
+            filename: `${slug(photo.name)}-${result.files.length + 1}.jpg`,
+            mimeType: "image/jpeg",
+            content: content.toString("base64"),
+            access: "public",
+          })
+          // No shop catalogue row to mark; the id only pairs file and outcome.
+          result.stored_ids.push(`${PARSERS_IMAGE}${photo.id}`)
+          result.outcomes.push({
+            id: `${PARSERS_IMAGE}${photo.id}`,
+            attempts: 1,
+            status: "stored",
+            error: null,
+          })
+        } catch (error) {
+          parsersFailed.set(photo.url, Date.now())
+          logger.info(`Product photo ${photo.url}: ${(error as Error).message?.slice(0, 200)}`)
+        }
+      }
+    }
+
     return new StepResponse(result)
   }
 )
@@ -351,6 +436,11 @@ export const markPartImagesStep = createStep(
     const fetchedAt = new Date()
 
     for (const outcome of outcomes) {
+      // Photos taken from the parsers' catalogue have no row here.
+      if (outcome.id.startsWith(PARSERS_IMAGE)) {
+        continue
+      }
+
       const fileUrl = file_urls[outcome.id] ?? null
 
       await catalog.updatePartImages({

@@ -38,8 +38,8 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   const name = `${part.brand} ${part.number}`
 
   return {
-    title: part.title ? `${name} — ${part.title}` : name,
-    description: `${name}${part.title ? `, ${part.title}` : ""}: аналоги, оригінальні номери, застосовність. Замовлення під поставку.`,
+    title: part.type || part.title ? `${name} — ${part.type ?? part.title}` : name,
+    description: `${name}${part.type || part.title ? `, ${part.type ?? part.title}` : ""}: аналоги, оригінальні номери, застосовність. Замовлення під поставку.`,
     alternates: { canonical: `/ua${catalogPartHref(part.brand, part.number_norm)}` },
   }
 }
@@ -120,6 +120,7 @@ export default async function CatalogPartPage(props: Props) {
   }
 
   const name = `${part.brand} ${part.number}`
+  const heading = part.type ?? part.title ?? name
   const crossCount =
     part.oe.length + part.analogs.length + part.newer.length + part.older.length
   const modelCount = part.fitment.reduce((sum, make) => sum + make.models.length, 0)
@@ -139,12 +140,12 @@ export default async function CatalogPartPage(props: Props) {
         </nav>
 
         <section className="ap-pdp ap-card">
-          <PdpGallery photos={part.images} title={part.title ?? name} />
+          <PdpGallery photos={part.images} title={heading} />
           <div className="ap-pdp-info">
             <div className="ap-eyebrow">
               {part.brand} · {part.number}
             </div>
-            <h1 className="ap-pdp-title">{part.title ?? name}</h1>
+            <h1 className="ap-pdp-title">{heading}</h1>
             {part.description && <p className="ap-lead">{part.description}</p>}
             <dl className="ap-keyfacts">
               <div>
@@ -340,7 +341,7 @@ export default async function CatalogPartPage(props: Props) {
               </p>
             </div>
             <PartsRequestForm
-              message={`Замовлення: ${name}${part.title ? ` — ${part.title}` : ""}`}
+              message={`Замовлення: ${name} — ${heading}`}
               submitLabel="Замовити"
             />
           </section>

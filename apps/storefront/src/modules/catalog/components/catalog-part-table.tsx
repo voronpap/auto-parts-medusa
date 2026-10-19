@@ -43,12 +43,12 @@ export default function CatalogPartTable({ parts }: { parts: CatalogSearchPart[]
               <td>
                 <LocalizedClientLink className="ap-part" href={href}>
                   <span className="ap-part-img">
-                    <PartImage src={part.image} title={part.title ?? name} size={48} />
+                    <PartImage src={part.image} title={part.type ?? part.title ?? name} size={48} />
                   </span>
                   <span>
                     <strong>{name}</strong>
                     <small>
-                      {part.title ?? part.category ?? ""}
+                      {part.type ?? part.title ?? part.category ?? ""}
                       {part.discontinued ? " · знято з виробництва" : ""}
                     </small>
                   </span>

@@ -15,6 +15,8 @@ export type CatalogSearchPart = {
   number: string
   number_norm: string
   title: string | null
+  /** The kind of part in Ukrainian, from TecDoc ("Гальмівний диск"). */
+  type: string | null
   category: string | null
   discontinued: boolean
   image: string | null
@@ -36,6 +38,7 @@ export type CatalogPart = {
   number: string
   number_norm: string
   title: string | null
+  type: string | null
   description: string | null
   category: string | null
   discontinued: boolean
@@ -94,6 +97,7 @@ export type VehiclePart = {
   number: string
   number_norm: string
   title: string | null
+  type: string | null
   conditions: string | null
   product: ShopLink
 }
@@ -159,32 +163,49 @@ export const retrieveTecdocModel = async (
     }>(`/store/catalog/models/${id}`, { method: "GET", next: CACHE })
     .catch(() => null)
 
+export type VehicleSection = {
+  id: number
+  name: string
+  parts: number
+  groups: { id: number; name: string; parts: number }[]
+}
+
+export type VehicleGroups = {
+  vehicle: TecdocVehicle
+  total: number
+  sections: VehicleSection[]
+  other: number
+}
+
 export const retrieveTecdocVehicleGroups = async (
   ktype: number
-): Promise<{
-  vehicle: TecdocVehicle
-  groups: { category: string; label: string; parts: number }[]
-} | null> =>
+): Promise<VehicleGroups | null> =>
   sdk.client
-    .fetch<{ vehicle: TecdocVehicle; groups: { category: string; label: string; parts: number }[] }>(
-      `/store/catalog/vehicle/${ktype}`,
-      { method: "GET", next: CACHE }
-    )
+    .fetch<VehicleGroups>(`/store/catalog/vehicle/${ktype}`, {
+      method: "GET",
+      next: CACHE,
+    })
     .catch(() => null)
 
-export const listTecdocVehicleParts = async (
-  ktype: number,
-  category: string,
-  offset: number
-): Promise<{
+export type VehicleGroupParts = {
   vehicle: TecdocVehicle
+  group: number
   label: string
+  section: { id: number; name: string } | null
   parts: VehiclePart[]
   more: boolean
-} | null> =>
+}
+
+/** Parts of one TecDoc group or section for a vehicle; group 0 is "other". */
+export const listTecdocVehicleParts = async (
+  ktype: number,
+  group: number,
+  offset: number
+): Promise<VehicleGroupParts | null> =>
   sdk.client
-    .fetch<{ vehicle: TecdocVehicle; label: string; parts: VehiclePart[]; more: boolean }>(
-      `/store/catalog/vehicle/${ktype}`,
-      { method: "GET", query: { category, offset }, next: CACHE }
-    )
+    .fetch<VehicleGroupParts>(`/store/catalog/vehicle/${ktype}`, {
+      method: "GET",
+      query: { group, offset },
+      next: CACHE,
+    })
     .catch(() => null)

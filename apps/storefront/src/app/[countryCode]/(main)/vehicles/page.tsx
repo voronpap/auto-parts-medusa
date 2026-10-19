@@ -23,7 +23,7 @@ type Search = {
   make?: string
   model?: string
   ktype?: string
-  category?: string
+  group?: string
   offset?: string
 }
 
@@ -68,7 +68,7 @@ const href = (params: Search) => {
 
 /**
  * Parts by vehicle over the TecDoc tree the parsers collect: make, model,
- * version (KType), then the categories and parts listed for that version.
+ * version (KType), then the TecDoc sections, groups and parts for it.
  * Each step is a plain address, so any of them can be bookmarked.
  */
 export default async function VehiclesPage(props: {
@@ -86,10 +86,11 @@ export default async function VehiclesPage(props: {
   let body: ReactNode
 
   if (ktype) {
-    const groups = search.category ? null : await retrieveTecdocVehicleGroups(ktype)
-    const page = search.category
-      ? await listTecdocVehicleParts(ktype, search.category, offset)
-      : null
+    // A TecDoc section or group; 0 is "other" (parts without a group yet).
+    const groupId = /^d+$/.test(search.group ?? "") ? Number(search.group) : null
+    const groups = groupId === null ? await retrieveTecdocVehicleGroups(ktype) : null
+    const page =
+      groupId === null ? null : await listTecdocVehicleParts(ktype, groupId, offset)
     const vehicle = groups?.vehicle ?? page?.vehicle
 
     if (!vehicle) {
@@ -100,7 +101,7 @@ export default async function VehiclesPage(props: {
         { label: vehicle.model ?? "", href: href({ model: String(vehicle.model_id) }) },
         {
           label: vehicle.description,
-          href: search.category ? href({ ktype: String(ktype) }) : undefined,
+          href: groupId === null ? undefined : href({ ktype: String(ktype) }),
         }
       )
 
@@ -116,7 +117,13 @@ export default async function VehiclesPage(props: {
         </p>
       )
 
-      if (page && search.category) {
+      if (page && groupId !== null) {
+        if (page.section) {
+          crumbs.push({
+            label: page.section.name,
+            href: href({ ktype: String(ktype), group: String(page.section.id) }),
+          })
+        }
         crumbs.push({ label: page.label })
         body = (
           <>
@@ -151,7 +158,7 @@ export default async function VehiclesPage(props: {
                               <strong>
                                 {part.brand} {part.number}
                               </strong>
-                              <small>{part.title ?? ""}</small>
+                              <small>{part.type ?? part.title ?? ""}</small>
                             </span>
                           </LocalizedClientLink>
                         </td>
@@ -184,7 +191,7 @@ export default async function VehiclesPage(props: {
                   <LocalizedClientLink
                     href={href({
                       ktype: String(ktype),
-                      category: search.category,
+                      group: String(groupId),
                       offset: String(Math.max(0, offset - 60)),
                     })}
                   >
@@ -195,7 +202,7 @@ export default async function VehiclesPage(props: {
                   <LocalizedClientLink
                     href={href({
                       ktype: String(ktype),
-                      category: search.category,
+                      group: String(groupId),
                       offset: String(offset + 60),
                     })}
                   >
@@ -207,7 +214,7 @@ export default async function VehiclesPage(props: {
           </>
         )
       } else {
-        const total = groups!.groups.reduce((sum, group) => sum + group.parts, 0)
+        const { total, sections, other } = groups!
 
         body = (
           <>
@@ -216,21 +223,43 @@ export default async function VehiclesPage(props: {
                 {vehicle.make} {vehicle.model} {vehicle.description}
               </h1>
               {facts}
-              <p>
-                Деталей у каталогах виробників: {total}.
-              </p>
+              <p>Деталей у каталогах виробників: {total}.</p>
             </div>
-            {groups!.groups.length ? (
-              <div className="ap-tree">
-                {groups!.groups.map((group) => (
-                  <LocalizedClientLink
-                    key={group.category}
-                    href={href({ ktype: String(ktype), category: group.category })}
-                  >
-                    <strong>{group.label}</strong>
-                    <small>деталей: {group.parts}</small>
-                  </LocalizedClientLink>
+            {total ? (
+              <div className="ap-makes">
+                {sections.map((section, index) => (
+                  <details key={section.id} open={index < 3}>
+                    <summary>
+                      <strong>{section.name}</strong>
+                      <span>деталей: {section.parts}</span>
+                    </summary>
+                    <div className="ap-tree">
+                      <LocalizedClientLink
+                        href={href({ ktype: String(ktype), group: String(section.id) })}
+                      >
+                        <strong>Усі деталі розділу</strong>
+                        <small>деталей: {section.parts}</small>
+                      </LocalizedClientLink>
+                      {section.groups.map((group) => (
+                        <LocalizedClientLink
+                          key={group.id}
+                          href={href({ ktype: String(ktype), group: String(group.id) })}
+                        >
+                          <strong>{group.name}</strong>
+                          <small>деталей: {group.parts}</small>
+                        </LocalizedClientLink>
+                      ))}
+                    </div>
+                  </details>
                 ))}
+                {other > 0 && (
+                  <div className="ap-tree">
+                    <LocalizedClientLink href={href({ ktype: String(ktype), group: "0" })}>
+                      <strong>Інше</strong>
+                      <small>ще без групи: {other}</small>
+                    </LocalizedClientLink>
+                  </div>
+                )}
               </div>
             ) : (
               <div className="ap-empty">

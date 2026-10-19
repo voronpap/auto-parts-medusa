@@ -1,5 +1,6 @@
 import { MedusaRequest, MedusaResponse } from "@medusajs/framework/http"
 import { MedusaError } from "@medusajs/framework/utils"
+import { catalogImagePath } from "../../../../../../lib/catalog-images"
 import { shopProductsByNumber } from "../../../../../../lib/catalog-shop"
 import {
   brandKey,
@@ -122,10 +123,10 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
           .orderBy(["part_id", "position"])
           .limit(400) as Promise<{ grp: string | null; name: string; value: string }[]>,
         db("part_image")
-          .select("url", "kind")
+          .select("id", "url", "kind")
           .whereIn("part_id", ids)
           .orderByRaw("(kind = 'photo') desc, position")
-          .limit(60) as Promise<{ url: string; kind: string }[]>,
+          .limit(60) as Promise<{ id: string; url: string; kind: string }[]>,
         db("part_application")
           .select(
             "make",
@@ -253,7 +254,11 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
     }
   }
 
-  const imageUrls = [...new Set(images.map((image) => image.url))].slice(0, MAX_IMAGES)
+  // The same photo is often listed by several sources; it is shown once.
+  const byUrl = new Map(images.map((image) => [image.url, image.id] as const))
+  const imageUrls = [...new Set(images.map((image) => image.url))]
+    .slice(0, MAX_IMAGES)
+    .map((url) => catalogImagePath(byUrl.get(url)!))
 
   const makes = new Map<string, Map<string, ModelFitment & { all: Set<string>; open: boolean }>>()
 

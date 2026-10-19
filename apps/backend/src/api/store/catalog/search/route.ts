@@ -1,6 +1,7 @@
 import { MedusaRequest, MedusaResponse } from "@medusajs/framework/http"
 import { MedusaError } from "@medusajs/framework/utils"
 import { z } from "@medusajs/framework/zod"
+import { catalogImagePath } from "../../../../lib/catalog-images"
 import { shopProductsByNumber } from "../../../../lib/catalog-shop"
 import {
   brandKey,
@@ -231,18 +232,20 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
     partIds.length
       ? (db("part_image")
           .distinctOn("part_id")
-          .select("part_id", "url")
+          .select("part_id", "id")
           .whereIn("part_id", partIds)
           .orderBy("part_id")
           .orderByRaw("(kind = 'photo') desc, position") as Promise<
-          { part_id: string; url: string }[]
+          { part_id: string; id: string }[]
         >)
       : Promise.resolve([]),
     shopProductsByNumber(req, [
       ...new Set(list.map((entry) => entry.number_norm)),
     ]),
   ])
-  const imageByPart = new Map(images.map((row) => [String(row.part_id), row.url]))
+  const imageByPart = new Map(
+    images.map((row) => [String(row.part_id), catalogImagePath(row.id)])
+  )
 
   return res.status(200).json({
     query: key,

@@ -77,7 +77,7 @@ const isPrivateHost = (host: string) =>
   /^\d+\.\d+\.\d+\.\d+$/.test(host) ||
   host.startsWith("[")
 
-class Skip extends Error {}
+export class Skip extends Error {}
 
 // Decoding a large JPEG in plain JavaScript takes seconds on this server, so
 // it runs in a worker thread and the API keeps answering meanwhile.
@@ -153,8 +153,8 @@ function shrink(body: Buffer): Promise<Buffer> {
   })
 }
 
-/** The photo, shrunk to MAX_SIDE and re-encoded as JPEG. */
-async function download(address: string): Promise<Buffer> {
+/** The photo, shrunk to MAX_SIDE and re-encoded as JPEG. Also used for catalogue photos. */
+export async function download(address: string): Promise<Buffer> {
   const url = new URL(address)
 
   if (!["https:", "http:"].includes(url.protocol) || isPrivateHost(url.hostname)) {

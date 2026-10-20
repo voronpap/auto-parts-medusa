@@ -320,12 +320,14 @@ export default async function TecdocBrowser({
       model.year_from && lastYear >= model.year_from
         ? Array.from({ length: lastYear - model.year_from + 1 }, (_, index) => lastYear - index)
         : []
-    const engines = versions.vehicles.filter(
-      (vehicle) =>
-        !year ||
-        ((vehicle.year_from == null || vehicle.year_from <= year) &&
-          (vehicle.year_to == null || vehicle.year_to >= year))
-    )
+    const builtIn = (vehicle: TecdocVehicle) =>
+      !year ||
+      ((vehicle.year_from == null || vehicle.year_from <= year) &&
+        (vehicle.year_to == null || vehicle.year_to >= year))
+    // The year's engines first; the others stay listed, marked, so none
+    // looks missing.
+    const inYear = versions.vehicles.filter(builtIn)
+    const engines = [...inYear, ...versions.vehicles.filter((vehicle) => !builtIn(vehicle))]
     const car: GarageCar = {
       make_id: `${TECDOC_PREFIX}${model.make_id}`,
       make: model.make,
@@ -386,7 +388,13 @@ export default async function TecdocBrowser({
           )}
           {engines.length > 0 && (
             <details className="ap-engines-pick">
-              <summary>Двигуни ({engines.length})</summary>
+              <summary>
+                Двигуни (
+                {year && inYear.length < engines.length
+                  ? `${inYear.length} для ${year} року, усього ${engines.length}`
+                  : engines.length}
+                )
+              </summary>
               <table className="ap-table ap-fit">
                 <thead>
                   <tr>
@@ -404,7 +412,12 @@ export default async function TecdocBrowser({
                           <strong>{vehicle.description}</strong>
                         </LocalizedClientLink>
                         <small>
-                          {[vehicle.body, vehicle.fuel, vehicle.capacity_ccm ? `${vehicle.capacity_ccm} см³` : null]
+                          {[
+                            vehicle.body,
+                            vehicle.fuel,
+                            vehicle.capacity_ccm ? `${vehicle.capacity_ccm} см³` : null,
+                            builtIn(vehicle) ? null : "інший рік випуску",
+                          ]
                             .filter(Boolean)
                             .join(" · ")}
                         </small>

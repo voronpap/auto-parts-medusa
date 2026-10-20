@@ -70,13 +70,24 @@ export default function VehiclePicker({
       ? Array.from({ length: lastYear - model.year_from + 1 }, (_, index) => lastYear - index)
       : []
   // Engines built in the chosen year, or all of the model's.
-  const engines = year
-    ? vehicles?.filter(
-        (item) =>
-          (item.year_from == null || item.year_from <= Number(year)) &&
-          (item.year_to == null || item.year_to >= Number(year))
-      )
-    : vehicles
+  // Engines built in the chosen year come first; the model's other engines
+  // stay listed below, so none looks missing when the year is off by one.
+  const builtIn = (item: TecdocVehicle) =>
+    !year ||
+    ((item.year_from == null || item.year_from <= Number(year)) &&
+      (item.year_to == null || item.year_to >= Number(year)))
+  const engines = vehicles?.filter(builtIn)
+  const otherEngines = year ? vehicles?.filter((item) => !builtIn(item)) : []
+  const engineLabel = (item: TecdocVehicle) =>
+    [
+      item.description,
+      item.kw_from ? `${Math.round(Number(item.kw_from))} кВт` : null,
+      item.fuel,
+      years(item.year_from, item.year_to),
+      item.engine_codes,
+    ]
+      .filter(Boolean)
+      .join(" · ")
   const filtered = allFilter.trim()
     ? makes.filter((item) =>
         item.name.toLowerCase().includes(allFilter.trim().toLowerCase())
@@ -292,25 +303,36 @@ export default function VehiclePicker({
                 <span>Двигун</span>
                 <select
                   value={ktype}
-                  disabled={!engines?.length}
+                  disabled={!vehicles?.length}
                   onChange={(event) => setKtype(event.target.value)}
                 >
                   <option value="">
                     {modelId && !vehicles ? "Завантаження…" : "Усі двигуни"}
                   </option>
-                  {engines?.map((item) => (
-                    <option key={item.id} value={item.id}>
-                      {[
-                        item.description,
-                        item.kw_from ? `${Math.round(Number(item.kw_from))} кВт` : null,
-                        item.fuel,
-                        years(item.year_from, item.year_to),
-                        item.engine_codes,
-                      ]
-                        .filter(Boolean)
-                        .join(" · ")}
-                    </option>
-                  ))}
+                  {otherEngines?.length ? (
+                    <>
+                      <optgroup label={`${year} рік`}>
+                        {engines?.map((item) => (
+                          <option key={item.id} value={item.id}>
+                            {engineLabel(item)}
+                          </option>
+                        ))}
+                      </optgroup>
+                      <optgroup label="Інші роки випуску">
+                        {otherEngines.map((item) => (
+                          <option key={item.id} value={item.id}>
+                            {engineLabel(item)}
+                          </option>
+                        ))}
+                      </optgroup>
+                    </>
+                  ) : (
+                    engines?.map((item) => (
+                      <option key={item.id} value={item.id}>
+                        {engineLabel(item)}
+                      </option>
+                    ))
+                  )}
                 </select>
               </label>
               <button

@@ -24,6 +24,9 @@ export type TecdocSearch = {
   ktype?: string
   group?: string
   offset?: string
+  /** Models a VIN or an older link points at, shown first on the make page. */
+  pick?: string
+  vin?: string
 }
 
 const PAGE_SIZE = 60
@@ -224,10 +227,12 @@ export default async function TecdocBrowser({
   search,
   signedIn,
   garage,
+  vin,
 }: {
   search: TecdocSearch
   signedIn: boolean
   garage: GarageCar | null
+  vin: string | null
 }) {
   const makeId = toId(search.make)
   const modelId = toId(search.model)
@@ -237,6 +242,7 @@ export default async function TecdocBrowser({
   const offset = Math.max(0, Number(search.offset) || 0)
   const crumbs: { label: string; href?: string }[] = []
   let body: ReactNode = null
+  let vinNote: string | null = null
 
   if (ktype) {
     const scope = { ktype: String(ktype) }
@@ -255,6 +261,7 @@ export default async function TecdocBrowser({
       model: `${vehicle.model ?? ""} ${vehicle.description}`.trim(),
       names: [vehicle.model ?? ""].filter(Boolean),
       year: null,
+      vin,
     }
 
     crumbs.push(
@@ -326,6 +333,11 @@ export default async function TecdocBrowser({
       model: model.name,
       names: [model.name],
       year: year ?? null,
+      vin,
+    }
+
+    if (vin) {
+      vinNote = `За VIN ${vin}: ${model.make} ${model.name}${year ? `, ${year} рік` : ""}. Двигун і комплектацію VIN не уточнює — оберіть двигун або звірте номер деталі перед замовленням.`
     }
 
     crumbs.push(
@@ -420,21 +432,39 @@ export default async function TecdocBrowser({
       return <div className="ap-empty ap-card">Марку не знайдено.</div>
     }
 
+    const picked = new Set((search.pick ?? "").split(",").map(Number).filter(Boolean))
+    const first = answer.models.filter((model) => picked.has(model.id))
+    const rest = answer.models.filter((model) => !picked.has(model.id))
+    // A year from a VIN stays with the model the shopper picks.
+    const modelHref = (id: number) =>
+      href({ model: String(id), year: year ? String(year) : undefined, vin: vin ?? undefined })
+    const tiles = (models: typeof answer.models) => (
+      <div className="ap-tree">
+        {models.map((model) => (
+          <LocalizedClientLink key={model.id} href={modelHref(model.id)}>
+            <strong>{model.name}</strong>
+            <small>{period(model.year_from, model.month_from, model.year_to, model.month_to)}</small>
+          </LocalizedClientLink>
+        ))}
+      </div>
+    )
+
+    if (vin) {
+      vinNote = `За VIN ${vin}: ${answer.make.name}${year ? `, ${year} рік` : ""}${
+        first.length ? "" : " — модель за VIN не визначено, оберіть її"
+      }.`
+    }
+
     crumbs.push({ label: answer.make.name })
     body = (
       <section className="ap-section ap-card">
         <div className="ap-section-head">
           <h1 className="ap-pdp-title">{answer.make.name}</h1>
-          <p>Оберіть модель.</p>
+          <p>{first.length ? "Найімовірніші моделі — перші." : "Оберіть модель."}</p>
         </div>
-        <div className="ap-tree">
-          {answer.models.map((model) => (
-            <LocalizedClientLink key={model.id} href={href({ model: String(model.id) })}>
-              <strong>{model.name}</strong>
-              <small>{period(model.year_from, model.month_from, model.year_to, model.month_to)}</small>
-            </LocalizedClientLink>
-          ))}
-        </div>
+        {first.length > 0 && tiles(first)}
+        {first.length > 0 && <div className="ap-result-head">Усі моделі</div>}
+        {tiles(first.length ? rest : answer.models)}
       </section>
     )
   }
@@ -456,6 +486,7 @@ export default async function TecdocBrowser({
           </span>
         ))}
       </nav>
+      {vinNote && <div className="ap-vin-note ap-card">{vinNote}</div>}
       {body}
     </>
   )

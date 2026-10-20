@@ -1,14 +1,16 @@
 import { redirect } from "next/navigation"
 
 import { lookupVin } from "@lib/data/parts-catalog"
+import { tecdocCarPath } from "@lib/data/tecdoc-resolve"
 
 const VIN_RE = /^[A-HJ-NPR-Z0-9]{17}$/
 
 /**
  * There is no VIN page: a VIN typed in the vehicle picker or the header
  * search is read here and the shopper lands on the car it names in "Підбір
- * за авто" — the model when the VIN tells it, else the make, else the picker
- * with a note. Old links to /vin keep working.
+ * за авто", in the TecDoc tree — the model when the VIN tells it, else the
+ * make (with the likely models first), else the picker with a note. Old
+ * links to /vin keep working.
  */
 export default async function VinPage(props: {
   params: Promise<{ countryCode: string }>
@@ -30,23 +32,19 @@ export default async function VinPage(props: {
   const result = await lookupVin(vin)
   const vehicle = result?.vehicle
 
-  if (!result || !vehicle?.make_id) {
+  if (!result || !vehicle?.make) {
     redirect(`${cars}?vin=${vin}&vin_error=${result ? "unknown" : "lookup"}`)
-  }
-
-  const query = new URLSearchParams({ make: vehicle.make_id, vin })
-
-  if (vehicle.family) {
-    query.set("model", vehicle.family.key)
   }
 
   // Position ten names two years 30 years apart (B is 2011 or 1981); the
   // newest is the likely one.
-  const year = vehicle.years[0]
+  const path = await tecdocCarPath({
+    make: vehicle.make,
+    models: vehicle.models,
+    label: vehicle.family?.label,
+    year: vehicle.years[0] ?? null,
+    vin,
+  })
 
-  if (year) {
-    query.set("year", String(year))
-  }
-
-  redirect(`${cars}?${query}`)
+  redirect(path ? `/${countryCode}${path}` : `${cars}?vin=${vin}&vin_error=unknown`)
 }

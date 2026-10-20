@@ -1,31 +1,48 @@
 import { Metadata } from "next"
-import { notFound } from "next/navigation"
+import { notFound, redirect } from "next/navigation"
 
+import { listTecdocMakes, retrieveTecdocMake, retrieveTecdocModel } from "@lib/data/catalog"
 import { isSignedIn, listGarage } from "@lib/data/garage"
-import { listTecdocMakes } from "@lib/data/catalog"
 import { retrieveVehicleMake } from "@lib/data/parts-catalog"
-import { SaveCarButton } from "@modules/garage/save-car"
+import { getRegion } from "@lib/data/regions"
+import { tecdocCarPath } from "@lib/data/tecdoc-resolve"
+import { popularOf } from "@lib/util/popular-makes"
+import TecdocBrowser, { isTecdocSearch, TecdocSearch } from "@modules/cars/tecdoc-browser"
+import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import VehiclePicker from "@modules/garage/vehicle-picker"
 import PartsRequestForm from "@modules/parts-request/request-form"
-import PickFilter from "@modules/cars/pick-filter"
-import TecdocBrowser, { isTecdocSearch, TecdocSearch } from "@modules/cars/tecdoc-browser"
-import { listProducts } from "@lib/data/products"
-import { popularOf } from "@lib/util/popular-makes"
-import { getRegion } from "@lib/data/regions"
-import ProductTable from "@modules/catalog/components/product-table"
-import LocalizedClientLink from "@modules/common/components/localized-client-link"
+
+type Search = TecdocSearch & { vin?: string; vin_error?: string }
 
 const DESCRIPTION =
-  "Оберіть марку, модель і рік автомобіля, щоб побачити запчастини, які до нього підходять."
+  "Оберіть марку і модель автомобіля (рік і двигун — за бажанням), щоб побачити запчастини, які до нього підходять."
+
+const toId = (value?: string) => {
+  const id = Number(value)
+
+  return Number.isInteger(id) && id > 0 ? id : null
+}
 
 // A make or a model is its own page in the sitemap, so it is its own canonical.
 export async function generateMetadata(props: {
-  searchParams: Promise<{ make?: string; model?: string }>
+  searchParams: Promise<Search>
 }): Promise<Metadata> {
-  const { make, model } = await props.searchParams
-  const data = make?.startsWith("vmake_") ? await retrieveVehicleMake(make, model) : null
+  const search = await props.searchParams
+  const makeId = toId(search.make)
+  const modelId = toId(search.model)
+  const named = modelId
+    ? await retrieveTecdocModel(modelId).then((answer) =>
+        answer
+          ? { name: `${answer.model.make} ${answer.model.name}`, query: `model=${modelId}` }
+          : null
+      )
+    : makeId
+      ? await retrieveTecdocMake(makeId).then((answer) =>
+          answer ? { name: answer.make.name, query: `make=${makeId}` } : null
+        )
+      : null
 
-  if (!make || !data) {
+  if (!named) {
     return {
       title: "Підбір запчастин за автомобілем",
       alternates: { canonical: "/ua/cars" },
@@ -33,307 +50,99 @@ export async function generateMetadata(props: {
     }
   }
 
-  const name = [data.make.name, data.family?.label].filter(Boolean).join(" ")
-  const query = `make=${encodeURIComponent(make)}${
-    data.family ? `&model=${encodeURIComponent(data.family.key)}` : ""
-  }`
-
   return {
-    title: `Запчастини для ${name}`,
-    alternates: { canonical: `/ua/cars?${query}` },
-    description: `Запчастини, що підходять до ${name}: пошук за моделлю і роком.`,
+    title: `Запчастини для ${named.name}`,
+    alternates: { canonical: `/ua/cars?${named.query}` },
+    description: `Запчастини, що підходять до ${named.name}: пошук за роком і двигуном.`,
   }
 }
 
-const years = (from: number | null, to: number | null) => {
-  if (from && to) return from === to ? `${from}` : `${from}–${to}`
-  if (from) return `з ${from}`
-  if (to) return `до ${to}`
-
-  return ""
+const vinErrors: Record<string, string> = {
+  format:
+    "Це не схоже на VIN: у коді має бути рівно 17 латинських літер і цифр, літер I, O та Q у VIN не буває.",
+  lookup: "Не вдалося перевірити VIN. Спробуйте ще раз за хвилину.",
+  unknown:
+    "За цим VIN марку визначити не вдалося. Оберіть авто вручну або залиште запит нижче — менеджер підбере деталь.",
 }
 
+/**
+ * Підбір за авто over the TecDoc tree: the picker, then a make, a model (all
+ * years or one, all engines) or one engine with its parts. Addresses with
+ * the shop's own vehicle makes (older links, garage entries) are sent to the
+ * same car in the TecDoc tree.
+ */
 export default async function CarsPage(props: {
   params: Promise<{ countryCode: string }>
-  searchParams: Promise<
-    TecdocSearch & {
-      vin?: string
-      vin_error?: string
-    }
-  >
+  searchParams: Promise<Search>
 }) {
   const { countryCode } = await props.params
   const search = await props.searchParams
-  const {
-    make: makeId,
-    model,
-    year: typedYear,
-    vin: typedVin,
-    vin_error: vinError,
-  } = await props.searchParams
   // The car came from a VIN (see /vin): it is named on the page and kept with the car.
-  const vin = typedVin
-    ?.replace(/[^A-Za-z0-9]/g, "")
-    .toUpperCase()
-    .slice(0, 17)
+  const vin = search.vin?.replace(/[^A-Za-z0-9]/g, "").toUpperCase().slice(0, 17)
+  const year = toId(search.year)
+
+  if (search.make?.startsWith("vmake_")) {
+    const legacy = await retrieveVehicleMake(search.make, search.model)
+    const path = legacy
+      ? await tecdocCarPath({
+          make: legacy.make.name,
+          models: legacy.family?.names,
+          label: legacy.family?.label,
+          year,
+          vin,
+        })
+      : null
+
+    redirect(`/${countryCode}${path ?? "/cars"}`)
+  }
+
   const region = await getRegion(countryCode)
 
   if (!region) {
     notFound()
   }
 
-  const year =
-    typedYear && /^\d{4}$/.test(typedYear) ? Number(typedYear) : undefined
-  // Shop vehicle makes ("vmake_…") come from older links, the garage and VIN;
-  // everything else on this page is the TecDoc tree.
-  const legacy = Boolean(makeId?.startsWith("vmake_"))
-  const tecdoc = !legacy && isTecdocSearch(search)
-  const data = legacy ? await retrieveVehicleMake(makeId!, model, year) : null
-  const [{ active: garage, cars }, signedIn] = await Promise.all([
-    listGarage(),
-    isSignedIn(),
-  ])
-
-  if (legacy && !data) {
-    notFound()
-  }
-
-  // TecDoc writes some makes in capitals: "ALPINA" goes after "Alfa Romeo".
-  const makes =
-    legacy || tecdoc
-      ? []
-      : (await listTecdocMakes())
-          .map((make) => ({ id: String(make.id), name: make.name }))
-          .sort((a, b) => a.name.localeCompare(b.name, "uk", { sensitivity: "base" }))
-  const popular = popularOf(makes)
-  const family = data?.family ?? null
-  const products = data?.product_ids.length
-    ? await listProducts({
-        countryCode,
-        queryParams: { id: data.product_ids.slice(0, 200), limit: 200 },
-      })
-        .then(({ response }) => response.products)
-        .catch(() => [])
-    : []
-  const lastYear = family
-    ? Math.min(
-        family.year_to ?? new Date().getFullYear(),
-        new Date().getFullYear()
-      )
-    : 0
-  const yearList =
-    family?.year_from && lastYear >= family.year_from
-      ? Array.from(
-          { length: lastYear - family.year_from + 1 },
-          (_, index) => lastYear - index
-        ).slice(0, 40)
-      : []
-  // A VIN and the year it names stay with the car while the shopper picks
-  // the model; picking a year replaces the one from the VIN.
-  const vinParam = vin ? `&vin=${vin}` : ""
-  const base = `/cars?make=${makeId}${vinParam}`
-  const vinNote = vinError
-    ? vinError === "format"
-      ? "Це не схоже на VIN: у коді має бути рівно 17 латинських літер і цифр, літер I, O та Q у VIN не буває."
-      : vinError === "lookup"
-      ? "Не вдалося перевірити VIN. Спробуйте ще раз за хвилину."
-      : "За цим VIN марку визначити не вдалося. Оберіть авто вручну або залиште запит нижче — менеджер підбере деталь."
-    : vin && data
-    ? `За VIN ${vin}: ${data.make.name}${family ? ` ${family.label}` : ""}${
-        year ? `, ${year} рік` : ""
-      }${
-        family ? "" : " — модель за VIN не визначено, оберіть її"
-      }. Двигун і комплектацію VIN не уточнює — звірте номер деталі перед замовленням.`
-    : null
+  const [{ active: garage, cars }, signedIn] = await Promise.all([listGarage(), isSignedIn()])
+  const tecdoc = isTecdocSearch(search)
+  // TecDoc writes makes in capitals; sorted the Ukrainian way all the same.
+  const makes = tecdoc
+    ? []
+    : (await listTecdocMakes())
+        .map((make) => ({ id: String(make.id), name: make.name }))
+        .sort((a, b) => a.name.localeCompare(b.name, "uk", { sensitivity: "base" }))
+  const vinError = search.vin_error ? vinErrors[search.vin_error] ?? vinErrors.unknown : null
 
   return (
     <div className="ap-scope ap-page">
       <div className="ap-shell">
-        {tecdoc && (
-          <TecdocBrowser search={search} signedIn={signedIn} garage={garage} />
-        )}
-
         {!tecdoc && (
-        <nav className="ap-crumbs" aria-label="Навігація">
-          <LocalizedClientLink href="/">Головна</LocalizedClientLink>
-          <span>/</span>
-          {data ? (
-            <LocalizedClientLink href="/cars">
-              Підбір за авто
-            </LocalizedClientLink>
-          ) : (
+          <nav className="ap-crumbs" aria-label="Навігація">
+            <LocalizedClientLink href="/">Головна</LocalizedClientLink>
+            <span>/</span>
             <b>Підбір за авто</b>
-          )}
-          {data && (
-            <>
-              <span>/</span>
-              {family ? (
-                <LocalizedClientLink href={base}>
-                  {data.make.name}
-                </LocalizedClientLink>
-              ) : (
-                <b>{data.make.name}</b>
-              )}
-            </>
-          )}
-          {family && (
-            <>
-              <span>/</span>
-              <b>{family.label}</b>
-            </>
-          )}
-        </nav>
+          </nav>
         )}
 
-        {vinNote && (
-          <div
-            className={`ap-vin-note ap-card${vinError ? " ap-vin-bad" : ""}`}
-          >
-            {vinNote}
-          </div>
-        )}
+        {vinError && <div className="ap-vin-note ap-card ap-vin-bad">{vinError}</div>}
 
-        {!data && !tecdoc && (
+        {tecdoc ? (
+          <TecdocBrowser search={search} signedIn={signedIn} garage={garage} vin={vin ?? null} />
+        ) : (
           <VehiclePicker
             makes={makes}
-            popular={popular}
+            popular={popularOf(makes)}
             current={
-              garage
-                ? [garage.make, garage.model, garage.year]
-                    .filter(Boolean)
-                    .join(" ")
-                : null
+              garage ? [garage.make, garage.model, garage.year].filter(Boolean).join(" ") : null
             }
             cars={cars}
             signedIn={signedIn}
           />
         )}
 
-        {data && !family && (
-          <section className="ap-section ap-card">
-            <div className="ap-section-head">
-              <h1 className="ap-pdp-title">{data.make.name}</h1>
-              <p>Оберіть модель. У дужках — роки, для яких є деталі.</p>
-            </div>
-            {data.families.length > 12 && (
-              <PickFilter target="all-models" placeholder="Знайти модель" />
-            )}
-            {data.families.length ? (
-              <div className="ap-pick" id="all-models">
-                {data.families.map((item) => (
-                  <LocalizedClientLink
-                    key={item.key}
-                    href={`${base}&model=${encodeURIComponent(item.key)}${
-                      year ? `&year=${year}` : ""
-                    }`}
-                  >
-                    <strong>{item.label}</strong>
-                    <small>{years(item.year_from, item.year_to)}</small>
-                  </LocalizedClientLink>
-                ))}
-              </div>
-            ) : (
-              <div className="ap-empty">
-                Для цієї марки моделей у каталозі немає.
-              </div>
-            )}
-          </section>
-        )}
-
-        {data && family && (
-          <>
-            <section className="ap-section ap-card">
-              <div className="ap-section-head">
-                <h1 className="ap-pdp-title">
-                  {data.make.name} {family.label}
-                </h1>
-                <p>
-                  {years(family.year_from, family.year_to)
-                    ? `Роки в каталозі: ${years(
-                        family.year_from,
-                        family.year_to
-                      )}. `
-                    : ""}
-                  Оберіть рік, щоб звузити перелік.
-                </p>
-                <SaveCarButton
-                  signedIn={signedIn}
-                  saved={
-                    garage?.make_id === data.make.id &&
-                    garage?.model_key === family.key &&
-                    (garage?.year ?? null) === (year ?? null)
-                  }
-                  car={{
-                    make_id: data.make.id,
-                    make: data.make.name,
-                    model_key: family.key,
-                    model: family.label,
-                    names: family.names,
-                    year: year ?? null,
-                    vin: vin ?? null,
-                  }}
-                />
-              </div>
-              {yearList.length > 1 && (
-                <div className="ap-years">
-                  <LocalizedClientLink
-                    className={year ? undefined : "ap-on"}
-                    href={`${base}&model=${encodeURIComponent(family.key)}`}
-                  >
-                    Усі роки
-                  </LocalizedClientLink>
-                  {yearList.map((item) => (
-                    <LocalizedClientLink
-                      key={item}
-                      className={item === year ? "ap-on" : undefined}
-                      href={`${base}&model=${encodeURIComponent(
-                        family.key
-                      )}&year=${item}`}
-                    >
-                      {item}
-                    </LocalizedClientLink>
-                  ))}
-                </div>
-              )}
-              {family.names.length > 1 && (
-                <p className="ap-vin-models">
-                  Об&apos;єднано варіанти з каталогів:{" "}
-                  {family.names.join(" · ")}
-                </p>
-              )}
-            </section>
-
-            <section className="ap-catalog ap-card">
-              <div className="ap-catalog-head">
-                <div>
-                  <h2>Підходить до авто</h2>
-                  <p>
-                    {products.length
-                      ? `Знайдено товарів: ${products.length}${
-                          year ? ` для ${year} року` : ""
-                        }`
-                      : "Для цього вибору товарів немає"}
-                    . Двигун і комплектацію звірте на сторінці товару.
-                  </p>
-                </div>
-                <LocalizedClientLink className="ap-all" href={base}>
-                  ← Інша модель
-                </LocalizedClientLink>
-              </div>
-              {products.length > 0 && (
-                <ProductTable products={products} countryCode={countryCode} />
-              )}
-            </section>
-          </>
-        )}
-
         <section className="ap-section ap-card" id="request">
           <div className="ap-section-head">
             <h2 className="ap-pdp-title">Не знайшли? Підберемо за VIN</h2>
-            <p>
-              Залиште телефон і що потрібно — менеджер підбере деталь і
-              передзвонить.
-            </p>
+            <p>Залиште телефон і що потрібно — менеджер підбере деталь і передзвонить.</p>
           </div>
           <PartsRequestForm vin={vin} />
         </section>

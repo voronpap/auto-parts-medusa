@@ -16,3 +16,17 @@ export const popularOf = <T extends { name: string }>(makes: T[]): T[] =>
 
     return makes.find((make) => names.includes(make.name.toLowerCase()))
   }).filter((make): make is T => Boolean(make))
+
+/** Whether two spellings name the same make ("Volkswagen" and "VW"). */
+export function sameMake(a: string, b: string) {
+  const names = (name: string) => {
+    const key = name.trim().toLowerCase()
+    const alias = Object.entries(ALIASES).find(
+      ([full, others]) => full === key || others.includes(key)
+    )
+
+    return alias ? [alias[0], ...alias[1]] : [key]
+  }
+
+  return names(a).includes(b.trim().toLowerCase())
+}

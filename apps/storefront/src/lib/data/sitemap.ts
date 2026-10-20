@@ -1,5 +1,5 @@
 import { sdk } from "@lib/config"
-import { listVehicleMakes, retrieveVehicleMake } from "@lib/data/parts-catalog"
+import { listTecdocMakes, retrieveTecdocMake } from "@lib/data/catalog"
 import { INFO_PAGES } from "@modules/info/pages"
 
 export const COUNTRY = process.env.NEXT_PUBLIC_DEFAULT_REGION || "ua"
@@ -78,28 +78,21 @@ export const pageEntries = async (): Promise<SitemapEntry[]> => {
   ]
 }
 
-/** Makes and their model families from the car picker. */
+/** Makes and their models from the car picker (the TecDoc tree, cars only). */
 export const carEntries = async (): Promise<SitemapEntry[]> => {
-  const makes = await listVehicleMakes()
+  const makes = await listTecdocMakes()
   const entries: SitemapEntry[] = []
 
   // A few makes at a time: each one is a request to the backend.
   for (let index = 0; index < makes.length; index += 8) {
     const details = await Promise.all(
-      makes
-        .slice(index, index + 8)
-        .map((make) => retrieveVehicleMake(make.id))
+      makes.slice(index, index + 8).map((make) => retrieveTecdocMake(make.id))
     )
 
     details.forEach((detail, offset) => {
-      const make = makes[index + offset]
-      const base = `/${COUNTRY}/cars?make=${encodeURIComponent(make.id)}`
-
-      entries.push({ path: base })
-      detail?.families.forEach((family) =>
-        entries.push({
-          path: `${base}&model=${encodeURIComponent(family.key)}`,
-        })
+      entries.push({ path: `/${COUNTRY}/cars?make=${makes[index + offset].id}` })
+      detail?.models.forEach((model) =>
+        entries.push({ path: `/${COUNTRY}/cars?model=${model.id}` })
       )
     })
   }

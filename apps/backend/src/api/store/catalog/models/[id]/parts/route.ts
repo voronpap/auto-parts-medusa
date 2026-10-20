@@ -2,6 +2,7 @@ import { MedusaRequest, MedusaResponse } from "@medusajs/framework/http"
 import { MedusaError } from "@medusajs/framework/utils"
 import { z } from "@medusajs/framework/zod"
 import { parsersDb } from "../../../../../../lib/parsers-db"
+import { MOTORCYCLE } from "../../../../../../lib/tecdoc-groups"
 import { vehicleGroupParts, vehicleSections } from "../../../../../../lib/vehicle-parts"
 
 const Query = z.object({
@@ -40,7 +41,10 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
   }
 
   const { year, group, offset } = parsed.data
-  const versions = db("tecdoc_vehicle").select("id").where({ type: "P", model_id: id })
+  const versions = db("tecdoc_vehicle")
+    .select("id")
+    .where({ type: "P", model_id: id })
+    .where((builder) => builder.whereNull("body").orWhereNot("body", MOTORCYCLE))
 
   if (year) {
     versions

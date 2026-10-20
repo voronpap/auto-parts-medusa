@@ -1,6 +1,7 @@
 import { MedusaRequest, MedusaResponse } from "@medusajs/framework/http"
 import { MedusaError } from "@medusajs/framework/utils"
 import { parsersDb } from "../../../../../lib/parsers-db"
+import { MOTORCYCLE } from "../../../../../lib/tecdoc-groups"
 
 /** One model of the TecDoc tree with its versions (KType). */
 export async function GET(req: MedusaRequest, res: MedusaResponse) {
@@ -46,6 +47,7 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
       "engine_codes"
     )
     .where({ type: "P", model_id: id })
+    .where((builder) => builder.whereNull("body").orWhereNot("body", MOTORCYCLE))
     .orderBy(["description", "year_from"])
 
   return res.status(200).json({ model, vehicles })

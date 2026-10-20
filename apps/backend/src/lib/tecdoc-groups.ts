@@ -101,3 +101,7 @@ export async function partTypes(
 
   return types
 }
+
+// TecDoc files motorcycles among passenger vehicles (type P, body
+// "Motorcycle"); the shop sells car parts, so they are left out of the tree.
+export const MOTORCYCLE = "Motorcycle"

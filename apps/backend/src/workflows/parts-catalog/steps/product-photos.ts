@@ -22,6 +22,11 @@ const TIMEOUT_MS = 20000
 const TYPES = ["image/jpeg", "image/png", "image/webp"]
 const MAX_WEBP_PIXELS = 20_000_000
 
+// Hosts whose robots.txt is not followed, by the owner's decision (2026-10-20:
+// FEBEST product photos, which their robots.txt closes to all bots). The
+// per-host pace still applies.
+const ROBOTS_IGNORED_HOSTS = new Set(["static.febest.de"])
+
 type Robots = { rules: ReturnType<typeof parseRobots> | null; at: number }
 
 // Process-wide, so every product shares one pace per host.
@@ -168,7 +173,7 @@ export async function download(
     throw new Skip("address is not a public web address")
   }
 
-  const allowed = await robotsAllow(url)
+  const allowed = ROBOTS_IGNORED_HOSTS.has(url.hostname) ? true : await robotsAllow(url)
 
   if (allowed === false) {
     throw new Skip("robots.txt disallows this address")

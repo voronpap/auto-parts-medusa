@@ -214,3 +214,43 @@ export const listTecdocVehicleParts = async (
       next: CACHE,
     })
     .catch(() => null)
+
+export type TecdocModelInfo = {
+  id: number
+  name: string
+  make_id: number
+  make: string
+  year_from: number | null
+  year_to: number | null
+}
+
+type ModelScope = { model: TecdocModelInfo; year: number | null; versions: number }
+
+/** Sections of all versions of a model, or of those built in `year`. */
+export const retrieveTecdocModelGroups = async (
+  modelId: number,
+  year: number | null
+): Promise<(ModelScope & Omit<VehicleGroups, "vehicle">) | null> =>
+  sdk.client
+    .fetch<ModelScope & Omit<VehicleGroups, "vehicle">>(
+      `/store/catalog/models/${modelId}/parts`,
+      { method: "GET", query: year ? { year } : {}, next: CACHE }
+    )
+    .catch(() => null)
+
+export const listTecdocModelParts = async (
+  modelId: number,
+  year: number | null,
+  group: number,
+  offset: number
+): Promise<(ModelScope & Omit<VehicleGroupParts, "vehicle">) | null> =>
+  sdk.client
+    .fetch<ModelScope & Omit<VehicleGroupParts, "vehicle">>(
+      `/store/catalog/models/${modelId}/parts`,
+      {
+        method: "GET",
+        query: { ...(year ? { year } : {}), group, offset },
+        next: CACHE,
+      }
+    )
+    .catch(() => null)

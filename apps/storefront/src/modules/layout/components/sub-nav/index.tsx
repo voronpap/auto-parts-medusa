@@ -7,7 +7,6 @@ const ITEMS = [
   { href: "/", label: "Головна" },
   { href: "/store", label: "Каталог" },
   { href: "/cars", label: "Підбір за авто" },
-  { href: "/vehicles", label: "Каталог авто" },
   { href: "/account/orders", label: "Мої замовлення" },
   { href: "/cart", label: "Кошик" },
 ]

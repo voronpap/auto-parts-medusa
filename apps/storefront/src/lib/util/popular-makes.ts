@@ -4,7 +4,15 @@ export const POPULAR_MAKES = [
   "Nissan", "Ford", "Opel", "Chery", "Geely", "BYD", "Great Wall",
 ]
 
+// Other spellings of the same makes (TecDoc writes Volkswagen as "VW").
+const ALIASES: Record<string, string[]> = {
+  volkswagen: ["vw"],
+  "great wall": ["great wall motors", "gwm"],
+}
+
 export const popularOf = <T extends { name: string }>(makes: T[]): T[] =>
-  POPULAR_MAKES.map((name) =>
-    makes.find((make) => make.name.toLowerCase() === name.toLowerCase())
-  ).filter((make): make is T => Boolean(make))
+  POPULAR_MAKES.map((name) => {
+    const names = [name.toLowerCase(), ...(ALIASES[name.toLowerCase()] ?? [])]
+
+    return makes.find((make) => names.includes(make.name.toLowerCase()))
+  }).filter((make): make is T => Boolean(make))

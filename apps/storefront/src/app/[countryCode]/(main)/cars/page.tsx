@@ -2,11 +2,13 @@ import { Metadata } from "next"
 import { notFound } from "next/navigation"
 
 import { isSignedIn, listGarage } from "@lib/data/garage"
-import { listVehicleMakes, retrieveVehicleMake } from "@lib/data/parts-catalog"
+import { listTecdocMakes } from "@lib/data/catalog"
+import { retrieveVehicleMake } from "@lib/data/parts-catalog"
 import { SaveCarButton } from "@modules/garage/save-car"
 import VehiclePicker from "@modules/garage/vehicle-picker"
 import PartsRequestForm from "@modules/parts-request/request-form"
 import PickFilter from "@modules/cars/pick-filter"
+import TecdocBrowser, { isTecdocSearch, TecdocSearch } from "@modules/cars/tecdoc-browser"
 import { listProducts } from "@lib/data/products"
 import { popularOf } from "@lib/util/popular-makes"
 import { getRegion } from "@lib/data/regions"
@@ -21,7 +23,7 @@ export async function generateMetadata(props: {
   searchParams: Promise<{ make?: string; model?: string }>
 }): Promise<Metadata> {
   const { make, model } = await props.searchParams
-  const data = make ? await retrieveVehicleMake(make, model) : null
+  const data = make?.startsWith("vmake_") ? await retrieveVehicleMake(make, model) : null
 
   if (!make || !data) {
     return {
@@ -53,15 +55,15 @@ const years = (from: number | null, to: number | null) => {
 
 export default async function CarsPage(props: {
   params: Promise<{ countryCode: string }>
-  searchParams: Promise<{
-    make?: string
-    model?: string
-    year?: string
-    vin?: string
-    vin_error?: string
-  }>
+  searchParams: Promise<
+    TecdocSearch & {
+      vin?: string
+      vin_error?: string
+    }
+  >
 }) {
   const { countryCode } = await props.params
+  const search = await props.searchParams
   const {
     make: makeId,
     model,
@@ -82,22 +84,27 @@ export default async function CarsPage(props: {
 
   const year =
     typedYear && /^\d{4}$/.test(typedYear) ? Number(typedYear) : undefined
-  const data = makeId ? await retrieveVehicleMake(makeId, model, year) : null
+  // Shop vehicle makes ("vmake_…") come from older links, the garage and VIN;
+  // everything else on this page is the TecDoc tree.
+  const legacy = Boolean(makeId?.startsWith("vmake_"))
+  const tecdoc = !legacy && isTecdocSearch(search)
+  const data = legacy ? await retrieveVehicleMake(makeId!, model, year) : null
   const [{ active: garage, cars }, signedIn] = await Promise.all([
     listGarage(),
     isSignedIn(),
   ])
 
-  if (makeId && !data) {
+  if (legacy && !data) {
     notFound()
   }
 
-  // Sources write some makes in capitals: "ALSTHOM" goes after "Alfa Romeo".
-  const makes = makeId
-    ? []
-    : (await listVehicleMakes()).sort((a, b) =>
-        a.name.localeCompare(b.name, "uk", { sensitivity: "base" })
-      )
+  // TecDoc writes some makes in capitals: "ALPINA" goes after "Alfa Romeo".
+  const makes =
+    legacy || tecdoc
+      ? []
+      : (await listTecdocMakes())
+          .map((make) => ({ id: String(make.id), name: make.name }))
+          .sort((a, b) => a.name.localeCompare(b.name, "uk", { sensitivity: "base" }))
   const popular = popularOf(makes)
   const family = data?.family ?? null
   const products = data?.product_ids.length
@@ -142,6 +149,11 @@ export default async function CarsPage(props: {
   return (
     <div className="ap-scope ap-page">
       <div className="ap-shell">
+        {tecdoc && (
+          <TecdocBrowser search={search} signedIn={signedIn} garage={garage} />
+        )}
+
+        {!tecdoc && (
         <nav className="ap-crumbs" aria-label="Навігація">
           <LocalizedClientLink href="/">Головна</LocalizedClientLink>
           <span>/</span>
@@ -171,6 +183,7 @@ export default async function CarsPage(props: {
             </>
           )}
         </nav>
+        )}
 
         {vinNote && (
           <div
@@ -180,7 +193,7 @@ export default async function CarsPage(props: {
           </div>
         )}
 
-        {!data && (
+        {!data && !tecdoc && (
           <VehiclePicker
             makes={makes}
             popular={popular}

@@ -1,15 +1,19 @@
 "use client"
 
+import { TecdocModel, TecdocVehicle } from "@lib/data/catalog"
 import { chooseGarageCar, GarageEntry } from "@lib/data/garage"
-import { VehicleFamily, VehicleMake } from "@lib/data/parts-catalog"
-import { pickerFamilies } from "@lib/data/vehicle-picker"
+import { pickerTecdocModels, pickerTecdocVehicles } from "@lib/data/vehicle-picker"
+import { carHref, TECDOC_MODEL, TECDOC_PREFIX } from "@lib/util/car-href"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import { useParams, useRouter } from "next/navigation"
-import { FormEvent, useEffect, useRef, useState, useTransition } from "react"
+import { FormEvent, useRef, useState, useTransition } from "react"
+
+/** A make of the TecDoc tree. */
+export type PickerMake = { id: string; name: string }
 
 type Props = {
-  makes: VehicleMake[]
-  popular: VehicleMake[]
+  makes: PickerMake[]
+  popular: PickerMake[]
   /** The chosen car's title, when there is one. */
   current: string | null
   cars: GarageEntry[]
@@ -30,8 +34,8 @@ const carTitle = (car: Pick<GarageEntry, "make" | "model" | "year">) =>
   [car.make, car.model, car.year].filter(Boolean).join(" ")
 
 /**
- * The cars page before a make is chosen: make, model and year lists, a
- * VIN, popular and all makes. Choosing a car
+ * The cars page before a car is chosen: make, model and version lists from
+ * the TecDoc tree, a VIN, popular and all makes. Choosing a car
  * opens its parts; a signed-in shopper's choice also goes into the garage.
  */
 export default function VehiclePicker({
@@ -47,24 +51,32 @@ export default function VehiclePicker({
   const [vin, setVin] = useState("")
   const [vinError, setVinError] = useState(false)
   const [makeId, setMakeId] = useState("")
-  const [families, setFamilies] = useState<VehicleFamily[] | null>(null)
-  const [familyKey, setFamilyKey] = useState("")
+  const [models, setModels] = useState<TecdocModel[] | null>(null)
+  const [modelId, setModelId] = useState("")
+  const [vehicles, setVehicles] = useState<TecdocVehicle[] | null>(null)
   const [year, setYear] = useState("")
+  const [ktype, setKtype] = useState("")
   const [allFilter, setAllFilter] = useState("")
   const [pending, startTransition] = useTransition()
   const left = useRef<HTMLDivElement>(null)
 
   const make = makes.find((item) => item.id === makeId) ?? null
-  const family = families?.find((item) => item.key === familyKey) ?? null
+  const model = models?.find((item) => String(item.id) === modelId) ?? null
+  const vehicle = vehicles?.find((item) => String(item.id) === ktype) ?? null
   const now = new Date().getFullYear()
-  const lastYear = family ? Math.min(family.year_to ?? now, now) : 0
+  const lastYear = model ? Math.min(model.year_to ?? now, now) : 0
   const yearList =
-    family?.year_from && lastYear >= family.year_from
-      ? Array.from(
-          { length: lastYear - family.year_from + 1 },
-          (_, index) => lastYear - index
-        ).slice(0, 40)
+    model?.year_from && lastYear >= model.year_from
+      ? Array.from({ length: lastYear - model.year_from + 1 }, (_, index) => lastYear - index)
       : []
+  // Engines built in the chosen year, or all of the model's.
+  const engines = year
+    ? vehicles?.filter(
+        (item) =>
+          (item.year_from == null || item.year_from <= Number(year)) &&
+          (item.year_to == null || item.year_to >= Number(year))
+      )
+    : vehicles
   const filtered = allFilter.trim()
     ? makes.filter((item) =>
         item.name.toLowerCase().includes(allFilter.trim().toLowerCase())
@@ -80,14 +92,29 @@ export default function VehiclePicker({
 
   const chooseMake = (id: string) => {
     setMakeId(id)
-    setFamilies(null)
-    setFamilyKey("")
+    setModels(null)
+    setModelId("")
+    setVehicles(null)
     setYear("")
+    setKtype("")
 
     if (id) {
-      pickerFamilies(id)
-        .then(setFamilies)
-        .catch(() => setFamilies([]))
+      pickerTecdocModels(Number(id))
+        .then(setModels)
+        .catch(() => setModels([]))
+    }
+  }
+
+  const chooseModel = (id: string) => {
+    setModelId(id)
+    setVehicles(null)
+    setYear("")
+    setKtype("")
+
+    if (id) {
+      pickerTecdocVehicles(Number(id))
+        .then(setVehicles)
+        .catch(() => setVehicles([]))
     }
   }
 
@@ -98,12 +125,7 @@ export default function VehiclePicker({
         await chooseGarageCar(car)
       }
 
-      const query = new URLSearchParams({ make: car.make_id })
-
-      if (car.model_key) query.set("model", car.model_key)
-      if (car.year) query.set("year", String(car.year))
-
-      router.push(`/${countryCode}/cars?${query}`)
+      router.push(`/${countryCode}${carHref(car)}`)
       router.refresh()
     })
   }
@@ -111,12 +133,15 @@ export default function VehiclePicker({
   const submitPick = (event: FormEvent) => {
     event.preventDefault()
 
-    if (make && family) {
+    // The year and the engine narrow the list but are not required.
+    if (make && model) {
       go({
-        make_id: make.id,
+        make_id: `${TECDOC_PREFIX}${make.id}`,
         make: make.name,
-        model_key: family.key,
-        model: family.label,
+        model_key: vehicle
+          ? `${TECDOC_PREFIX}${vehicle.id}`
+          : `${TECDOC_PREFIX}${TECDOC_MODEL}${model.id}`,
+        model: vehicle ? `${model.name} ${vehicle.description}` : model.name,
         year: year ? Number(year) : null,
       })
     }
@@ -142,7 +167,7 @@ export default function VehiclePicker({
         <p className={current ? "ap-vp-current" : undefined}>
           {current
             ? `Обране авто: ${current}`
-            : "Не вибрано жодного транспортного засобу. Оберіть марку, модель і рік або введіть VIN."}
+            : "Не вибрано жодного транспортного засобу. Оберіть марку і модель (рік і двигун — за бажанням) або введіть VIN."}
         </p>
       </div>
 
@@ -228,19 +253,16 @@ export default function VehiclePicker({
               <label className="ap-vp-field">
                 <span>Модель</span>
                 <select
-                  value={familyKey}
-                  disabled={!families?.length}
-                  onChange={(event) => {
-                    setFamilyKey(event.target.value)
-                    setYear("")
-                  }}
+                  value={modelId}
+                  disabled={!models?.length}
+                  onChange={(event) => chooseModel(event.target.value)}
                 >
                   <option value="">
-                    {makeId && !families ? "Завантаження…" : "Виберіть модель"}
+                    {makeId && !models ? "Завантаження…" : "Виберіть модель"}
                   </option>
-                  {families?.map((item) => (
-                    <option key={item.key} value={item.key}>
-                      {item.label}
+                  {models?.map((item) => (
+                    <option key={item.id} value={item.id}>
+                      {item.name}
                       {years(item.year_from, item.year_to)
                         ? ` (${years(item.year_from, item.year_to)})`
                         : ""}
@@ -253,7 +275,10 @@ export default function VehiclePicker({
                 <select
                   value={year}
                   disabled={!yearList.length}
-                  onChange={(event) => setYear(event.target.value)}
+                  onChange={(event) => {
+                    setYear(event.target.value)
+                    setKtype("")
+                  }}
                 >
                   <option value="">Усі роки</option>
                   {yearList.map((item) => (
@@ -263,10 +288,35 @@ export default function VehiclePicker({
                   ))}
                 </select>
               </label>
+              <label className="ap-vp-field">
+                <span>Двигун</span>
+                <select
+                  value={ktype}
+                  disabled={!engines?.length}
+                  onChange={(event) => setKtype(event.target.value)}
+                >
+                  <option value="">
+                    {modelId && !vehicles ? "Завантаження…" : "Усі двигуни"}
+                  </option>
+                  {engines?.map((item) => (
+                    <option key={item.id} value={item.id}>
+                      {[
+                        item.description,
+                        item.kw_from ? `${Math.round(Number(item.kw_from))} кВт` : null,
+                        item.fuel,
+                        years(item.year_from, item.year_to),
+                        item.engine_codes,
+                      ]
+                        .filter(Boolean)
+                        .join(" · ")}
+                    </option>
+                  ))}
+                </select>
+              </label>
               <button
                 type="submit"
                 className="ap-primary"
-                disabled={!family || pending}
+                disabled={!model || pending}
               >
                 {pending ? "Відкриваємо…" : "Показати запчастини"}
               </button>
@@ -341,7 +391,6 @@ export default function VehiclePicker({
                       onClick={() => chooseBrand(item.id)}
                     >
                       <strong>{item.name}</strong>
-                      <small>товарів: {item.products}</small>
                     </button>
                   ))}
                 </div>
@@ -369,7 +418,6 @@ export default function VehiclePicker({
                     onClick={() => chooseBrand(item.id)}
                   >
                     <strong>{item.name}</strong>
-                    <small>{item.products}</small>
                   </button>
                 ))
               ) : (

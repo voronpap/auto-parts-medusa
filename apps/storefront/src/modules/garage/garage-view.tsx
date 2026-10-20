@@ -1,14 +1,12 @@
 import { GarageEntry, listGarage } from "@lib/data/garage"
+import { carHref } from "@lib/util/car-href"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import { ChooseCarButton, RemoveCarButton } from "./save-car"
 
 const carName = (car: GarageEntry) =>
   `${car.make} ${car.model ?? ""} ${car.year ?? ""}`.replace(/\s+/g, " ").trim()
 
-const partsHref = (car: GarageEntry) =>
-  `/cars?make=${car.make_id}${
-    car.model_key ? `&model=${encodeURIComponent(car.model_key)}` : ""
-  }${car.year ? `&year=${car.year}` : ""}`
+const partsHref = carHref
 
 /** The shopper's saved cars: choose one, open its parts, remove it. */
 export default async function GarageView() {
